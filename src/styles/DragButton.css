@@ -1,0 +1,15 @@
+.icon{
+  width: 30px;
+  height: 30px;
+  background-image: url("../images/dragBtn.png");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+.icon:hover{
+  cursor:grab;
+}
+
+.icon:active{
+  cursor: grabbing;
+}

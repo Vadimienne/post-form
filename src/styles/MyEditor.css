@@ -1,0 +1,23 @@
+[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: #555;
+}
+
+[placeholder]:empty:focus::before {
+    content: "";
+}
+
+.editor-text{
+  padding: 10px;
+}
+
+.toolbox {
+  display: flex;
+  border-bottom: 1px solid #3d3d3d;
+  padding: 10px;
+}
+
+.editor{
+  border: 1px solid #3d3d3d;
+  border-radius: 3px;
+}

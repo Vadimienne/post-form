@@ -1,4 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+require('babel-polyfill')
+var path = require('path')
 
 module.exports = {
   module: {
@@ -35,6 +37,11 @@ module.exports = {
         use: ['file-loader']
       }
     ]
+  },
+  resolve: {
+
+       modules: [path.resolve(__dirname, 'src'), 'node_modules']
+
   },
   plugins: [
     new HtmlWebPackPlugin({

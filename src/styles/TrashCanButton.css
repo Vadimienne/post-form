@@ -1,0 +1,12 @@
+.trash-can-btn{
+  width: 30px;
+  height: 30px;
+  background-image: url("../images/trashCanBtn.png");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.trash-can-btn:hover{
+  cursor: pointer;
+}
