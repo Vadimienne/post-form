@@ -59,6 +59,7 @@ class Ingredients extends Component {
 
     return (
       <>
+        <input />
         <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle>{mappedIngredients}</SortableContainerIng>
         <ConstructorBtn text='Добавить ингредиент' img={AddBtn} onClick={()=>this.addIngredient()} />
       </>
