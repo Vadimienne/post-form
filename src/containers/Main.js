@@ -37,7 +37,7 @@ class Main extends Component {
           minutes: '45',
           portions: '3',
           preparationHours: '0',
-          preparationMinutes: '15',
+          preparationMinutes: '0',
         },
         ingredientGroups:[
           {

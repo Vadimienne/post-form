@@ -6,7 +6,12 @@ import Check from 'components/Checkbox'
 class Timings extends Component {
   constructor(props) {
     super(props);
-    this.state = { isChecked: (props.data.preparationHours || props.data.preparationMinutes)}
+    console.log('hi')
+    console.log(typeof props.data.preparationHours)
+    console.log(props.data.preparationHours, props.data.preparationMinutes)
+    console.log(Number(props.data.preparationHours) || Number(props.data.preparationMinutes))
+    console.log('pa')
+    this.state = { isChecked: (parseInt(props.data.preparationHours) || parseInt(props.data.preparationMinutes))}
     this.onInput = this.onInput.bind(this)
   }
 
@@ -29,13 +34,13 @@ class Timings extends Component {
   render() {
     const { isChecked } = this.state
     const { hours, minutes, portions, preparationHours, preparationMinutes } = this.props.data
-
+    console.log('isChecked ' + isChecked)
     return (
       <>
         <input type='number' value={hours} onChange={(e) => this.onInput('hours',e)}/>
         <input value={minutes} onChange={(e) => this.onInput('minutes',e)}/>
         <input value={portions} onChange={(e) => this.onInput('portions',e)}/>
-        <Check onToggle={() => this.onToggle()}/>
+        <Check onToggle={() => this.onToggle()} isActive={isChecked}/>
         {isChecked? (
           <>
           <input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
