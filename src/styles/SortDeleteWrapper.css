@@ -8,12 +8,14 @@
 }
 
 .sort-delete-wrapper{
+  display: inline-block;
   background-color: white;
   border: 1px solid #666666;
   margin-bottom: 20px;
 }
 
 .module {
+  display: inline-block;
   padding: 10px;
 }
 

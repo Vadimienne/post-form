@@ -9,8 +9,13 @@ import Dropzone from 'components/Dropzone';
 import Editor from 'components/MyEditor';
 import SortDeleteWrapper from 'components/SortDeleteWrapper';
 import TrashCanButton from 'components/TrashCanButton';
-import IngredientsList from 'components/IngredientsList';
+import IngredientList from 'components/IngredientList';
 import Ingredient from 'components/IngredientItem'
+import Step from 'components/Step'
+import Steps from 'components/Steps'
+import Tags from 'components/Tags'
+
+import 'styles/Main.sass'
 
 
 const SortableContainer = sortableContainer(({children}) => {
@@ -23,7 +28,7 @@ class Main extends Component {
     this.state = {
       json: {
         title: 'Recipe',
-        titlePic: 'https://pbs.twimg.com/profile_images/956981887687380993/RFfhvjkm_400x400.jpg',
+        titlePic: {url:'https://pbs.twimg.com/profile_images/956981887687380993/RFfhvjkm_400x400.jpg'},
         titleDescription: 'hi my name is hi my name is hi my name is',
         timeInfo: {
           hours: 1,
@@ -46,7 +51,7 @@ class Main extends Component {
         ],
         steps: [
           {
-            image: 'https://i.redd.it/flnarodfujvz.jpg',
+            image: {url:'https://i.redd.it/flnarodfujvz.jpg'},
             description: 'hi hello privet',
             ingredients: [
               {
@@ -57,13 +62,13 @@ class Main extends Component {
             ]
           },
           {
-            image: 'https://i.redd.it/flnarodfujvz.jpg',
-            description: 'hi hello privet',
+            image: {url:'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'},
+            description: 'hi',
             ingredients: [
               {
-                name: 'Chicken',
-                quantity: '2',
-                metric: 'шт.'
+                name: 'ken',
+                quantity: '1',
+                metric: 'г'
               },
             ]
           },
@@ -72,21 +77,6 @@ class Main extends Component {
 
       }
     };
-
-    this.createStep = this.createStep.bind(this)
-    this.removeStep = this.removeStep.bind(this)
-  }
-
-  createStep() {
-  let array = this.state.json
-  array.steps.push({image:'', description:'', ingredinets:[]})
-  this.setState({json: array})
-  }
-
-  removeStep(stepIndex) {
-    let array = this.state.json
-    array.steps.splice(stepIndex, 1)
-    this.setState({json: array})
   }
 
   stateUpdater(field, val){
@@ -96,14 +86,17 @@ class Main extends Component {
   }
 
   render() {
+    const { title, titlePic, titleDescription, timeInfo, ingredientGroups, steps, tags } = this.state.json
+
     console.log(this.state.json)
     return (
       <form id="article-form">
-        <input onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={this.state.json.title}/>
-        <Dropzone onChange={(val)=> this.stateUpdater('titlePic', val)} />
-        <Editor onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
-        <IngredientsList onChange={()=>{}}/>
-        <button type='button' onClick={()=>this.createStep(1)} />
+        <input onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
+        <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
+        <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
+        {/*<IngredientList onChange={(val)=>{this.stateUpdater('ingredientGroups'}}/>*/}
+        <Steps data={steps} onChange={(val) => this.stateUpdater('steps', val)}/>
+        <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
       </form>
     );
   }
