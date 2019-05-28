@@ -14,6 +14,8 @@ import Ingredient from 'components/IngredientItem'
 import Step from 'components/Step'
 import Steps from 'components/Steps'
 import Tags from 'components/Tags'
+import IngredientGroups from 'components/IngredientGroups'
+import Timings from 'components/Timings'
 
 import 'styles/Main.sass'
 
@@ -31,11 +33,11 @@ class Main extends Component {
         titlePic: {url:'https://pbs.twimg.com/profile_images/956981887687380993/RFfhvjkm_400x400.jpg'},
         titleDescription: 'hi my name is hi my name is hi my name is',
         timeInfo: {
-          hours: 1,
-          minutes: 45,
-          portions: 3,
-          preparationHours: 0,
-          preparationMinutes: 15,
+          hours: '1',
+          minutes: '45',
+          portions: '3',
+          preparationHours: '0',
+          preparationMinutes: '15',
         },
         ingredientGroups:[
           {
@@ -88,13 +90,14 @@ class Main extends Component {
   render() {
     const { title, titlePic, titleDescription, timeInfo, ingredientGroups, steps, tags } = this.state.json
 
-    console.log(this.state.json)
+    console.log(this.state.json.timeInfo)
     return (
       <form id="article-form">
         <input onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
         <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
         <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
-        {/*<IngredientList onChange={(val)=>{this.stateUpdater('ingredientGroups'}}/>*/}
+        <Timings data={timeInfo} onChange={(val) => this.stateUpdater('timeInfo', val)} />
+        <IngredientGroups data={ingredientGroups} onChange={(val)=>this.stateUpdater('ingredientGroups',val)} />
         <Steps data={steps} onChange={(val) => this.stateUpdater('steps', val)}/>
         <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
       </form>
