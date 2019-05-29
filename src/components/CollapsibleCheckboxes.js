@@ -3,9 +3,12 @@ import ReactDOM from "react-dom";
 
 import Check from 'components/Checkbox'
 
+import 'styles/CollapsibleCheckboxes.sass'
+
 class CollapsibleCheckboxes extends Component {
   constructor(props) {
     super(props);
+    this.state = {isOpen:true}
   }
 
   toggleCheck(index){
@@ -20,12 +23,12 @@ class CollapsibleCheckboxes extends Component {
     let checkboxes = boxes.map((elem, index) => <div><Check isActive={elem.isChecked}  onToggle={()=> this.toggleCheck(index)}/> <span>{elem.name}</span> </div>)
 
     return (
-      <>
-        <span>{head}</span>
-        <div>
+      <div className='checkboxes-component'>
+        <span onClick={() => this.setState({isOpen: !this.state.isOpen})}>{head}</span>
+        <div className={'checkboxes-list' + (this.state.isOpen? '': ' closed')}>
           {checkboxes}
         </div>
-      </>
+      </div>
     );
   }
 }
