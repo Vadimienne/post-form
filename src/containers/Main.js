@@ -16,6 +16,7 @@ import Steps from 'components/Steps'
 import Tags from 'components/Tags'
 import IngredientGroups from 'components/IngredientGroups'
 import Timings from 'components/Timings'
+import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
 
 import 'styles/Main.sass'
 
@@ -75,7 +76,17 @@ class Main extends Component {
             ]
           },
         ],
-        tags: ['bolognese','chicken']
+        tags: ['bolognese','chicken'],
+        checkboxes:{
+          head:'Методы приготовления',
+          boxes: [
+            {name: 'взбивать', isChecked: true},
+            {name: 'варить, тушить', isChecked: true},
+            {name: 'гриль, мангал', isChecked: false},
+            {name: 'замораживать, охлаждать', isChecked: false},
+            {name: 'фритюр', isChecked: true},
+          ]
+        }
 
       }
     };
@@ -90,9 +101,10 @@ class Main extends Component {
   render() {
     const { title, titlePic, titleDescription, timeInfo, ingredientGroups, steps, tags } = this.state.json
 
-    console.log(this.state.json.timeInfo)
+    console.log(this.state.json.checkboxes.boxes)
     return (
       <form id="article-form">
+        <CollapsibleCheckboxes data={this.state.json.checkboxes} onChange={(val)=> this.stateUpdater('checkboxes', val)}/>
         <input onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
         <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
         <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
