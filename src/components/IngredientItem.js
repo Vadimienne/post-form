@@ -46,11 +46,15 @@ class Ingredient extends Component {
 
     //setting initial metric value
     let defaultValue
+    if(metric.length){
     for (let i = 0; i < options.length; i++){
       if(options[i].value == metric){
         defaultValue = options[i]
         break
       }
+    }}
+    else {
+      defaultValue = {label:'', value: ''}
     }
 
     const customStyles = {
@@ -60,12 +64,13 @@ class Ingredient extends Component {
       }),
 
     }
+    console.log(defaultValue)
 
     return (
       <div className='ingredient-item'>
         <input value={name} onChange={(e)=>this.onInput('name',e)}/>
         <input value={quantity} onChange={(e)=>this.onInput('quantity',e)}/>
-        <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onSelect.bind(this)} defaultValue={defaultValue} />
+        <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onSelect.bind(this)} value={defaultValue} />
       </div>
     );
   }
