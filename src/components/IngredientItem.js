@@ -54,7 +54,7 @@ class Ingredient extends Component {
       }
     }}
     else {
-      defaultValue = {label:'', value: ''}
+      defaultValue = null
     }
 
     const customStyles = {
@@ -64,7 +64,6 @@ class Ingredient extends Component {
       }),
 
     }
-    console.log(defaultValue)
 
     return (
       <div className='ingredient-item'>

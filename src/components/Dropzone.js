@@ -23,11 +23,11 @@ function postPic () {
 class Dropzone extends Component {
   constructor(props) {
     super(props)
-    // console.log('drop')
-    // console.log(props.data)
+    
     this.state = {
       hightlight: false,
       selectedImg:''}
+
     this.fileInputRef = React.createRef()
     this.defaultImg = "https://www.jvlife.ru/assets/placeholders/bigimage-829a77075b45bf3a762f9e7b9a39781d78fd0c73803c58ec6936000573179599.png"
 
@@ -106,7 +106,7 @@ class Dropzone extends Component {
   }
 
   render() {
-    
+
     let url = ''
     if(this.props.data) {
       url=this.props.data.url

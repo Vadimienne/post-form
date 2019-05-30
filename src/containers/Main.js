@@ -101,7 +101,7 @@ class Main extends Component {
   render() {
     const { title, titlePic, titleDescription, timeInfo, ingredientGroups, steps, tags } = this.state.json
 
-    console.log(this.state.json.checkboxes.boxes)
+    //console.log(this.state.json.checkboxes.boxes)
     return (
       <form id="article-form">
         <CollapsibleCheckboxes data={this.state.json.checkboxes} onChange={(val)=> this.stateUpdater('checkboxes', val)}/>
