@@ -20,7 +20,12 @@ class CollapsibleCheckboxes extends Component {
   render() {
     const { head, boxes } = this.props.data
 
-    let checkboxes = boxes.map((elem, index) => <div><Check isActive={elem.isChecked}  onToggle={()=> this.toggleCheck(index)}/> <span>{elem.name}</span> </div>)
+    let checkboxes = boxes.map((elem, index) => (
+      <div key={'checkbox-element-'+index}>
+        <Check key={'checkbox-'+index} isActive={elem.isChecked}  onToggle={()=> this.toggleCheck(index)}/>
+        <span key={'checkbox-name'+index}>{elem.name}</span>
+      </div>
+    ))
 
     return (
       <div className='checkboxes-component'>
