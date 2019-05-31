@@ -6,7 +6,7 @@ import img from 'images/trashCan.png'
 function Comp (props) {
   return (
     <>
-      <div className='trash-can-btn' onClick={props.onClick}/>
+      <div role='button' tabIndex={0} className='trash-can-btn' onClick={props.onClick}/>
     </>
   )
 }

@@ -8,7 +8,7 @@ import img from 'images/drag.png'
 function Comp (props) {
   return (
     <>
-      <div className='icon'/>
+      <div role='button' tabIndex={0} className='icon'/>
     </>
   )
 }

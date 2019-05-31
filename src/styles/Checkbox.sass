@@ -1,4 +1,5 @@
 .checkbox
+
   .checkbox-input
     opacity: 0
 
@@ -19,18 +20,20 @@
     border-bottom: 2px solid white
     transform: rotate(-45deg)
 
-  label
-    position: relative
-
-  label::after, label::before
-    position: absolute
-
   label::before
-    top: 3px
+    display: inline-block
+    margin-right: 10px
+
+  label
+    position: absolute
+    line-height: 0.875rem
+    font-size: 0.875rem
+
 
   label::after
+    position: absolute
     left: 4px
-    top: 8px
+    top: 6px
 
   label::after
     content: none
