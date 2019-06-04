@@ -1,0 +1,120 @@
+@import '_imports'
+
+.profile-menu
+  &__item
+    line-height: 60px
+    border-bottom: 1px solid #D6CDBF
+    cursor: pointer
+    display: block
+    text-decoration: none
+    position: relative
+    padding-left: 55px
+    color: #242424
+    font-size: 12px
+    font-weight: 700
+    text-transform: uppercase
+
+    &:hover
+      color: #000
+      .fonticon
+        color: #ff391e
+
+    &.active
+      color: #ff391e
+
+      .fonticon
+        color: #ff391e
+
+  &__icon-container
+    width: 38px
+    height: 60px
+    position: absolute
+    top: 0
+    left: 0
+    text-align: center
+    font-size: 28px
+    font-weight: normal
+
+.control-buttons
+  margin-top: 20px
+  text-align: right
+
+  .button
+    margin-left: 20px
+
+.edit-album-icon
+  float: right
+  position: relative
+  margin-top: -1px
+  cursor: pointer
+
+  &:hover
+    .fonticon
+      color: #ff391e
+
+  .fonticon
+    display: inline-block
+    vertical-align: middle
+    color: #666666
+
+.vertical-sepa
+  width: 1px
+  height: 14px
+  opacity: 0.2
+  background-color: black
+  float: right
+  margin: 5px 21px 0 0
+
+.content-box.duel-stats
+  margin-top: 50px
+
+.duel-stats
+
+  .button
+    display: block
+    text-align: center
+    width: 194px
+    margin: 20px auto 0
+
+  &__item
+    text-align: center
+    margin-bottom: 22px
+    margin-top: 30px
+
+    &:first-child
+      margin-top: 12px
+
+  &__info
+    display: inline-block
+
+  &__icon
+    float: left
+    vertical-align: middle
+    margin-top: -2px
+
+    &_duel
+      +imgbox('icons/duel-stats-duel.png')
+      margin-right: 22px
+
+    &_win
+      +imgbox('icons/duel-stats-win.png')
+      margin-right: 20px
+
+  &__number
+    float: left
+    font-size: 30px
+    line-height: 30px
+    color: #242424
+    font-weight: 600
+    margin-right: 8px
+
+  &__text
+    font-size: 14px
+    line-height: 14px
+    color: #4c4c4c
+    float: left
+    text-align: left
+    margin-top: 13px
+
+    &_tline
+      margin-top: 2px

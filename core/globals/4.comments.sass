@@ -1,0 +1,134 @@
+@import '_imports'
+
+.comment-box
+  width: auto
+  padding: 15px
+  margin: 0 15px
+  background-color: #FBF8F6
+  border-radius: 8px
+  position: relative
+  +clearfix
+
+  +width-lessthan(1024)
+    padding: 20px 20px 15px
+
+  .field-comment
+    margin-left: 77px
+
+    +width-lessthan(1024)
+      margin-left: 65px
+
+    +width-lessthan(600)
+      margin-left: 0
+
+  .user-avatar
+    float: left
+
+    +width-lessthan(600)
+      width: 40px
+      height: 40px
+      position: absolute
+      left: 20px
+      bottom: 15px
+
+  .button
+    float: right
+    margin-top: 5px
+
+    +width-lessthan(600)
+      +width-between-property(width, 320, 210, 600, 220, true, true)
+      padding: 0
+      margin-top: 10px
+      text-align: center
+
+  & + .comment
+    border-top: none
+
+.comments-container
+  margin-bottom: 25px
+
+.comments-section
+  background-color: #fff
+  position: relative
+  //box-shadow: 0 1px 4px rgba(71, 44, 6, 0.2)
+  margin-top: 35px
+  padding-bottom: 25px
+
+  +width-lessthan(1024)
+    width: 688px
+    margin-left: auto
+    margin-right: auto
+    border-radius: 10px
+
+  +width-lessthan(820)
+    width: auto
+
+  &:last-child
+    margin-bottom: -35px
+    border-radius: 0px 0px 4px 4px
+
+  &:before
+    content: ''
+    +imgbox('elements/global/comment-section-triangle.png')
+    position: absolute
+    top: -18px
+    left: 0
+    right: 0
+    margin: 0 auto
+
+  &__layout
+    width: 580px
+    margin: 0 auto
+
+    +width-lessthan(1024)
+      width: auto
+      margin: 0 60px
+
+    +width-lessthan(600)
+      margin: 0 20px
+
+  &__header
+    padding: 30px 0 20px
+
+    +width-lessthan(1024)
+      margin: 0
+      padding-top: 20px
+
+    .title
+      line-height: normal
+
+    .button
+      float: right
+
+  .comment-box
+    width: 100%
+    box-sizing: border-box
+    margin: 0
+
+    +width-lessthan(1024)
+      width: auto
+      margin: 0 -20px
+
+    .field-comment
+      width: auto
+
+      &:before
+        +width-lessthan(600)
+          transform: rotate(-90deg)
+          top: auto
+          left: 17px
+          bottom: -10px
+
+  .comment
+    .comment__content
+      .comment-box
+        margin-bottom: 18px
+
+  .field-comment
+    width: 459px
+
+.all-comments-container
+  border-bottom: 1px solid #e6e1da
+
+#comment_form_template
+  margin-bottom: 20px

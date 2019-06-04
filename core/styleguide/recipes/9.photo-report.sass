@@ -1,0 +1,154 @@
+@import '_imports'
+
+// Photo report
+//
+// Фотоотчет
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.content-box_photo-report
+//   +e.content
+//     +b.title_sans-serif._small._uppercase фото отчёты к рецепту
+//       span 23
+//     +b.button_transparent
+//       +b('span').fonticon_photo-report
+//       span Добавить фотографию
+//   +b.photo-report
+//     +e.photo-container
+//       img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//     +e.photo-container
+//       img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//     +e.photo-container
+//       img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//     +e.photo-container
+//       img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//     +e.photo-container
+//       img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//       +e.overlay
+//       +e.moar еще
+//         span 20
+//
+// Styleguide 7.9
+
+.content-box_photo-report
+  +width-lessthan(1024)
+    text-align: center
+
+  .content-box
+    &__content
+      +clearfix()
+
+      +width-lessthan(1024)
+        padding: 20px
+        text-align: left
+
+    &__empty
+      color: #666
+      font-size: 14px
+      font-weight: 400
+      line-height: 22px
+      text-align: center
+      padding: 34px 0 35px
+      border-top: 1px solid #e6e6e6
+      margin: 0 29px
+
+      +width-lessthan(1024)
+        margin: 0 20px
+
+  .title
+    float: left
+    line-height: 40px
+
+    +width-lessthan(1024)
+      line-height: normal
+
+  .button
+    float: right
+
+    +width-lessthan(1024)
+      float: none
+      margin: 20px 0
+
+    .fonticon
+      font-size: 18px
+
+    &.device-hide
+      +width-lessthan(1024)
+        display: none
+
+    &.device-show
+      display: none
+      
+      +width-lessthan(1024)
+        display: inline-block
+
+.photo-report
+  +clearfix()
+  position: relative
+  overflow: hidden
+  border-radius: 0 0 4px 4px
+
+  &__photo-container
+    width: calc(20% - 1Px)
+    padding-bottom: 20%
+    float: left
+    position: relative
+    overflow: hidden
+    cursor: pointer
+    outline: none
+    margin-left: 1Px
+
+    &:first-child
+      width: 20%
+      margin-left: 0
+      border-radius: 0 0 0 4px
+
+    &:last-child
+      border-radius: 0 0 4px 0
+
+    &:hover
+      .photo-report__moar
+        color: #ff391e
+
+    img
+      width: 100%
+      height: 100%
+      display: block
+      position: absolute
+      pointer-events: none
+
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: black
+    opacity: 0.6
+    border-radius: 0 0 4px 0
+
+  &__moar
+    display: flex
+    flex-direction: row
+    align-items: center
+    color: white
+    font-size: 16px
+    font-weight: 700
+    text-align: center
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+    +width-lessthan(1024)
+      font-size: 14px
+
+    +width-lessthan(768)
+      +width-between-property(font-size, 320, 12, 768, 14, true, true)
+
+  &__moar-text
+    width: 100%
+    text-align: center
+    

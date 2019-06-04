@@ -1,0 +1,87 @@
+@import '_imports'
+
+// Gallery card
+//
+// Карточка галереи
+//
+// default - обычное состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b('article').gallery-card.card
+//   a(href="#")
+//     +e.preview
+//       +e('img').preview-img(src="/assets/images/content/cabinet/gallery-preview.jpg")
+//     +e.thumbnails
+//       +e.thumb-container
+//         +e('img').thumb-image(src="/assets/images/content/cabinet/gallery-thumb1.jpg")
+//       +e.thumb-container
+//         +e('img').thumb-image(src="/assets/images/content/cabinet/gallery-thumb2.jpg")
+//       +e.thumb-container
+//       +e.thumb-container
+//       +e.thumb-container
+//     +b.title Фотографии профиля
+//     +b.text-icon
+//       +b('span').fonticon_photo
+//       span 2 фотографии
+//   .card__options
+//     .card__option
+//       +b('span').fonticon_settings-user-menu
+//
+// Styleguide 4.16
+
+.gallery-card
+  position: relative
+  text-align: center
+  display: block
+  text-decoration: none
+
+  &__preview
+    height: 321px
+    position: relative
+    overflow: hidden
+    display: block
+
+  &__preview-image
+    width:  100%
+
+  &__thumbnails
+    +clearfix
+    background: #e1e1e1
+    margin-bottom: 15px
+    display: flex
+
+  &__thumb-container
+    width: 56px
+    height: 56px
+    position: relative
+    overflow: hidden
+
+    &:before
+      content: ''
+      width: 1Px
+      height: 36px
+      background-color: #F2F2F2
+      position: absolute
+      top: 50%
+      left: 0
+      margin-top: -18px
+
+    &:first-child
+      &:before
+        display: none
+
+  &__thumb-image
+    width: 100%
+    position: relative
+
+  .text-icon
+    color: #666
+    font-size: 13px
+    font-weight: 600
+
+  .title
+    display: block
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis

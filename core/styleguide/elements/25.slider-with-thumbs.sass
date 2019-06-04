@@ -1,0 +1,217 @@
+@import '_imports'
+
+// Slider with thumbs
+//
+// Слайдер с тамбнэилами
+//
+// default - обычное состояние
+//
+// markup:
+// +b.thumb-slider
+//   +e.container
+//     +e.wrapper
+//       +e.slide
+//         +e.video-icon
+//         img(src="/assets/images/content/thumb-slider-slide.jpg")
+//       +e.slide
+//         +e.video-icon
+//         img(src="/assets/images/content/thumb-slider-slide.jpg")
+//       +e.slide
+//         +e.video-icon
+//         img(src="/assets/images/content/thumb-slider-slide.jpg")
+//   +e.thumbs
+//     +e.wrapper
+//       +e.thumb.active
+//         +e.image-container
+//           +b.video-icon-small
+//           +e.overlay
+//           img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//       +e.thumb
+//         +e.image-container
+//           +e.overlay
+//           img(src="/assets/images/content/thumb-slider-thumb.jpg")
+//       +e.thumb
+//         +e.image-container
+//           +e.overlay
+//       +e.thumb
+//         +e.image-container
+//           +e.overlay
+//       +e.thumb
+//         +e.image-container
+//           +e.overlay
+//   +b.slider-controls_thumbs
+//     +e.prev.disabled
+//       +b('span').fonticon_arrow-left
+//     +e.next
+//       +b('span').fonticon_arrow-right
+//
+// Styleguide 1.25
+
+.thumb-slider
+  width: 580px
+  border-bottom: 1px solid #f0eadc
+  position: relative
+  user-select: none
+
+  +width-lessthan(1024)
+    width: 100%
+    overflow: hidden
+
+    .slider-controls
+      display: none
+
+  &_photo
+    width: 100%
+    height: auto
+    margin-top: 30px
+
+  &__delete
+    width: 24px
+    height: 24px
+    border: 2px solid white
+    border-radius: 50%
+    position: absolute
+    top: 20px
+    right: 20px
+    cursor: pointer
+    z-index: 2
+    line-height: 24px
+    text-align: center
+
+    .fonticon
+      color: #fff
+
+    &:hover
+      background: #fff
+
+      .fonticon
+        color: #ff3620
+
+  &__slider-container
+    height: 450px
+    overflow: hidden
+    position: relative
+
+    +width-lessthan(1024)
+      height: auto
+      margin-left: -10px
+
+  &__top-slider
+    position: relative
+
+  &__slide
+    float: left
+    width: 580px
+    height: 450px
+    +imgbox('icons/icon-play.png', '', '.thumb-slider__video-icon')
+    position: relative
+    overflow: hidden
+
+    +width-lessthan(1024)
+      height: auto
+
+      & + .thumb-slider__slide
+        padding-left: 10px
+
+    img
+      width: 100%
+      display: block
+
+  &__video-icon
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+
+  &__thumbs-container
+    //width: 100%
+    height: 114px
+    margin-top: 1Px
+    margin-left: -1Px
+    position: relative
+    overflow: hidden
+    +clearfix
+    box-sizing: border-box
+    // margin: 0 46px
+
+    +width-lessthan(1024)
+      display: none
+
+  &__thumb
+    //width: calc(20% - 1px)
+    width: 115px
+    height: 114px
+    position: relative
+    overflow: hidden
+    float: left
+    cursor: pointer
+    outline: none
+
+    &.slick-current
+      .thumb-slider__overlay
+        display: block
+
+  &__image-container
+    width: 100%
+    height: 115px
+    display: block
+    position: relative
+    overflow: hidden
+    margin-left: 1Px
+
+    img
+      width: 100%
+      display: block
+      pointer-events: none
+
+  &__overlay
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0,0,0,0.5)
+
+    &:after
+      content: ''
+      +imgbox('icons/view.png')
+      position: absolute
+      top: 0
+      right: 0
+      left: 0
+      bottom: 0
+      margin: auto
+
+.video-icon-small
+  position: absolute
+  top: 10px
+  left: 10px
+  +imgbox('icons/video-icon-small.png')
+
+.thumb-slider_photo
+  .slider-controls
+    position: static
+
+    &__count
+      font-size: 14px
+      font-weight: 700
+      text-transform: uppercase
+      color: #4c4c4c
+      position: absolute
+      top: -35px
+      right: auto
+      left: 0
+      bottom: auto
+      font-family: "Open Sans"
+
+    &__count-name
+      display: inline-block
+
+    &__count-item
+      display: inline-block
+
+      &_current
+        color: #fe5722

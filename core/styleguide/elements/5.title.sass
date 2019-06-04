@@ -1,0 +1,56 @@
+@import '_imports'
+
+// Title
+// 
+// Информация о пользователе
+// 
+// default - обычное состояние
+// title_small - обычное состояние
+// title_medium - обычное состояние
+// title_big - обычное состояние
+// title_white - обычное состояние
+//
+// markup:
+// +b('h1').title(class="{$modifiers}") Бургеры вместе с BORK
+// +b.title(class="{$modifiers}") Бургеры вместе с BORK
+// 
+// Styleguide 1.5
+
+$title-color : #242424
+
+.title
+  color: $title-color
+  font-family: "Noto Serif"
+  font-size: 16px
+  font-weight: 700
+  line-height: 20px
+  margin: 0px
+
+  &_small
+    font-size: 14px
+    line-height: normal
+
+  &_medium
+    font-size: 22px
+    line-height: 24px
+
+  &_big
+    font-size: 28px
+    line-height: normal
+
+  &_white
+    color: #fff
+
+  &_sans-serif
+    font-family: "Open Sans"
+
+  &_uppercase
+    text-transform: uppercase
+
+  &_button-height
+    line-height: 40px
+
+  &>span
+    color: #ff391e
+    display: inline-block
+    margin-left: 5px

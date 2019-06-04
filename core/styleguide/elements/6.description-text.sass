@@ -1,0 +1,28 @@
+@import '_imports'
+
+// Description
+// 
+// Описание
+// 
+// default - обычное состояние
+//
+// markup:
+// +b('p').description-text(class="{$modifiers}") 
+//   span Рецепты: 
+//   | крокеты с ветчиной, тыквенный хумус с фундуком, пирожки из теста фило с рисом и грибами
+// +b.description-text(class="{$modifiers}") В том виде, в котором мы узнали и полюбили пиццу, она впервые появилась в 1830-е годы в Неаполе.
+// 
+// Styleguide 1.6
+
+.description-text
+  color: #4D4D4D
+  font-size: 14px
+  font-weight: 400
+  line-height: 20px
+  margin: 0
+
+  span
+    color: #808080
+
+  &_white
+    color: #fff

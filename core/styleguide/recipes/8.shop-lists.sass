@@ -1,0 +1,85 @@
+@import '_imports'
+
+// Shop list
+//
+// Лист покупок
+//
+// default - обычное состояние
+//
+// markup:
+// +b.shop-lists
+//   +e.item
+//     +b.title_small Моя список покупок
+//     +e.date от 10.06.2015
+//     +b('span').fonticon_trash-can
+//   +e.item.active
+//     +b.title_small Список покупок на все случаи жизни и всё такое
+//     +e.date от 10.06.2015
+//     +b('span').fonticon_trash-can
+//
+// Styleguide 7.8
+
+.shop-lists
+  position: relative
+  background-color: white
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(71, 44, 6, 0.2)
+  margin-bottom: 15px
+
+  &__item
+    padding: 5px 40px 15px 20px
+    cursor: pointer
+    position: relative
+
+    &:hover
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15)
+      z-index: 1
+
+    &.active
+      background-color: #e6e1da
+
+      .fonticon
+        display: block
+
+    &_empty
+      font-family: "Noto Serif"
+      font-weight: 600
+      font-size: 14px
+      line-height: normal
+      padding: 25px 20px
+      cursor: default
+
+      &:hover
+        box-shadow: none
+
+    & + &
+      border-top: 1px solid #e6e1da
+
+    .fonticon
+      font-size: 20px
+      color: #ccc
+      cursor: pointer
+      position: absolute
+      top: 50%
+      right: 13px
+      margin-top: -12px
+      display: none
+
+      &:hover
+        color: #ff391e
+
+  &__date
+    color: #999
+    font-size: 12px
+    font-weight: 400
+    margin-top: 2px
+    line-height: normal
+    font-family: "Open Sans"
+
+  &__list-item
+
+    & + &
+      margin-top: 20px
+
+  .definition-list-table
+    margin-top: 15px

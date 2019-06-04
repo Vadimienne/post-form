@@ -1,0 +1,88 @@
+@import '_imports'
+
+// Mentions
+//
+// Упоминания
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.mentions
+//   +b.mention
+//     +e.online-status
+//     +b.person_h._mention
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Анастасия Мацукатова
+//             +e.mention нравится рецепт: «Курица по китайски»
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b.mention.online
+//     +e.online-status
+//     +b.person_h._mention
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Анастасия Мацукатова
+//             +e.mention нравится рецепт: «Курица по китайски»
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +e.load-more Загрузить ещё
+//
+// Styleguide 1.57
+
+.mentions
+  &__load-more
+    line-height: 50px
+    color: #999
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 600
+    text-transform: uppercase
+    text-align: center
+    cursor: pointer
+    border-radius: 0 0 4px 4px
+
+    &:hover
+      background-color: #fbf8f6
+
+.mention
+  padding: 10px 30px 10px 10px
+  position: relative
+  border-bottom: 1px solid #e6e1da
+
+  &:first-child
+    border-radius: 4px 4px 0 0
+
+  &:hover
+    background-color: #f2f2f2
+
+  &.online
+    .mention__online-status
+      display: block
+
+  &__online-status
+    width: 10Px
+    height: 10Px
+    opacity: 0.5
+    border-radius: 50%
+    background-color: #2cb946
+    position: absolute
+    top: 10Px
+    right: 10Px
+    display: none
+
+  .button
+    text-transform: none
+    font-size: 13px
+    margin-top: 18px
+    margin-bottom: 10px
+
+    & + .button
+      margin-left: 5px
+      background: none
+
+    .fonticon
+      font-size: 18px

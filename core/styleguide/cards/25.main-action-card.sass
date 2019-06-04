@@ -1,0 +1,103 @@
+@import '_imports'
+
+// Main action card
+//
+// Карточка действия на главной
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_main-action
+//   +e('picture').picture
+//     source(srcset="/assets/images/card/card_main-action-vote.jpg 1x, /assets/images/card/card_main-action-vote@2x.jpg 2x, /assets/images/card/card_main-action-vote@3x.jpg 3x")
+//     img(src="/assets/images/card/card_main-action-vote.jpg" alt="")
+//   +e.info
+//     .title Голосование
+//       br
+//       |  за рецепт дня
+//     +e.button-wrp
+//       +b.button._transparent._white._fit Голосовать
+// +b('article').card_main-action._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/card/card_main-action-school.jpg 1x, /assets/images/card/card_main-action-school@2x.jpg 2x, /assets/images/card/card_main-action-school@3x.jpg 3x")
+//     img(src="/assets/images/card/card_main-action-school.jpg" alt="")
+//   +e.info
+//     .title Кулинарная школа
+//     +e.video-description
+//       +e.video-number 256
+//       +e.video-text видео
+//         br
+//         | уроков
+//     +e.button-wrp
+//       +b.button._transparent._white._fit Учиться
+//
+// Styleguide 4.25
+
+.card_main-action
+  box-shadow: 0 1px 4px rgba(0,0,0,.1)
+  text-align: center
+  background-color: transparent
+  cursor: default
+
+  .card
+
+    &__picture
+      width: 100%
+      height: 100%
+      border-bottom: none
+
+    &__info
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+
+      .title
+        font-size: 26px
+        line-height: 26px
+        color: #fff
+        width: 80%
+        margin: 36px auto 0
+
+
+
+    &__button-wrp
+      position: absolute
+      bottom: 30px
+      width: 200px
+      left: 0
+      right: 0
+      margin: 0 auto
+
+    &__video-description
+      margin-top: 26px
+      display: inline-block
+      color: #fff
+      +clearfix
+      line-height: 20px
+
+    &__video-number
+      font-weight: 700
+      font-size: 30px
+      float: left
+      margin-right: 8px
+      margin-top: 4px
+
+    &__video-text
+      font-size: 14px
+      text-align: left
+      line-height: 13px
+      float: left
+      font-weight: 600
+
+  &:hover
+    cursor: pointer
+
+    .button_white
+      border-color: white
+  
+.card_title-bottom 
+  .card__info
+    .title
+      margin: 280px auto 0

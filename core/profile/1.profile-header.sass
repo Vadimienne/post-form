@@ -1,0 +1,219 @@
+@import '_imports'
+
+.profile-header
+  height: 440px
+  margin: 0 -50px 20px -50px
+  position: relative
+
+  &_edit
+    .profile-header__user-name
+      bottom: 50px
+    .profile-header__user-status
+      bottom: 35px
+
+  &__layout
+    width: 1180px
+    margin: 0 auto
+
+  .back-button
+    position: absolute
+    top: 25px
+    left: 50px
+
+  &__upload
+    position: absolute
+    top: 26px
+    right: 50px
+
+    .fonticon
+      font-size: 18px
+
+    &:hover
+      .fonticon
+        color: #ff391e
+
+  &__user-name
+    color: #FFF
+    font-family: "Noto Serif"
+    font-size: 48px
+    font-weight: 700
+    line-height: normal
+    position: absolute
+    bottom: 105px
+    left: 350px
+    margin: 0
+
+  &__user-status
+    color: #e5e5e5
+    font-family: "Noto Serif"
+    font-size: 14px
+    font-style: italic
+    line-height: normal
+    position: absolute
+    bottom: 87px
+    left: 350px
+
+  &__buttons
+    position: absolute
+    bottom: 20px
+    left: 350px
+
+    .button
+      &:hover
+        color: #ff391e
+      & + .button
+        margin-left: 5px
+  
+  &__jvbuttons
+    position: absolute
+    bottom: 450px
+    right: 50px
+
+    .button
+      &:hover
+        color: #ff391e
+      & + .button
+        margin-left: 5px
+
+.profile-header-social-links
+  position: absolute
+  right: 50px
+  bottom: 20px
+  +clearfix
+
+  &__social-link
+    display: block
+    float: left
+    margin-left: 10px
+    position: relative
+    width: 40px
+    height: 40px
+    background: rgba(255, 255, 255, .4)
+    border-radius: 20px
+    cursor: pointer
+
+    &:hover
+      background: #fff
+
+    &_vk
+      +imgbox('userprofile/vk.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/vk-hover.png', '', '.profile-header-social-links__icon')
+
+    &_fb
+      +imgbox('userprofile/fb.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/fb-hover.png', '', '.profile-header-social-links__icon')
+
+    &_tw
+      +imgbox('userprofile/tw.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/tw-hover.png', '', '.profile-header-social-links__icon')
+
+    &_mail
+      +imgbox('userprofile/mail.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/mail-hover.png', '', '.profile-header-social-links__icon')
+
+    &_pinterest
+      +imgbox('userprofile/pinterest.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/pinterest-hover.png', '', '.profile-header-social-links__icon')
+
+    &_ok
+      +imgbox('userprofile/ok.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/ok-hover.png', '', '.profile-header-social-links__icon')
+
+    &_inst
+      +imgbox('userprofile/inst.png', '', '.profile-header-social-links__icon')
+
+      &:hover
+        +imgbox('userprofile/inst-hover.png', '', '.profile-header-social-links__icon')
+
+
+
+
+  &__icon
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+
+.profile-cover
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+
+  &.loading-in-progress
+    position: absolute !important
+
+  img
+    width: 100%
+
+  &__shadow
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    background: left bottom repeat-x
+    +background-image-retina('userprofile/cover-shadow.png')
+
+.profile-avatar
+  width: 264px
+  height: 264px
+  border: 8px solid #fff
+  background-color: #fff
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1)
+  position: relative
+  overflow: hidden
+  margin-top : -185px
+  z-index: 9999
+
+  img
+    display : block
+    width : 100%
+
+  &__upload
+    position: absolute
+    top: 18px
+    right: 18px
+
+    .fonticon
+      font-size: 18px
+
+    &:hover
+      .fonticon
+        color: #ff391e
+
+.profile-header_visockaya
+  height: 540px
+
+  .profile-header__user-name
+    font-size: 80px
+    line-height: 80px
+    text-shadow: 1.1px 1.6px 4px rgba(0, 0, 0, 0.1)
+    left: 50px
+    bottom: 50px
+
+  .profile-header-social-links
+    bottom: 68px
+
+  .back-button_transparent-bg
+    background: none
+    border: 1px solid #fff
+    color: #fff
+    top: 45px

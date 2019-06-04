@@ -1,0 +1,154 @@
+@import '_imports'
+
+// fonticon
+//
+// Строчный элемент, содержащий иконки, вставленные шрифтом
+//
+// default - обычное состояние
+//
+// markup:
+// +b('span').fonticon_facebook
+// +b('span').fonticon_vkontakte
+// +b('span').fonticon_twitter
+// +b('span').fonticon_gear
+// +b('span').fonticon_last-updates
+// +b('span').fonticon_about
+// +b('span').fonticon_recipes
+// +b('span').fonticon_posts
+// +b('span').fonticon_books
+// +b('span').fonticon_photos
+// +b('span').fonticon_courses
+// +b('span').fonticon_messages
+// +b('span').fonticon_subscription
+// +b('span').fonticon_followers
+// +b('span').fonticon_add
+// +b('span').fonticon_message
+// +b('span').fonticon_publish
+// +b('span').fonticon_like
+// +b('span').fonticon_cart
+// +b('span').fonticon_recipe
+// +b('span').fonticon_photo
+// +b('span').fonticon_add-friend
+// +b('span').fonticon_remove-friend
+// +b('span').fonticon_views
+// +b('span').fonticon_draft
+// +b('span').fonticon_trash-can
+// +b('span').fonticon_cross
+// +b('span').fonticon_vote
+// +b('span').fonticon_print
+// +b('span').fonticon_mailto
+// +b('span').fonticon_shoping-list
+// +b('span').fonticon_arrow-left
+// +b('span').fonticon_arrow-right
+// +b('span').fonticon_cross-wide
+// +b('span').fonticon_fullscreen
+// +b('span').fonticon_profile-settings
+// +b('span').fonticon_back-button
+// +b('span').fonticon_blog
+// +b('span').fonticon_theater
+// +b('span').fonticon_movie
+// +b('span').fonticon_interview
+// +b('span').fonticon_favorites-user-menu
+// +b('span').fonticon_logout-user-menu
+// +b('span').fonticon_notification-user-menu
+// +b('span').fonticon_profile-user-menu
+// +b('span').fonticon_settings-user-menu
+// +b('span').fonticon_shoping-list-user-menu
+// +b('span').fonticon_new-book
+// +b('span').fonticon_arrow-thin-prev
+// +b('span').fonticon_arrow-thin-next
+// +b('span').fonticon_expand-arrow
+// +b('span').fonticon_collaps-arrow
+// +b('span').fonticon_winner-cup
+// +b('span').fonticon_check-icon
+// +b('span').fonticon_announcement
+// +b('span').fonticon_plus
+// +b('span').fonticon_play-icon
+// +b('span').fonticon_clock-icon
+// +b('span').fonticon_present
+// +b('span').fonticon_heart
+// +b('span').fonticon_reload
+// +b('span').fonticon_time
+// +b('span').fonticon_notes
+// +b('span').fonticon_ask-question
+// +b('span').fonticon_materials
+// +b('span').fonticon_rub
+// +b('span').fonticon_ingredients
+// +b('span').fonticon_rollup
+// +b('span').fonticon_shopping-cart
+// +b('span').fonticon_upload-image
+// +b('span').fonticon_change-pass
+// +b('span').fonticon_done
+// +b('span').fonticon_smile
+// +b('span').fonticon_video
+// +b('span').fonticon_knifes
+// +b('span').fonticon_handler
+// +b('span').fonticon_edit-list
+// +b('span').fonticon_report
+// +b('span').fonticon_search
+// +b('span').fonticon_add-subsection
+// +b('span').fonticon_add-ingredient
+// +b('span').fonticon_preview-show
+// +b('span').fonticon_preview-hide
+// +b('span').fonticon_action-like
+// +b('span').fonticon_action-comment
+// +b('span').fonticon_action-answer
+// +b('span').fonticon_action-rate
+// +b('span').fonticon_action-friend
+// +b('span').fonticon_action-edit
+// +b('span').fonticon_action-feed
+// +b('span').fonticon_action-win
+// +b('span').fonticon_check-all
+// +b('span').fonticon_mail
+//
+// Styleguide 1.13
+
+.fonticon
+  display : inline
+  font-weight: normal
+  font-family: "EdimDoma Icons"
+
+  &_add
+    font-size: 16px
+
+  &_print
+    font-size: 16px
+
+  &_gear
+    font-size: 18px
+
+  &_shoping-list
+    font-size: 20px
+
+  &_views
+    font-size: 24px
+
+  &_ask-question
+    font-size: 20px
+
+  &_notes
+    font-size: 18px
+
+  &_materials
+    font-size: 18px
+
+  &_draft
+    font-size: 16px
+
+  &_add-ingredient
+    font-size: 20px
+
+  &_add-subsection
+    font-size: 14px
+
+  &_check-all
+    font-size: 20px
+
+  @each $name, $glyph in $fonticons
+    &_#{$name}
+      &:before
+        content : '#{$glyph}'
+
+.button
+  .fonticon_done
+    font-size: 18px

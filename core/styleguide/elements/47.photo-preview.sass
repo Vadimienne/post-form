@@ -1,0 +1,94 @@
+@import '_imports'
+
+// Photo preview
+//
+// Превью фотографии
+//
+// default - обычное состояние
+// photo-preview_big - большая
+// photo-preview_card - как карточка
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.photo-preview(class="{$modifiers}")
+//   +e.delete
+//     +b('span').fonticon_trash-can
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/photo-preview.jpg 1x, /assets/images/content/photo-preview@2x.jpg 2x, /assets/images/content/photo-preview@3x.jpg 3x")
+//       img(src="/assets/images/content/photo-preview.jpg" alt="")
+//   +e.overlay
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//
+// Styleguide 1.47
+
+.photo-preview
+  display: block
+  width: 280px
+  height: 280px
+  background-color: white
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1)
+  position: relative
+  overflow: hidden
+  cursor: pointer
+
+  &_big
+    width: 580px
+    height: 450px
+
+  &_card
+    width: 280px
+    height: 450px
+
+  &:hover
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,.04))
+
+  &__delete
+    width: 24px
+    height: 24px
+    border: 2px solid white
+    border-radius: 50%
+    position: absolute
+    top: 10px
+    right: 10px
+    cursor: pointer
+    z-index: 2
+    line-height: 24px
+    text-align: center
+
+    .fonticon
+      color: #fff
+
+    &:hover
+      background: #fff
+
+      .fonticon
+        color: #ff3620
+
+  .person_h
+    display: block
+    position: absolute
+    left: 20px
+    bottom: 20px
+
+    .person__name
+      color: #fff
+
+    &:hover
+      .person__name
+        color: #ff391e

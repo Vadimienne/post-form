@@ -1,0 +1,31 @@
+@import '_imports'
+
+// Device tooltip
+//
+// Подсказки на устройствах
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.device-tooltip
+//   +e.print-item С изображениями
+//   +e.print-item Без изображений
+//
+// Styleguide 3.9
+
+.device-tooltip
+  width: 300px
+  border-radius: 10px
+  background-color: #ffffff
+  box-shadow: 0 0 6px 0 rgba(72, 44, 4, 0.3)
+
+  &__item
+    display: block
+    color: #4c4c4c !important
+    font-size: 14px
+    line-height: 50px
+    text-align: center
+    text-transform: none
+
+    & + .device-tooltip__item
+      border-top: 1px solid #f5eee0

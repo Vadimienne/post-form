@@ -1,0 +1,57 @@
+@import '_imports'
+
+// Countdown
+// 
+// Обратный отсчет
+// 
+// countdown - обычное состояние
+//
+// markup:
+// +b.dark-wrapper
+//  +b.countdown
+//    +b.description-text До начала занятия осталось:
+//    +e.container
+//      +e.item
+//        +e('span').item-number 12
+//        +e('span').item-name часов
+//      +e.item
+//        +e('span').item-number 38
+//        +e('span').item-name минут
+// 
+// Styleguide 1.41
+
+.countdown
+  line-height: normal
+  width: 170px
+  text-align: center
+
+  .description-text
+    color: #c1c1c1
+    font-size: 12px
+  
+  &__container
+    +clearfix
+    margin-top: -3px
+    width: 165px
+    margin: -3px auto 0
+
+  &__item
+    float: left
+    color: #ffffff
+
+  .countdown__item + .countdown__item
+    float: right
+
+  &__item-number
+    display: inline-block
+    vertical-align: top
+    font-size: 28px
+    font-weight: 700
+    margin-right: 8px
+    margin-top: -5px
+
+  &__item-name
+    display: inline-block
+    font-size: 14px
+    vertical-align: top
+    font-weight: 400

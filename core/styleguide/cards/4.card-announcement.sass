@@ -1,0 +1,74 @@
+@import '_imports'
+
+// Card announcement
+//
+// Карточка анонса телепередачи
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card-announcement.card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +e.overlay
+//     +e.icon Анонс передачи
+//     +b.badge_tv Едим дома!
+//     +e('main').content
+//       +b.title Такая работа
+//       +b('p').description-text
+//         span Рецепты:
+//         | рыбный пирог со сливочной начинкой, томатный суп с чечевицей, свеклой и шпинатом, мандариновый кекс
+//
+// Styleguide 4.4
+
+.card-announcement
+  border: 2px solid #ff6600
+  text-align: center
+  position: relative
+
+  &__overlay
+    position: absolute
+    top: 27px
+    left: 50%
+    margin-left: -111px
+    width: 222px
+    height: 222px
+    border-radius: 50%
+    background-color: rgba(245, 238, 224, .8)
+
+  &_bg_transparent.card
+    background-color: transparent
+
+  &__icon
+    padding-top: 60px
+    background: center top no-repeat
+    +background-image-retina('icons/announcement.png')
+    color: #EF3836
+    font-family: "Noto Serif"
+    font-size: 18px
+    font-weight: 400
+    position: absolute
+    top: 92px
+    left: 0
+    right: 0
+
+  &__picture
+    display: block
+    width: 220px
+    height: 220px
+    background-color: #F7F1E6
+    border-radius: 110px
+    position: relative
+    overflow: hidden
+    margin: 28px auto 15px
+
+  .badge
+    margin-bottom: 10px
+
+  &__content
+    padding: 0 20px
+
+  .title
+    margin-bottom: 10px

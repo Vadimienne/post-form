@@ -1,0 +1,89 @@
+@import '_imports'
+
+// Activity item
+//
+// Активность
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.activity-item
+//
+// Styleguide 1.61
+
+.activity-item
+  position: relative
+  padding: 15px 0 15px 32px
+  border-bottom: 1px solid #e6e1da
+
+  &_win
+    background: #ebf5e0
+    border-bottom: none
+    position: relative
+    margin-top: -1px
+
+    &:before
+      content: ''
+      display: block
+      width: 30px
+      height: 100%
+      position: absolute
+      top: 0
+      left: -30px
+      background: #ebf5e0
+
+    &:after
+      content: ''
+      display: block
+      width: 30px
+      height: 100%
+      position: absolute
+      top: 0
+      right: -30px
+      background: #ebf5e0
+
+    &:first-child
+      margin-top: 0
+
+  &:last-child
+    border-bottom: none
+
+  .fonticon
+    color: #f02e22
+    font-size: 22px
+
+  &__icon-container
+    position: absolute
+    top: 15px
+    left: 0
+
+  &__date
+    font-size: 12px
+    color: #999
+    font-family: "Open Sans"
+    font-weight: 400
+    line-height: normal
+
+  &__activity
+    font-size: 12px
+    color: #666
+    line-height: normal
+
+    span
+      color: #242424
+      font-family: "Noto Serif"
+      font-weight: 700
+
+    a
+      display: inline-block
+      color: #f02e22
+      max-width: 270px
+      vertical-align: text-bottom
+      position: relative
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+      &:hover
+        text-decoration: underline

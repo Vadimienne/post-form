@@ -1,0 +1,731 @@
+@import '_imports'
+
+// Slider
+//
+// Слайдер <br>
+// <b>beh_slide - скролящийся слайдер</b> <br>
+// <b>beh_fade - слайдер c эффектом fade</b>
+//
+// slider - обычное состояние
+//
+// markup:
+// div(style="width:520px;")
+//   .slider.slider_beh_slide(data-module="slider", data-options='{}')
+//     .slider__container
+//       .slider__wrapper
+//         +b.goods.slider__slide
+//           +e.image-container
+//             img(src="/assets/images/content/advice-slider.jpg")
+//           +e.description Нож для чистки овощей Genova, 6 см, зеленый
+//           +b.price 195 руб.
+//         +b.goods.slider__slide
+//           +e.image-container
+//             img(src="/assets/images/content/advice-slider.jpg")
+//           +e.description Нож для чистки овощей Genova, 6 см, зеленый
+//           +b.price 195 руб.
+//         +b.goods.slider__slide
+//           +e.image-container
+//             img(src="/assets/images/content/advice-slider.jpg")
+//           +e.description Нож для чистки овощей Genova, 6 см
+//           +b.price 195 руб.
+//         +b.goods.slider__slide
+//           +e.image-container
+//             img(src="/assets/images/content/advice-slider.jpg")
+//           +e.description Нож для чистки овощей Genova, 6 см
+//           +b.price 195 руб.
+//     +b.slider-controls_bottom
+//       +b.control-button_transparent.slider-controls__prev.disabled
+//         +b('span').fonticon_arrow-left
+//       +b.control-button_transparent.slider-controls__next
+//         +b('span').fonticon_arrow-right
+// div(style="width:520px;")
+//   .slider.slider_beh_slide(data-module="slider", data-options='{}')
+//     .slider__container
+//       .slider__wrapper
+//         +b('a').goods_prize.slider__slide(href="#")
+//           +e.image-container
+//             img(src="/assets/images/content/club/slide-prize.jpg")
+//           +e.place 1 место
+//           +e.description Холодильник Oursson RF1000/RD
+//         +b('a').goods_prize.slider__slide(href="#")
+//           +e.image-container
+//             img(src="/assets/images/content/club/slide-prize-2.jpg")
+//           +e.place 2 место
+//           +e.description Электрический гриль Oursson
+//         +b('a').goods_prize.slider__slide(href="#")
+//           +e.image-container
+//             img(src="/assets/images/content/club/slide-prize-3.jpg")
+//           +e.place 3 место
+//           +e.description Мясорубка Oursson MG2010/RD
+//     +b.slider-controls_bottom
+//       +b.control-button_transparent.slider-controls__prev.disabled
+//         +b('span').fonticon_arrow-left
+//       +b.control-button_transparent.slider-controls__next
+//         +b('span').fonticon_arrow-right
+// div(style="width:580px;")
+//   .slider.slider_beh_fade.slider_wide-card(data-module="slider-fade", data-options='{"paginatorColor":"grey"}')
+//     .slider__container
+//       .slider__slide
+//         +b('article').card_event._wide
+//           +e('picture').picture
+//             source(srcset="/assets/images/content/calendar-wide-card.jpg 1x, /assets/images/content/calendar-wide-card@2x.jpg 2x, /assets/images/content/calendar-wide-card@3x.jpg 3x")
+//             img(src="/assets/images/content/calendar-wide-card.jpg" alt="")
+//           +e('main').content
+//             +e.icon_holiday
+//             +b.badge_holidays Сегодня • 25 июля
+//             +b.title_medium Международный день пиццы
+//             +b('p').description-text В том виде, в котором мы узнали и полюбили пиццу, она впервые появилась в 1830-е годы в Неаполе.
+//             +e.button-container
+//               +b.button_pink 10 рецептов для праздника
+//       .slider__slide
+//         +b('article').card_event._wide.slider__slide
+//           +e('picture').picture
+//             source(srcset="/assets/images/content/calendar-wide-card.jpg 1x, /assets/images/content/calendar-wide-card@2x.jpg 2x, /assets/images/content/calendar-wide-card@3x.jpg 3x")
+//             img(src="/assets/images/content/calendar-wide-card.jpg" alt="")
+//           +e('main').content
+//             +e.icon_holiday
+//             +b.badge_holidays Сегодня • 25 июля
+//             +b.title_medium Международный день пиццы
+//             +b('p').description-text В том виде, в котором мы узнали и полюбили пиццу, она впервые появилась в 1830-е годы в Неаполе.
+//             +e.button-container
+//               +b.button_pink 10 рецептов для праздника
+//     +b.slider-controls_inside
+//       +b.control-button.slider-controls__prev.disabled
+//         +b('span').fonticon_arrow-left
+//       +b.control-button.slider-controls__next
+//         +b('span').fonticon_arrow-right
+//       +b.slider-paginator-dotted_grey
+//         +e.item.active
+//         +e.item
+//         +e.item
+// div(style="width:580px;")
+//   .slider.slider_beh_fade.slider_wide-card(data-module="slider-fade", data-options='{"paginatorColor":"grey"}')
+//     .slider__container
+//       .slider__slide
+//         +b('article').card_big-footer._wide
+//           +e('picture').picture
+//             source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//             img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//           +e.overlay
+//           +b.badge_cooking-school кулинарные Советы
+//           +e('main').content
+//             +b.title_white Мужской класс: мясо под грейпфрутовым соусом, картофельный салат, маффины с кабачком
+//             +b.right
+//               +b.class-rate_novice._white
+//                 +e.icon
+//                 | Для начинающих
+//             +b.person_h._lh-small._white
+//               +b.user-avatar_small
+//                 +e('img').image(src="/assets/images/content/user-img.png")
+//               +e.wrapper
+//                 +e.content
+//                   +e.name Едим Дома
+//           +b('footer').card-footer
+//             +b.button_green В корзину
+//             +b.right
+//               +b.price_big 1 488 руб.
+//       .slider__slide
+//         +b('article').card_big-footer._wide
+//           +e('picture').picture
+//             source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//             img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//           +e.overlay
+//           +b.badge_cooking-school кулинарные Советы
+//           +e('main').content
+//             +b.title_white Мужской класс: мясо под грейпфрутовым соусом, картофельный салат, маффины с кабачком
+//             +b.right
+//               +b.class-rate_novice._white
+//                 +e.icon
+//                 | Для начинающих
+//             +b.person_h._lh-small._white
+//               +b.user-avatar_small
+//                 +e('img').image(src="/assets/images/content/user-img.png")
+//               +e.wrapper
+//                 +e.content
+//                   +e.name Едим Дома
+//           +b('footer').card-footer
+//             +b.button_green В корзину
+//             +b.right
+//               +b.price_big 1 488 руб.
+//     +b.slider-controls_inside._paginator-right-top
+//       +b.control-button.slider-controls__prev.disabled
+//         +b('span').fonticon_arrow-left
+//       +b.control-button.slider-controls__next
+//         +b('span').fonticon_arrow-right
+//       +b.slider-paginator-dotted_grey
+//         +e.item.active
+//         +e.item
+//         +e.item
+// +b.calendar-box
+//   +e.slider.slider.slider_beh_fade.slider_calendar(data-module="slider", data-options='{"type":"fade"}')
+//     .slider__container
+//       +e.slide.slider__slide
+//         +e('img').slide-image(src="/assets/images/content/calendar-slider-image-2.jpg" alt="")
+//         +e.slide-overlay
+//         +e.slide-content
+//           +e.slide-title.title.title_medium.title_white Международный день пиццы в Бразилии и Аргентине
+//       +e.slide.slider__slide
+//         +e('img').slide-image(src="/assets/images/content/calendar-slider-image.jpg" alt="")
+//         +e.slide-overlay
+//         +e.slide-content
+//           +e.slide-title.title.title_medium.title_white Международный день пиццы
+//     .slider-controls
+//       +b.slider-paginator-dotted
+//         +e.item.active
+//         +e.item
+//         +e.item
+//   +e.separator
+//   +e.info
+//     +b.badge_holidays Сегодня • 25 июля
+//   +b.calendar
+//     +e.header
+//       +b.control-button_small._calendar._prev
+//         +b('span').fonticon_arrow-left
+//       +e.month.title.title_medium.title_white Август
+//       +b.control-button_small._calendar._next
+//         +b('span').fonticon_arrow-right
+//     +e('table').table
+//       +e('thead').table-head
+//         +e('tr').table-row
+//           +e('th').table-cell Пн
+//           +e('th').table-cell Вт
+//           +e('th').table-cell Ср
+//           +e('th').table-cell Чт
+//           +e('th').table-cell Пт
+//           +e('th').table-cell Сб
+//           +e('th').table-cell Вс
+//       +e('tbody').table-body
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 1
+//               +b.tooltip_calendar._column_1
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 2
+//           +e('td').table-cell
+//             +e('a').day(href="#") 3
+//           +e('td').table-cell
+//             +e('a').day_today(href="#") 4
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 5
+//           +e('td').table-cell
+//             +e('a').day(href="#") 6
+//           +e('td').table-cell
+//             +e('a').day(href="#") 7
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 8
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 9
+//               +b.tooltip_calendar._column_2
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 10
+//           +e('td').table-cell
+//             +e('a').day(href="#") 11
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 12
+//               +b.tooltip_calendar._column_5
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 13
+//           +e('td').table-cell
+//             +e('a').day(href="#") 14
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 15
+//           +e('td').table-cell
+//             +e('a').day(href="#") 16
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 17
+//               +b.tooltip_calendar._column_3
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 18
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 19
+//           +e('td').table-cell
+//             +e('a').day(href="#") 20
+//           +e('td').table-cell
+//             +e('a').day(href="#") 21
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 22
+//           +e('td').table-cell
+//             +e('a').day(href="#") 23
+//           +e('td').table-cell
+//             +e('a').day(href="#") 24
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 25
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 26
+//           +e('td').table-cell
+//             +e('a').day(href="#") 27
+//           +e('td').table-cell
+//             +e('a').day(href="#") 28
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 29
+//           +e('td').table-cell
+//             +e('a').day(href="#") 30
+//           +e('td').table-cell
+//             +e('a').day(href="#") 31
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 1
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 2
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 3
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 4
+// div(style="width:760px;")
+//   +b.slider_beh_fade._content-media._bio(data-module="slider-fade", data-options='{"paginator":"numbers"}')
+//     +e.container
+//       +e.slide
+//         img(src="/assets/images/content/bio-slider.jpg")
+//       +e.slide
+//         img(src="/assets/images/content/bio-slider-2.jpg")
+//       +e.slide
+//         img(src="/assets/images/content/bio-slider.jpg")
+//     +b.slider-controls_inside._content-media
+//       +b.control-button.slider-controls__prev.disabled
+//         +b('span').fonticon_arrow-left
+//       +b.control-button.slider-controls__next
+//         +b('span').fonticon_arrow-right
+//       +e.count
+//         +e.count-item_current 1
+//         | /
+//         +e.count-item_total 5
+//
+// Styleguide 1.46
+
+.slider
+  position: relative
+
+.slider_main
+  height: 400px !important
+  overflow: hidden
+
+  .slider
+
+    &__overlay
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: #000
+      opacity: .3
+      transition: opacity 0.3s ease
+
+    &__wrapper
+      top: 0
+      width: 100%
+      position: absolute
+      line-height: 400px
+      text-align: center
+
+    &__content
+      margin-top: -25px
+      line-height: normal
+      display: inline-block
+      vertical-align: middle
+      text-align: center
+      max-width: 45%
+
+      .badge
+        margin-bottom: 19px
+
+      .title
+        color: #fff
+        font-size: 30px
+        line-height: 44px
+
+    &__slide
+      visibility: hidden
+
+  &:hover
+    .slider__overlay
+      opacity: 0.5
+
+  img
+    width: 100%
+    height: auto
+    display: block
+
+  .slider-controls_inside
+    .slider-controls
+
+      &__prev
+        left: 50px
+
+      &__next
+        right: 50px
+
+    .slider-paginator-dotted
+      bottom: 20px
+      &__item
+        margin: 0 5px
+
+.slider_beh_slide
+  .slider
+    &__container
+      position: relative
+      overflow: hidden
+
+    &__wrapper
+      position: relative
+      width: 20000px
+      +clearfix
+
+    &__slide
+      float: left
+      margin-left: 20px
+
+      &:first-child
+        margin: 0
+
+.slider_beh_fade
+  .slider
+    &__container
+      position: relative
+      overflow: visible
+
+    &__slide
+      position: absolute
+      top: 0
+      left: 0
+
+.slider_wide-card
+  width: 580px
+  height: 450px
+  .card
+    float: none
+    margin: 0
+
+.slider_calendar
+  position: absolute
+
+.slider_content-media
+  margin-top: 40px
+  padding-bottom: 25px
+
+.slider_bio
+  width: 760px
+
+.slider_photo-preview
+  width: 100%
+  margin-top: 30px
+
+  .slider
+    &__slide
+      width: 880px
+      background-color: #EBD8BF
+      border-radius: 4px
+      box-shadow: 0 1px 4px rgba(71, 44, 6, 0.2)
+      overflow: hidden
+      text-align: center
+
+    &__image-container
+      height: 526px
+
+      img
+        height: 100%
+        display: inline-block
+
+    &__delete
+      width: 24px
+      height: 24px
+      border: 2px solid white
+      border-radius: 50%
+      position: absolute
+      top: 20px
+      right: 20px
+      cursor: pointer
+      z-index: 2
+      line-height: 24px
+      text-align: center
+
+      .fonticon
+        color: #fff
+
+      &:hover
+        background: #fff
+
+        .fonticon
+          color: #ff3620
+
+  .photo-description
+    background: white
+    padding: 15px 40px 25px 35px
+    text-align: left
+
+    &__date
+      float: right
+      color: #898989
+      font-family: "Noto Serif"
+      font-size: 11px
+      font-style: italic
+
+    &__text
+      color: #8a8a8a
+      font-family: "Open Sans"
+      font-size: 13px
+      font-weight: 400
+
+    &__recipe
+      color: #242424
+      font-family: "Noto Serif"
+      font-size: 16px
+      font-weight: 700
+
+      &:hover
+        color: #ff391e
+
+  .slider-controls
+
+    &__count
+      font-size: 14px
+      font-weight: 700
+      text-transform: uppercase
+      color: #4c4c4c
+      position: absolute
+      top: -35px
+      left: 0
+      font-family: "Open Sans"
+
+    &__count-name
+      display: inline-block
+
+    &__count-item
+      display: inline-block
+
+      &_current
+        color: #fe5722
+
+    .slider-controls__prev,
+    .slider-controls__next
+      top: 260px
+
+.slider_duel-popup
+  width: 746px
+  margin: 0 auto 35px
+
+  .slider
+
+    &__container
+      overflow: hidden
+
+// Slider controls
+//
+// Блок с контролами слайдера
+//
+// default - обычное состояние
+//
+// markup:
+// +b.slider-controls_bottom
+//   +b.control-button_transparent.slider-controls__prev
+//     +b('span').fonticon_arrow-left
+//   +b.control-button_transparent.slider-controls__next
+//     +b('span').fonticon_arrow-right
+//
+// Styleguide 1.37
+
+.slider-controls
+  position: relative
+
+  &__count
+    color: #999
+    font-family: "Noto Serif"
+    font-size: 16px
+    font-weight: 400
+    position: absolute
+    right: 0
+    bottom: 0
+
+  &__count-item
+    display: inline-block
+
+
+.slider-controls_bottom
+  margin-top: 20px
+  +clearfix
+
+  .slider-controls
+    &__prev
+      float: left
+
+    &__next
+      float: right
+
+.slider-controls_inside
+  position: static
+
+  .slider-paginator-dotted
+    position: absolute
+    left: 0
+    right: 0
+    margin: 0 auto
+    bottom: 25px
+
+  .slider-controls
+    &__prev
+      position: absolute
+      top: 50%
+      margin-top: -20px
+      left: 20px
+
+    &__next
+      position: absolute
+      top: 50%
+      margin-top: -20px
+      right: 20px
+
+.slider-controls_duel-popup
+  .slider-controls
+    &__prev
+      left: -70px
+
+    &__next
+      right: -70px
+
+.slider-controls_paginator-right-top
+  .slider-paginator-dotted
+    bottom: auto
+    top: 17px
+    left: auto
+    right: 13px
+
+.slider-controls_content-media
+  .slider-controls
+    &__prev
+      margin-top: -32px
+
+    &__next
+      margin-top: -32px
+
+.slider-controls_popup
+
+  .control-button
+    background: none
+    border-radius: 0
+    border: none
+    opacity: .3
+    &:active
+      background-color: transparent
+
+    &:hover
+      opacity: 1
+
+    &.disabled
+      opacity: .2
+      &:hover
+        opacity: .2
+        background-color: transparent
+
+  .slider-controls
+    &__prev
+      +imgbox('popups/arrow-left.png')
+      position: absolute
+      top: 260px
+      left: 35px
+
+    &__next
+      +imgbox('popups/arrow-right.png')
+      position: absolute
+      top: 260px
+      right: 35px
+
+.slider-controls_thumbs
+  position: relative
+
+  &.disabled
+    display: none
+
+  .slider-controls
+
+    &__prev
+      width: 46px
+      height: 114px
+      background-color: white
+      border-radius: 0px 0px 0px 2px
+      position: absolute
+      bottom: 0
+      left: 0
+      text-align: center
+      line-height: 114px
+      cursor: pointer
+
+      &:hover
+        .fonticon
+          color: #ff391e
+
+      &.disabled
+        .fonticon
+          opacity: .1
+          color: #000
+
+    &__next
+      width: 46px
+      height: 114px
+      background-color: white
+      border-radius: 0px 0px 0px 2px
+      position: absolute
+      bottom: 0
+      right: 0
+      text-align: center
+      line-height: 114px
+      cursor: pointer
+
+      &:hover
+        .fonticon
+          color: #ff391e
+
+      &.disabled
+        .fonticon
+          opacity: .1
+          color: #000
+
+  .fonticon
+    font-size: 10px

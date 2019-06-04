@@ -1,0 +1,37 @@
+@import '_imports'
+
+//+pixelperfect('pixelperfect/edimdoma_profile_v3.jpg')
+
+.grid-two-column
+  +clearfix
+
+  &__column
+
+  &__column_left
+    float: left
+    width: 280px
+
+    +width-lessthan(1024)
+      width: 340px
+      height: 100vh
+      background: #f5eee0
+      position: fixed
+      top: 0
+      left: 0
+      transform: translate(-100%, 0)
+      z-index: 11
+      overflow: auto
+      visibility: hidden
+
+    +width-lessthan(385)
+      width: 100%
+
+  &__column_center
+    float: right
+    width: 880px
+
+    +width-lessthan(1024)
+      width: 100%
+
+  .page-header
+    padding-bottom: 20px

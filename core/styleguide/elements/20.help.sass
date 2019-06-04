@@ -1,0 +1,64 @@
+@import '_imports'
+
+// Help-button
+//
+// Помощь
+//
+// default - обычное состояние
+//
+// markup:
+// +b('a').help-button_qa(href="#")
+//   .icon
+//   +e.text Вопросы и ответы
+// +b('a').help-button_delivery(href="#")
+//   .icon
+//   +e.text Доставка
+// +b('a').help-button_contacts(href="#")
+//   .icon
+//   +e.text Контакты
+//
+// Styleguide 1.20
+
+.help-button
+  padding-top: 150px
+  height: 200px
+  width: 33.3%
+  background: #fff
+  float: left
+  text-align: center
+  position: relative
+  box-sizing: border-box
+  cursor: pointer
+
+  & + &
+    border-left: 1px solid #dddddd
+
+  .icon
+    position: absolute
+    left: 0
+    right: 0
+    margin: 0 auto
+
+  &_qa
+    +imgbox('icons/qa.png', '', '.icon')
+
+    .icon
+      top: 53px
+
+  &_delivery
+    +imgbox('icons/delivery.png', '', '.icon')
+
+    .icon
+      top: 34px
+
+  &_contacts
+    +imgbox('icons/contacts.png', '', '.icon')
+
+    .icon
+      top: 54px
+
+  &__text
+    color: #252525
+    font-family: "Noto Serif"
+    font-size: 16px
+    font-weight: 700

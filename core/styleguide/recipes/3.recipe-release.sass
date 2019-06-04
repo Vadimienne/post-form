@@ -1,0 +1,78 @@
+@import '_imports'
+
+// Recipe release
+//
+// Рецепт выпуска
+//
+// default  - обычное состояние
+//
+// markup:
+// +b('a').recipe-release(href="#")
+//   +e('img').image(src="/assets/images/content/recipe-release.jpg" alt="")
+//   +e.delete
+//     +b('span').fonticon_trash-can
+//   +e.content
+//     +b.badge_recipes Рецепты
+//     +b.title Торт
+//       | «Птичье молоко»
+//       br
+//       | (мраморный)
+//     +b.description-text Такое суфле можно приготовить и без желатина, тогда сливки взбивайте поплотнее, чтобы они дали объем.
+// +b('a').recipe-release(href="#")
+//   +e('img').image(src="/assets/images/content/recipe-release.jpg" alt="")
+//   +e.content
+//     +b.badge_recipes Рецепты
+//     +b.title Торт
+//       | «Птичье молоко»
+//       br
+//       | (мраморный)
+//     +b.description-text Такое суфле можно приготовить и без желатина, тогда сливки взбивайте поплотнее, чтобы они дали объем.
+//
+// Styleguide 7.3
+
+.recipe-release
+  display: block
+  width: 500px
+  margin-bottom: 20px
+  +clearfix
+  position: relative
+
+  & + &
+    padding-top: 20px
+    border-top: 1px solid #f0eadc
+
+  &__delete
+    position: absolute
+    top: 20px
+    right: 0
+
+    .fonticon
+      color: #ccc
+      font-size: 20px
+
+    &:hover
+      .fonticon
+        color: #ff391e
+
+  &__image
+    width: 174px
+    float: left
+    margin-right: 20px
+
+  &__content
+    display: block
+    float: right
+    width: 305px
+
+  .badge
+    margin-bottom: 10px
+
+  .title
+    display: block
+    margin-bottom: 8px
+
+  .description-text
+    display: block
+
+.title + .recipe-release
+  margin-top: 16px

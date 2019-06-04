@@ -1,0 +1,176 @@
+@import '_imports'
+
+// Sharing
+// 
+// Поделится
+// 
+// default - Обычное состояние
+//
+// markup:
+// +b.share
+//   +e.share-btn_pin
+//     .icon
+//   +e.share-btn_fb
+//     .icon
+//   +e.share-btn_tw
+//     .icon
+//   +e.share-btn_od
+//     .icon
+//   +e.share-btn_mm
+//     .icon
+//   +e.share-btn_vk
+//     .icon
+//   +e.share-btn_mail
+//     .icon
+// 
+// Styleguide 1.11
+
+.share
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: space-between
+
+  +width-lessthan(600)
+    flex-direction: column
+    margin-bottom: -20px
+
+  &__content
+    width: 100%
+    height: 100%
+
+    +width-lessthan(600)
+      display: inline-block
+      width: 160px
+      text-align: left
+      line-height: 49px
+
+  &__share-btn
+    width: 60px
+    height: 30px
+    border-radius: 15px
+    position: relative
+    box-sizing: border-box
+    cursor: pointer
+
+    +width-lessthan(1024)
+      width: 81px
+      height: 40px
+      border-radius: 20px
+
+    +width-lessthan(768)
+      +width-between-property(width, 600, 60, 768, 81, true, true)
+
+    +width-lessthan(600)
+      width: auto !important
+      margin: 0 -20px
+      border-radius: 0
+      background: none
+      border-top: 1px solid #f5eee0
+      height: 49px !important
+      text-align: center
+      border-radius: 0 !important
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+      +width-lessthan(600)
+        position: static
+        display: inline-block
+        vertical-align: middle
+        width: 23px !important
+        background-position: center
+        margin-right: 18px
+
+    span
+      display: none
+      vertical-align: middle
+      white-space: nowrap
+
+      +width-lessthan(600)
+        display: inline-block
+    
+    &_pin
+      background-color: #CA0928
+      color: #ca0928
+      +imgbox('content/share/pin.png', '', '.icon')
+
+      +width-lessthan(600)
+        +imgbox('content/share/pin-phone.png', '', '.icon')
+
+      &:hover
+        background-color: #d53a53
+    
+    &_fb
+      background-color: #365ea0
+      color: #365ea0
+      +imgbox('content/share/fb.png', '', '.icon')
+
+      +width-lessthan(600)
+        +imgbox('content/share/fb-phone.png', '', '.icon')
+
+      &:hover
+        background-color: #5e7eb3
+    
+    &_tw
+      background-color: #2ca9e1
+      color: #2ca9e1
+      +imgbox('content/share/tw.png', '', '.icon')
+
+      +width-lessthan(600)
+        +imgbox('content/share/tw-phone.png', '', '.icon')
+
+      &:hover
+        background-color: #56bae7
+    
+    &_od
+      background-color: #e27620
+      color: #e27620
+      +imgbox('content/share/od.png', '', '.icon')
+
+      +width-lessthan(600)
+        +imgbox('content/share/od-phone.png', '', '.icon')
+
+      &:hover
+        background-color: #e8914d
+    
+    &_mm
+      background-color: #3d6cb0
+      color: #3d6cb0
+      +imgbox('content/share/mm.png', '', '.icon')
+
+      +width-lessthan(600)
+        +imgbox('content/share/mm-phone.png', '', '.icon')
+
+      &:hover
+        background-color: #6489c0
+    
+    &_vk
+      background-color: #487099
+      color: #487099
+      +imgbox('content/share/vk.png', '', '.icon')
+
+      +width-lessthan(600)
+        +imgbox('content/share/vk-phone.png', '', '.icon')
+
+      &:hover
+        background-color: #6d8dad
+    
+    &_mail
+      background-color: #fff
+      border: 1px solid #dfdfde
+      +imgbox('content/share/mail.png', '', '.icon')
+
+      +width-lessthan(600)
+        border-left: none
+        border-right: none
+        border-bottom: none
+
+      &:hover
+        background-color: #f2f2f2
+        border-color: #f2f2f2

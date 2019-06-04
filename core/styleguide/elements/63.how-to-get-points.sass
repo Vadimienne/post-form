@@ -1,0 +1,143 @@
+@import '_imports'
+
+// How to get coins
+//
+// Как заработать монеты
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.how-to-get-coins.closed(data-module="how-to-get-coins")
+//   +e.header
+//     +e.coins-icon
+//     +e.arrow
+//     +e.text как получить монеты
+//   +e.hidden-part
+//     +e.content
+//       +e.head 
+//         span Действие 
+//         span Монеты
+//       +b.coin-action
+//         +e.text Регистрация на сайте
+//         +e.coins 2500
+//       +b.coin-action
+//         +e.text Создание рецепта
+//         +e.coins 1000
+//       +b.coin-action
+//         +e.text Создание поста	
+//         +e.coins 400
+//       +b.coin-action
+//         +e.text Комментарий
+//         +e.coins 100
+//       +b.coin-action
+//         +e.text Поставить лайк
+//         +e.coins 1200
+//       +b.coin-action
+//         +e.text Подписаться на кого-то
+//         +e.coins 700
+//       +b.coin-action
+//         +e.text Подружиться
+//         +e.coins 50
+//       +b.coin-action
+//         +e.text Подписаться на Юлию Высоцкую
+//         +e.coins 10
+//       +b.coin-action
+//         +e.text Набрать 50 лайков под своим постом/рецептом
+//         +e.coins 400
+//
+// Styleguide 1.63
+
+.how-to-get-coins
+  width: 100%
+  position: relative
+  background-color: #FFF
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1)
+  overflow: hidden
+
+  &.closed
+    .how-to-get-coins__arrow
+      +imgbox('badges/arrow-closed.png')
+
+  &__header
+    height: 80px
+    background-color: #43bb78
+    cursor: pointer
+    position: relative
+
+  &__coins-icon
+    +imgbox('badges/coins.png')
+    position: absolute
+    top: 50%
+    left: 90px
+    margin-top: -26.5px
+
+  &__arrow
+    +imgbox('badges/arrow-open.png')
+    position: absolute
+    top: 50%
+    right: 134px
+    margin-top: -5px
+
+  &__text
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    color: white
+    font-family: "Open Sans"
+    font-size: 14px
+    font-weight: 700
+    text-transform: uppercase
+    user-select: none
+
+  &__hidden-part
+    height: 0
+
+  &__content
+    padding: 20px 50px 30px
+
+  &__head
+    display: flex
+    justify-content: space-between
+    opacity: 0.4
+    color: black
+    font-family: "Open Sans"
+    font-size: 12px
+    line-height: normal
+
+.coin-action
+  display: flex
+  justify-content: space-between
+  padding: 13px 0
+
+  & + &
+    border-top: 1px solid #eae8e2
+
+  &:last-child
+    padding-bottom: 0
+
+  &__text
+    width: 50%
+    color: black
+    font-family: "Open Sans"
+    font-size: 14px
+    font-weight: 400
+
+  &__coins
+    color: #292929
+    font-family: "Noto Serif"
+    font-size: 16px
+    font-weight: 700
+    font-style: italic
+    padding-right: 40px
+    position: relative
+
+    &:after
+      content: ''
+      display: block
+      +imgbox('badges/coin.png')
+      position: absolute
+      top: -1px
+      right: 0

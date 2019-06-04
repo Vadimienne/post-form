@@ -1,0 +1,219 @@
+@import '_imports'
+
+
+// Comments
+//
+// Элементы комментариев
+//
+// Styleguide 9.0
+
+// Comment
+//
+// Комментарий
+//
+// default - Обычное состояние
+//
+// markup:
+// +b.comment
+//   +b.user-avatar
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.status
+//   +e.content
+//     +e('a').author-name(href="#") Maximka Eronina
+//     +e.post-time 9 дней назад
+//     +b.plain-text Все четко, вчера и поза, переводили деньги с карты на карту в Англию — работало все как часы. Может фэйк для паники?
+//     +e.answer Ответить
+//   +e.subcomments
+//     +b.comment
+//       +b.user-avatar(class="{$modifiers}")
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.status
+//       +e.content
+//         +e('a').author-name(href="#") Maximka Eronin
+//         +e.post-time 9 дней назад
+//         +b.plain-text
+//           | Не смог расплатиться сегодня в
+//           a(href="#")Пятёрочке
+//           | по карте Альфа-Банка. Так что не "фейк".
+//           br
+//           br
+//           | А вообще учи русский язык. Есть замечательное слово "утка" или можно сказать "представление" или просто "обман".
+//           br
+//           br
+//           | А если ты уж написал фейк, то пиши "Майби итс э фээйк фор паник".
+//         +e.answer Ответить
+//     +b.comment
+//       +b.user-avatar(class="{$modifiers}")
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.status
+//       +e.content
+//         +e('a').author-name(href="#") Maximka Eronin
+//         +e.post-time 9 дней назад
+//         +b.plain-text Все четко, вчера и поза, переводили деньги с карты на карту в Англию — работало все как часы. Может фэйк для паники?
+//         +e.cancel Отменить
+//         +b.comment-box
+//           +b('a').user-avatar(href="#")
+//             +e('img').image(src="/assets/images/content/user-img.png")
+//           +b.field-comment
+//             +e.emoji
+//             textarea.field-comment__textarea(placeholder="Текст вашего сообщения...").
+//           +b.button_transparent
+//             +b('span').fonticon_publish
+//             span Опубликовать
+//
+// Styleguide 9.1
+
+.comment
+  position: relative
+  overflow: hidden
+  padding-top: 20px
+  padding-left: 15px
+  padding-right: 15px
+  border-top: 1px solid #e6e1da
+  line-height: normal
+
+  +width-lessthan(1024)
+    padding-left: 0
+    padding-right: 0
+
+  .content-box__content + &
+    border-top: 1px solid transparent
+
+  &:first-child
+    border-top: none
+
+  .comment-box
+    margin-left: 0
+
+    +width-lessthan(1024)
+      margin: 0
+
+    +width-lessthan(600)
+      padding-left: 5px
+      padding-right: 5px
+
+      .user-avatar
+        left: 5px
+
+  &__subcomments
+    margin: 20px 0 20px 22px
+    padding-left: 27px
+    background: left top repeat-y
+    +background-image-retina('elements/global/answer-comment-dot.png')
+    clear: left
+
+    +width-lessthan(600)
+      margin-left: 0
+      padding-left: 20px
+
+    .comment
+      padding-left: 15px
+      padding-right: 15px
+
+    .comment + .comment
+      margin-top: 20px
+
+
+  &__content
+    margin-left: 75px
+    position: relative
+    +clearfix
+
+    +width-lessthan(1024)
+      margin-left: 70px
+
+    .comment-box
+      margin: 0 0 30px 0
+
+  &__author-name
+    float: left
+    color: #222
+    font-size: 14px
+    font-weight: 700
+    text-decoration: none
+    margin-bottom: 10px
+
+    +width-lessthan(1024)
+      float: none
+      padding-top: 9px
+      display: block
+      line-height: normal
+      margin-bottom: 0
+
+  &__post-time
+    color: #808080
+    font-size: 12px
+    font-weight: 400
+    float: left
+    margin-left: 20px
+
+    +width-lessthan(1024)
+      font-size: 10px
+      float: none
+      margin-left: 0
+      margin-bottom: 25px
+
+  .plain-text
+    clear: both
+    margin-bottom: 10px
+
+    +width-lessthan(600)
+      margin-left: -70px
+
+  &__action
+    color: #808080
+    font-size: 12px
+    font-weight: 400
+    cursor: pointer
+    margin-bottom: 20px
+    display: inline-block
+    margin-right: 10px
+
+    &:hover
+      color: #000
+
+  &__answer
+    display: inline-block
+    color: grey
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 400
+    cursor: pointer
+    line-height: normal
+
+    &:hover
+      color: #ee1919
+
+    +width-lessthan(600)
+      margin-left: -70px
+
+  &__cancel
+    display: inline-block
+    color: #ee1919
+    font-size: 12px
+    font-weight: 400
+    cursor: pointer
+    margin-bottom: 10px
+
+    &:hover
+      color: #000
+
+    +width-lessthan(600)
+      margin-left: -70px
+
+  .user-avatar
+    float: left
+    overflow: visible
+
+    &__image
+      border-radius: 50%
+
+    &__status
+      width: 9px
+      height: 9px
+      background-color: #4cc861
+      border: 2px solid white
+      border-radius: 50%
+      position: absolute
+      top: 0
+      left: 0

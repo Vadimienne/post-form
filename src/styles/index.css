@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+    position: relative;
+    line-height: 1.5em;
+}
+
+html, [dynamic-compile] {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    cursor: default !important;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+html {
+  display: block;
+  color: -internal-root-color;
+}

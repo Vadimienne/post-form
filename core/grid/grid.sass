@@ -1,0 +1,60 @@
+@import '_imports'
+
+.grid-row
+  +clearfix
+  margin-left: -20px
+
+  &_black
+    background: #1a1a1a
+    margin: 0 -50px 20px -50px
+    padding: 0 50px 0 30px
+
+  .page-header
+    padding-bottom : 20px
+
+.grid-col
+  float: left
+  width: 1180px
+  margin-left: 20px
+  margin-right: -100%
+
+  &_one
+    width: 280px
+    margin-left: 20px
+
+  &_two
+    width: 580px
+
+  &_three
+    width: 880px
+
+.grid-offset
+  &_one
+    margin-left: 320px
+
+  &_two
+    margin-left: 620px
+
+  &_three
+    margin-left: 920px
+
+.flow-item
+  width: 600px
+  position: relative
+
+  &_one
+    margin-bottom: 20px
+    width: 280px
+
+  &_flex
+    width: 580px
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+    &:after
+      content: ''
+      width: 280px
+
+  .card-container-placeholder
+    height: 450px

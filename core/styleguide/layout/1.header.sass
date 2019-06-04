@@ -1,0 +1,775 @@
+@import '_imports'
+
+// layout
+//
+// Элементы лэйаута
+//
+// Styleguide 5.0
+
+// Header
+//
+// Header
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.header
+//   +b.button_green
+//     +b.icon
+//     span Вход
+//   +b.button
+//     +b.icon
+//     span регистрация
+//   +e('a').logo(href="#")
+//   +b.header-search(data-module="header-search")
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск по рецептам и ингридиентам")
+//       +e.icon
+//     +b.drop-down_search
+//       +e.all.right Все
+//       +e.headline Рецепты
+//       +e.item
+//         +e('div').item-hover
+//         span Куриные крылышки и молодой картофель,
+//           br
+//           | запеченные в духовке
+//       +e.item
+//         +e('div').item-hover
+//         span Куринный суп с помпушками
+//       +e.item
+//         +e('div').item-hover
+//         span Куринное филе с соусом песто
+//       +e.hr
+//       +e.headline Ингридиенты
+//       +e.item
+//         +e('div').item-hover
+//         span Курица
+//       +e.item
+//         +e('div').item-hover
+//         span Куринная грудка
+//       +e.hr
+//       +e.all.right Все
+//       +e.headline Люди
+//       +e.item
+//         +e('div').item-hover
+//         span Курицина Валлерия
+//       +e.item
+//         +e('div').item-hover
+//         span Курочкина Анна
+//       +e.item
+//         +e('div').item-hover
+//         span Куринное облочко
+//       +e.hr_fullwidth
+//       +e.show-all-results Показать все результаты поиска
+//       +e.triangle
+//     +b.drop-down_search._search-last
+//       +e.headline последние поисковые запросы
+//       +e.item
+//         +e('div').item-hover
+//         span Курица
+//       +e.item
+//         +e('div').item-hover
+//         span Картошка
+//       +e.item
+//         +e('div').item-hover
+//         span Кисонька
+//       +e.item
+//         +e('div').item-hover
+//         span Помидорка
+//       +e.triangle
+//   +b.header-nav
+//     +e.item.active
+//       +e('a').link(href="#") Главная
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Рецепты
+//       .icon
+//       +b('div').drop-down_main-menu
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Посуда
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Кухонные ножи
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Кухонные принадлжености
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Бар и стекло
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Сервировка стола
+//         +e.triangle
+//     &nbsp;
+//     +e.item
+//       +e('a').link(href="#") Телепередачи
+//     &nbsp;
+//     +e.item
+//       +e('a').link(href="#") Кулинарная школа
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Магазин
+//       .icon
+//     &nbsp;
+//     +e.item
+//       +e('a').link(href="#") Живем дома
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Клуб
+//       .icon
+//       +b('div').drop-down_main-menu
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span календарь
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Энциклопедия
+//         +e.triangle
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Ещё
+//       .icon
+//       +b('div').drop-down_main-menu
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span календарь
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Энциклопедия
+//         +e.triangle
+// +b.header
+//   +b('a').button_round(href="#")
+//     +b('span').fonticon_shopping-cart
+//     +e.item-count 14
+//   +b('a').button_round(href="#")
+//     +b('span').fonticon_message
+//     +e.item-count 14
+//   +b.header-user-menu
+//     .icon
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.name Margarita Soldiasdasdadada
+//     +e.drop-down-wrapper
+//       +b.drop-down_user-menu
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           +b('span').fonticon_profile-user-menu
+//           span Профиль
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           +b('span').fonticon_settings-user-menu
+//           span Настройки
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           +b('span').fonticon_notification-user-menu
+//           span Уведомления
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           +b('span').fonticon_shoping-list-user-menu
+//           span Шоппинг листы
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           +b('span').fonticon_favorites-user-menu
+//           span Избранное
+//         +e('a').item_logout(href="#")
+//           +e('div').item-hover
+//           +b('span').fonticon_logout-user-menu
+//           span Выход
+//         +e.triangle
+//   +e('a').logo(href="#")
+//   +b.header-search(data-module="header-search")
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск по рецептам и ингридиентам")
+//       +e.icon
+//     +b.drop-down_search
+//       +e.all.right Все
+//       +e.headline Рецепты
+//       +e.item
+//         +e('div').item-hover
+//         span Куриные крылышки и молодой картофель,
+//           br
+//           | запеченные в духовке
+//       +e.item
+//         +e('div').item-hover
+//         span Куринный суп с помпушками
+//       +e.item
+//         +e('div').item-hover
+//         span Куринное филе с соусом песто
+//       +e.hr
+//       +e.headline Ингридиенты
+//       +e.item
+//         +e('div').item-hover
+//         span Курица
+//       +e.item
+//         +e('div').item-hover
+//         span Куринная грудка
+//       +e.hr
+//       +e.all.right Все
+//       +e.headline Люди
+//       +e.item
+//         +e('div').item-hover
+//         span Курицина Валлерия
+//       +e.item
+//         +e('div').item-hover
+//         span Курочкина Анна
+//       +e.item
+//         +e('div').item-hover
+//         span Куринное облочко
+//       +e.hr_fullwidth
+//       +e.show-all-results Показать все результаты поиска
+//       +e.triangle
+//     +b.drop-down_search._search-last
+//       +e.headline последние поисковые запросы
+//       +e.item
+//         +e('div').item-hover
+//         span Курица
+//       +e.item
+//         +e('div').item-hover
+//         span Картошка
+//       +e.item
+//         +e('div').item-hover
+//         span Кисонька
+//       +e.item
+//         +e('div').item-hover
+//         span Помидорка
+//       +e.triangle
+//   +b.header-nav
+//     +e.item.active
+//       +e('a').link(href="#") Главная
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Рецепты
+//       .icon
+//       +b('div').drop-down_main-menu
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Посуда
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Кухонные ножи
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Кухонные принадлжености
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Бар и стекло
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Сервировка стола
+//         +e.triangle
+//     &nbsp;
+//     +e.item
+//       +e('a').link(href="#") Телепередачи
+//     &nbsp;
+//     +e.item
+//       +e('a').link(href="#") Кулинарная школа
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Магазин
+//       .icon
+//     &nbsp;
+//     +e.item
+//       +e('a').link(href="#") Живем дома
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Клуб
+//       .icon
+//       +b('div').drop-down_main-menu
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span календарь
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Энциклопедия
+//         +e.triangle
+//     &nbsp;
+//     +e.item_expandeble
+//       +e('a').link(href="#") Ещё
+//       .icon
+//       +b('div').drop-down_main-menue
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span календарь
+//         +e('a').item(href="#")
+//           +e('div').item-hover
+//           span Энциклопедия
+//         +e.triangle
+//
+// Styleguide 5.1
+
+.header
+  width: 1180px
+  height: 130px
+  padding: 31px 50px 0 50px
+  background-color: #FFF
+  position: relative
+
+  +width-lessthan(1154)
+    width: auto
+
+  +width-lessthan(1024)
+    height: 40px
+    padding: 10px 40px
+    box-shadow: 0 1px 3px rgba(71, 44, 6, 0.2)
+    top: 0
+    left: 0
+    right: 0
+    z-index: 9
+
+  +width-lessthan(768)
+    +width-between-property(padding-left, 320, 10, 768, 40, true, true)
+    +width-between-property(padding-right, 320, 10, 768, 40, true, true)
+
+  +width-lessthan(400)
+    height: 30px
+
+  &__logo
+    display: block
+    +imgbox('layout/header-logo.png')
+    float: left
+    margin: -13px 0 12px 0
+
+    +width-lessthan(1024)
+      width: 122px
+      height: 48px
+      float: none
+      margin: -4px auto 0
+ 
+    +width-lessthan(400)
+      width: 96px
+      height: 37px
+      margin-top: -3px
+
+  &__ny
+    +width-lessthan(1024)
+      display: none
+    width: 101px
+    height: 101px
+    position: absolute
+    top: 0
+    right: 0
+    img
+      max-width: 100%
+  
+  &__spacer
+    +width-lessthan(1024)
+      display: none
+    float: right
+    width: 71px
+    height: 20px
+
+  .field_search
+    float: left
+    margin-left: 230px
+
+  .button
+    float: right
+    padding: 0 20px
+    display: block
+    border-color: #e6e6e6
+
+    &:hover
+      border-color: #363636
+
+    &_green
+      margin-left: 10px
+      border-color: #66cc66
+
+      +width-lessthan(1024)
+        width: 100px
+        padding: 0
+        text-align: center
+
+        & ~ [data-popup="registration"]
+          display: none
+
+      +width-lessthan(525)
+        width: 88px
+
+      &:hover
+        border-color: #4ecf4e
+
+    &_round
+      margin-left: 10px
+      position: relative
+      padding: 0
+
+      +width-lessthan(1024)
+        display: none
+
+      .fonticon
+        &_shopping-cart
+          font-size: 16px
+
+    &_coins
+      height: 40px
+      padding: 0 18px 0 50px 
+      line-height: 40px
+      box-sizing: border-box
+      +background-image-retina('badges/coin.png')
+      background-position: 15px center
+      background-repeat: no-repeat
+      border-radius: 20px
+      font-family: "Noto Serif"
+      font-size: 15px
+      font-weight: 700
+      font-style: italic
+      margin-left: 10px
+
+  .mobile-search-icon
+    float: left
+    line-height: 0
+    position: relative
+    cursor: pointer
+    margin-top: 10px
+    display: none
+    z-index: 2
+
+    +width-lessthan(1024)
+      display: block
+
+    +width-lessthan(400)
+      margin-top: 6px
+
+    &:before
+      content: ''
+      position: absolute
+      top: -10px
+      left: -10px
+      right: -10px
+      bottom: -10px
+
+    svg
+      height: 20px
+
+  .dark-overlay
+    width: 100%
+    height: 100vh
+    background: #000000
+    opacity: 0.85
+    position: fixed
+    top: 0
+    left: 0
+    visibility: hidden
+
+  .header-nav
+    clear: both
+    border-top: 1px solid #e6e6e6
+    text-align: justify
+    text-justify: distribute
+    height: 60px
+
+    +width-lessthan(1024)
+      display: none
+
+    &:after
+      content: ''
+      display: inline-block
+      width: 100%
+
+    &__item
+      display: inline-block
+      font-size: 13px
+      font-weight: 700
+      text-transform: uppercase
+      line-height: 60px
+
+      &_expandeble
+        padding-right: 24px
+        +imgbox('layout/expandeble-arrow.png', '', '.icon')
+        position: relative
+
+        .icon
+          position: absolute
+          top: 50%
+          right: 0
+          margin-top: image-height('layout/expandeble-arrow.png')/-2
+
+        .drop-down
+          display: none
+          top: 52px
+          right: -41px
+          z-index: 2
+
+      &:hover
+        +imgbox('layout/expandeble-arrow-hover.png', '', '.icon')
+
+        .header-nav__link
+          color: #808080
+
+        .drop-down
+          display: block
+          z-index: 100
+
+
+      &.active
+        .header-nav__link
+          color: #ff391e
+
+    &__link
+      text-decoration: none
+      color: #4D4D4D
+
+.header-user-menu
+  width: 200px
+  height: 40px
+  border: 1px solid #e6e6e6
+  border-radius: 20px
+  float: right
+  position: relative
+  box-sizing: border-box
+  +imgbox('layout/expandeble-arrow.png', '', '.icon')
+  cursor: pointer
+
+  +width-lessthan(1024)
+    display: none
+
+  .icon
+    position: absolute
+    top: 16px
+    right: 20px
+
+  &__item-count
+    min-width: 20px
+    height: 20px
+    padding: 0 4px
+    box-sizing: border-box
+    background-color: #FF391E
+    border-radius: 10px
+    color: #FFF
+    font-family: "Arial"
+    font-size: 12px
+    font-weight: 700
+    line-height: 20px
+    text-align: center
+    position: absolute
+    top: -10px
+    right: -8px
+
+  &__drop-down-wrapper
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    padding-top: 60px
+    display: none
+    z-index: 4
+
+  .drop-down
+    width: 100%
+    top: 60px
+    box-sizing: border-box
+
+  &:hover
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15)
+    border-color: #fff
+    +imgbox('layout/expandeble-arrow-hover.png', '', '.icon')
+
+    .header-user-menu__drop-down-wrapper
+      display: block
+
+  .user-avatar
+    position: absolute
+    top: 4px
+    left: 4px
+
+  &__name
+    padding-left: 45px
+    width: 110px
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    color: #666
+    font-family: "Noto Serif"
+    font-size: 12px
+    font-weight: 700
+    line-height: 40px
+
+.header-search
+  width: 40px
+  height: 40px
+  position: relative
+  float: right
+  margin-right: 10px
+  z-index: 20
+
+  +width-lessthan(1024)
+    display: none
+
+  &:hover
+    .header-search__container
+      border-color: #808080
+
+      &.focus
+        border-color: #66cc66
+
+  &__container
+    width: 100%
+    height: 100%
+    position: relative
+    border: 1px solid #e6e6e6
+    border-radius: 20px
+    overflow: hidden
+    box-sizing: border-box
+    transition: border-color .25s ease
+    cursor: pointer
+
+    &.focus
+      border-color: #66cc66
+
+  &__input
+    position: absolute
+    top: 0
+    left: 57px
+    outline: none
+    border: none
+    background: transparent
+    height: 100%
+    width: 340px
+    box-sizing: border-box
+    font-size: 14px
+    font-weight: 400
+    padding: 0 20px 0 0
+    -webkit-user-select: text
+
+    +placeholder
+      color: #B3B3B3
+
+  &__icon
+    +imgbox('forms/header-search-icon.png')
+    position: absolute
+    top: 10px
+    left: 11px
+
+.header-mobile-search
+  position: absolute
+  top: 0
+  right: 40px
+  left: 40px
+  bottom: 0
+  background-color: white
+  visibility: hidden
+
+  &:before
+    content: ''
+    width: 40px
+    height: 100%
+    position: absolute
+    top: 0
+    left: -40px
+    background-color: white
+
+  &:after
+    content: ''
+    width: 40px
+    height: 100%
+    position: absolute
+    top: 0
+    right: -40px
+    background-color: white
+
+  +width-lessthan(768)
+    +width-between-property(left, 320, 10, 768, 40, true, true)
+    +width-between-property(right, 320, 10, 768, 40, true, true)
+
+    &:before
+      +width-between-property(width, 320, 10, 768, 40, true, true)
+      +width-between-property(left, 320, -10, 768, -40, true, true)
+
+    &:after
+      +width-between-property(width, 320, 10, 768, 40, true, true)
+      +width-between-property(right, 320, -10, 768, -40, true, true)
+
+  &__container
+    width: calc(100% - 100px)
+    height: 100%
+    margin: 0 50px
+
+  &__input
+    display: block
+    width: 100%
+    height: 100%
+    padding: 0
+    border: none
+    outline: none
+
+.mobile-menu-button
+  width: 20px
+  height: 14px
+  float: right
+  position: relative
+  margin: 13px 0 0 30px
+  cursor: pointer
+  display: none
+
+  &:before
+    content: ''
+    position: absolute
+    top: -10px
+    right: -10px
+    left: -10px
+    bottom: -10px
+
+  +width-lessthan(1024)
+    display: block
+
+  +width-lessthan(400)
+    margin-top: 8px
+
+  & ~ .button_green
+    +width-lessthan(525)
+      display: none
+
+  &__line
+    width: 100%
+    height: 2px
+    border-radius: 1px
+    background-color: #000000
+    position: absolute
+
+    &_top
+      top: 0
+
+    &_middle
+      top: 6px
+
+    &_bottom
+      width: 50%
+      bottom: 0
+
+.close-search-button
+  width: 20px
+  height: 20px
+  position: absolute
+  top: 19px
+  right: 0
+  cursor: pointer
+
+  +width-lessthan(400)
+    top: 14px
+
+  &:before
+    content: ''
+    position: absolute
+    top: -10px
+    right: -10px
+    left: -10px
+    bottom: -10px
+
+  &__line
+    width: 100%
+    height: 2px
+    transform-origin: 50% 50%
+    border-radius: 1px
+    background-color: #000000
+    position: absolute
+    top: 9px
+
+    &_left
+      transform: rotate(45deg)
+    
+    &_right
+      transform: rotate(-45deg)

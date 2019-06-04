@@ -1,0 +1,210 @@
+@import '_imports'
+
+// Upload image
+//
+// Инпут для загрузки картинок
+//
+// default - обычное состояние
+// :hover - ховер
+//
+// markup:
+// +b('label').upload-image(class="{$modifiers}")
+//   +b('input').input-file(type="file")
+//   +e.icon Загрузите фотографию
+// +b('label').upload-image(class="{$modifiers}")
+//   +b('input').input-file(type="file")
+//   +e.drag-n-drop-area
+//   +e.icon Переместите фотографию
+// +b('label').upload-image
+//   +e.loader
+//     +e.loader-title Загрузка
+//     +e.bar-container
+//       +e.loading-bar
+//     +e.file-name aqoos.jpg
+// +b('label').upload-image
+//   +e('img').img(src='assets/images/content/recipe-step-image.jpg')
+//   +e.remove-image
+//     +b('span').fonticon_remove-friend
+//
+// Styleguide 2.12
+
+.upload-image
+  display: block
+  position: relative
+  width: 100%
+  height: 100%
+  //min-width: 580px
+  min-height: 150px
+  background-color: #FBF8F6
+  cursor: pointer
+  overflow: hidden
+  border: 1px solid #FBF8F6
+  box-sizing: border-box
+
+  &.error
+    border-color: #ff451c
+
+    .upload-image__icon-text
+      color: #ff451c
+
+    .warning-icon
+      display: inline-block
+      &:hover
+        & + .error-message
+          display: block
+
+  &.preview
+    .upload-image__icon
+      opacity: 0
+
+    &:hover
+      .upload-image__icon
+        opacity: 1
+        color: white
+
+      .upload-image__overlay
+        opacity: 0.5
+
+  &__img
+    width: 100%
+
+  &__overlay
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    background: black
+    opacity: 0
+    transition: opacity 0.25s ease
+
+  &__remove-image
+    display: block
+    width: 30px
+    height: 30px
+    background-color: #FFF
+    border-radius: 15px
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)
+    position: absolute
+    top: 20px
+    right: 20px
+    cursor: pointer
+    text-align: center
+    line-height: 30px
+    color: #ccc
+
+    .fonticon
+      display: inline-block
+      vertical-align: middle
+      font-size: 10px
+      margin-right: -1px
+
+    &:hover
+      color: #ff391e
+
+  &__icon
+    background: center top no-repeat
+    +background-image-retina('forms/upload-image.png')
+    padding-top: 55px
+    color: #999
+    font-size: 14px
+    font-weight: 400
+    text-align: center
+    position: absolute
+    top: 50%
+    left: 0
+    right: 0
+    margin-top: -36.5px
+    transition: background 0.25s ease, opacity 0.25s ease, color 0.25s ease
+
+  &__drag-n-drop-area
+    display: none
+    position: absolute
+    top: 10px
+    left: 10px
+    right: 10px
+    bottom: 10px
+    border: 1px dashed #ff391e
+    background-color: #EEE7E3
+
+  &__icon-text
+    display: inline-block
+    vertical-align: middle
+
+  &__loader
+    width: 220px
+    height: 69px
+    display: block
+    color: #666
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 400
+    text-transform: uppercase
+    text-align: center
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+
+  &__loader-title
+    display: block
+    margin-bottom: 17px
+
+  &__bar-container
+    display: block
+    width: 218px
+    height: 3px
+    border: 1px solid #ff391e
+    border-radius: 3px
+    margin-bottom: 15px
+
+  &__loading-bar
+    display: block
+    width: 63%
+    height: 100%
+    background: #ff391e
+
+
+  &:hover
+    .upload-image__icon
+      +background-image-retina('forms/upload-image_hover.png')
+      color: #000
+
+    .upload-image__drag-n-drop-area
+      display: block
+
+
+  &_new-post
+    width: auto
+    margin: 0 -20px
+    min-height: 340px
+
+    img
+      max-width: 100%
+      display: block
+      margin: 0 auto
+      height: auto
+      max-height: 400px
+
+  &_new-part
+    width: auto 
+    margin: 0 -20px
+    min-height: 210px 
+    img
+      max-width: 100%
+      display: block
+      margin: 0 auto
+      height: auto
+      max-height: 240px
+    input
+      width: 100%
+      overflow: visible
+      height: 100%
+      z-index: 2345
+      // opacity: 1
+
+  &.loaded
+    .upload-image__icon
+      display: none

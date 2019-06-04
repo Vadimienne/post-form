@@ -1,0 +1,280 @@
+@import '_imports'
+
+// Friend card
+//
+// Карточка добавления в друзья
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').friend-card.card.card_small
+//   +e.add-friend
+//     +b.add-friend-hover
+//       +b('span').fonticon_add-friend
+//       span Добавить в друзья
+//   +e.status
+//   a(href="#")
+//     +e.cover
+//       +e.overlay
+//       +e('img').cover-img(src="/assets/images/content/cabinet/banner-img.jpg")
+//     +e.avatar
+//       +e('img').avatar-img(src="/assets/images/content/cabinet/user-img.jpg")
+//     +e.name Margarita Soldi
+//     +e.status Продвинутый
+//     +e.friend-data
+//       +e.column
+//         +e.count 690
+//         +e.text Рецепта
+//       +e.column
+//         +e.count 690
+//         +e.text Постов
+//       +e.column
+//         +e.count 69 000
+//         +e.text Рейтинг
+// +b('article').friend-card.card.card_small
+//   +e.add-friend_added
+//     +b.add-friend-hover
+//       +b('span').fonticon_remove-friend
+//       span Убрать из друзей
+//   a(href="#")
+//     +e.cover
+//       +e.overlay
+//       +e('img').cover-img(src="/assets/images/content/cabinet/banner-img.jpg")
+//     +e.avatar
+//       +e('img').avatar-img(src="/assets/images/content/cabinet/user-img.jpg")
+//     +e.name Margarita Soldi
+//     +e.status Продвинутый
+//     +e.friend-data
+//       +e.column
+//         +e.count 690
+//         +e.text Рецепта
+//       +e.column
+//         +e.count 690
+//         +e.text Постов
+//       +e.column
+//         +e.count 69 000
+//         +e.text Рейтинг
+// +b('article').friend-card.friend-card_special.card.card_small
+//   +e.add-friend_added
+//     +b.add-friend-hover
+//       +b('span').fonticon_remove-friend
+//       span Убрать из друзей
+//   a(href="#")
+//     +e.cover
+//       +e.overlay
+//       +e('img').cover-img(src="/assets/images/content/julia-vysotsky-friend-card-cover.jpg")
+//     +e.avatar
+//       +e('img').avatar-img(src="/assets/images/content/julia-vysotsky-friend-card-avatar.jpg")
+//     +e.friend-info
+//       +e.name Юлия
+//         br
+//         | Высоцкая
+//       +e.status Мастер
+//     +e.friend-data
+//       +e.column
+//         +e.count 690
+//         +e.text Рецепта
+//       +e.column
+//         +e.count 690
+//         +e.text Постов
+//       +e.column
+//         +e.count 69 000
+//         +e.text Рейтинг
+//
+// Styleguide 4.15
+
+.friend-card
+  position: relative
+
+  &__add-friend
+    +imgbox('elements/global/add-friend.png')
+    position: absolute
+    top: 7px
+    right: 9px
+    cursor: pointer
+    z-index: 1
+
+    &_added
+      +imgbox('elements/global/add-friend-added.png')
+
+    &:hover
+      .add-friend-hover
+        opacity: 1
+        pointer-events: auto
+
+  &__online-status
+    width: 10px
+    height: 10px
+    background-color: #4cc861
+    border: 2px solid white
+    border-radius: 50%
+    position: absolute
+    top: 10px
+    left: 15px
+    z-index: 1
+
+  &__cover
+    height: 135px
+    position: relative
+    overflow: hidden
+
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,.04))
+
+  &__cover-img
+    width: 100%
+
+  &__avatar
+    width: 72px
+    height: 72px
+    background-color: #fff
+    border-radius: 4px
+    border: 4px solid #fff
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
+    position: absolute
+    top: 70px
+    left: 15px
+    overflow: hidden
+
+  &__avatar-img
+    width: 100%
+
+  &__friend-info
+    position: absolute
+    top: 85px
+    left: 105px
+    text-align: left
+
+  &__name
+    max-width: 160px
+    max-height: 60px
+    font-family: "Noto Serif"
+    color: #FFF
+    font-size: 18px
+    font-weight: 700
+    line-height: 20px
+    position: absolute
+    left: 105px
+    bottom: 105px
+    text-align: left
+    overflow: hidden
+    text-overflow: ellipsis
+
+  &__status
+    font-family: "Noto Serif"
+    color: #e5e5e5
+    font-size: 12px
+    font-style: italic
+    line-height: normal
+    position: absolute
+    top: 110px
+    left: 105px
+
+  &__friend-data
+    padding-top: 27px
+
+  &__column
+    width: 33.3%
+    float: left
+    border-left: 1px solid #e6e1da
+    box-sizing: border-box
+    text-decoration: none
+
+    &:first-child
+      border: none
+
+  &__count
+    color: #383838
+    font-size: 18px
+    font-weight: 600
+    line-height: 18px
+
+  &__text
+    color: #919191
+    font-family: "Noto Serif"
+    font-size: 12px
+    font-style: italic
+    line-height: normal
+
+.add-friend-hover
+  width: auto
+  height: 26px
+  padding: 0 10px
+  background-color: #FFF
+  border-radius: 13px
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)
+  position: absolute
+  top: 3px
+  right: 3px
+  color: #6E6E6E
+  font-size: 12px
+  font-weight: 400
+  line-height: 26px
+  white-space: nowrap
+  overflow: hidden
+  opacity: 0
+  transition: opacity .3s ease
+  pointer-events: none
+
+  span
+    vertical-align: middle
+    display: inline-block
+    margin-top: -2px
+
+  .fonticon
+    margin-right: 10px
+
+    &_add-friend
+      color: #53cc62
+
+    &_remove-friend
+      color: #e52b12
+      padding-top: 3px
+
+.friend-card_special
+  .friend-card
+
+    &__overlay
+      background-image: none
+      background-color: #000
+      opacity: .4
+
+    &__avatar
+      top: 20px
+      width: 92px
+      height: 92px
+
+    &__count
+      color: #fff
+
+    &__text
+      color: #ccc
+
+    &__cover
+      height: 215px
+
+    &__friend-data
+      position: absolute
+      width: 100%
+      bottom: 20px
+
+    &__column
+      border-color: rgba(230, 225, 218, .3)
+
+    &__friend-info
+      top: 40px
+      left: 136px
+
+    &__name
+      font-size: 20px
+      line-height: 20px
+      margin-bottom: 4px
+      position: static
+
+    &__status
+      position: static

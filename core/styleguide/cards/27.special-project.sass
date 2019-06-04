@@ -1,0 +1,52 @@
+@import '_imports'
+
+// Special project card
+//
+// Карточка специального поединка
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_special-project
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/candy.jpg 1x, /assets/images/content/candy@2x.jpg 2x, /assets/images/content/candy@3x.jpg 3x")
+//     img(src="/assets/images/content/candy.jpg" alt="")
+//   +e.project-name Дружба с Италией
+//
+// Styleguide 4.27
+
+.card_special-project
+
+  .card
+
+    &__picture
+      width: 100%
+      height: 250px
+      border-bottom: none
+      margin-bottom: 25px
+
+    &__project-info
+      padding: 0 30px
+      color: #242424
+      font-family: "Noto Serif"
+      font-size: 16px
+      line-height: 20px
+      font-weight: 700
+
+    &__go
+      height: 43px
+      position: absolute
+      left: 0
+      right: 0
+      bottom: 0
+      color: #414141
+      font-family: "Open Sans"
+      font-size: 13px
+      font-weight: 600
+      line-height: 43px
+      border-top: 1px solid #ddd
+      text-align: center
+
+  &:hover
+    .card__go
+      color: #ff391e

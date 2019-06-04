@@ -1,0 +1,64 @@
+@import '_imports'
+
+.video-container
+  padding: 20px 50px
+  background-color: #1a1a1a
+  margin: -20px -50px 20px
+
+  .player
+    +imgbox('cooking-school/player.png')
+
+  .button_black
+    & + .button_black
+      margin-left: 5px
+
+.webinar-info
+  margin-bottom: 20px
+  display: block
+  +clearfix
+
+  .user-avatar
+    float: left
+    margin-right: 10px
+
+  &__content
+    float: left
+
+  &__user
+    font-size: 14px
+    color: #ff441b
+    font-weight: 600
+
+  &__title
+    font-size: 16px
+    color: #ffffff
+    font-weight: 700
+
+.lesson-status
+  position: relative
+  z-index: 5
+  font-size: 12px
+  margin-top: 7px
+  font-weight: 400
+
+  .fonticon
+    font-size: 20px
+    margin-left: 10px
+    display: inline-block
+    vertical-align: middle
+
+  &__text
+    display: inline-block
+    vertical-align: middle
+    margin-top: -2px
+
+  &_done
+    color: #38dc80
+
+  &_playing
+    color: #ed392f
+
+
+.lesson-status.lesson-status_done
+  .fonticon
+    font-size: 22px

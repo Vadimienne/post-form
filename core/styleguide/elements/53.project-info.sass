@@ -1,0 +1,138 @@
+@import '_imports'
+
+// Project info
+//
+// SEO блок
+//
+// markup:
+// - bemto_settings_context_replace = false
+//  +b.project-info
+//    +e('img').icon(src="/assets/images/elements/project-info/icon-tele.png")
+//    +e.info
+//      h1 Заголовок 1. «Едим Дома»: лучшие рецепты на самом кулинарном сайте
+//      h2 Заголовок 2. Добро пожаловать на официальный кулинарный сайт Юлии Высоцкой «Едим Дома»!
+//      h3 Заголовок 3. Вкусно будет всем. Обещаем!
+//      h4 Заголовок 4. Приготовили что-то необычное?
+//      h5 Заголовок 5. Наш портал.
+//      h6 Заголовок 6. Наш портал.
+//      p Наш портал – не просто место, где собраны рецепты блюд со всего мира, которые под силу приготовить не только профессионалам, но и каждой хозяйке на своей домашней кухне: ведь все они содержат подробные пошаговые инструкции, а также фото или видео. «Едим Дома» — это настоящая социальная сеть, где кипит живое общение: кулинары делятся своими профессиональными секретами, благодаря чему простые домохозяйки превращаются в настоящих шеф-поваров.
+//      ul
+//        li Хотите узнать больше о разных ингредиентах, используемых при приготовлении блюд? К вашим услугам — наша
+//          a(href="#")  энциклопедия
+//          | .
+//        li Пропустили в воскресенье выпуск любимой передачи «Едим Дома»? На нашем портале вы найдете полную их
+//          a(href="#")  подборку
+//          | .
+//
+// Styleguide 1.53
+
+.project-info
+  margin-top: 30px
+  padding-top: 40px
+  border-top: 1px solid #ded9cc
+
+  &__icon
+    width: 140px
+    height: 140px
+    float: left
+    margin-left: 71px
+
+    +width-lessthan(1024)
+      margin-left: 0
+
+    +width-lessthan(600)
+      display: block
+      width: 100px
+      height: 100px
+      float: none
+      margin: 0 auto 25px
+
+  &__icon + &__info
+    margin-left: 300px
+    margin-right: 220px
+
+    +width-lessthan(1024)
+      margin-left: 190px
+      margin-right: 0
+
+    +width-lessthan(600)
+      margin-left: 20px
+      margin-right: 20px
+
+  h1
+    color: #242424
+    font-family: "Noto Serif"
+    font-size: 22px
+    font-weight: 700
+    line-height: 36px
+    margin: -10px 0 15px 0
+
+  h2
+    color: #4d4d4d
+    font-family: "Open Sans"
+    font-size: 16px
+    font-weight: 700
+    line-height: 25px
+    margin: 0 0 17px 0
+
+  h3
+    color: #4d4d4d
+    font-family: "Open Sans"
+    font-size: 16px
+    font-weight: 700
+    font-style: italic
+    line-height: 18px
+    margin: 0 0 20px 0
+
+  h4
+    color: #4d4d4d
+    font-family: "Open Sans"
+    font-size: 16px
+    font-weight: 400
+    line-height: 25px
+    margin: 0 0 15px 0
+
+  h5
+    color: #4d4d4d
+    font-family: "Open Sans"
+    font-size: 13px
+    font-weight: 700
+    line-height: 18px
+    margin: 0 0 17px 0
+
+  h6
+    color: #4d4d4d
+    font-family: "Noto Serif"
+    font-size: 15px
+    font-style: italic
+    line-height: 18px
+    font-weight: 400
+    margin: 0 0 19px 0
+
+  p
+    color: #4d4d4d
+    font-family: "Open Sans"
+    font-size: 13px
+    font-weight: 400
+    line-height: 18px
+    margin: 0 0 20px 0
+
+  ul
+    padding: 0 0 0 15px
+
+    li
+      color: #4d4d4d
+      font-family: "Open Sans"
+      font-size: 13px
+      font-weight: 400
+      line-height: 18px
+      padding-left: 5px
+
+      & + li
+        margin-top: 20px
+
+  a
+    color: #ed342a
+
+    &:hover
+      text-decoration: underline

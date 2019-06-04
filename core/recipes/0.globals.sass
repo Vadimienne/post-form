@@ -1,0 +1,204 @@
+@import '_imports'
+
+.recipe-step-title
+  .text-icon
+    &:hover
+      .fonticon
+        color: #ff391e
+
+
+.recipe-image-container
+  width: 580px
+  height: 340px
+  background-color: #FBF8F6
+  margin-left: -20px
+
+  .upload-image
+    height: 340px
+
+.step-image-container
+  width: 580px
+  height: 150px
+  background-color: #FBF8F6
+  margin-left: -20px
+  position: relative
+
+  &__step-count
+    width: 50px
+    height: 50px
+    background-color: #FFF
+    border-radius: 50%
+    color: #242424
+    font-family: "Noto Serif"
+    font-size: 20px
+    font-weight: 700
+    line-height: 50px
+    text-align: center
+    position: absolute
+    left: 30px
+    bottom: 20px
+
+.recipe-selectbox-icon
+  float: left
+  margin-right: 10px
+
+  &_clock
+    +imgbox('recipes/clock.png')
+
+  &_person
+    +imgbox('recipes/person.png')
+
+.measure
+  color: #5E5E5E
+  font-size: 14px
+  font-weight: 400
+  line-height: 38px
+  float: left
+  margin-left: 10px
+
+.ingredients-input-container
+  margin-bottom: 20px
+  padding-left: 15px
+
+  &_step
+    margin-top: -10px
+
+  &__row
+    margin-top: 10px
+    position: relative
+
+  .field + .field
+    margin-left: 5px
+
+  .handler
+    top: 15px
+    left: -15px
+
+.delete-engridient
+  display: inline-block
+  height: 40px
+  width: 16px
+  margin-left: 5px
+  vertical-align: middle
+  cursor: pointer
+  line-height: 40px
+
+  .fonticon
+    display: inline-block
+    vertical-align: middle
+    font-size: 20px
+    color: #cccccc
+    margin-top: -3px
+
+  &:hover
+    .fonticon
+      color: #ff391e
+
+.field-row_ingredients
+  background-color: #fbf8f6
+  position: relative
+
+  .handler_row-ingredients
+    top: 25px
+    left: 20px
+
+  .button
+    font-weight: 400
+    text-transform: none
+    font-size: 13px
+    background: none
+
+  .field_medium
+    padding: 0 32px 0 15px
+
+    .text-icon
+      position: absolute
+      top: -2px
+      right: 8px
+      z-index: 2
+
+      .fonticon
+        font-size: 20px
+        color: #cccccc
+
+      &:hover
+        .fonticon
+          color: #ff391e
+
+.handler
+  position: absolute
+  line-height: 12px
+  cursor: pointer
+  z-index: 2
+  cursor: move
+
+  &:before
+    content: ''
+    position: absolute
+    top: -5px
+    right: -5px
+    left: -5px
+    bottom: -5px
+
+  .fonticon
+    font-size: 14px
+    color: #ccc
+
+.is-dragging
+
+  .field_w278,
+  .field_w80,
+  .field_w116
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15)
+
+  .handler
+    .fonticon
+      color: #de0b0b
+
+.vote-instruction
+  padding-top: 55px
+
+  .title
+    margin-bottom: 10px
+
+  .plain-text
+    p
+      margin-bottom: 5px
+
+.recipe-button-container
+  text-justify: distribute
+  text-align: justify
+  line-height: 0
+  font-size: 0.1px
+
+  +width-lessthan(1024)
+    display: none
+
+  &:after
+    content: ''
+    display: inline-block
+    width: 100%
+
+  .plain-text &
+
+    .button
+      margin: 0
+
+      & + .button
+        margin: 0
+
+      +width-lessthan(1024)
+        &_round
+          float: right
+
+          & + .button
+            margin-right: 10px
+
+
+  &_show-on-device
+    display: none
+    text-align: left
+    +clearfix
+    
+    +width-lessthan(1024)
+      display: block

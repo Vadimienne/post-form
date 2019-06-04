@@ -1,0 +1,322 @@
+@import '_imports'
+
+.content-box
+  position: relative
+  width: 100%
+  background-color: #FFF
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(71, 44, 6, 0.2)
+  margin-top : 20px
+
+  &_center
+    text-align: center
+
+  &_banner
+    text-align: center
+    background: transparent
+    box-shadow: none
+    margin-top: 0
+    overflow: hidden
+    .content-box__content
+      padding: 0
+      text-align: center
+      &>div
+        margin: 0 -130px !important
+        transform-origin: 50% 0 0
+        width: auto !important
+        // height: auto !important
+        iframe
+          margin-top: 20px
+          // padding: 20px 0 0
+          vertical-align: top
+          display: inline-block
+
+        a
+          margin-top: 20px
+          display: inline-block
+          // padding: 20px 0 0
+          img
+            vertical-align: top
+
+  &_card-height
+    min-height: 450px
+
+    .content-box__content
+      height: 391px
+      box-sizing: border-box
+
+  &_card-double-height
+    min-height: 920px
+
+    .content-box__content
+      height: 861px
+      box-sizing: border-box
+
+  &:first-child
+    margin-top: 0px
+
+  &__header
+    padding: 25px 30px
+
+    &_price
+      padding: 20px 30px
+
+      .title
+        line-height: 40px
+
+    &_shop-item
+      padding: 5px 0 20px 0
+
+      .item-article
+        font-size: 14px
+        font-weight: 400
+        color: #242424
+        margin-top: 15px
+
+        span
+          color: #696259
+
+    &_small
+      padding: 20px 20px
+
+    &_padding1540
+      padding: 15px 40px
+
+    &_padding2520
+      padding: 25px 20px
+
+    &_padding1520
+      padding: 15px 20px
+
+    &_reward-badges
+      padding: 25px 50px
+
+    &_updates
+      padding: 0 30px
+      border-bottom: 1px solid #e6e6e6
+
+      .title
+        font-size: 12px
+        line-height: 37px
+
+    .comment-disabler
+      float: right
+
+  &__content
+    padding: 25px 30px
+
+    +width-lessthan(1024)
+      padding-left: 60px
+      padding-right: 60px
+
+    +width-lessthan(768)
+      +width-between-property(padding-left, 600, 20, 768, 60, true, true)
+      +width-between-property(padding-right, 600, 20, 768, 60, true, true)
+
+    &_padding2030
+      padding: 20px 30px
+
+    &_padding2040
+      padding: 20px 40px
+
+    &_padding3540
+      padding: 35px 40px
+
+    &_reward-badges
+      padding: 20px 50px
+      border-top: 1px solid #ded9cc
+
+    &_wide
+      padding: 20px
+
+      .recipe-step-title
+        margin: -20px -20px 0 -20px
+        padding: 0 20px 0 40px
+        position: relative
+
+        .handler
+          top: 20px
+          left: 20px
+    &_nopb
+      padding-bottom: 0px
+
+    &_grey
+      background-color: #fbf8f6
+
+    &_updates
+      padding: 0 30px 10px 30px
+
+  &__footer
+
+    &_padding1520
+      padding: 15px 20px
+
+    &_padding10
+      padding: 10px
+
+    &_padding102020
+      padding: 10px 20px 20px
+
+  &__button
+    position: absolute
+    bottom: 0
+    width: 100%
+    height: 41px
+    line-height: 41px
+    font-size: 13px
+    text-decoration: none
+    color: #a2a2a2
+    text-align: center
+    border-top: 1px solid #dddddd
+    border-radius: 0 0 4px 4px
+
+    &:hover
+      background-color: #fbf8f6
+
+  .rating
+    margin-top: -5px
+
+  .button_like-it
+    float: right
+    margin-top: 19px
+    z-index: 20
+
+    span
+      margin-top: -7px
+
+    .fonticon
+      padding-top: 2px
+
+  &.chat, &.discussed, &.announced
+    .content-box__content
+      &:after
+        content: ''
+        position: absolute
+        bottom: 0
+        left: 5px
+        right: 5px
+        width: 100%
+        height: 25px
+        background-image: linear-gradient(to top, #fff 1%, rgba(255,255,255,0) 100%)
+
+      &:before
+        content: ''
+        position: absolute
+        z-index: 5
+        top: 0
+        left: 0
+        right: 0
+        width: 100%
+        height: 25px
+        background-image: linear-gradient(to bottom, #fff 1%, rgba(255,255,255,0) 100%)
+
+
+.content-media
+  margin-left: -30px
+  margin-right: -30px
+  position : relative
+
+  +width-lessthan(1024)
+    margin-left: -60px
+    margin-right: -60px
+
+  +width-lessthan(768)
+    +width-between-property(margin-left, 600, -20, 768, -60, true, true)
+    +width-between-property(margin-right, 600, -20, 768, -60, true, true)
+
+  &_about
+    margin: -20px -40px 40px -40px
+
+  img
+    display : block
+    width : 100%
+
+  uppod_player_div
+    img
+      width: auto !important
+
+.article-box
+  .content-box__content
+    &_article
+      padding: 25px 30px
+
+  .badge
+    margin: 0 0 15px 0
+
+  .title_medium
+    margin-bottom: 25px
+
+  .plain-text__image-aligner
+
+    .content-media
+      margin-left: 0
+      margin-right: 0
+
+    h2
+      &:first-child
+        margin-top: 35px
+
+    p
+      &:first-child
+        margin-top: 35px
+
+    & + .hr
+      margin: 35px 0 30px 0
+
+  .title_small
+    margin-bottom: 10px
+
+  &_contest
+
+    .title_medium
+      margin-top: 25px
+
+    .contest-info
+      margin-top: -10px
+      margin-bottom: 13px
+
+.content-box_rate-share
+  .content-box
+    &__content
+      +width-lessthan(1024)
+        padding-left: 20px
+        padding-right: 20px
+
+      .hr + .section-title
+        margin-top: 0
+
+.avatars-preview
+  +clearfix
+  margin-left: -2px
+  margin-top: -5px
+  max-height: 110px
+  position: relative
+  overflow: hidden
+  padding-right: 10px
+  margin-right: -10px
+
+  &_voices
+    margin-left: -10px
+    max-height: 376px
+
+  &__scroll-box
+    +clearfix
+
+  .user-avatar
+    float: left
+    margin-left: 2px
+    margin-top: 5px
+
+    &_medium
+      float: none
+
+  .person_w-70
+    margin-left: 5px
+    margin-top: 10px
+
+  .person_v
+    .title
+      white-space: nowrap
+
+.recipes-release
+  margin-top: 22px

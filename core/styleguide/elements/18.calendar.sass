@@ -1,0 +1,604 @@
+@import '_imports'
+
+// Calendar-box / calendar
+// 
+// Календарь
+// 
+// default - обычное состояние
+// six-weeks - месяц с 6 неделями
+//
+// markup:
+// +b.calendar-box
+//   +e.slider.slider.slider_beh_fade.slider_calendar(data-module="slider", data-options='{"type":"fade"}')
+//     .slider__container
+//       +e.slide.slider__slide
+//         +e('img').slide-image(src="/assets/images/content/calendar-slider-image-2.jpg" alt="")
+//         +e.slide-overlay
+//         +e.slide-content
+//           +e.slide-title.title.title_medium.title_white Международный день пиццы в Бразилии и Аргентине
+//       +e.slide.slider__slide
+//         +e('img').slide-image(src="/assets/images/content/calendar-slider-image.jpg" alt="")
+//         +e.slide-overlay
+//         +e.slide-content
+//           +e.slide-title.title.title_medium.title_white Международный день пиццы
+//     .slider-controls
+//       +b.slider-paginator-dotted
+//         +e.item.active
+//         +e.item
+//         +e.item
+//   +e.separator
+//   +e.info
+//     +b.badge_holidays Сегодня • 25 июля
+//   +b.calendar
+//     +e.header
+//       +b.control-button_small._calendar._prev
+//         +b('span').fonticon_arrow-left
+//       +e.month.title.title_medium.title_white Август
+//       +b.control-button_small._calendar._next
+//         +b('span').fonticon_arrow-right
+//     +e('table').table
+//       +e('thead').table-head
+//         +e('tr').table-row
+//           +e('th').table-cell Пн
+//           +e('th').table-cell Вт
+//           +e('th').table-cell Ср
+//           +e('th').table-cell Чт
+//           +e('th').table-cell Пт
+//           +e('th').table-cell Сб
+//           +e('th').table-cell Вс
+//       +e('tbody').table-body
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 1
+//               +b.tooltip_calendar._column_1
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 2
+//           +e('td').table-cell
+//             +e('a').day(href="#") 3
+//           +e('td').table-cell
+//             +e('a').day_today(href="#") 4
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 5
+//           +e('td').table-cell
+//             +e('a').day(href="#") 6
+//           +e('td').table-cell
+//             +e('a').day(href="#") 7
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 8
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 9
+//               +b.tooltip_calendar._column_2
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 10
+//           +e('td').table-cell
+//             +e('a').day(href="#") 11
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 12
+//               +b.tooltip_calendar._column_5
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 13
+//           +e('td').table-cell
+//             +e('a').day(href="#") 14
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 15
+//           +e('td').table-cell
+//             +e('a').day(href="#") 16
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 17
+//               +b.tooltip_calendar._column_3
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 18
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 19
+//           +e('td').table-cell
+//             +e('a').day(href="#") 20
+//           +e('td').table-cell
+//             +e('a').day(href="#") 21
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 22
+//           +e('td').table-cell
+//             +e('a').day(href="#") 23
+//           +e('td').table-cell
+//             +e('a').day(href="#") 24
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 25
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 26
+//           +e('td').table-cell
+//             +e('a').day(href="#") 27
+//           +e('td').table-cell
+//             +e('a').day(href="#") 28
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 29
+//           +e('td').table-cell
+//             +e('a').day(href="#") 30
+//           +e('td').table-cell
+//             +e('a').day(href="#") 31
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 1
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 2
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 3
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 4
+// +b.calendar-box_six-weeks
+//   +e.slider.slider.slider_beh_fade.slider_calendar(data-module="slider", data-options='{"type":"fade"}')
+//     .slider__container
+//       +e.slide.slider__slide
+//         +e('img').slide-image(src="/assets/images/content/calendar-slider-image.jpg" alt="")
+//         +e.slide-overlay
+//         +e.slide-content
+//           +e.slide-title.title.title_medium.title_white Международный день пиццы в Бразилии и Аргентине
+//       +e.slide.slider__slide
+//         +e('img').slide-image(src="/assets/images/content/calendar-slider-image-2.jpg" alt="")
+//         +e.slide-overlay
+//         +e.slide-content
+//           +e.slide-title.title.title_medium.title_white Международный день пиццы
+//     .slider-controls
+//       +b.slider-paginator-dotted
+//         +e.item.active
+//         +e.item
+//         +e.item
+//   +e.separator
+//   +e.info
+//     +b.badge_holidays Сегодня • 25 июля
+//   +b.calendar
+//     +e.header
+//       +b.control-button_small._calendar._prev
+//         +b('span').fonticon_arrow-left
+//       +e.month.title.title_medium.title_white Август
+//       +b.control-button_small._calendar._next
+//         +b('span').fonticon_arrow-right
+//     +e('table').table
+//       +e('thead').table-head
+//         +e('tr').table-row
+//           +e('th').table-cell Пн
+//           +e('th').table-cell Вт
+//           +e('th').table-cell Ср
+//           +e('th').table-cell Чт
+//           +e('th').table-cell Пт
+//           +e('th').table-cell Сб
+//           +e('th').table-cell Вс
+//       +e('tbody').table-body
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 25
+//               +b.tooltip_calendar._column_1
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 26
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 27
+//           +e('td').table-cell
+//             +e('a').day_today._other-month(href="#") 28
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 29
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 30
+//           +e('td').table-cell
+//             +e('a').day(href="#") 1
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 2
+//               +b.tooltip_calendar._column_1
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 3
+//           +e('td').table-cell
+//             +e('a').day(href="#") 4
+//           +e('td').table-cell
+//             +e('a').day(href="#") 5
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 6
+//           +e('td').table-cell
+//             +e('a').day(href="#") 7
+//           +e('td').table-cell
+//             +e('a').day(href="#") 8
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 9
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 10
+//               +b.tooltip_calendar._column_2
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 11
+//           +e('td').table-cell
+//             +e('a').day(href="#") 12
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 13
+//               +b.tooltip_calendar._column_5
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 14
+//           +e('td').table-cell
+//             +e('a').day(href="#") 15
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 16
+//           +e('td').table-cell
+//             +e('a').day(href="#") 17
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 18
+//               +b.tooltip_calendar._column_3
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 19
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 20
+//           +e('td').table-cell
+//             +e('a').day(href="#") 21
+//           +e('td').table-cell
+//             +e('a').day(href="#") 22
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 23
+//           +e('td').table-cell
+//             +e('a').day(href="#") 24
+//           +e('td').table-cell
+//             +e('a').day(href="#") 25
+//           +e('td').table-cell
+//             +e('a').day_holiday(href="#") 26
+//               +b.tooltip_calendar._column_4
+//                 +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//                 +e.content
+//                   +e.date 12 июля
+//                   +b.title_small Национальный день
+//                     br
+//                     |  чеснока в США
+//           +e('td').table-cell
+//             +e('a').day(href="#") 27
+//           +e('td').table-cell
+//             +e('a').day(href="#") 28
+//           +e('td').table-cell
+//             +e('a').day(href="#") 29
+//         +e('tr').table-row
+//           +e('td').table-cell
+//             +e('a').day(href="#") 30
+//           +e('td').table-cell
+//             +e('a').day(href="#") 31
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 1
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 2
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 3
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 4
+//           +e('td').table-cell
+//             +e('a').day_other-month(href="#") 5
+// 
+// Styleguide 1.18
+
+.calendar-box
+  width: 280px
+  height: 450px
+  position: relative
+  overflow: hidden
+  border-radius: 3px
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)
+
+  +width-lessthan(1024)
+    width: 320px
+    height: 282px
+
+  +width-lessthan(400)
+    width: 300px
+    height: 265px
+
+  &__slider
+    position: absolute
+    width: 280px
+    height: 450px
+
+    +width-lessthan(1024)
+      width: 320px
+      height: 282px
+
+    +width-lessthan(400)
+      width: 300px
+      height: 265px
+
+  &__slide
+    position: absolute
+    top: 0
+    left: 0
+    width: 280px
+    height: 450px
+
+    +width-lessthan(1024)
+      width: 320px
+      height: 282px
+      border-radius: 3px
+      overflow: hidden
+
+    +width-lessthan(400)
+      width: 300px
+      height: 265px
+
+  &__slide-overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 280px
+    height: 450px
+    border-radius: 3px
+    background-image: linear-gradient(to top, rgba(0,0,0,.84), rgba(0,0,0,0))
+
+    +width-lessthan(1024)
+      width: 320px
+      height: 282px
+
+    +width-lessthan(400)
+      width: 300px
+      height: 265px
+
+  &__slide-image
+    position: absolute
+    top: 0
+    left: 0
+    width: 280px
+    height: 450px
+    border: none
+    border-radius: 3px
+
+    +width-lessthan(1024)
+      width: 320px
+      height: auto
+
+    +width-lessthan(400)
+      width: 300px
+
+  &__slide-content
+    position: absolute
+    height: 115px
+    line-height: 115px
+    width: 80%
+    text-align: center
+    left: 10%
+    right: 10%
+    top: 70px
+
+  &__slide-title.title
+    font-size: 24px
+    display: inline-block
+    vertical-align: middle
+
+  &__info
+    position: absolute
+    width: 280px
+    text-align: center
+    box-sizing: border-box
+    padding-top: 20px
+
+    +width-lessthan(1024)
+      width: 320px
+
+    +width-lessthan(400)
+      width: 300px
+
+  &__separator
+    top: 219px
+    border-top: 1px solid rgba(255, 255, 255, .15)
+    position: absolute
+    width: 100%
+
+    +width-lessthan(1024)
+      top: auto
+      bottom: 51px
+
+  .slider-paginator-dotted
+    position: absolute
+    width: 100%
+    top: 193px
+
+    +width-lessthan(1024)
+      top: auto
+      bottom: 61px
+
+  &__all-holidays-link
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    line-height: 50px
+    text-align: center
+    font-size: 12px
+    font-weight: 600
+    letter-spacing: 1px
+    color: #ffffff
+    text-transform: uppercase
+
+.calendar-box_six-weeks
+
+  .slider-paginator-dotted
+    top: 167px
+
+  .calendar-box
+
+    &__separator
+      top: 193px
+
+    &__slide-content
+      top: 52px
+
+.calendar
+  position: absolute
+  bottom: 14px
+  left: 0
+  right: 0
+  margin: auto
+  width: 238px
+
+  +width-lessthan(1024)
+    display: none
+
+  &__header
+    width: 100%
+    height: 24px
+    position: relative
+    text-align: center
+    margin-bottom: 12px
+
+  &__table-head
+    .calendar__table-cell
+      height: 28px
+
+  &__month.title
+    font-size: 18px
+
+  &__table
+
+  &__table-cell
+    font-size: 12px
+    font-family: Arial
+    height: 28px
+    width: 34px
+    text-align: center
+    font-weight: normal
+    color: #fff
+
+  .calendar__table-cell + .calendar__table-cell
+    border-left: 1px solid #fff
+    border-left: 1px solid rgba(245, 241, 228, 0.15)
+
+  &__day
+    position: relative
+    height: 25px
+    line-height: 25px
+    width: 25px
+    margin: 0 auto
+    display: block
+    text-decoration: none
+    color: #fff
+    box-sizing: border-box
+    border-radius: 50%
+    border: 1px solid transparent
+
+    &:hover
+
+      .tooltip
+        opacity: 1
+        visibility: visible
+
+    &_other-month
+      color: rgba(255, 255, 255, .4)
+
+    &_today
+      background-color: #ee1919
+      border: 1px solid #ee1919
+      color: #fff
+
+    &_holiday
+      border: 1px solid #ee1919
+
+      &:hover
+        border-color: #a09b90
+  
+  
+  .control-button
+    position: absolute
+
+  .control-button_prev
+    top: 0
+    left: 0
+
+  .control-button_next
+    top: 0
+    right: 0

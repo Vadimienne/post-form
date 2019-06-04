@@ -1,0 +1,40 @@
+@import '_imports'
+
+// Tv show
+//
+// Из какого шоу рецепт
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.tv-show
+//   +e.title Из телепередачи
+//   +e('a').show-name(href="#") «Июньских ягод аромат» от 26 июня 2016
+//   +e('a').show-name(href="#") «Июньских ягод аромат» от 26 июня 2016
+//
+// Styleguide 1.56
+
+.tv-show
+  padding-left: 42px
+  margin-top: 20px
+  background: left top no-repeat
+  +background-image-retina('recipes/tv-show.png')
+
+  +width-lessthan(600)
+    padding: 35px 0 0 0
+
+  &__title
+    color: #242424
+    font-family: "Open Sans"
+    font-size: 14px
+    font-weight: 700
+    margin-bottom: 5px
+
+  &__show-name
+    color: #ed342a
+    font-family: "Open Sans"
+    font-size: 15px
+    font-weight: 400
+    line-height: 22px
+    text-decoration: none

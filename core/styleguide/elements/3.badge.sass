@@ -1,0 +1,93 @@
+@import '_imports'
+
+// Badge
+//
+// Бэйдж
+//
+// badge_recipes - бэйдж раздела рецепты
+// badge_tv - бэйдж раздела телепередачи
+// badge_cooking-school - бэйдж раздела кулинарная школа
+// badge_shop - бэйдж раздела магазин
+// badge_home - бэйдж раздела живем дома
+// badge_club - бэйдж раздела клуб
+// badge_holidays - бэйдж раздела календарь
+// badge_wiki - бэйдж раздела энциклопедия
+// badge_date - белый бэйдж
+// badge_discount - скидочный бэйдж
+// badge_discount-shop - скидочный бэйдж
+// badge_new-item - скидочный бэйдж
+//
+// markup:
+// +b.badge(class="{$modifiers}") Рецепт дня
+//
+// Styleguide 1.3
+
+.badge
+  display: inline-block
+  padding: 0 12px
+  height: 22px
+  border-radius: 4px
+  color: #FFF
+  font-size: 11px
+  font-weight: 600
+  text-transform: uppercase
+  line-height: 22px
+  cursor : default
+  user-select : none
+
+  &_date
+    background-color: #fff
+    color: #242424
+    font-weight: 700
+
+  &_discount
+    background-color: #fff
+    color: #ff391e
+
+  &_discount-shop
+    background-color: none
+    color: #ff391e
+    border: 1px solid #ff391e
+    box-sizing: border-box
+    line-height: 20px
+
+  &_new-item
+    background-color: none
+    color: #43bb78
+    border: 1px solid #43bb78
+    box-sizing: border-box
+    line-height: 20px
+
+
+  &_recipes
+    background-color: #ff6f00
+
+  &_draft
+    background-color: #b4afa5
+
+  &_moderation
+    background-color: #ff391e
+
+  &_tv
+    background-color: #59a2ed
+
+  &_cooking-school
+    background-color: #6cd857
+
+  &_holidays
+    background-color: #f66
+
+  &_shop
+    background-color: #43bb78
+
+  &_wiki
+    background-color: #ffb700
+
+  &_club
+    background-color: #b633d7
+
+  &_home
+    background-color: #ec58a5
+
+  &_youtube
+    background-color: #FF0000

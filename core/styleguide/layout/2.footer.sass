@@ -1,0 +1,696 @@
+@import '_imports'
+
+// Footer
+//
+// Footer
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.footer
+//   +e.layout
+//     +e.footer-top
+//       +b.footer-social
+//         +e('a').link_fb(href="#")
+//           .icon
+//         +e('a').link_vk(href="#")
+//           .icon
+//         +e('a').link_ok(href="#")
+//           .icon
+//         +e('a').link_ig(href="#")
+//           .icon
+//         +e('a').link_pin(href="#")
+//           .icon
+//         +e('a').link_mm(href="#")
+//           .icon
+//         +e('a').link_youtube(href="#")
+//           .icon
+//         +e('a').link_viber(href="#")
+//           .icon
+//         +e('a').link_tw(href="#")
+//           .icon
+//         +e('a').link_google(href="#")
+//           .icon
+//       +b.footer-nav
+//         +e('a').item(href="#") О проекте
+//         +e('a').item(href="#") Рекламодателям
+//         +e('a').item(href="#") Права
+//         +e('a').item(href="#") Контакты
+//         +e('a').item(href="#") Помощь
+//         +e('a').item(href="#") Правила
+//         +e('a').item(href="#") Спецпроекты
+//     +e.row
+//       +e('a').logo(href="#")
+//       +b.disclaimer
+//         +e.text Здесь вы найдете множество новых кулинарных идей,
+//           br
+//           | станете автором собственной Кулинарной книги, встретите
+//           br
+//           | друзей-единомышленников и сможете поболтать обо всем
+//           br
+//           | на свете!
+//       +b.footer-projects
+//         +e.headline Наши проекты
+//         +e.link-wrapper
+//           +e('a').link(href="#")
+//             span Кулинарная студия
+//             .icon
+//         +e.link-wrapper
+//           +e('a').link(href="#")
+//             span Ресторанная группа
+//             .icon
+//         +e.link-wrapper
+//           +e('a').link(href="#")
+//             span Кулинарные путешествия
+//             .icon
+//         +e.link-wrapper
+//           +e('a').link(href="#")
+//             span Франшиза Едим Дома
+//             .icon
+//         +e.link-wrapper
+//           +e('a').link(href="#")
+//             span Книги Юлии Высоцкой
+//             .icon
+//         +e.link-wrapper
+//           +e('a').link(href="#")
+//             span Мастерская кухонной мебели
+//             .icon
+//       +b.footer-apps
+//         +b.footer-app
+//           +e.headline Рецепты завтраков
+//             br
+//             | от Юлии Высоцкой
+//           +e('a').button_appstore(href="#")
+//             .icon
+//         +b.footer-app
+//           +e.headline Рецепты
+//             br
+//             | Юлии Высоцкой
+//           +e('a').button_appstore(href="#")
+//             .icon
+//           +e('a').button_google(href="#")
+//             .icon
+//           +e('a').button_windows(href="#")
+//             .icon
+//     +e.footer-bottom
+//       +e.copyright © 2009–2016 ООО «Едимдома.ру» –&nbsp;
+//         a(href="#") вкусные рецепты
+//         | . Все права защищены
+//       +e.beta Сделано c &nbsp;
+//         a(href="http://betaagency.ru/ru", target="_blank") Beta Digital Production
+//
+// Styleguide 5.2
+
+.footer
+  background: #242424
+  padding-top: 30px
+  border-bottom: 1px solid #242424
+  overflow-x: hidden
+  position: relative
+
+  +width-lessthan(1024)
+    padding-top: 40px
+
+  &__layout
+    width: 1180px
+    margin: 0 auto
+
+    +width-lessthan(1024)
+      width: auto
+      margin: 0 40px
+
+    +width-lessthan(768)
+      +width-between-property(margin-left, 320, 10, 768, 40, true, true)
+      +width-between-property(margin-right, 320, 10, 768, 40, true, true)
+
+    +width-lessthan(600)
+      +width-between-property(margin-right, 320, 0, 600, 80, true, true )
+      +width-between-property(margin-left, 320, 0, 600, 80, true, true )
+      padding-left: 30px
+      padding-right: 30px
+
+  &__row
+    +clearfix
+
+  &__footer-top
+    +clearfix
+    border-bottom: 1px solid #3a3a3a
+
+  &__footer-bottom
+    margin-top: 20px
+    padding-top: 27px
+    padding-bottom: 27px
+    clear: both
+    border-top: 1px solid #3a3a3a
+    font-size: 12px
+    color: #4c4c4c
+    font-weight: 400
+    line-height: normal
+    position: relative
+    +clearfix
+
+    +width-lessthan(1024)
+      margin-top: 40px
+
+    +width-lessthan(600)
+      margin-top: 0
+      padding-top: 30px
+      border-top: none
+
+    a
+      color: #808080
+      text-decoration: underline
+
+      &:hover
+        text-decoration: none
+        color: #ff391e
+
+  &__copyright
+    float: left
+
+    br
+      display: none
+
+      +width-lessthan(1024)
+        display: inline
+
+    +width-lessthan(600)
+      float: none
+
+  &__bottom-disclaimer
+    margin-top: 30px
+    display: none
+
+    +width-lessthan(600)
+      display: block
+
+  &__beta
+    float: right
+
+    +width-lessthan(1024)
+      line-height: 30px
+
+    +width-lessthan(600)
+      line-height: normal
+      float: none
+      margin-top: 30px
+
+  &__logo
+    display: block
+    +imgbox('layout/footer/footer-logo.png')
+    float: left
+    margin-top: 41px
+
+    +width-lessthan(1024)
+      display: none
+
+.footer-top-right-container
+  +width-lessthan(1024)
+    float: right
+
+  +width-lessthan(600)
+    float: none
+    position: relative
+
+    &:before
+      content: ''
+      width: 100%
+      height: 100%
+      box-sizing: border-box
+      position: absolute
+      top: 0
+      left: -100%
+      border-bottom: 1px solid #3a3a3a
+
+    &:after
+      content: ''
+      width: 100%
+      height: 100%
+      box-sizing: border-box
+      position: absolute
+      top: 0
+      right: -100%
+      border-bottom: 1px solid #3a3a3a
+
+  &__phone-logo
+    width: 96px
+    height: 37px
+    +background-image-retina('layout/footer/footer-logo.png')
+    background-repeat: no-repeat
+    background-position: center
+    background-size: contain
+    margin-bottom: 41px
+    display: none
+
+    +width-lessthan(600)
+      display: block
+
+.footer-social
+  // float: right
+  text-align: center
+  margin-bottom: 25px
+
+  +width-lessthan(1024)
+    float: right
+    text-align: left
+    margin-bottom: 0
+
+  +width-lessthan(600)
+    width: 100%
+    position: relative
+    padding-bottom: 30px
+
+    &:before
+      content: ''
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      left: -100%
+      border-bottom: 1px solid #3a3a3a
+
+    &:after
+      content: ''
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      right: -100%
+      border-bottom: 1px solid #3a3a3a
+
+  &__clearfix-container
+    +clearfix
+
+  &__col
+    display: inline-block
+    +clearfix
+
+    +width-lessthan(1024)
+      display: block
+      float: left
+
+      & + .footer-social__col
+        // margin-left: 30px
+        +width-between-property(margin-left, 600, 10, 1024, 30, true, true)
+
+    +width-lessthan(600)
+      & + .footer-social__col
+        margin-left: 0
+        float: right
+
+  &__link
+    display: block
+    width: 34px
+    height: 34px
+    float: left
+    border: 1px solid #3a3a3a
+    border-radius: 20px
+    position: relative
+    margin-left: 10px
+    color: rgba(255, 255, 255, 0.4)
+    line-height: normal
+
+    +width-lessthan(1024)
+      width: auto
+      height: auto
+      float: none
+      border: none
+      padding-left: 30px
+
+      & + .footer-social__link
+        margin-top: 31px
+
+    +width-lessthan(600)
+      margin-left: 0
+
+    &:hover
+      border-color: #535353
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+      +width-lessthan(1024)
+        right: auto
+
+    span
+      display: none
+      font-family: "Open Sans"
+      font-size: 12px
+      line-height: 2
+
+      +width-lessthan(1024)
+        display: inline-block
+
+    &_fb
+      +imgbox('layout/footer/fb.png', '', '.icon')
+
+    &_vk
+      +imgbox('layout/footer/vk.png', '', '.icon')
+
+    &_ok
+      +imgbox('layout/footer/ok.png', '', '.icon')
+
+    &_google
+      +imgbox('layout/footer/google.png', '', '.icon')
+
+    &_tw
+      +imgbox('layout/footer/tw.png', '', '.icon')
+
+    &_pin
+      +imgbox('layout/footer/pin.png', '', '.icon')
+
+    &_ig
+      +imgbox('layout/footer/ig.png', '', '.icon')
+
+    &_mm
+      +imgbox('layout/footer/mm.png', '', '.icon')
+
+    &_youtube
+      +imgbox('layout/footer/youtube.png', '', '.icon')
+
+    &_viber
+      +imgbox('layout/footer/viber.png', '', '.icon')
+
+    &_telegram
+      +imgbox('layout/footer/telegram.png', '', '.icon')
+
+    &_yzen
+      +imgbox('layout/footer/yzen.png', '', '.icon')
+
+    &_gassist
+      +imgbox('layout/footer/gassist.png', '', '.icon')      
+
+.footer-nav
+  // float: left
+  text-align: center
+  margin-bottom: 29px
+  line-height: normal
+  font-size: 0.1px
+  position: relative
+  +clearfix
+
+  +width-lessthan(1024)
+    float: left
+    text-align: left
+    +width-between-property(margin-right, 600, 10, 1024, 80, true, true)
+    margin-bottom: 40px
+
+  +width-lessthan(600)
+    float: none
+    margin-right: 0
+    margin-bottom: 30px
+    +clearfix
+    padding-bottom: 30px
+    border-bottom: 1px solid #3a3a3a
+
+  &__col
+    display: inline-block
+
+    +width-lessthan(1024)
+      display: block
+
+      & + .footer-nav__col
+        margin-top: 14px
+
+    +width-lessthan(600)
+      float: left
+
+      & + .footer-nav__col
+        margin-top: 0
+        float: right
+
+  &__item
+    display: inline-block
+    margin-right: 25px
+    opacity: .5
+    color: #FFF
+    font-size: 13px
+    font-weight: 400
+    line-height: 40px
+    text-decoration: none
+
+    +width-lessthan(1024)
+      display: block
+      margin: 0
+      font-size: 12px
+      line-height: 2
+      text-decoration: underline
+
+      & + .footer-nav__item
+        margin-top: 14px
+
+    &:hover
+      color: #ff391e
+      opacity: 1
+
+.disclaimer
+  float: left
+  margin-left: 49px
+  opacity: .2
+  color: #FFF
+  font-size: 12px
+  font-weight: 400
+  line-height: 18px
+  padding-top: 33px
+
+  +width-lessthan(1024)
+    display: none
+
+  &__text
+    margin-bottom: 75px
+
+.tablet-disclaimer
+  float: left
+  width: 170px
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  +width-lessthan(600)
+    display: none
+
+  &__text
+    font-family: "Open Sans"
+    font-size: 11px
+    line-height: 1.64
+    letter-spacing: normal
+    color: rgba(255, 255, 255, 0.4)
+
+  &__logo
+    width: 116px
+    height: 45px
+    +background-image-retina('layout/footer/footer-logo.png')
+    background-repeat: no-repeat
+    background-position: center
+    background-size: contain
+    margin: 5px 0 31px
+
+.footer-projects
+  float: left
+  padding-top: 23px
+  margin-left: 55px
+  width: 185px
+
+  +width-lessthan(1024)
+    width: 210px
+    margin-left: 0
+    padding-top: 52px
+
+  +width-lessthan(600)
+    width: 100%
+    padding: 30px 0 20px
+    position: relative
+    border-bottom: 1px solid #3a3a3a
+
+    &:before
+      content: ''
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      left: -100%
+      border-bottom: 1px solid #3a3a3a
+
+    &:after
+      content: ''
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      right: -100%
+      border-bottom: 1px solid #3a3a3a
+
+  &__headline
+    opacity: .2
+    color: #FFF
+    font-size: 12px
+    font-weight: 400
+    line-height: 18px
+    margin-bottom: 6px
+
+  &__link-wrapper
+    line-height: 18px
+    margin-bottom: 5px
+    position: relative
+
+    +width-lessthan(1024)
+      line-height: 40px
+      margin-bottom: 0
+
+      & + .footer-projects__link-wrapper
+        border-top: 1px solid rgba(255, 255, 255, 0.2)
+
+    &:last-child
+      margin-bottom: 0
+
+  &__link
+    display: inline-block
+    color: #959595
+    font-size: 13px
+    font-weight: 400
+    padding-right: 0px
+    text-decoration: none
+    +imgbox('layout/footer/project-link.png', '', '.icon')
+    line-height: normal
+
+    .icon
+      margin-bottom: 1px
+      display: inline-block
+      vertical-align: middle
+
+      +width-lessthan(1024)
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        margin: auto 0
+
+    span
+      white-space: nowrap
+      display: inline-block
+
+    &:hover
+      text-decoration: none
+      color: #ff391e
+
+
+.footer-apps
+  float: right
+
+  +width-lessthan(600)
+    float: none
+    clear: both
+
+.footer-app
+  float: left
+  padding-top: 23px
+  margin-left: 10px
+  text-align: center
+
+  +width-lessthan(1024)
+    margin-left: 0
+    padding-top: 40px
+
+    & + .footer-app
+      margin-left: 20px
+
+  +width-lessthan(768)
+    float: none
+    margin: 0
+
+    & + .footer-app
+      margin-left: 0
+
+  +width-lessthan(600)
+    padding: 30px 0
+    position: relative
+    border-bottom: 1px solid #3a3a3a
+
+    &:before
+      content: ''
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      left: -100%
+      border-bottom: 1px solid #3a3a3a
+
+    &:after
+      content: ''
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      right: -100%
+      border-bottom: 1px solid #3a3a3a
+
+  &__headline
+    opacity: .2
+    color: #FFF
+    font-size: 12px
+    font-weight: 400
+    line-height: 14px
+    margin-bottom: 9px
+
+    +width-lessthan(768)
+      br
+        display: none
+
+  &__button
+    display: block
+    width: 157px
+    height: 38px
+    border: 1px solid #3a3a3a
+    border-radius: 20px
+    position: relative
+
+    & + .footer-app__button
+      margin-top: 10px
+
+    +width-lessthan(1024)
+      width: 210px
+      height: 60px
+      border-radius: 30px
+      border: solid 1px rgba(255, 255, 255, 0.2)
+      box-sizing: border-box
+
+    +width-lessthan(768)
+      width: 260px
+
+    +width-lessthan(600)
+      width: 100%
+
+    &:hover
+      border-color: #535353
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+    &_appstore
+      +imgbox('layout/footer/appstore.png', '', '.icon')
+
+      +width-lessthan(1024)
+        +imgbox('layout/footer/appstore-tablet.png', '', '.icon')
+
+    &_google
+      +imgbox('layout/footer/google-play.png', '', '.icon')
+
+      +width-lessthan(1024)
+        +imgbox('layout/footer/google-play-tablet.png', '', '.icon')
+
+    &_windows
+      +imgbox('layout/footer/windows.png', '', '.icon')
+
+      +width-lessthan(1024)
+        +imgbox('layout/footer/windows-tablet.png', '', '.icon')

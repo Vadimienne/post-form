@@ -1,0 +1,124 @@
+@import '_imports'
+
+// Reward badge
+//
+// Reward badge
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.reward-badge
+//   +e.icon
+//   +e.name Шеф-повар
+//   +e.count 88
+// +b.reward-badge
+//   +e.icon
+//   +e.name Шеф-повар
+//   +b.badge-hover
+//     +e.amount 2000
+//     +e.currency 2000
+//   +e.count 999
+//
+// Styleguide 1.62
+
+.reward-badge
+  width: 90px
+  height: 90px
+  position: relative
+  cursor: pointer
+  margin: 0 20px 70px
+
+  svg
+    width: 90px
+    height: 90px
+
+  &.locked
+    .reward-badge__name
+      color: #cdcdcd
+
+    #back
+      *
+        fill: #d7e8ed !important
+
+    #front
+      *
+        fill: #c2d3d9 !important
+    
+    #round
+      fill: #c2d3d9 !important
+    
+    #month
+      fill: #c2d3d9 !important
+    
+    #year
+      fill: #c2d3d9 !important
+
+
+  &_placeholder
+    visibility: hidden
+    height: 0
+    padding: 0
+    margin: 0
+
+  &:hover
+    .badge-hover
+      opacity: 1
+
+  &__name
+    font-family: "Noto Serif"
+    font-size: 14px
+    font-weight: 700
+    line-height: 20px
+    position: absolute
+    top: 105px
+    left: -10px
+    right: -10px
+    text-align: center
+
+  &__count
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 25px
+    height: 25px
+    background-color: #494442
+    color: white
+    font-family: "Noto Serif"
+    font-size: 12px
+    font-weight: 400
+    position: absolute
+    top: 65px
+    right: 8px
+    border-radius: 50%
+
+    &_small
+      font-size: 10px
+
+.badge-hover
+  display: flex
+  flex-flow: column
+  align-items: center
+  justify-content: center
+  width: 90px
+  height: 90px
+  position: absolute
+  top: 0
+  left: 0
+  background-color: #ffde43
+  color: #e59d00
+  border-radius: 50%
+  font-family: "Noto Serif"
+  opacity: 0
+  transition: opacity 0.35s ease
+
+  &__amount 
+    font-size: 22px
+    font-weight: 700
+    font-style: italic
+    line-height: 1
+
+  &__currency
+    font-size: 11px
+    font-style: italic
+    line-height: normal

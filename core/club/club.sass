@@ -1,0 +1,121 @@
+.selection
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  border: 2px solid #ec1c24
+  border-radius: 4px
+  display: none
+
+  &__check
+    background-color: #fff
+    width: 28px
+    height: 28px
+    border-radius: 50%
+    position: absolute
+    top: 50%
+    left: 50%
+    margin: -14px 0 0 -14px
+    text-align: center
+
+    .fonticon
+      color: #ec1c24
+      font-size: 8px
+      line-height: 28px
+
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    background-color: rgba(0, 0, 0, .4)
+
+.selection_duel-recipe
+  .selection
+    &__overlay
+      height: 198px
+
+.selection_duel-user
+  border-radius: 50%
+  .selection
+    &__overlay
+      height: 76px
+      border-radius: 50%
+
+.discussed
+  &__container
+    margin: 0
+    position: relative
+    box-sizing: border-box
+    overflow: hidden
+    border-radius: 0 0 4px 4px
+
+  &__item
+    padding: 15px 0 20px
+    border-bottom: 1px solid #dddddd
+
+    &:last-child
+      border-bottom: none
+
+    .title
+      margin-bottom: 7px
+      line-height: 18px
+      display: block
+
+    .description-text
+      color: #666666
+      overflow: hidden
+      position: relative
+      line-height: 18px
+      max-height: 54px
+
+  &__info
+    color: #999999
+    font-size: 12px
+    line-height: 18px
+    margin-top: 10px
+
+  &__author
+    font-style: italic
+    color: grey
+
+    &:hover
+      text-decoration: underline
+
+  &__info-separator
+    margin: 0 10px
+
+  &__time
+
+  .content-box__content
+    padding-top: 0
+    padding-bottom: 0
+    position: relative
+    box-sizing: border-box
+    overflow: hidden
+    border-radius: 0 0 4px 4px
+
+  .fonticon
+    display: inline-block
+
+  .fonticon_reload
+    font-size: 21px
+    color: #ff441b
+    margin-top: -3px
+    cursor: pointer
+
+  .fonticon_time
+    font-size: 18px
+    vertical-align: middle
+    margin-right: 10px
+
+.course-description
+
+  .section-title
+    line-height: 22px
+    width: 65%
+    margin-bottom: 3px
+
+  .entry-stats_cource-stats
+    margin: 48px 0 15px

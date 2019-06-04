@@ -1,0 +1,63 @@
+.gallery 
+  position: relative
+  margin: 30px -30px
+  cursor: pointer
+  &__image_img
+    max-width: 100%
+
+  &__title
+    height: 50px
+    line-height: 50px
+    padding: 0 25px
+    .fonticon
+      color: #d1d1d1
+      cursor: pointer
+      vertical-align: middle
+      span
+        display: inline-block
+        vertical-align: bottom
+        color: #242424
+        font-size: 14px
+        font-weight: 400
+        font-family: "Open Sans"
+        margin-left: 10px      
+      &:hover
+        color: #ff391e
+
+.gallery-slider
+  .slick-list
+    width: 100%        
+
+.slider-paginator-dotted 
+  position: absolute
+  bottom: 15px
+  left: 0
+  right: 0
+  li 
+    padding: 0 !important
+    &:before 
+      content: none !important
+   
+
+
+.slider-buttons 
+  width: 100%
+  box-sizing: border-box
+  .control-button 
+    position: absolute
+    top: 200px  
+    display: inline-block
+    z-index: 1000
+ 
+  .slider-controls__prev
+    left: 10px
+  .slider-controls__next 
+    right: 10px
+ 
+.pale
+  color: #b2b2b2
+
+.hoverable
+  text-decoration: underline
+  &:hover
+    text-decoration: none

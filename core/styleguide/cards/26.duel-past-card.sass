@@ -1,0 +1,118 @@
+@import '_imports'
+
+// Duel past card
+//
+// Карточка прошедщего поединка
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_duel-past
+//   +e.icon
+//   +e.title.title.title_medium Грибные блюда
+//   +e.status Отменен
+//   +b.duel-recipe
+//     +e.card
+//       +e.card-header
+//         +b.person_h._lh-small
+//           +b.user-avatar_small
+//             +e('img').image(src="/assets/images/content/user-img.png")
+//           +e.wrapper
+//             +e.content
+//               +b.title_small Людмила
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//       +e.card-content
+//         +e.card-name
+//           +b.title_small Бутерброд с пикантным творогом
+// +b('article').card_duel-past
+//   +e.icon
+//   +e.title.title.title_medium Грибные блюда
+//   +e.status Поединок окончен. 
+//     +e('a').revenge(href="#") Реванш
+//   +b.duel-recipe
+//     +e.card
+//       +e.card-header
+//         +b.person_h._lh-small
+//           +b.user-avatar_small
+//             +e('img').image(src="/assets/images/content/user-img.png")
+//           +e.wrapper
+//             +e.content
+//               +b.title_small Людмила
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//       +e.card-content
+//         +e.card-name
+//           +b.title_small Бутерброд с пикантным творогом
+// +b('article').card_duel-past._duel-past-winner
+//   +e.icon
+//   +e.title.title.title_medium Рыбное удовольствие в 2 строки
+//   +e.status Вы выиграли
+//   +b.duel-recipe
+//     +e.card
+//       +e.card-header
+//         +b.person_h._lh-small
+//           +b.user-avatar_small
+//             +e('img').image(src="/assets/images/content/user-img.png")
+//           +e.wrapper
+//             +e.content
+//               +b.title_small Людмила
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//       +e.card-content
+//         +e.card-name
+//           +b.title_small Бутерброд с пикантным творогом
+//
+// Styleguide 4.26
+
+.card_duel-past
+  background-color: #e9e2d2
+  padding: 10px
+  box-shadow: none
+  height: auto
+  min-height: 450px
+  cursor: default
+
+  &:hover
+    box-shadow: none
+
+  .duel-recipe__card
+    box-shadow: 0 1px 4px rgba(0,0,0,.1)
+  
+  .card
+
+    &__title
+      text-align: center
+      margin-bottom: 7px
+
+    &__icon
+      margin: 26px auto 25px
+      +imgbox('icons/duel-past.png')
+
+    &__status
+      font-size: 13px
+      color: #323232
+      text-align: center
+      font-style: italic
+      margin-bottom: 38px
+      line-height: normal
+
+    &__revenge
+      color: #ff4a33
+
+      &:hover
+        text-decoration: underline
+
+
+.card_duel-past-winner
+  background-color: #ffa900
+
+  .card
+
+    &__title
+      color: #fff
+
+    &__status
+      color: #fff
+
+    &__icon
+      +imgbox('icons/duel-past-winner.png')
+    &__icon
+      margin: 10px auto 5px

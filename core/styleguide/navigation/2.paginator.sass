@@ -1,0 +1,141 @@
+@import '_imports'
+
+// Paginator
+//
+// Переключение страниц
+//
+// paginator_default  - обычное состояние
+//
+// markup:
+// +b.paginator
+//   +e.pages
+//     +e('a').item(href="#") 1
+//     +e('a').item(href="#") 2
+//     +e('a').item(href="#") 3
+//     +e('a').item.active(href="#") 99999
+//     +e('a').nav_next(href="#")
+//       +b.icon
+//     +e('a').nav_prev(href="#")
+//       +b.icon
+//
+// Styleguide 3.2
+
+.paginator
+  margin-top: 40px
+  position: relative
+  text-align: center
+
+  +width-lessthan(1024)
+    margin-top: 20px
+
+  &__nav
+    display: block
+    width: 68px
+    height: 38px
+    border: 1px solid #cac6ba
+    border-radius: 20px
+    position: absolute
+    cursor: pointer
+    top: 50%
+    margin-top: -20px
+
+    +width-lessthan(1024)
+      width: 38px
+      height: 38px
+      border-radius: 24px
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+    &_prev
+      left: 0
+      +imgbox('navigation/paginator-prev.png', '', '.icon')
+
+    &_next
+      right: 0
+      +imgbox('navigation/paginator-next.png', '', '.icon')
+
+    &:hover
+      background-color: #FBF8F6
+      border-color: #FBF8F6
+
+    &:active
+      background-color: #e8e2d0
+      border-color: #e8e2d0
+
+  &__pages
+    position: relative
+    overflow: hidden
+    height: 51px
+
+    +width-lessthan(1024)
+      height: 40px
+
+  &__item
+    display: inline-block
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    margin: 0 5px
+    cursor: pointer
+    color: #242424
+    font-family: "Arial"
+    font-size: 14px
+    font-weight: 700
+    line-height: 50px
+    text-decoration: none
+    position: relative
+
+    +width-lessthan(1024)
+      width: 40px
+      height: 40px
+      font-size: 12px
+      line-height: 40px
+      margin: 0 2px
+
+    &:before
+      content: ''
+      width: 1px
+      height: 10px
+      background-color: #CAC6BA
+      position: absolute
+      top: 50%
+      left: -6px
+      margin-top: -5px
+
+      +width-lessthan(1024)
+        height: 14px
+        margin-top: -7px
+        left: -2px
+
+    &:first-child
+      &:before
+        display: none
+
+    &:hover
+      background-color: #fbf8f6
+
+    &.active
+      background-color: #EE1919
+      color: #fff
+
+      &:before
+        display: none
+
+      & + .paginator__item
+        &:before
+          display: none
+      +width-lessthan(600)
+        &:not(.pagination__item_first-active) ~ .disabled
+          &:before
+            display: none
+    
+    &_hide-sm
+      +width-lessthan(600)
+        display: none
+        

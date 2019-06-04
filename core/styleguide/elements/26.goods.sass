@@ -1,0 +1,106 @@
+@import '_imports'
+
+// Goods
+//
+// Блок с товаром <br>
+// <b>prize</b> - модификатор используется на странице с конкурсом <br>
+// <b>.goods-container</b> - вспомогательный блок
+//
+// markup:
+// +b.goods-container
+//   +b('a').goods(href="#")
+//     +e.image-container
+//       img(src="/assets/images/content/advice-slider.jpg")
+//     +e.description Нож для чистки овощей Genova, 6 см, зеленый
+//     +b.price 195 руб.
+//   +b('a').goods(href="#")
+//     +e.image-container
+//       img(src="/assets/images/content/advice-slider.jpg")
+//     +e.description Нож для чистки овощей Genova, 6 см, зеленый
+//     +b.price 195 руб.
+//   +b('a').goods(href="#")
+//     +e.image-container
+//       img(src="/assets/images/content/advice-slider.jpg")
+//     +e.description Нож для чистки овощей Genova, 6 см
+//     +b.price 195 руб.
+// +b.goods-container
+//   +b('a').goods_prize(href="#")
+//     +e.image-container
+//       img(src="/assets/images/content/club/slide-prize.jpg")
+//     +e.place 1 место
+//     +e.description Холодильник Oursson RF1000/RD
+//   +b('a').goods_prize(href="#")
+//     +e.image-container
+//       img(src="/assets/images/content/club/slide-prize-2.jpg")
+//     +e.place 2 место
+//     +e.description Электрический гриль Oursson
+//   +b('a').goods_prize(href="#")
+//     +e.image-container
+//       img(src="/assets/images/content/club/slide-prize-3.jpg")
+//     +e.place 3 место
+//     +e.description Мясорубка Oursson MG2010/RD
+//
+// Styleguide 1.26
+
+.goods
+  width: 160px
+  display: block
+  text-decoration: none !important
+  cursor: pointer
+
+  &:hover
+    .goods__image-container
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+      border-color: #fff
+
+  &__image-container
+    height: 158px
+    border: 1px solid #e6e6e6
+    position: relative
+    overflow: hidden
+    display: block
+    margin-bottom: 5px
+
+    img
+      width: 100%
+      display: block
+
+  &__description
+    font-family: "Noto Serif"
+    font-size: 14px
+    color: #343434
+    font-weight: 700
+    line-height: 20px
+    display: block
+    margin-bottom: 5px
+    max-height: 60px
+    position: relative
+    overflow: hidden
+    text-decoration: none
+
+  .price
+    font-size: 14px
+    display: block
+    font-style: italic
+    text-decoration: none
+
+.goods_prize
+
+  .goods
+
+    &__description
+      margin-bottom: 0
+
+    &__place
+      display: block
+      color: #4cc862
+      font-size: 14px
+      line-height: 20px
+      font-family: "Noto Serif"
+      font-style: italic
+      margin-bottom: 5px
+
+.goods-container
+  +clearfix
+
+

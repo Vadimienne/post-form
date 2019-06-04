@@ -1,0 +1,130 @@
+@import '_imports'
+
+// Search tags
+//
+// Search tags
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.search-tags
+//   +e.row
+//     +e.tag_remove-all
+//      span Сбросить все
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Завтрак с Юлией Высоцкой
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Мясо
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Завтрак с Юлией Высоцкой
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Мясо
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Мясо
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Завтрак с Юлией Высоцкой
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      img(src="/assets/images/content/user-img.png")
+//      span Мясо
+//      +b('span').fonticon_cross
+//   +e.row
+//    +e.found Найдено: 1 488 рецептов
+//
+// Styleguide 3.7
+
+.search-tags
+  line-height: normal
+  font-size: 0.1px
+  margin: 0 -50px 10px -50px
+
+  +width-lessthan(1024)
+    margin: 0 0 10px 0
+
+  &.is_stuck
+    z-index: 9999
+    box-shadow: 0 1px 4px rgba(71, 44, 6, 0.2)
+
+  &__row
+    +clearfix
+    line-height: normal
+    padding: 12px 50px
+    background-color: #ede4d3
+
+    +width-lessthan(1024)
+      padding: 5px 10px
+
+  &__tag
+    display: inline-block
+    color: #404040
+    font-size: 12px
+    font-weight: 400
+    position: relative
+    line-height: 24px
+    cursor: pointer
+    margin-right: 30px
+
+    &_remove-all
+      padding-right: 20px
+      margin-right: 15px
+
+      &:after
+        content: ''
+        width: 1px
+        height: 20px
+        background-color: #DED9CC
+        position: absolute
+        top: 50%
+        right: 0
+        margin-top: -10px
+
+    &:hover
+      color: #ee1919
+      .fonticon
+        transform: rotate(90deg) translate3d(0, 0, 0)
+        transform-origin: 50% 50%
+
+
+    .fonticon
+      display: inline-block
+      vertical-align: middle
+      font-size: 8px
+      margin-left: 5px
+      transition: transform .3s ease
+      position: relative
+      backface-visibility: hidden
+      -webkit-transform-style: preserve-3d
+
+    img
+      display: block
+      width: 24px
+      height: 24px
+      float: left
+      margin-right: 5px
+
+  &__found
+    color: #373737
+    font-size: 13px
+    font-weight: 400
+    margin: 13px 0 14px
+
+  & + .sort-header
+    margin-top: 0

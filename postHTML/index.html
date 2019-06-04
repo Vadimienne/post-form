@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Post app</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css"></link>
+  </head>
+  <body>
+    <form class="main-form" action="index.html" method="post">
+      <fieldset>
+        <legend>Основная информация</legend>
+        <p>
+          <label for="recipe-name">Название рецепта</label>
+          <input type="text" id="recipe-name" placeholder="Введите название рецепта">
+        </p>
+        <p>
+          <label for="recipe-img">Главное фото рецепта</label>
+          <input type="file" id="recipe-img">
+        </p>
+        <p>
+          <label for="recipe-description">Описание рецепта</label>
+          <input type="text" id="recipe-description">
+        </p>
+        <p>
+          Время приготовления
+          <input type="text" id="recipe-time-hour">
+          <label for="recipe-time-hour">Часов</label>
+          <input type="text" id="recipe-time-min">
+          <label for="recipe-time-min">Минут</label>
+        </p>
+        <p>
+          Количество персон
+          <input type="text" id="recipe-portion">
+          <label for="recipe-portion">человек</label>
+        </p>
+
+        <input type="checkbox" id="preparation-required" name="preparation-required" value="">
+        <label for="preparation-required">Требуется подготовка</label>
+
+        <p>
+          Время подготовки
+          <input type="text" id="recipe-preptime-hour">
+          <label for="recipe-preptime-hour"></label>
+          <input type="text" id="recipe-preptime-min">
+          <label for="recipe-preptime-min"></label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Шаг рецепта</legend>
+        <p>
+          <label for="recipe-img">Фото шага</label>
+          <input type="file" id="recipe-img">
+        </p>
+        <p>
+          <label for="recipe-img">Описание шага</label>
+          <input type="file" id="recipe-img">
+        </p>
+        <p>
+          <label for="step-">Ингредиенты шага</label>
+          <input type="file" id="step-">
+        </p>
+
+      </fieldset>
+    </form>
+  </body>
+</html>

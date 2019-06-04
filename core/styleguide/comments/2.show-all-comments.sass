@@ -1,0 +1,27 @@
+@import '_imports'
+
+// Show all comments
+//
+// Показать все комментарии
+//
+// default - Обычное состояние
+//
+// markup:
+// +b.show-all-comments
+//   +e.icon
+//   | Показать все комментарии
+//
+// Styleguide 9.2
+
+.show-all-comments
+  color: #4D4D4D
+  font-size: 12px
+  font-weight: 700
+  text-transform: uppercase
+  +imgbox('elements/global/show-all-comments.png', '', '.show-all-comments__icon')
+  text-align: center
+  cursor: pointer
+  margin-top: 45px
+
+  &__icon
+    margin: 0 auto 5px

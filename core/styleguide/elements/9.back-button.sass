@@ -1,0 +1,55 @@
+@import '_imports'
+
+// Back button
+//
+// Кнопка назад
+//
+// default - Обычное состояние
+// back-button_transparent-bg - Обычное состояние
+//
+// markup:
+// +b('a').back-button(href="#" class="{$modifiers}")
+//   +b('span').fonticon_back-button
+//   span вернуться назад
+//
+// Styleguide 1.9
+
+.back-button
+  display: block
+  color: #4D4D4D
+  font-size: 12px
+  font-weight: 600
+  text-transform: uppercase
+  text-decoration: none
+  position: relative
+
+  span
+    vertical-align: middle
+
+  .fonticon
+    display: inline-block
+    margin-right: 10px
+
+  &:hover
+    color: #000
+    .fonticon
+      color: #ff391e
+
+  &:active
+    color: #4D4D4D
+    .fonticon
+      color: #4D4D4D
+
+  &_transparent-bg
+    width: 180px
+    height: 40px
+    background: white
+    border-radius: 20px
+    line-height: 40px
+    text-align: center
+
+    &:hover
+      background: #fff
+
+    &:active
+      background: rgba(255, 255, 255, .2)

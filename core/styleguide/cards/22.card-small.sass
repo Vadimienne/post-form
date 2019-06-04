@@ -1,0 +1,76 @@
+@import '_imports'
+
+// Card small
+//
+// Маленькая карточка
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_small
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-small-black.png 1x, /assets/images/content/card-small-black@2x.png 2x, /assets/images/content/card-small-black@3x.png 3x")
+//       img(src="/assets/images/content/card-small-black.png" alt="")
+//     +e('main').content
+//       +b.badge_wiki Энциколпедия
+//       +b.title_white._medium Национальные кухни
+// +b('article').card_small
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-small-white.png 1x, /assets/images/content/card-small-white@2x.png 2x, /assets/images/content/card-small-white@3x.png 3x")
+//       img(src="/assets/images/content/card-small-white.png" alt="")
+//     +e('main').content
+//       +b.badge_wiki Энциколпедия
+//       +b.title_medium Кухонная утварь
+// +b('article').card_school._small
+//   a(href="#")
+//     +e('main').content
+//       +e.icon_vebinar
+//       +b.title_medium Вебинары
+// +b('article').card_school._small
+//   a(href="#")
+//     +e('main').content
+//       +e.icon_articles
+//       +b.title_medium Вебинары
+//
+// Styleguide 4.22
+
+.card_small
+  text-align: center
+
+  .card__picture
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border: none
+
+  .card__content
+    position: relative
+    padding-top: 30px
+
+  .badge
+    margin-bottom: 15px
+
+.card_school
+
+  .card__content
+    padding-top: 0
+
+  .card__icon
+    margin: 0 auto
+
+    &_vebinar
+      +imgbox('icons/vebinar.png')
+      margin-bottom: 15px
+      margin-top: 50px
+
+    &_articles
+      +imgbox('icons/articles.png')
+      margin-bottom: 20px
+      margin-top: 59px
+

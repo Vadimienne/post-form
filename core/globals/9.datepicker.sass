@@ -1,0 +1,236 @@
+@import '_imports'
+
+.datepicker
+  direction: ltr
+
+.datepicker-inline
+  width: 220px
+
+.datepicker.datepicker-rtl
+  direction: rtl
+  table tr td span
+    float: right
+
+.datepicker-dropdown
+  box-sizing: border-box
+  top: 0
+  left: 0
+  padding: 15px 10px
+  width: 260px
+
+  &:before
+    content: ''
+    position: absolute
+    +imgbox('elements/global/dropdown-triangle.png')
+    right: 10px
+    top: -10px
+
+  &.datepicker-orient-bottom
+    margin-top: 20px
+
+.datepicker
+  > div
+    display: none
+  table
+    margin: 0
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    width: 240px
+    border-collapse: separate
+    border-spacing: 5px 2px
+    th
+      font-weight: normal
+
+    tr
+      div
+        width: 24px
+        height: 24px
+        margin: 0 auto
+        line-height: 24px
+        border-radius: 50%
+      td, th
+        text-align: center
+        width: 24px
+        height: 24px
+        border: none
+
+        &.datepicker-switch
+          border-radius: 10px
+
+.datepicker table tr td
+  &:hover
+    div
+      cursor: pointer
+      background-color: #f2f2f2
+  &.active
+    div
+      color: #fff
+      background-color: #ee1919
+
+
+.datepicker table tr td span
+  display: block
+  width: 23%
+  height: 54px
+  line-height: 54px
+  float: left
+  margin: 1%
+  cursor: pointer
+  border-radius: 50%
+  &:hover
+    background: #eeeeee
+  &.disabled
+    background: none
+    color: #999999
+    cursor: default
+    &:hover
+      background: none
+      color: #999999
+      cursor: default
+  &.active
+    color: #ffffff
+    background-color: #428bca
+    border-color: #357ebd
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+    &:hover
+      color: #ffffff
+      background-color: #428bca
+      border-color: #357ebd
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+    &.disabled
+      color: #ffffff
+      background-color: #428bca
+      border-color: #357ebd
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+      &:hover
+        color: #ffffff
+        background-color: #428bca
+        border-color: #357ebd
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+    &:focus, &:hover:focus
+      color: #ffffff
+      background-color: #ee1919
+      border-color: #193c5a
+    &.disabled
+      &:focus, &:hover:focus
+        color: #ffffff
+        background-color: #ee1919
+        border-color: #193c5a
+    &.focus, &:hover.focus
+      color: #ffffff
+      background-color: #ee1919
+      border-color: #193c5a
+    &.disabled
+      &.focus, &:hover.focus
+        color: #ffffff
+        background-color: #ee1919
+        border-color: #193c5a
+    &:hover, &.disabled:hover, &:active, &:hover:active
+      color: #ffffff
+      background-color: #ee1919
+      border-color: #285e8e
+    &.disabled
+      &:active, &:hover:active
+        color: #ffffff
+        background-color: #ee1919
+        border-color: #285e8e
+    &.active, &:hover.active
+      color: #ffffff
+      background-color: #ee1919
+      border-color: #285e8e
+    &.disabled
+      &.active, &:hover.active
+        color: #ffffff
+        background-color: #ee1919
+        border-color: #285e8e
+
+.datepicker
+  table tr td span
+    &.old, &.new
+      color: #999999
+  .datepicker-switch
+    width: 145px
+    cursor: pointer
+    font-family: 'Open Sans'
+    font-weight: 600
+    font-size: 14px
+    text-transform: uppercase
+    color: #242424
+
+  .prev, .next
+    color: #242424
+    font-size: 9px
+    &:hover
+      color: #ff391e
+
+
+  .prev, .next, tfoot tr th
+    cursor: pointer
+  .datepicker-switch:hover, tfoot tr th:hover
+    background: #eeeeee
+  .cw
+    font-size: 10px
+    width: 12px
+    padding: 0 2px 0 5px
+    vertical-align: middle
+
+.input-group.date .input-group-addon
+  cursor: pointer
+
+.input-daterange
+  width: 100%
+  input
+    text-align: center
+    &:first-child
+      border-radius: 3px 0 0 3px
+    &:last-child
+      border-radius: 0 3px 3px 0
+  .input-group-addon
+    width: auto
+    min-width: 16px
+    padding: 4px 5px
+    font-weight: normal
+    line-height: 1.42857143
+    text-align: center
+    text-shadow: 0 1px 0 #fff
+    vertical-align: middle
+    background-color: #eeeeee
+    border: solid #cccccc
+    border-width: 1px 0
+    margin-left: -5px
+    margin-right: -5px
+
+.datepicker
+  &.dropdown-menu
+    position: absolute
+    top: 100%
+    left: 0
+    margin-left: -21px
+    z-index: 1000
+    box-shadow: 0 1px 4px rgba(0,0,0,.3)
+    float: left
+    display: none
+    list-style: none
+    background-color: #ffffff
+    border-radius: 5px
+    -webkit-background-clip: padding-box
+    -moz-background-clip: padding
+    background-clip: padding-box
+    *border-right-width: 2px
+    *border-bottom-width: 2px
+    color: #808080
+    font-size: 12px
+    line-height: 1.42857143
+    th
+      padding: 0px 5px
+      &.dow
+        color: #b2b2b2
+
+.datepicker
+  table tr td
+    &.old, &.new
+      color: #cfcfcf

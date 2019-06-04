@@ -1,0 +1,190 @@
+// Control button
+// 
+// Кнопка переключателя в слайдере и календаре <br>
+// <b>control-button</b> - обычное состояние <br>
+// <b>transparent</b> - кнопка переключатель с прозрачным фоном <br>
+// <b>white</b> - c белой обводкой и иконкой <br>
+// <b>close</b> - Кнопка закрытия popup'a
+// 
+// markup:
+// +b.control-button
+//   +b('span').fonticon_arrow-left
+// +b.control-button.disabled
+//   +b('span').fonticon_arrow-left
+// +b.control-button
+//   +b('span').fonticon_arrow-right
+// +b.control-button.disabled
+//   +b('span').fonticon_arrow-right
+// br
+// +b.control-button_transparent
+//   +b('span').fonticon_arrow-left
+// +b.control-button_transparent.disabled
+//   +b('span').fonticon_arrow-left
+// +b.control-button_transparent
+//   +b('span').fonticon_arrow-right
+// +b.control-button_transparent.disabled
+//   +b('span').fonticon_arrow-right
+// br
+// .dark-wrapper
+//   +b.control-button_white
+//     +b('span').fonticon_arrow-left
+//   +b.control-button_white.disabled
+//     +b('span').fonticon_arrow-left
+//   +b.control-button_white
+//     +b('span').fonticon_arrow-right
+//   +b.control-button_white.disabled
+//     +b('span').fonticon_arrow-right
+// br
+// .dark-wrapper
+//   +b.control-button_white._close
+//     +b('span').fonticon_cross-wide
+// br
+// .dark-wrapper
+//   +b.control-button_small._calendar
+//     +b('span').fonticon_arrow-left
+//   +b.control-button_small._calendar
+//     +b('span').fonticon_arrow-right
+// br
+// .dark-wrapper
+//   +b.control-button_medium._close
+//     +b('span').fonticon_cross-wide
+//
+// Styleguide 1.45
+ 
+.control-button
+  display: block
+  width: 36px
+  height: 36px
+  border: 2px solid #fff
+  border-radius: 50%
+  text-align: center
+  line-height: 36px
+  cursor: pointer
+  color: #000000
+  background-color: #fff
+  transform: translateZ(0)
+
+  .fonticon
+    font-size: 10px
+
+  &:hover
+    color: #ff391e
+
+  &:active
+    color: #fff
+    background-color: #ff391e
+    border-color: #ff391e
+
+
+  &.disabled
+    opacity: .2
+    cursor: default
+
+    &:hover, &:active
+      color: #000000
+      border-color: #fff
+      background-color: #fff
+
+.control-button_transparent
+  background-color: transparent
+  border: 2px solid #cdcdcd
+
+  &:hover
+    color: #ff391e
+    border-color: #ff391e
+
+  &:active
+    color: #fff
+    background-color: #ff391e
+    border-color: #ff391e
+
+  &.disabled
+
+    &:hover, &:active
+      color: #000000
+      border-color: #cdcdcd
+      background-color: transparent
+
+.control-button_white
+  border-color: #fff
+  color: #ffffff
+  background-color: transparent
+
+  &:hover
+    color: #ff391e
+    border-color: #ff391e
+
+  &:active
+    color: #fff
+    background-color: #ff391e
+    border-color: #ff391e
+
+  &.disabled
+    opacity: .1
+    cursor: default
+
+  &.disabled
+
+    &:hover, &:active
+      color: #ffffff
+      border-color: #ffffff
+      background-color: transparent
+
+.control-button_close
+  color: #565656
+  border-color: #565656
+  background-color: transparent
+
+  &:hover
+    color: #ff391e
+    border-color: #ff391e
+
+  &:active
+    color: #fff
+    background-color: #ff391e
+    border-color: #ff391e
+
+.popup-close:hover
+  .control-button_close
+    color: #ff391e
+    border-color: #ff391e
+
+.popup-close:active
+  .control-button_close
+    color: #fff
+    background-color: #ff391e
+    border-color: #ff391e
+
+.control-button_small
+  width: 22px
+  height: 22px
+  border: 1px solid transparent
+  line-height: 20px
+
+  .fonticon
+    font-size: 7px
+
+.control-button_medium
+  width: 26px
+  height: 26px
+  border-width: 2px
+  line-height: 26px
+
+  .fonticon
+    font-size: 10px
+
+.control-button_calendar
+  background-color: transparent
+  color: #bcb8ac
+  border-color: transparent
+
+  &:hover
+    color: #fff
+    border-color: rgba(255, 255, 255, .4)
+
+  &:active
+    color: #fff
+    border-color: rgba(255, 255, 255, .4)
+    background-color: transparent
+
+  

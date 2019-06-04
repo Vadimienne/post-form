@@ -1,0 +1,198 @@
+@import '_imports'
+
+// Messages list
+//
+// Список сообщений
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.messages-list
+//   +e.container
+//     +e.item
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.item-content
+//         +e.item-user
+//           +e.item-user-name Апрель
+//         +e.item-date 14:31
+//         +e.item-unread 20
+//         +e.item-message Привет! Я хотела узнать как взять и сварить
+//     +e.item
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.item-content
+//         +e.item-user
+//           +e.item-user-name Очень длинное имя пользователя
+//           +e.item-user-online
+//         +e.item-date 14:31
+//         +e.item-message Привет! Я хотела узнать как взять и сварить
+//     +e.item.active
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.item-content
+//         +e.item-user
+//           +e.item-user-name Апрель
+//           +e.item-user-online
+//         +e.item-date 14:31
+//         +e.item-message Привет! Я хотела узнать как взять и сварить
+//
+// Styleguide 1.54
+
+.messages-list
+  width: 280px
+  box-shadow: 0 1px 4px rgba(71, 44, 6, .2)
+  border-radius: 4px
+  position: relative
+  max-height: 764px
+  overflow: hidden
+  background-color: #fff
+
+  h4
+    font-weight: normal
+    text-align: center
+
+  a
+    display: block
+
+  &__container
+    position: relative
+
+  &__item
+    +clearfix
+    background-color: #fff
+    padding: 10px 20px
+    box-sizing: border-box
+    height: 60px
+    position: relative
+    cursor: pointer
+
+    &.active
+      cursor: default
+      &:after
+        display: block
+
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      right: 0
+      bottom: 0
+      top: -1px
+      background-color: #f2f2f2
+      z-index: 2
+      display: none
+
+    &:before
+      content: ''
+      position: absolute
+      left: 0
+      right: 0
+      bottom: 0
+      width: 100%
+      height: 1px
+      background-color: #e6e1da
+
+    &:first-child
+      border-radius: 4px 4px 0 0
+
+      &:after
+        top: 0
+        border-radius: 4px 4px 0 0
+
+    &:last-child
+      border-radius: 0 0 4px 4px
+
+      &:before
+        display: none
+
+      &:after
+        border-radius: 0 0 4px 4px
+
+  .user-avatar
+    float: left
+    margin-right: 10px
+    z-index: 3
+
+  &__item-content
+    float: left
+    width: 190px
+    position: relative
+    z-index: 3
+
+  &__item-user
+    +clearfix
+
+  &__item-user-name
+    font-size: 12px
+    color: #383838
+    font-family: "Noto Serif"
+    font-weight: 700
+    line-height: normal
+    margin-top: 1px
+    margin-bottom: 4px
+    max-width: 120px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    float: left
+    margin-right: 6px
+
+  &__item-user-online
+    width: 7px
+    height: 7px
+    border-radius: 50%
+    background-color: #53cc62
+    float: left
+    margin-top: 7px
+
+  &__item-date
+    font-size: 10px
+    color: #cccccc
+    position: absolute
+    right: 0
+    top: 4px
+    line-height: normal
+
+  &__item-unread
+    position: absolute
+    bottom: 0
+    right: 0
+    font-size: 11px
+    color: #fff
+    height: 16px
+    line-height: 16px
+    padding: 0 6px
+    border-radius: 8px
+    background-color: #ff451c
+    &_menu
+      bottom: 50%
+      margin-bottom: -8px
+
+
+  &__item-message
+    font-size: 12px
+    color: #999999
+    width: 160px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    line-height: normal
+
+  .mCSB_scrollTools .mCSB_draggerRail
+    background-color: rgba(124, 124, 124, 0.1)
+    width: 4px
+    border-radius: 2px
+
+  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+    background-color: rgba(124, 124, 124, 1)
+    border-radius: 2px
+    cursor: pointer
+
+  .mCSB_outside + .mCSB_scrollTools
+    right: -4px
+    z-index: 3
+
+  .mCSB_draggerContainer
+    margin: 3px 0

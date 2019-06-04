@@ -1,0 +1,108 @@
+@import '_imports'
+
+.page-header
+  &__heading
+    padding: 35px 0
+    position: relative
+    min-height: 94px
+    box-sizing: border-box
+
+    +width-lessthan(1024)
+      padding: 30px 0
+
+      .right
+        display: none
+
+    .page-title
+      text-align: center
+      line-height: normal
+      width: 580px
+      margin: 0 auto 5px
+
+      +width-lessthan(768)
+        width: auto
+        margin: 0 5px 5px
+
+    .back-button
+      position: absolute
+      height: 40px
+      line-height: 40px
+      left: 0
+      top: 0
+      bottom: 0
+      margin: auto 0
+
+    .button
+      position: absolute
+      right: 0
+      top: 0
+      bottom: 0
+      margin: auto 0
+
+    .field_search_store
+      height: 40px
+      position: absolute
+      right: 0
+      top: 0
+      bottom: 0
+      margin: auto 0
+
+    .field_search_users
+      height: 40px
+      position: absolute
+      right: 0
+      top: 0
+      bottom: 0
+      margin: auto 0
+
+    .breadcrumbs
+      text-align: center
+
+  &__add-recipe-button
+    position: relative
+    margin-bottom: 10px
+    font-family: 'Open Sans'
+    font-size: 12px
+    font-weight: normal
+    font-style: normal
+    font-stretch: normal
+    line-height: normal
+    color: #b4afa6
+    text-align: center
+    display: none
+
+    +width-lessthan(1024)
+      display: block
+
+    span
+      display: inline-block
+      padding-left: 15px
+      position: relative
+
+      &:before
+        content: ''
+        +imgbox('recipes/add-recipe-mobile.png')
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        margin: auto
+
+      &:after
+        content: ''
+        position: absolute
+        top: -10px 
+        left: -10px
+        right: -10px
+        bottom: -10px
+
+  &__ribbon
+    line-height : 40px
+    text-align: center
+    border-bottom : 1px solid #ded9cc
+
+    +width-lessthan(1024)
+      display: none
+
+    &_one-line
+      border-top: 0

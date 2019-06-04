@@ -1,0 +1,450 @@
+@import '_imports'
+
+// Card
+//
+// Типовая карточка
+//
+// default - обычное состояние
+// card_mediumimage - карточка с средней высотой картинки
+// card_bigimage - карточка с большой высотой картинки
+// card_noauthor - карточка без автора
+// card_noauthor.card_mediumimage - комбинация средней высоты картинки и отсутствия блока с автором
+// card_noauthor.card_bigimage - комбинация большой высоты картинки и отсутствия блока с автором
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//   +b.badge_recipes.card__category Рецепты
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title.card__title Картошка с грибами и сыром и мясом тапира тушеном в соусе
+//     +b('a').person_h._lh-small(href="#")
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Анастасия Мацукатова
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer
+//     +b.right
+//       +b.text-icon
+//         +b('span').fonticon_like
+//         span 1 488
+//     +e.add
+//       +b.text-icon
+//         +b('span').fonticon_add
+//         span В избранное
+//       +b.absolute-container
+//         +b.drop-down_favorites
+//           +e.scroll-box
+//             +e.container
+//               +e.item
+//                 +e('div').item-hover
+//                 span Моя книга
+//               +e.item
+//                 +e('div').item-hover
+//                 span Сладости
+//               +e.item
+//                 +e('div').item-hover
+//                 span Печенье
+//           +e.new-book
+//             +b('span').fonticon_new-book
+//             span Новая книга
+//           +e.triangle
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-class.png 1x, /assets/images/content/card-class@2x.png 2x, /assets/images/content/card-class@3x.png 3x")
+//       img(src="/assets/images/content/card-class.png" alt="")
+//   +b.badge_cooking-school.card__category кулинарный Курс
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title.card__title Постное меню. Новый взгляд: карри из чечевицы хумус, рататуй-роллы, каша из топора
+//     +b('a').person_h._lh-small(href="#")
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Анастасия Мацукатова
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer
+//     +b.right
+//       +b.price 1488 руб.
+//     +b.class-rate_novice
+//       +e.icon
+//       | Для начинающих
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-shop-item.png 1x, /assets/images/content/card-shop-item@2x.png 2x, /assets/images/content/card-shop-item@3x.png 3x")
+//       img(src="/assets/images/content/card-shop-item.png" alt="")
+//   +b.badge_shop.card__category Бар и стекло
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title.card__title Емкость для cоуса с кисточкой Bistro (0.25 л), черная
+//     +b('a').person_h._lh-small(href="#")
+//       +e.wrapper
+//         +e.content
+//           +e.name Bodum
+//   +b('footer').card-footer
+//     +b.right
+//       +b.price 1488 руб.
+//     +b.text-icon
+//       +b('span').fonticon_cart
+//       span В корзину
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-shop-item.png 1x, /assets/images/content/card-shop-item@2x.png 2x, /assets/images/content/card-shop-item@3x.png 3x")
+//       img(src="/assets/images/content/card-shop-item.png" alt="")
+//   +b.badge_shop.card__category Бар и стекло
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title.card__title Емкость для cоуса с кисточкой Bistro (0.25 л), черная
+//     +b('a').person_h._lh-small(href="#")
+//       +e.wrapper
+//         +e.content
+//           +e.name Bodum
+//   +b('footer').card-footer
+//     +b.right
+//       +b.price 1488 руб.
+//     +b.in-basket
+//       span в
+//       +e('span').important корзине
+//       +b('span').fonticon_cross-wide
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/tv-show.png 1x, /assets/images/content/tv-show@2x.png 2x, /assets/images/content/tv-show@3x.png 3x")
+//       img(src="/assets/images/content/tv-show.png" alt="")
+//       +e.videoicon
+//   +b.badge_tv.card__category Едим дома!
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title Сумерки. Снег. Тишина…
+//       +b('p').description-text
+//         span Рецепты:
+//         | крокеты с ветчиной, тыквенный хумус с фундуком, пирожки из теста фило с рисом и грибами
+//     +b('a').person_h._lh-small(href="#")
+//       +e.wrapper
+//         +e.content
+//           +e.name Едим Дома
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") Сегодня
+//   +b.card-footer
+//     +b.right
+//       +b.text-icon
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_views
+//        span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_message
+//        span 88
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-advice.png 1x, /assets/images/content/card-advice@2x.png 2x, /assets/images/content/card-advice@3x.png 3x")
+//       img(src="/assets/images/content/card-advice.png" alt="")
+//   +b.badge_cooking-school.card__category кулинарные Советы
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title Романтическое меню с афродизиаками
+//       +b('p').description-text
+//         | В день всех влюбленных хочется сделать что-нибудь приятное для
+//     +b('a').person_h._lh-small(href="#")
+//       +e.wrapper
+//         +e.content
+//           +e.name Едим Дома
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") Сегодня
+//   +b.card-footer
+//     +b.right
+//       +b.text-icon_like
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon_views
+//        +b('span').fonticon_views
+//        span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_message
+//        span 88
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +b.badge_date.card__eventdate 12 - 14 декабря
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-calendar.png 1x, /assets/images/content/card-calendar@2x.png 2x, /assets/images/content/card-calendar@3x.png 3x")
+//       img(src="/assets/images/content/card-calendar.png" alt="")
+//   +b.badge_holidays.card__category Праздник
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title Как подобрать цветы и комнатные растения
+//       +b('p').description-text
+//         | Флористы рассказывают о тенденциях в фитодизайне
+//     +b('a').person_h._lh-small(href="#")
+//       +e.wrapper
+//         +e.content
+//           +e.name Едим Дома
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") Сегодня
+//   +b.card-footer
+//     +b.right
+//       +b.text-icon
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_recipe
+//        span 5 Рецептов
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-ingridient.png 1x, /assets/images/content/card-ingridient@2x.png 2x, /assets/images/content/card-ingridient@3x.png 3x")
+//       img(src="/assets/images/content/card-ingridient.png" alt="")
+//   +b.badge_wiki.card__category ингредиенты
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title Приправы, специи
+//       +b('p').description-text
+//         | Ягода — многосемянный плод с тонким кожистым эпикарпием, сочным мезокарпием и твёрдым
+//   +b.card-footer
+//     +b.text-icon
+//        +b('span').fonticon_ingredients
+//        span 5 ингредиентов
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//   +b.badge_recipes.card__category Рецепты
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title.card__title Картошка с грибами и сыром и мясом тапира тушеном в соусе
+//     +b('a').person_h._lh-small(href="#")
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Анастасия Мацукатова
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer_vote
+//     +b.text-icon
+//       +b('span').fonticon_vote
+//       span Голосовать
+// +b('article').card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//   +b.badge_recipes.card__category Рецепты
+//   +e('main').content
+//     +e('a').description(href="#")
+//       +b.title.card__title Картошка с грибами и сыром и мясом тапира тушеном в соусе
+//     +b('a').person_h._lh-small(href="#")
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Анастасия Мацукатова
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer_voted
+//     +b.text-icon
+//       +b('span').fonticon_vote
+//       span Голосовать
+//
+// Styleguide 4.2
+
+
+.card
+
+  +imgbox('icons/icon-play.png', '', '.card__videoicon')
+  cursor: pointer
+  text-decoration: none
+  position: relative
+
+  &__options
+    position: absolute
+    top: 10px
+    right: 10px
+
+  &__option
+    display: inline-block
+    margin-left: 6px
+    width: 24px
+    height: 24px
+    border: 2px solid white
+    border-radius: 50%
+    cursor: pointer
+    z-index: 2
+    line-height: 24px
+    text-align: center
+
+    .fonticon
+      color: #fff
+
+    &:hover
+      background: #fff
+
+      .fonticon
+        color: #ff3620
+
+  & > a
+    text-decoration: none
+    display: block
+
+  &__eventdate
+    position: absolute
+    top: 20px
+    left: 20px
+    z-index: 3
+
+  &__picture
+    width: 100%
+    height: 210px
+    display: block
+    overflow: hidden
+    position: relative
+    border-bottom: 1px solid #ddd
+    box-sizing: border-box
+    border-radius: 4px 4px 0 0
+
+    +width-lessthan(1024)
+      height: 248px
+
+    +width-lessthan(768)
+      +width-between-property(height, 320, 232, 768, 248, true, true)
+
+    img
+      display: block
+      width: 100%
+      height: 100%
+
+  &__childrenicon
+    position: absolute
+    top: 10px
+    left: 20px
+    +imgbox('icons/children.png')
+
+  &__videoicon
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+
+  &__category
+    position: absolute
+    top: 224px
+    left: 20px
+
+    +width-lessthan(1024)
+      top: 20px
+
+  &__content
+    padding: 45px 20px 0 20px
+
+    +width-lessthan(1024)
+      padding-top: 18px
+
+    +width-lessthan(768)
+      +width-between-property(padding-top, 320, 14, 768, 18, true, true)
+
+  &__description
+    height: 105px
+    position: relative
+    overflow: hidden
+    margin-bottom: 10px
+    text-decoration: none
+    display: block
+
+    +width-lessthan(1024)
+      height: 48px
+      margin-bottom: 28px
+
+    +width-lessthan(768)
+      +width-between-property(height, 320, 40, 768, 48, true, true)
+      +width-between-property(margin-bottom, 320, 14, 768, 28, true, true)
+
+    .title
+      margin-bottom: 7px
+
+      +width-lessthan(768)
+        margin-bottom: 0
+        line-height: normal
+        +width-between-property(font-size, 320, 15, 768, 16, true, true)
+
+  &_noauthor
+    .card__description
+      height: 105px + 30px + 10px
+    .person
+      display: none
+
+  &_mediumimage
+    .card__picture
+      height: 230px
+    .card__category
+      top: 244px
+    .card__description
+      height: 85px
+
+    &.card_noauthor
+      .card__description
+        height: 85px + 30px + 10px
+
+
+  &_bigimage
+    .card__picture
+      height: 250px
+    .card__category
+      top: 264px
+    .card__description
+      height: 65px
+
+    &.card_noauthor
+      .card__description
+        height: 65px + 30px + 10px
+
+  &_empty
+    background: transparent !important
+    box-shadow: none !important
+    cursor: default
+
+  .absolute-container
+    visibility: hidden
+    position: absolute
+    top: 0
+    height: auto
+    left: -30px
+    padding-top: 40px
+
+    +width-lessthan(1024)
+      padding-top: 45px
+
+    &.right
+      left: -110px
+
+  &:not(.card_wide)
+    +width-lessthan(1024)
+      .person
+        display: block
+
+        &__wrapper
+          float: none
+
+        &__content
+          display: block  
+          +clearfix
+
+        &__name
+          float: left
+          line-height: 17px
+
+        &__post-time
+          float: right
+          margin: 0
+          line-height: 17px
+
+        .user-avatar
+          display: none

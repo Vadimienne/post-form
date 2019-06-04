@@ -5,6 +5,8 @@ import {sortableContainer, sortableElement, sortableHandle} from 'react-sortable
 import 'styles/DragButton.css'
 import img from 'images/drag.png'
 
+//sorting via keyboard doesn't work with <button>
+
 function Comp (props) {
   return (
     <>

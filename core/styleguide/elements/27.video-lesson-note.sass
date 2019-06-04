@@ -1,0 +1,75 @@
+@import '_imports'
+
+// Video lesson note
+// 
+// Заметка
+//  
+// markup:
+// +b('table').table-notes
+//   +e('tr').tr
+//     +e('td').time 13:05
+//     +e('td').lesson-number
+//       | Урок №
+//       span 99
+//     +e('td').lesson-name Рецепт хлеба с отрубями и курагой
+//     +e('td').note-text Малый информационный жанр, наиболее широко распространенный в ежедневной печати. По сути, то же, что и информация, заметка носит обычно менее официозный, более персонифицированный характер, помимо изложения хода события иногда включая в себя
+//     +e('td').remove
+//       +b.text-icon
+//         +b('span').fonticon_trash-can
+//         span Удалить
+// 
+// Styleguide 1.27
+
+.table-notes
+  border-collapse: collapse
+  width: 100%
+
+  td
+    vertical-align: top
+
+  &__time
+    width: 55px
+    color: #ff391e
+    font-size: 14px
+    font-weight: 700
+
+  &__lesson-number
+    width: 87px
+    padding-top: 6px
+    color: #666
+    font-size: 14px
+    font-weight: 400
+    line-height: 12px
+
+  &__lesson-name
+    padding-top: 1px
+    width: 185px
+    padding-right: 25px
+    color: #666
+    font-size: 14px
+    font-weight: 700
+    line-height: 22px
+
+  &__note-text
+    padding-top: 1px
+    width: 640px
+    padding-right: 35px
+    color: #333
+    font-size: 14px
+    font-weight: 400
+    line-height: 22px
+
+  &__remove
+    text-align: right
+
+    .text-icon
+      color: #5e5e5e
+      font-size: 14px
+      font-weight: 400
+
+      &:hover
+        .fonticon
+          color: #ff391e
+
+      .fonticon
+        font-size: 18px

@@ -1,0 +1,196 @@
+@import '_imports'
+
+// Plain text
+//
+// Обычный текст
+//
+// default - Обычное состояние
+//
+// markup:
+// +b.plain-text
+//   p Все четко, вчера и поза, переводили деньги с карты на карту в Англию — работало все как часы. Может фэйк для паники? Все четко, вчера и поза, переводили деньги с карты на карту в Англию — работало все как часы. Может фэйк для паники?
+//   p По списку:
+//   ul
+//     li как получить новых клиентов без вложений в рекламу
+//     li почему простое изменение формы заказа может повысить продажи на 18%,
+//     li как продать товар, который нужно срочно сбыть,
+//     li какие изменения происходят с воронкой продаж при активной работе с постоянными клиентами.
+//
+// Styleguide 1.10
+
+.plain-text
+  color: #333
+  font-size: 15px
+  font-weight: 400
+  line-height: 22px
+
+  &_align-center
+    text-align: center
+
+  &_small-text
+    color: #242424
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+
+  h2
+    line-height: normal
+    font-family: "Open Sans"
+    font-weight: 700
+    font-size: 17px
+    line-height: 22px
+    text-align: left
+
+  .share
+    margin-top: 20px
+
+  .content-media
+    margin-top: 40px
+    margin-bottom: 40px
+
+    +width-lessthan(1024)
+      margin-top: 30px
+      margin-bottom: 30px
+
+  .hr,
+  .person,
+  .section-title
+    margin-top: 20px
+    margin-bottom: 20px
+
+    &:first-child
+      margin-top: 0
+  dl
+    line-height: 2
+    margin-top: 20px
+    margin-bottom: 20px
+
+    &:first-child
+      margin-top: 0
+      margin-top: -5px
+
+  .section-title
+    font-size: 1em
+    line-height: 1.5em
+    margin-bottom: 10px
+    margin-top: 30px
+
+    &.title
+      font-size: 16px
+      line-height: 20px
+
+    &.title_small
+      font-size: 14px
+      line-height: normal
+
+  a:not(.button)
+    color: $color-link
+    text-decoration: none
+
+    &:hover
+      text-decoration: underline
+
+  .hr
+    &_mb25
+      margin-bottom: 25px
+
+  .button + .button
+    margin-left: 15px
+
+  p
+    font-size: 15px
+    margin: 0 0 10px 0
+
+  //p + ul
+  //  margin-top: -5px
+
+  ul + p
+    margin-top: 10px
+
+  ul
+    list-style: none
+    margin: 1.5em
+    padding: 0
+
+    li
+      font-size: 14px
+      font-weight: 400
+      line-height: 20px
+      padding-left: 20px
+      position: relative
+
+      &:before
+        content: ''
+        +imgbox('elements/global/bullet.png')
+        position: absolute
+        top: 8px
+        left: 0
+
+    li + li
+      margin-top: 5px
+  
+  ol
+    margin: 1.5em 0
+
+    li
+      font-size: 14px
+      font-weight: 400
+      line-height: 20px
+      padding-left: 20px
+      position: relative
+
+    li + li
+      margin-top: 5px
+
+
+  
+  &__image-aligner
+    img:not([src*='smiles']):not([src*='data/posts']):not(.gallery__image_img)
+      max-width: 100%
+      width: 100%
+      height: auto !important
+      margin: 30px -30px !important
+      max-width: calc(100% + 60px)
+      width: calc(100% + 60px)
+      display: block
+    iframe[src*='youtube']
+      max-width: 100%
+      width: 100%
+      margin: 30px -30px !important
+      max-width: calc(100% + 60px)
+      width: calc(100% + 60px)
+
+  &__recipe-actions
+    +width-lessthan(479)
+      display: flex
+      justify-content: space-between
+
+      .button + .button
+        margin: 0
+
+  &__banner
+    margin: 20px -30px
+    overflow: hidden
+
+
+
+.mfp-with-zoom .mfp-container, .mfp-with-zoom.mfp-bg 
+  opacity: 0
+  -webkit-backface-visibility: hidden
+  /* ideally, transition speed should match zoom duration */
+  transition: all 0.3s ease-out
+
+.mfp-with-zoom.mfp-ready .mfp-container 
+  opacity: 1
+.mfp-with-zoom.mfp-ready.mfp-bg 
+  opacity: 0.8
+
+.mfp-with-zoom.mfp-removing .mfp-container, .mfp-with-zoom.mfp-removing.mfp-bg 
+  opacity: 0
+
+.mfp-bg 
+  opacity: 0.5 !important
+  background: #fff !important
+
+.zoomable
+  cursor: zoom-in

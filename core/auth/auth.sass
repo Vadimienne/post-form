@@ -1,0 +1,167 @@
+@import "_imports.sass"
+
+.auth-page
+  height: 630px
+  margin-bottom: -35px
+  background: center no-repeat
+  +background-image-retina('auth/auth-bg.jpg')
+  background-size: cover
+  position: relative
+
+.auth-content
+  width: 300px
+  margin: 0 auto
+  padding-top: 73px
+
+  &__title
+    color: white
+    font-family: "Open Sans"
+    font-size: 30px
+    font-weight: 700
+    line-height: 34px
+    text-transform: uppercase
+    margin-bottom: 40px
+    text-align: center
+
+  &__instruction
+    color: white
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+    text-align: center
+    margin-bottom: 25px
+
+.auth-form
+  display: block
+  text-align: center
+
+  &__social
+    margin: 0 0 15px -20px
+    +clearfix
+
+  &__social-icon
+    width: 60px
+    height: 40px
+    border-radius: 20px
+    position: relative
+    float: left
+    margin-left: 20px
+    cursor: pointer
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+    &_fb
+      background-color: #3B5998
+      +imgbox('popups/fb.png', '', '.icon')
+
+    &_vk
+      background-color: #4c75a3
+      +imgbox('popups/vk.png', '', '.icon')
+
+    &_tw
+      background-color: #54a9f0
+      +imgbox('popups/tw.png', '', '.icon')
+
+    &_od
+      background-color: #ff9933
+      +imgbox('popups/od.png', '', '.icon')
+
+    &:hover
+      background-color: #53cc62
+
+  &__hr
+    border: none
+    height: 1px
+    background: #DCD6C9
+    margin-bottom: 10px
+
+  &__separator
+    color: #DCD6C9
+    font-size: 14px
+    font-weight: 400
+    text-align: center
+    clear: both
+    position: relative
+    margin-bottom: 25px
+    line-height: normal
+
+    &:before
+      content: ''
+      width: 135px
+      height: 1px
+      background: #DCD6C9
+      position: absolute
+      top: 50%
+      left: 0
+      margin-top: -.5px
+      opacity: 0.2
+
+    &:after
+      content: ''
+      width: 135px
+      height: 1px
+      background: #DCD6C9
+      position: absolute
+      top: 50%
+      right: 0
+      margin-top: -.5px
+      opacity: 0.2
+
+  .field
+    margin-bottom: 10px
+
+    & + .field
+      margin-left: 0
+
+  .button
+    margin: 25px 0 15px 0
+    display: block
+    width: 100%
+
+  &__popup-footer
+    +clearfix
+
+  &__bottom-link
+    color: #B3B3B3
+    font-size: 12px
+    font-weight: 400
+    text-decoration: underline
+    display: inline-block
+    cursor: pointer
+
+    &:hover
+      text-decoration: none
+
+.auth-footer
+  height: 65px
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  border-top: 1px solid #616463
+  text-align: center
+
+  &__text
+    opacity: 0.6
+    color: white
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 400
+    line-height: 65px
+
+    &_registr
+      line-height: normal
+      padding-top: 15px
+
+    a
+      color: white
+      text-decoration: underline
+
+      &:hover
+        text-decoration: none

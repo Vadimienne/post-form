@@ -1,0 +1,42 @@
+@import '_imports'
+
+// Competition participant
+//
+// Участник соревнования
+//
+// default  - обычное состояние
+//
+//- bemto_settings_context_replace = false
+// +b.competition-participant
+//   +e.title Из телепередачи
+//   +e('a').show-name(href="#") «Июньских ягод аромат» от 26 июня 2016
+//   +e('a').show-name(href="#") «Июньских ягод аромат» от 26 июня 2016
+//
+// Styleguide 7.11
+
+.competition-participant
+  padding-left: 52px
+  padding-top: 20px
+  margin-top: 20px
+  //border-top: 1px solid #e5e3dc
+  background: left 25px no-repeat
+  +background-image-retina('recipes/participant.png')
+
+  +width-lessthan(600)
+    padding: 45px 0 0 0
+    background-position: left top
+
+  &__title
+    color: #242424
+    font-family: "Open Sans"
+    font-size: 14px
+    font-weight: 700
+    margin-bottom: 5px
+
+  &__show-name
+    color: #ed342a
+    font-family: "Open Sans"
+    font-size: 15px
+    font-weight: 400
+    line-height: 22px
+    text-decoration: none

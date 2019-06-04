@@ -1,0 +1,271 @@
+@import '_imports'
+
+// Nutritional value
+// 
+// Пищевая ценность
+// 
+// default - обычное состояние
+//
+// markup:
+// +b.nutritional-value
+//   +b.title_sans-serif._uppercase._small Пищевая ценность
+//   +e.container
+//     +e.leftside
+//       +b.kkal-meter
+//         +e.data
+//           +e.value 488
+//           +e.unit кКалл
+//           +e.percent 35%
+//       +e.nutritional-list
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Белки
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 г
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Жиры
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 г
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Углеводы
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 6 г
+//     +b.daily-norm
+//       +e.title % от дневной нормы
+//       +e.percentage
+//         +e.percent 48%
+//         +e.percent 9%
+//         +e.percent 16%
+//       +e.text
+//         | Основнанно на вашем
+//         br
+//         | возрасте, весе и активности. Является справочной информацией.
+// +b.nutritional-value
+//   +b.title_sans-serif._uppercase._small Пищевая ценность
+//   +e.container
+//     +e.leftside
+//       +b.kkal-meter
+//         +e.data
+//           +e.value 488
+//           +e.unit кКалл
+//           +e.percent 35%
+//       +e.nutritional-list
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Белки
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 г
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Жиры
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 г
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Углеводы
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 6 г
+//     +b.daily-norm
+//       +e.title % от дневной нормы
+//       +e.please-login
+//         Для отображения дневной 
+//         br
+//         нормы 
+//         a(href="#") войдите 
+//         | или 
+//         br
+//         a(href="#") зарегистрируйтесь
+// 
+// Styleguide 7.6
+
+.nutritional-value
+  position: relative
+  line-height: normal
+
+  // +width-lessthan(1024)
+  //   display: none
+
+  //   & + .field-row
+  //     display: none
+
+  .title
+    margin-bottom: 17px
+    +width-lessthan(1024)
+      margin-bottom: 21px
+
+  &__container
+    display: flex
+    justify-content: space-between
+    +width-lessthan(768)
+      flex-direction: column
+
+  &__leftside
+    display: flex
+    +width-lessthan(768)
+      flex-direction: column
+
+  &__nutritional-list
+    width: 140px
+    margin-left: 30px
+    padding-top: 7px
+    +width-lessthan(1024)
+      margin-left: 21px
+    +width-lessthan(768)
+      width: auto
+      margin-left: 0
+      margin-right: 60px 
+
+    .definition-list-table + .definition-list-table
+      margin-top: 12px
+      +width-lessthan(1024)
+        margin-top: 6px
+        border-top: none
+
+    .definition-list-table__td
+      +width-lessthan(1024)
+        padding-top: 0 
+        padding-bottom: 0
+        vertical-align: middle
+
+    .definition-list-table__td_dashes
+      +width-lessthan(1024)
+        display: table-cell
+        vertical-align: bottom
+
+  &__please-login
+    margin-left: 25px
+    padding-top: 5px
+    color: #999793
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+    +width-lessthan(768)
+      margin-left: 0
+
+    a
+      text-decoration: none
+      color: #ef4e45
+
+      &:hover
+        text-decoration: underline
+
+.daily-norm
+  width: 218px
+  height: 95px
+  padding: 30px 20px 0 10px
+  border: 2px solid #e5e3dc
+  border-radius: 4px
+  position: relative
+  margin-top: -25px
+  +width-lessthan(1024)
+    width: 242px
+    height: 99px
+    margin-top: -28px
+    padding: 36px 20px 0 23px
+  +width-lessthan(768)
+    margin-top: 0
+    width: auto
+    height: auto
+    padding: 15px 0 0 0 
+    border: none
+
+  &__title
+    width: 170px
+    color: #C4BEBA
+    font-size: 14px
+    font-weight: 600
+    text-align: center
+    background-color: #fbf8f6
+    position: absolute
+    top: -10px
+    left: 0
+    right: 0
+    margin: 0 auto
+    +width-lessthan(768)
+      position: static
+      text-align: left
+      width: auto
+      color: #ED342A
+
+  &__percentage
+    float: left
+    +width-lessthan(768)
+      position: absolute
+      right: 0
+      top: -81px
+
+  &__percent
+    color: #EF4E46
+    font-size: 14px
+    font-weight: 600
+    margin-bottom: 12px
+
+  &__text
+    margin-left: 40px
+    color: #999793
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+    +width-lessthan(1024)
+      margin-left: 46px
+    +width-lessthan(768)
+      margin-left: 0
+      margin-top: 5px
+
+  &__please-login
+    margin-left: 18px
+    color: #999793
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+
+    a
+      text-decoration: none
+      color: #ef4e45
+
+      &:hover
+        text-decoration: underline
+
+.kkal-meter
+  width: 86px
+  height: 86px
+  border: 2px solid #e5e3dc
+  border-radius: 50%
+  position: relative
+  +width-lessthan(1024)
+    width: 96px
+    height: 96px
+
+  &__data
+    text-align: center
+    padding-top: 25px
+    +width-lessthan(1024)
+      padding-top: 30px
+
+  &__value
+    color: #ED342A
+    font-family: "Arial"
+    font-size: 24px
+    font-weight: 400
+    line-height: 12px
+
+  &__unit
+    display: inline-block
+    color: #242424
+    font-size: 12px
+    font-weight: 600
+    line-height: 16px
+    border-bottom: 1px solid #c4beba
+
+  &__percent
+    color: #ED342A
+    font-size: 13px
+    font-weight: 600

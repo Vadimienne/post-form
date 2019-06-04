@@ -1,0 +1,25 @@
+@import '_imports'
+
+// Default link
+// 
+// Ссылка
+// 
+// default - обычное состояние
+// default-link:hover - hover
+//
+// markup:
+// +b('a').default-link(href="#" class="{$modifiers}") Ссылка
+// 
+// Styleguide 1.15
+
+.default-link
+  color: $color-link
+  font-size: 13px
+  font-weight: 400
+  display: block
+  text-decoration: none
+  cursor: pointer
+  line-height: normal
+
+  &:hover
+    text-decoration: underline

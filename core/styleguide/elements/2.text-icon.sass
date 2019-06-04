@@ -1,0 +1,54 @@
+@import '_imports'
+
+// text-icon
+//
+// Базовый элемент для отображения текста с иконкой
+//
+// text-icon_default - обычное состояние
+// text-icon_white - иконки
+// text-icon_grey - иконки
+// text-icon_red-icon - активная иконка (нажатый лайк)
+//
+// markup:
+// +b.text-icon(class="{$modifiers}")
+//   +b('span').fonticon_facebook
+//   span 4 454
+//
+// Styleguide 1.2
+
+.text-icon
+  position: relative
+  cursor: pointer
+  display: inline-block
+  color: #666
+  font-family: "Open Sans"
+  font-size: 13px
+  font-weight: 600
+  text-decoration: none
+  user-select: none
+
+  span
+    display: inline
+    vertical-align: middle
+
+    & + span
+      margin-left: 10px
+
+  & + &
+    margin-left : 20px
+
+  &_white
+    color: #fff
+
+  &_grey
+    color: #c8cbcc
+
+  &_red-icon
+    .fonticon
+      color: #ff391e
+
+  .card-footer &
+    &:not(.text-icon_views)
+      &:hover
+        .fonticon
+          color: #ff391e

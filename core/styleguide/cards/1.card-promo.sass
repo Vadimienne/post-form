@@ -1,0 +1,78 @@
+@import '_imports'
+
+// Cards
+//
+// Карточки
+//
+// Styleguide 4.0
+
+// Card promo
+//
+// Промо карточка
+//
+// default  - обычное состояние
+//
+// markup:
+// +b('article').card-promo.card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-promo-black.png 1x, /assets/images/content/card-promo-black@2x.png 2x, /assets/images/content/card-promo-black@3x.png 3x")
+//       img(src="/assets/images/content/card-promo-black.png" alt="")
+//   +e('header').header
+//     +b.badge_recipes Рецепты
+//     a(href="#")
+//       +b.title_white Бургеры вместе
+//         br
+//         | с BORK
+//   +b('footer').card-footer_white
+//     +b.right
+//       +b.text-icon._white
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon._white
+//        +b('span').fonticon_add
+//        span В избранное
+// +b('article').card-promo.card(class="{$modifiers}")
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-promo-white.png 1x, /assets/images/content/card-promo-white@2x.png 2x, /assets/images/content/card-promo-white@3x.png 3x")
+//       img(src="/assets/images/content/card-promo-white.png" alt="")
+//   +e('header').header
+//     +b.badge_recipes Рецепты
+//     a(href="#")
+//       +b.title Бургеры вместе
+//         br
+//         | с BORK
+//   +b('footer').card-footer
+//     +b.right
+//       +b.text-icon_like
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon_add
+//        +b('span').fonticon_add
+//        span В избранное
+//
+// Styleguide 4.1
+
+
+.card-promo
+  cursor: pointer
+
+  &__picture
+    position: absolute
+    width: 100%
+    height: 100%
+    overflow: hidden
+    border-radius: 4px
+
+    img
+      width: 100%
+      height: 100%
+
+  &__header
+    padding-top: 20px
+    text-align: center
+    position: relative
+
+  .badge
+    margin-bottom: 30px

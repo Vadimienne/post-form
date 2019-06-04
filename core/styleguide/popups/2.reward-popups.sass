@@ -1,0 +1,537 @@
+@import '_imports'
+
+// Reward description
+//
+// Описание награды
+//
+// markup:
+// +b.popup-container_reward
+//   +e.header награды за достижения
+//   +b.popup-content
+//     +b.badge-description-container
+//       +e.badge
+//       +b.badge-description
+//         +e.name Награда «<span>Легенда</span>»
+//         +e.condition Для получения награды<br>необходимо собрать 500+ подписчиков
+//     +b.reward-owners-conainer
+//       +b.title_small._sans-serif Обладатели награды
+//       +b.show-all-owners(data-module="show-reward-owners")
+//         +e.amount +<span>12</span>
+//         +e.text
+//       +b.reward-owners
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//
+// Styleguide 6.23
+
+.popup-container_reward
+  width: 943px
+
+  .popup-container
+    &__header
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 50px
+      background-color: white
+      border-radius: 4px 4px 0px 0px
+      color: #373737
+      font-family: "Open Sans"
+      font-size: 14px
+      font-weight: 700
+      text-transform: uppercase
+
+  .popup-content
+    width: 100%
+    padding: 0 80px
+    box-sizing: border-box
+
+  .badge-description-container
+    padding-top: 47px
+    margin-bottom: 57px
+    +clearfix()
+
+    &__badge
+      width: 160px
+      height: 160px
+      float: left
+
+      svg
+        width: 160px
+        height: 160px
+
+  .badge-description
+    margin-left: 217px
+    padding-top: 25px
+
+    &__name
+      color: black
+      font-family: "Noto Serif"
+      font-size: 36px
+      font-weight: 700
+      line-height: normal
+      margin-bottom: 15px
+
+    &__condition
+      color: black
+      font-family: "Open Sans"
+      font-size: 13px
+      font-weight: 400
+      line-height: 19px
+
+  .reward-owners-conainer
+    border-top: 1px solid #ded9cc
+    padding: 20px 0 55px 0
+
+  .reward-owners
+    width: 625px
+    height: 90px
+    position: relative
+    overflow: hidden
+    margin-top: 20px
+    +clearfix()
+
+    &.show
+      width: auto
+      height: auto
+
+    &__owner
+      float: left
+
+      & + .reward-owners__owner
+        margin-left: 20px
+
+      &:nth-child(10n+11)
+        margin-left: 0
+
+    &__owner-name
+      width: 60px
+      position: relative
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+      color: #242424
+      font-family: "Open Sans"
+      font-size: 13px
+      font-weight: 400
+      margin-bottom: 15px
+
+  .show-all-owners
+    float: right
+    margin: 48px 20px 0 0
+    cursor: pointer
+
+    &:hover
+      .show-all-owners__text
+        text-decoration: none
+
+    &__amount
+      color: #6e6e6e
+      font-family: "Open Sans"
+      font-weight: 400
+      line-height: 30px
+      font-size: 19px
+
+      span
+        font-size: 24px
+
+    &__text
+      color: #6d6d6d
+      font-family: "Open Sans"
+      font-size: 13px
+      font-weight: 400
+      text-decoration: underline
+
+  .victory-list
+    margin-top: 25px
+
+    &__count
+      font-family: "Noto Serif"
+      font-size: 14px
+      font-weight: 700
+      line-height: 20px
+      color: black
+
+      span
+        color: #8a8a8a
+
+    &__list
+      padding-left: 20px
+      margin: 10px 0 0 0
+
+    &__item
+      font-family: "Open Sans"
+      font-size: 13px
+      line-height: 24px
+      color: black
+      font-weight: 400
+      
+      a
+        display: inline-block
+        color: black
+        font-weight: 400
+        text-decoration: none
+        line-height: 13px
+        border-bottom: 1px solid #b5afa5
+
+        &:hover
+          border: none
+      
+      span
+        color: #8a8a8a
+        font-style: italic
+
+// Battle reward description
+//
+// Описание награды за кулинарную битву
+//
+// markup:
+// +b.popup-container_reward
+//   +e.header награды за достижения
+//   +b.popup-content
+//     +b.badge-description
+//       +e.name Награда «<span>Кулинарная битва</span>»
+//       +e.condition Для получения награды<br>необходимо выиграть кулинарную битву
+//       +b.victory-list
+//         +e.count Cписок побед <span>(11)</span>
+//         +e('ul').list
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//     +b.reward-owners-conainer
+//       +b.title_small._sans-serif Обладатели награды
+//       +b.show-all-owners(data-module="show-reward-owners")
+//         +e.amount +<span>12</span>
+//         +e.text
+//       +b.reward-owners
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//
+// Styleguide 6.24
+
+// Buy reward
+//
+// Покупка награды
+//
+// markup:
+// +b.popup-container_reward
+//   +e.header награды за достижения
+//   +b.popup-content
+//     +b.badge-description
+//       +e.name Награда «<span>Кулинарная битва</span>»
+//       +e.condition Для получения награды<br>необходимо выиграть кулинарную битву
+//       +b.victory-list
+//         +e.count Cписок побед <span>(11)</span>
+//         +e('ul').list
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//           +e('li').item Битва <a href="#">«Легкие салаты»</a> <span>(21 декабря 2016)</span>
+//     +b.reward-owners-conainer
+//       +b.title_small._sans-serif Обладатели награды
+//       +b.show-all-owners(data-module="show-reward-owners")
+//         +e.amount +<span>12</span>
+//         +e.text
+//       +b.reward-owners
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//         +e.owner
+//           +b.user-avatar_medium
+//             +e('img').image(src="http://teestore.ru/wp-content/uploads/2016/08/Slowpoke-P.jpg")
+//           +e.owner-name Зойчонок
+//
+// Styleguide 6.25
+
+.popup-container_buy-reward
+
+  .popup-content
+    display: none
+
+    &.active
+      display: block
+
+  .popup-content_choose-recipient
+
+    .badge-description
+      padding-top: 10px
+
+      &__price
+        padding-left: 35px
+        position: relative
+        color: black
+        font-family: "Noto Serif"
+        font-size: 13px
+        font-style: italic
+        margin-bottom: 25px
+
+        &:before
+          content: ''
+          +imgbox('badges/coin.png')
+          position: absolute
+          top: 50%
+          left: 0
+          margin-top: -13px
+
+      &__button-container
+        display: flex
+
+        .button
+          display: block
+          width: 165px
+          padding: 0
+          text-align: center
+
+          & + .button
+            margin-left: 10px
+
+  .popup-content_reject
+    padding: 40px 0 45px
+    text-align: center
+
+    .title
+      margin-bottom: 25px
+
+    .button + .button
+      margin-left: 10px
+
+  .popup-content_accept
+    padding: 40px 0 45px 0
+    text-align: center
+
+    .title
+      margin-bottom: 25px
+
+  .popup-content_choose-friend
+    padding-top: 30px
+    padding-bottom: 40px
+
+    .slider
+      height: 100px
+
+    .popup-content__button-container
+      text-align: center
+      margin-top: 25px
+
+      .button + .button
+        margin-left: 10px
+
+    .field
+      width: 100%
+
+    .title
+      text-align: center
+      
+    .popup-content__find-friend
+      margin-top: 25px
+      padding: 0 75px 35px
+      border-bottom: 1px solid #ded9cc
+
+    .popup-content__friend-list
+      padding-top: 15px
+      
+      .title
+        text-align: left
+        margin-bottom: 10px
+
+      .selection__overlay
+        height: 100%
+
+      .person
+        .title
+          font-weight: 400
+          width: 60px
+          position: relative
+          overflow: hidden
+          text-overflow: ellipsis
+          text-align: center
+          margin: 0 auto
+
+  .friend-slider
+    margin: 0 80px
+
+  .slider-controls
+    &__button
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 40px
+      height: 40px
+      border-radius: 50%
+      border: 1px solid #c5c0b4
+      position: absolute
+      top: 15px
+      cursor: pointer
+
+      &_prev
+        left: 0
+
+      &_next
+        right: 0
+
+        .fonticon
+          margin-right: -1px
+
+      .fonticon
+        display: inline-block
+        font-size: 10px
+        opacity: 0.6
+
+      &:hover
+        color: #ff391e
+        border-color: #ff391e
+
+        .fonticon
+          opacity: 1
+
+      &:active
+        color: #fff
+        background-color: #ff391e
+        border-color: #ff391e
+
+      &.disabled
+        cursor: default
+        border-color: #e4ddd0
+        color: black
+        background: none
+
+        .fonticon
+          opacity: 0.1

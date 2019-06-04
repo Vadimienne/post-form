@@ -1,0 +1,125 @@
+@import '_imports'
+
+// Card footer
+//
+// Футре карточки
+//
+// default - черный бордер с прозрачностью
+// card-footer_white - белый бордер с прозрачностью
+//
+// markup:
+// +b('footer').card-footer(class="{$modifiers}")
+//
+// Styleguide 4.19
+
+.card-footer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 0 20px
+  line-height: 40px
+  border-top: 1px solid rgba(0,0,0, .1)
+  text-align: left
+  color: #5B5B5B
+  font-size: 13px
+  font-weight: 600
+
+  +width-lessthan(1024)
+    line-height: 47px
+
+    .text-icon
+      span + span
+        margin-left: 5px
+
+  +width-lessthan(600)
+    .text-icon
+      .fonticon_views
+        // display: none
+        & + span
+          // display: none
+    .text-icon
+      .fonticon_message
+        // display: none
+        & + span
+          // display: none
+  .card_wide &
+    +width-lessthan(600)
+      .text-icon
+        .fonticon_views
+          display: none
+          & + span
+            display: none
+      .text-icon
+        .fonticon_message
+          // display: none
+          & + span
+            // display: none
+
+
+  &_white
+    border-color: rgba(255,255,255, .1)
+
+    .text-icon
+      color: white
+
+  &_vote
+    text-align: center
+    border-radius: 0 0 4px 4px
+
+    .text-icon
+      color: #ff391e
+      font-family: "Open Sans"
+      font-size: 11px
+      font-weight: 700
+      text-transform: uppercase
+
+      .fonticon
+        color: #ff391e
+        font-size: 18px
+
+    &:hover
+      background-color: #ff391e
+
+      .text-icon
+        color: white
+
+        .fonticon
+          color: white !important
+
+  &_voted
+    text-align: center
+    background-color: #ff391e
+    border-radius: 0 0 4px 4px
+
+    .text-icon
+      span + span
+        display: none
+
+      .fonticon
+        color: white !important
+        font-size: 18px
+  &_buyme
+    text-align: center
+    background-color: #43bb78
+    border-radius: 0 0 4px 4px
+    color: white !important
+    .text-icon
+      span + span
+        //display: none
+        color: white !important
+      color: white !important
+      .fonticon
+        color: white !important
+        font-size: 18px
+    &:hover
+      background-color: #4cd488
+      cursor: pointer
+
+  &__add
+    position: relative
+    display: inline-block
+
+    &:hover
+      .absolute-container
+        visibility: visible

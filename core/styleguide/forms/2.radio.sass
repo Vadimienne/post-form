@@ -1,0 +1,76 @@
+@import '_imports'
+
+// Radio-input
+// 
+// Радио  
+// 
+// radio_default  - обычное состояние
+// radio:hover  - hover
+// radio_disabled  - неактивное состояние
+//
+// markup:
+// +b('label').radio(class="{$modifiers}")
+//  +e('input').input(type='radio' name="name" value='1')
+//  span Радио
+//
+// Styleguide 2.2
+
+
+.radio
+  display: inline-block
+  color: #242424
+  font-family: "Open Sans"
+  font-size: 14px
+  font-weight: 700
+  cursor: pointer
+
+  .field &
+    font-weight: normal
+    line-height : 38px
+    height : 38px
+
+    & + .radio
+      margin-left : 20px
+
+    &__input + span:before
+      top : 9px
+
+  &:hover
+    .radio__input
+      & + span
+        &:before
+          border-color: #303030
+
+  &_disabled
+    cursor: default
+
+    .radio__input
+      & + span::before
+        +imgbox('forms/radio-disabled.png')
+        border: none
+      &:checked + span::before
+        +imgbox('forms/radio-disabled.png')
+        border: none
+
+  &__input
+    display: none
+
+    & + span
+      display: block
+      position: relative
+      padding-left: 30px
+
+      &:before
+        content: ''
+        width: 18px
+        height: 18px
+        background-color: #FFF
+        border-radius: 10px
+        border: 1px solid #e7e7e7
+        position: absolute
+        top: -1px
+        left: 0
+
+    &:checked + span::before
+      +imgbox('forms/radio-checked.png')
+      border: none

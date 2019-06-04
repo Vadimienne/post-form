@@ -1,0 +1,72 @@
+@import '_imports'
+
+// Card commercial
+//
+// Рекламная карточка
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_commercial
+//   a(href="#")
+//     +e.note Реклама
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-commercial.png 1x, /assets/images/content/card-commercial@2x.png 2x, /assets/images/content/card-commercial@3x.png 3x")
+//       img(src="/assets/images/content/card-commercial.png" alt="")
+//
+// Styleguide 4.14
+
+.card_commercial
+  cursor: pointer
+  text-align: center
+
+  +width-lessthan(1024)
+    display: flex
+    justify-content: center
+  
+  .grid-col_one &
+    text-align: center
+    display: block
+    margin-bottom: 20px
+  .flow-item &
+    margin-bottom: 0
+  
+  &_noborder
+    background: transparent
+    box-shadow: none
+    .card__note
+      display: none
+
+  &.absolute
+    position: absolute
+    top: 0
+    right: 0
+    z-index: 3
+
+  .card__note
+    color: #C9C5BC
+    font-family: "Arial"
+    font-size: 10px
+    font-weight: 400
+    position: absolute
+    top: 4px
+    left: 20px
+    line-height: normal
+
+  .card__picture
+    padding: 20Px
+    position: absolute
+    top: 0
+    left: 0
+    width: 280Px
+    height: 450Px
+    border: none
+    transform-origin: 0 0
+
+    +width-lessthan(1024)
+      width: auto
+      height: auto
+      position: static
+      transform: scale(0.8)
+      transform-origin: center center
+      align-self: center

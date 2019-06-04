@@ -1,0 +1,418 @@
+@import '_imports'
+
+// Elements
+//
+// Общие элементы
+//
+// Styleguide 1.0
+
+// Button
+//
+// Кнопка
+//
+// button_default  - обычное состояние
+// button_disabled - неактивная кнопка
+// button_green - зеленая кнопка
+// button_white - белая кнопка
+// button_green.button_disabled - неактивная кнопка
+// button_black - неактивная кнопка
+// button_black.button_disabled - неактивная кнопка
+// button_no-border - кнопка без бордера
+// button_pink - розовая кнопка
+// button_red - красная кнопка
+// button_green-transparent - зеленая кнопка
+// button_transparent - Прозрачный бэкграунд
+// button_tag - тэг
+// button_round - круглая кнопка (только для кнопок без названия)
+// button_fit - кнопка занимает всю ширину родительского контейнера
+// button_fit.button_alignleft - контент кнопки прибивается к левому краю
+//
+// markup:
+// +b.button(class="{$modifiers}")
+//   span Название кнопки
+// +b.button(class="{$modifiers}")
+//   +b('span').fonticon_facebook
+//   span Название кнопки
+// +b.button(class="{$modifiers}")
+//   +b('span').fonticon_twitter
+//   span Название кнопки
+// +b.button(class="{$modifiers}")
+//   +b('span').fonticon_vkontakte
+//   span Название кнопки
+// +b.button(class="{$modifiers}")
+//   +b('span').fonticon_vkontakte
+// +b.button(class="{$modifiers}")
+//   +e.item-count 14
+//
+// Styleguide 1.1
+
+
+.button
+  border: 1px solid $color-disabled
+  height: 40px
+  line-height: 40px
+  display: -moz-inline-stack
+  display: inline-block
+  box-sizing: border-box
+  padding: 0 20px
+  color: #4c4c4c
+  text-transform: uppercase
+  border-radius: $border-radius
+  cursor: pointer
+  font-size: 12px
+  font-weight: 600
+  transition: border-color .2s ease, background-color .2s ease
+  user-select: none
+  background : white
+  position: relative
+
+  span
+    vertical-align : middle
+    display: inline-block
+    margin-top: -3px
+
+    +width-lessthan(1024)
+      margin-top: 0
+
+  &__item-count
+    min-width: 20px
+    height: 20px
+    padding: 0 4px
+    box-sizing: border-box
+    background-color: #FF391E
+    border-radius: 10px
+    color: #FFF
+    font-family: "Arial"
+    font-size: 12px
+    font-weight: 700
+    line-height: 20px
+    text-align: center
+    position: absolute
+    top: -10px
+    right: -8px
+
+  &__submit
+    width: 100%
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: none
+    border: none
+    outline: none
+
+  .fonticon
+    display : inline-block
+    & + span
+      margin-left : 10px
+
+    +width-lessthan(1024)
+      margin-top: -3px
+
+  &:hover, .hover
+    border: 1px solid #363636
+
+  &:focus, .focus
+    border: 1px solid #66cc66
+
+  &:active, .active
+    border: 1px solid #cccccc
+
+  &_lowercase
+    text-transform: none
+    font-weight: 400
+
+  &_disabled
+    cursor: default
+    pointer-events: none
+
+    &, &:focus, &:hover
+      border: 1px solid $color-disabled
+      color: #cccccc
+
+  &_green
+    border: 1px solid $color-green
+    background: $color-green
+    color: white
+
+    &:hover, .hover
+      border: 1px solid $color-green-hover
+      background: $color-green-hover
+
+    &:focus, .focus
+      border: 1px solid $color-green-active
+      background: $color-green-active
+
+    &:active, .active
+      border: 1px solid $color-green-active
+      background: $color-green-active
+
+    &.button_disabled
+      &, &:focus, &:hover
+        color : white
+        border: 1px solid $color-disabled
+        background: $color-disabled
+
+  &_green-transparent
+    border: 1px solid $color-green
+    background: none
+    color: $color-green
+
+    &:hover
+      border: 1px solid $color-green
+      background-color: $color-green
+      color: white
+
+  &_white
+    color: #fff
+    border-color: rgba(255, 255, 255, .2)
+
+    &:hover
+      border-color: rgba(255, 255, 255, 1)
+
+  &_black
+    border: 1px solid #313131
+    background: #1a1a1a
+    color: white
+
+    .fonticon
+      color: #303030
+
+    &:hover, .hover
+      border: 1px solid #535353
+
+      .fonticon
+        color: #535353
+
+    &:focus, .focus
+      border: 1px solid #66cc66
+
+    &:active, .active
+      border: 1px solid #313131
+      background : #313131
+
+    &.button_disabled
+      &, &:focus, &:hover
+        color: #303030
+        border: 1px solid #303030
+
+  &_pink
+    border: 1px solid #ff391e
+    color: #ff391e
+
+    &:hover
+      border-color: #ff391e
+      background: #ff391e
+      color: #fff
+
+  &_red
+    background: #ff391e
+    border-color: #ff391e
+    color: #fff
+
+    &:hover
+      background: #ff5640
+      border-color: #ff5640
+      color: #fff
+
+    &:focus
+      background: #ff5640
+      border-color: #4ecf4e
+      color: #fff
+
+    &:active
+      background: #e52b12
+      border-color: #e52b12
+      color: #fff
+
+    &.button_disabled
+      &, &:focus, &:hover
+        color : white
+        border: 1px solid $color-disabled
+        background: $color-disabled
+
+  &_transparent
+    background-color: transparent
+
+  &_tag
+    height: 30px
+    line-height: 30px
+    padding: 0 12px
+    font-size: 13px
+    font-weight: 400
+    text-transform: none
+    background: none
+    border-color: #cac3b6
+
+    &:hover
+      border-color: #ee1919
+
+    &.active
+      background-color: #ddd7ca
+      border-color: #ddd7ca
+      cursor: default
+
+  &_fit
+    display : block
+    text-align : center
+
+    .text-icon
+      padding-left : 30px
+
+    .text-icon__icon
+      width : 20px
+
+    & + &
+      margin-top : 10px
+
+  &_alignleft
+    text-align: left
+
+  &_round
+    padding : 0
+    width : 40px
+    height : 40px
+    text-align : center
+
+  &_no-border
+    border-color : transparent
+    box-shadow: 0.6px 0.8px 4px rgba(0, 0, 0, 0.15)
+
+    &:hover
+      border-color : transparent
+
+  &_like-it
+    font-family: "Noto Serif"
+    font-size: 18px
+    font-weight: 700
+
+  &_subscribed
+    .fonticon
+      font-size: 12px
+      color: #53cc62
+
+  &_add-subsection
+    padding: 0
+    border: none
+    background: none
+    margin-right: 30px
+    font-size: 13px
+    font-weight: 400
+    position: absolute
+    text-transform: none
+    right: 0
+    bottom: 20px
+
+    &:hover
+      border: none
+      color: #FF391E
+
+.button_shoping-list
+  // +width-lessthan(1024)
+    float: right
+
+  span
+    &:nth-child(2)
+      +width-lessthan(600)
+        display: none
+
+    &:nth-child(3)
+      margin-left: 10px
+      display: none
+
+      +width-lessthan(600)
+        display: inline-block
+
+  .absolute-container
+    height: auto
+    padding-top: 20px
+    left: -20px
+    visibility: hidden
+
+    +width-lessthan(1024)
+      left: auto
+      right: 0
+
+      .drop-down_favorites
+        left: auto
+        right: -15px
+
+.button_shoping-list.active
+
+  background: white
+  box-shadow: 0 1px 4px rgba(0,0,0,.15)
+  border-color: white
+
+  .fonticon_shoping-list
+    color: #ee1919
+
+  &:hover
+    border-color: white
+
+  .absolute-container
+    visibility: visible
+
+.button_order-shopping-list
+  float: right
+  .fonticon
+    vertical-align: top  
+  span
+    &:nth-child(2)
+      +width-lessthan(615)
+        display: none
+
+.button_check-all
+  +width-lessthan(600)
+    .fonticon + span
+      display: none
+
+.recipe-edit-add-button
+  margin-left: 15px
+
+.button_print
+  +imgbox('layout/expandeble-arrow.png', '', '.button__icon')
+  position: relative
+  display: inline-block
+
+  &:hover
+    border-color: white
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15)
+
+    +width-lessthan(1024)
+      border-color: #363636
+      box-shadow: none
+
+  .button
+    &__icon
+      display: inline-block
+      vertical-align: middle
+      margin: -2px 0 0 10px
+
+    &__drop-down-container
+      position: absolute
+      top: 0
+      right: 0
+      padding-top: 54px
+
+  .drop-down
+    display: none
+
+  &:hover
+    +imgbox('layout/expandeble-arrow-hover.png', '', '.button__icon')
+
+    .drop-down
+      display: block
+
+  .device-tooltip
+    position: absolute
+    bottom: 50px
+    right: 0
+    display: none
+
+    +width-lessthan(600)
+      right: -60px
+
+  &.showtip
+    .device-tooltip
+      display: block

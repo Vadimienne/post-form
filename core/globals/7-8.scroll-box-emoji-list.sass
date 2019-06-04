@@ -1,0 +1,84 @@
+@import '_imports'
+
+[data-module="scroll-box"], .scroll-box
+  .iScrollLoneScrollbar
+    position: absolute
+    bottom: 2px
+    top: 2px
+    right: 0px
+    width: 12px
+    z-index: 100
+    transform: translateZ(0)
+    opacity: 0.3
+    transition : opacity 3s ease 1.5s
+
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: auto
+      right: 2px
+      bottom: 0
+      background-color: #f2f2f2
+      border-radius: 2Px
+      width: 4px
+
+  .iScrollIndicator
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    margin: 0 auto
+    width: 12px
+    height: 100%
+    cursor: pointer
+    transform: translateZ(0)
+    
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: auto
+      right: 2px
+      width: 4px
+      height: 100%
+      background-color: #7c7c7c 
+      border-radius: 2Px
+
+  &:hover
+    .iScrollLoneScrollbar
+      opacity: 1
+      transition : opacity .3s ease
+
+.side-nav
+  .iScrollLoneScrollbar
+    bottom: 20px
+    top: 0
+    &:before
+      background-color: rgba(124, 124, 124, .1)
+
+
+.emoji-list
+  list-style-type: none
+  margin: 0
+  padding: 0
+  padding-bottom: 30px
+  position: relative
+  +clearfix
+
+  *
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+  li
+    font-size: 36px
+    float: left
+    display: inline-block
+    margin: 5px
+
+  img.emoji
+    cursor: pointer
+    height: 1em
+    width: 1em
+    vertical-align: -0.1em

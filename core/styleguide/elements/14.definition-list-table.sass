@@ -1,0 +1,116 @@
+@import '_imports'
+
+// Difinition-list-table
+//
+// Пищевая ценность
+//
+// default - обычное состояние
+//
+// markup:
+// +b('table').definition-list-table
+//   +e('tr').tr
+//     +e('td').td Белки
+//     +e('td').td_dashes
+//       span
+//     +e('td').td_value 3 г
+//
+// Styleguide 1.14
+
+.definition-list-table
+  width: 100%
+  border-collapse: collapse
+  line-height: normal
+
+  & + &
+    margin-top: 15px
+
+    +width-lessthan(1024)
+      margin-top: 0
+      border-top: 1px solid #ebe4d4
+
+  &__td
+    color: #4D4D4D
+    font-size: 14px
+    font-weight: 400
+
+    +width-lessthan(1024)
+      padding-top: 13px 
+      padding-bottom: 13px 
+      vertical-align: top
+
+    .duel-recipe-info &
+      max-width: 180px
+      overflow: hidden
+      text-overflow: ellipsis
+
+    &_dashes
+      width: 100%
+      box-sizing: border-box
+      padding: 0 15px
+      vertical-align: bottom
+
+      +width-lessthan(1024)
+        display: none
+
+      span
+        display: block
+        border-bottom: 1px dashed #cdcbc6
+        margin-top: -5px
+
+    &_name
+      width: 100%
+      &>div
+        position: relative
+        &:after 
+          content: ''
+          position: absolute
+          left: 32px
+          right: 15px
+          bottom: 3px
+          top: 0
+          border-bottom: 1px dashed #cdcbc6
+          // margin-top: -5px
+          +width-lessthan(1024)
+            display: none
+
+      +width-lessthan(1024)
+        width: 100%
+        white-space: normal
+        box-sizing: border-box
+        padding-right: 20px
+
+
+    &_value
+      color: #242424
+      font-weight: 600
+      max-width: none
+      text-align: right
+      white-space: nowrap
+      vertical-align: bottom
+      +width-lessthan(1024)
+        line-height: 24px
+
+    .checkbox
+      span
+        color: #4D4D4D
+        font-size: 14px
+        font-weight: 400
+
+      &_has-info
+        text-decoration: underline
+
+        +width-lessthan(1024)
+          text-decoration: none
+
+          .checkbox-info-container
+            display: inline-block
+
+        &:hover
+          text-decoration: none
+
+  .recipe_ingredient_title
+    display: inline
+    padding-right: 15px
+    background: #fbf8f6
+    position: relative
+    z-index: 1

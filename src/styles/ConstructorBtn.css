@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.add-module-btn:focus{
+  background-color: red;
+}
+
 .add-module-text{
   margin-top: 1px;
   white-space: nowrap;

@@ -1,0 +1,137 @@
+@import '_imports'
+
+// Recipe author block
+//
+// Блок с автором и кнопками в рецепте
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.recipe-author-block
+//   +b.button_like-it._red
+//     +b('span').fonticon_like
+//     span 1488
+//   +b.button_comments._transparent
+//     +b('span').fonticon_message
+//     span 1488
+//   +b.button_rate._transparent
+//     +b('span').fonticon_like
+//     span 1488
+//   +b('a').person_h._lh-big(href="#")
+//     +b.user-avatar_big
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//     +e.status
+//
+// Styleguide 7.10
+
+.recipe-author-block
+  +clearfix
+
+  &__buttons-container
+    float: right
+    display: flex
+    flex-direction: row-reverse
+
+    +width-lessthan(600)
+      float: none
+      justify-content: space-between
+      padding-top: 13px
+      border-top: 1px solid #ddd9cd
+      margin-top: 15px
+
+  .button
+    font-family: "Noto Serif"
+    font-size: 14px
+    font-weight: 700
+    margin-top: 20px
+
+    +width-lessthan(1024)
+      margin-top: 5px
+
+    & + .button
+      margin-right: 10px
+      margin-left: 0 !important
+
+    .fonticon + span
+      margin-left: 5px
+
+    span
+      margin-top: -6.5px
+
+    .fonticon
+      padding-top: 0
+      font-size: 18px
+
+    &_comments
+      padding: 0 8px
+
+      +width-lessthan(1024)
+        width: 80px
+        text-align: center
+        padding: 0
+
+    &_rate
+      padding: 0 8px
+
+      +width-lessthan(1024)
+        width: 80px
+        text-align: center
+        padding: 0
+
+    &_like-it
+      padding: 0 13px
+
+      +width-lessthan(1024)
+        padding: 0
+        text-align: center
+        width: 100px
+
+      .fonticon
+        font-size: 16px
+
+  .person
+    +width-lessthan(1024)
+      &__wrapper
+        line-height: 50px
+
+      &__status
+        top: 0
+        left: 0
+
+      &__post-time
+        margin-top: 0
+        line-height: normal
+
+      .user-avatar
+        width: 50px
+        height: 50px
+        margin-right: 10px
+
+    &__name
+      // width: 150px
+      padding-bottom: 2px
+      position: relative
+      overflow: hidden
+      // white-space: normal
+      text-overflow: ellipsis
+      line-height: 18px
+
+      +width-lessthan(1024)
+        // width: 100px
+        font-size: 14px
+        line-height: 16px
+        padding-bottom: 0
+
+  .person_lh-big
+    width: auto
+    color: #333 !important
+    .person__name
+      white-space: normal
+      overflow: visible
+    .person__wrapper
+      width: auto
+

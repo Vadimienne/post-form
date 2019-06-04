@@ -1,0 +1,81 @@
+@import '_imports'
+
+// Loading in progress
+//
+// Класс показывающий что в данные момент происходит загрузка
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.messages-list.loading-in-progress.loading-in-progress_rounded
+//   +e.container
+//     +e.item
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.item-content
+//         +e.item-user
+//           +e.item-user-name Апрель
+//         +e.item-date 14:31
+//         +e.item-unread 20
+//         +e.item-message Привет! Я хотела узнать как взять и сварить
+//     +e.item
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.item-content
+//         +e.item-user
+//           +e.item-user-name Очень длинное имя пользователя
+//           +e.item-user-online
+//         +e.item-date 14:31
+//         +e.item-message Привет! Я хотела узнать как взять и сварить
+//     +e.item.active
+//       +b.user-avatar_average
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.item-content
+//         +e.item-user
+//           +e.item-user-name Апрель
+//           +e.item-user-online
+//         +e.item-date 14:31
+//         +e.item-message Привет! Я хотела узнать как взять и сварить
+//   .loading-in-progress__overlay
+//
+// Styleguide 1.55
+
+.loading-in-progress
+  position: relative
+
+  &__overlay
+    position: absolute
+    z-index: 1000
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: white
+
+  &__container
+    display: table
+    width: 100%
+    height: 100%
+
+  &__row
+    display: table-cell
+    vertical-align: middle
+    text-align: center
+
+  &__spinner
+    +imgbox('preloader.png')
+    margin: 0 auto 5px
+
+  &__text
+    color: #999
+    font-family: "Open Sans"
+    font-size: 11px
+    font-weight: 600
+    text-transform: uppercase
+
+.loading-in-progress_recipes
+
+  .loading-in-progress
+    &__overlay
+      background-color: #f5eee0

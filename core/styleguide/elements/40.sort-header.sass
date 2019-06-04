@@ -1,0 +1,110 @@
+@import '_imports'
+
+// Sort header
+//
+// Сортировка
+//
+// sort-header - обычное состояние
+//
+// markup:
+// +b.sort-header
+//   +b.right
+//     +b.sort-container(data-module="sort-container")
+//       +e.label Сортировать:
+//       +b.sort-selectbox
+//         +e.selected-value по добавлению
+//         +e.icon
+//   +e.found Найдено 5 пользователей
+//
+// Styleguide 1.40
+
+.sort-header
+  +clearfix
+  padding: 20px 0
+  border-top: 1px solid #ded9cc
+  border-bottom: 1px solid #ded9cc
+  line-height: 13px
+  margin-bottom: 10px
+
+  &.with-tags
+    border-bottom: none
+    margin-bottom: 0
+
+  .right
+    line-height: 40px
+
+  &__sort
+    float: right
+    font-size: 13px
+    color: #242424
+    font-weight: 700
+
+  &__found
+    color: #4D4D4D
+    font-size: 13px
+    font-weight: 400
+    float: left
+    line-height: 40px
+
+    +width-lessthan(1024)
+      display: none
+
+  &__found-item
+    color: #4D4D4D
+
+    &:hover
+      color: #ff391e
+      text-decoration: underline
+
+  .drop-down
+    visibility: hidden
+    opacity: 0
+
+.sort-header_search-result
+  margin-bottom: 20px
+  //margin-top: 12px
+
+.filter-button
+  width: 170px
+  height: 40px
+  position: relative
+  float: left
+  border-radius: 20px
+  +background-image-retina('recipes/icon-filter.png')
+  background-position: 30px center
+  background-repeat: no-repeat
+  background-color: #e02407
+  line-height: 40px
+  font-family: "Open Sans"
+  font-size: 12px
+  font-weight: 600
+  color: #ffffff
+  letter-spacing: 1px
+  text-align: center
+  text-transform: uppercase
+  cursor: pointer
+  transition: background-color 0.2s ease
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  &:hover
+    background-color: #ff391e
+
+  &__count
+    padding: 0 6px
+    height: 20px
+    background-color: #ffffff
+    border-radius: 20px
+    position: absolute
+    top: 50%
+    left: 120px
+    margin-top: -10px
+    font-family: "Open Sans"
+    font-size: 11px
+    font-weight: 600
+    line-height: 20px
+    text-align: center
+    color: #e02407
+    letter-spacing: 0.1px

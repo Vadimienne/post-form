@@ -1,0 +1,46 @@
+@import '_imports'
+
+.grid-three-column
+  +clearfix
+
+  &__column
+
+  &__column_left
+    float: left
+    width: 280px
+
+    +width-lessthan(1024)
+      display: none
+
+  &__column_center
+    float: right
+    width: 580px
+    margin-right: 20px
+
+    +width-lessthan(1024)
+      width: 688px
+      margin: 0 auto
+      float: none
+
+      .content-box
+        border-radius: 10px
+
+    +width-lessthan(768)
+      +width-between-property(width, 320, 320, 768, 688, true, true)
+
+    +width-lessthan(600)
+      width: 100%
+
+  &__column_right
+    width: 280px
+    float: right
+    min-height: 450px
+
+    +width-lessthan(1024)
+      display: none
+
+  .page-header
+    padding-bottom: 20px
+
+    +width-lessthan(1024)
+      padding: 0

@@ -1,0 +1,307 @@
+@import "_imports.sass"
+@import "../fonts/stylesheet.sass"
+
+@page
+  size: auto
+  margin: 5mm 0mm 5mm 0mm
+
+
+.body_print
+  font-family: 'Noto Serif'
+  margin: 5mm 15mm 0mm 15mm
+  position: relative
+  background-color: #FFFFFF
+
+  p
+    margin: 0
+
+  .page
+    width: 166.335mm
+    margin: 0 auto
+
+  .logo
+    float: right
+
+  .title
+    font-weight: bold
+    font-size: 16pt
+    width: 100mm
+    color: #232323
+    margin-bottom: 6mm
+
+  .author
+    font-weight: bold
+    font-size: 9pt
+    color: #000101
+
+  .post-time
+    font-family: 'Open sans'
+    font-size: 6pt
+    color: #9e9e9f
+
+  .author-block
+    +clearfix
+    margin-bottom: 6.9mm
+
+    .author
+      padding-top: 0.5mm
+
+    &__image
+      display: block
+      float: left
+      margin-right: 4mm
+      border-radius: 50%
+
+  .separator
+    border-top: 0.275mm solid #a7a9ac
+    width: 100%
+    margin: 6mm 0 6mm
+
+  .recipe-image
+    width: 122.786mm
+    height: 76.864mm
+    position: relative
+    overflow: hidden
+    float: left
+
+    img
+      width: 100%
+
+  .info
+    +clearfix
+
+    &__column
+      width: 79.9mm
+      float: left
+
+      & + .info__column
+        float: right
+
+      .info__description
+        width: auto
+
+    &__title
+      font-size: 8pt
+      font-weight: bold
+      font-family: 'Open sans'
+      margin-bottom: 3mm
+
+    &__description
+      font-size: 8pt
+      color: #58585b
+      width: 120mm
+      float: left
+
+      p
+        margin-bottom: 3mm
+
+        &:last-child
+          margin-bottom: 0
+
+  .main-info
+    +clearfix
+    margin-bottom: 6mm
+
+    &__column
+      width: 36.72mm
+      float: left
+      margin-left: 6.245mm
+      border-top: 0.275mm solid #a7a9ac
+      padding-top: 5.25mm
+
+    &__item
+      +clearfix
+      margin-bottom: 4.80mm
+
+    &__image
+      display: block
+      float: left
+
+      &_cooking
+        height: 6.71mm
+        margin: 0 4.50mm 0 1.28mm
+
+      &_prepare
+        height: 6.9mm
+        margin: 0 4.5mm 0 1.28mm
+
+      &_person
+        height: 7mm
+        margin: 0 3.7mm 0 1.26mm
+
+    &__title
+      font-family: 'Open sans'
+      font-size: 6pt
+      color: #9e9e9f
+
+    &__content
+      font-size: 9pt
+      font-weight: bold
+      color: #000101
+
+    .nutritional-value
+      border: 0.271mm solid #e6e7e8
+      box-sizing: border-box
+      width: 37.189mm
+      padding: 3mm 1.5mm 3mm 2mm
+      margin-top: 6.7mm
+
+      &__title
+        font-family: 'Open sans'
+        font-weight: bold
+        font-size: 8pt
+        color: #242424
+        margin-bottom: 5mm
+
+  .definition-list-table
+    width: 100%
+    border-collapse: collapse
+
+    & + .definition-list-table
+      margin-top: 2mm
+
+    &__td
+      white-space: nowrap
+      color: #404041
+      font-size: 6pt
+
+      &_dashes
+        width: 100%
+        box-sizing: border-box
+        padding: 0 2.2mm
+        vertical-align: bottom
+
+        span
+          display: block
+          border-bottom: 0.271mm dashed #cdcbc6
+          margin-top: -0.771mm
+
+  .steps,
+  .ingredients
+    .definition-list-table__td
+      font-size: 8pt
+
+    .definition-list-table__td_dashes
+      span
+        margin-top: -0.871mm
+
+  .ingredients
+    margin-bottom: 10mm
+
+    &__title
+      font-weight: bold
+      font-size: 9pt
+      margin-bottom: 6mm
+
+    &__row
+      +clearfix
+      margin-bottom: 6mm
+
+    &__list
+      float: left
+      width: 80mm
+      page-break-inside: avoid
+
+      &_shop
+        float: none
+        width: 167mm
+        margin-bottom: 6mm
+
+    .ingredients__list + .ingredients__list
+      float: right
+
+    &__name
+      font-size: 8pt
+      font-weight: bold
+      font-family: 'Open sans'
+      margin-bottom: 3mm
+
+  .steps
+
+    .definition-list-table
+      width: 80mm
+      margin-bottom: 5mm
+
+    &__step
+      +clearfix
+      page-break-inside: avoid
+
+    &__numbers
+      width: 15mm
+      float: left
+      font-size: 9pt
+      font-weight: bold
+      font-family: 'Open sans'
+      white-space: nowrap
+      margin: -1mm 6mm 0 0
+
+    &__number
+      color: #bbbdc0
+
+      &_current
+        color: #242424
+
+    &__image
+      width: 59mm
+      height: 50.419mm
+      position: relative
+      overflow: hidden
+      float: left
+      margin-right: 5.77mm
+
+      img
+        width: 100%
+
+    &__info
+      border-top: 0.271mm solid #a7a9ac
+      padding-top: 3.5mm
+      padding-bottom: 2.5mm
+      // width: auto
+      // overflow: hidden
+      float: left
+      width: 80mm
+
+      p
+        font-size: 8pt
+        color: #58585b
+        margin-bottom: 3.5mm
+
+  .page_no-images
+
+    .info
+      .nutritional-value
+        float: right
+        border: 0.271mm solid #e6e7e8
+        box-sizing: border-box
+        width: 37.189mm
+        padding: 3mm 1.5mm 3mm 2mm
+
+        &__title
+          font-family: 'Open sans'
+          font-weight: bold
+          font-size: 8pt
+          color: #242424
+          margin-bottom: 5mm
+
+    .main-info
+      &__item
+        display: inline-block
+        margin-right: 10mm
+
+      &__title
+        margin-left: 10.64mm
+
+      &__image
+        margin: 0
+
+      &__content
+        margin-left: 10.64mm
+
+    .steps
+      &__numbers
+        margin: 0
+
+      &__info
+        width: 145.877mm
+        float: right
+        margin-top: 1mm

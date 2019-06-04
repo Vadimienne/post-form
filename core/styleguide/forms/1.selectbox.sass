@@ -1,0 +1,729 @@
+@import '_imports'
+
+// Selectbox
+//
+// Выпадающий список
+//
+// selectbox_default  - обычное состояние
+// selectbox_open  - раскрытое состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.selectbox(class="{$modifiers}")
+//   +b.selectvalue Выберите ...
+//   +b.selectlist
+//     +e('a').item(href="#") Наименование 1
+//     +e('a').item(href="#") Наименование 1
+//     +e('a').item(href="#") Наименование 1
+//     +b.scroll
+//       +e.track
+//         +e.drag
+// div(style="height:150px")
+//
+// Styleguide 2.1
+
+.selectbox
+  //width: 381px
+  height: 38px
+  border: 1px solid #e6e6e6
+  background-color: #FFF
+  border-radius: 4px
+  position: relative
+
+  &_cooking-time
+    float: left
+    width: 106px
+    border: none
+
+  &_person-quantity
+    float: left
+    width: 80px
+    border: none
+
+  &_w150
+    width: 150px
+    border: none
+
+  &_open
+    border-radius: 4px 4px 0 0
+
+    .selectvalue
+      &:after
+        +imgbox('forms/selectbox-arrow-up.png')
+
+    .selectlist
+      display: block
+
+.selectvalue
+  padding-left: 20px
+  line-height: 38px
+  color: #B3B3B3
+  font-family: "Open Sans"
+  font-size: 14px
+  font-weight: 400
+  cursor: pointer
+  position: relative
+
+  &:before
+    content: ''
+    border-left: 1px solid #CDCBC6
+    height: 19px
+    position: absolute
+    top: 9px
+    right: 31px
+
+  &:after
+    content: ''
+    +imgbox('forms/selectbox-arrow-down.png')
+    position: absolute
+    top: 16px
+    right: 9px
+
+.selectlist
+  display: none
+  height: 127px
+  padding: 10px 0
+  background-color: #FFF
+  border-radius: 0 0 4px 4px
+  border: 1px solid #e6e6e6
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+  position: absolute
+  top: 100%
+  left: 0
+  right: -1px
+
+  &__item
+    height: 40px
+    padding-left: 20px
+    font-family: "Open Sans"
+    font-size: 14px
+    font-weight: 400
+    color: #242424
+    line-height: 40px
+    cursor: pointer
+    display: block
+
+    &:hover
+      background-color: #FBF8F6
+
+//Selectize
+.field
+  select
+    display: block
+    height: 40px
+    visibility: hidden
+
+.selectize-control
+  line-height: 0
+  font-size: 0
+  border-radius: 4px
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    right: 31px
+    top: 10px
+    height: 20px
+    width: 1Px
+    background-color: #cdcbc6
+    z-index: 2
+    pointer-events: none
+
+  &:hover
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+
+  .iScrollLoneScrollbar
+    position: absolute
+    bottom: 2px
+    top: 2px
+    right: 0px
+    width: 12px
+    z-index: 100
+    transform: translateZ(0)
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: auto
+      right: 2px
+      bottom: 0
+      background-color: #f2f2f2
+      border-radius: 2Px
+      width: 4px
+
+  .iScrollIndicator
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    margin: 0 auto
+    width: 12px
+    height: 48px
+    cursor: pointer
+    transform: translateZ(0)
+
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: auto
+      right: 2px
+      width: 4px
+      height: 48px
+      background-color: #7c7c7c
+      border-radius: 2Px
+
+.selectize-control.plugin-drag_drop
+  &.multi > .selectize-input > div.ui-sortable-placeholder
+    visibility: visible !important
+    background: #f2f2f2 !important
+    background: rgba(0, 0, 0, 0.06) !important
+    border: 0 none !important
+    -webkit-box-shadow: inset 0 0 12px 4px #ffffff
+    box-shadow: inset 0 0 12px 4px #ffffff
+  .ui-sortable-placeholder::after
+    content: '!'
+    visibility: hidden
+  .ui-sortable-helper
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+
+.selectize-dropdown-header
+  position: relative
+  padding: 5px 8px
+  border-bottom: 1px solid #d0d0d0
+  background: #f8f8f8
+  border-radius: 4px 4px 0 0
+
+.selectize-dropdown-header-close
+  position: absolute
+  right: 8px
+  top: 50%
+  color: #303030
+  opacity: 0.4
+  margin-top: -12px
+  line-height: 20px
+  font-size: 20px !important
+  &:hover
+    color: #000000
+
+.selectize-dropdown.plugin-optgroup_columns
+  .optgroup
+    border-right: 1px solid #f2f2f2
+    border-top: 0 none
+    float: left
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+    &:last-child
+      border-right: 0 none
+    &:before
+      display: none
+  .optgroup-header
+    border-top: 0 none
+
+.selectize-control
+  &.plugin-remove_button
+    [data-value]
+      position: relative
+      padding-right: 24px !important
+      .remove
+        z-index: 1
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        width: 17px
+        text-align: center
+        font-weight: bold
+        font-size: 12px
+        color: inherit
+        text-decoration: none
+        vertical-align: middle
+        display: inline-block
+        padding: 2px 0 0 0
+        border-left: 1px solid #0073bb
+        border-radius: 0 2px 2px 0
+        box-sizing: border-box
+        &:hover
+          background: rgba(0, 0, 0, 0.05)
+      &.active .remove
+        border-left-color: #00578d
+    .disabled [data-value] .remove
+      &:hover
+        background: none
+      border-left-color: #aaaaaa
+  position: relative
+
+.selectize-dropdown
+  color: #303030
+  font-family: inherit
+  font-size: 13px
+  line-height: 18px
+  -webkit-font-smoothing: inherit
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+
+.plugin-custom_scroll.selectize-dropdown
+  max-height: 138px
+  overflow: hidden
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+
+.selectize-input
+  color: #b3b3b3
+  font-family: inherit
+  font-size: 14px
+  line-height: 18px
+  -webkit-font-smoothing: inherit
+  input
+    color: #b3b3b3
+    font-family: inherit
+    font-size: 14px
+    line-height: 18px
+    -webkit-font-smoothing: inherit
+  background: #ffffff
+  cursor: text
+  display: inline-block
+
+.selectize-control.single .selectize-input.input-active
+  background: #ffffff
+  cursor: text
+  display: inline-block
+
+.selectize-input
+  border: 1px solid #e6e6e6
+  padding: 10px 35px 10px 20px
+  display: inline-block
+  width: 100%
+  overflow: hidden
+  position: relative
+  z-index: 1
+  box-sizing: border-box
+  border-radius: 4px
+
+  &:hover
+    border-color: #363636
+
+.selectize-control.multi .selectize-input.has-items
+  padding: 5px 8px 2px
+
+.selectize-input
+  &.full
+    background-color: #ffffff
+  &.disabled
+    cursor: default !important
+    *
+      cursor: default !important
+  &.focus
+  &.dropdown-active
+    border-radius: 4px 4px 0 0
+    border-color: #e6e6e6
+  > *
+    vertical-align: baseline
+    display: -moz-inline-stack
+    display: inline-block
+    zoom: 1
+    *display: inline
+
+.selectize-control.multi .selectize-input
+  > div
+    cursor: pointer
+    margin: 0 3px 3px 0
+    padding: 2px 6px
+    background: #1da7ee
+    color: #ffffff
+    border: 1px solid #0073bb
+    &.active
+      background: #fbf8f6
+      color: #ffffff
+      border: 1px solid #00578d
+  &.disabled > div
+    color: #ffffff
+    background: #d2d2d2
+    border: 1px solid #aaaaaa
+    &.active
+      color: #ffffff
+      background: #d2d2d2
+      border: 1px solid #aaaaaa
+
+.selectize-input
+  .item
+    color: #242424
+    max-width: 88%
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    display: block
+    float: left
+  > input
+    display: inline-block !important
+    padding: 0 !important
+    min-height: 0 !important
+    max-height: none !important
+    max-width: 100% !important
+    margin: 0 1px !important
+    text-indent: 0 !important
+    border: 0 none !important
+    background: none !important
+    line-height: inherit !important
+    -webkit-user-select: auto !important
+    -webkit-box-shadow: none !important
+    box-shadow: none !important
+    float: left
+    &::-ms-clear
+      display: none
+    &:focus
+      outline: none !important
+  &::after
+    content: ' '
+    display: block
+    clear: left
+  &.dropdown-active::before
+    content: ' '
+    display: block
+    position: absolute
+    background: #f0f0f0
+    height: 1px
+    bottom: 0
+    left: 0
+    right: 0
+
+.selectize-dropdown
+  position: absolute
+  z-index: 10
+  border: 1px solid #e5e5e5
+  background: #ffffff
+  margin: -1px 0 0 0
+  border-top: 0 none
+  box-sizing: border-box
+  border-radius: 0 0 4px 4px
+  [data-selectable]
+    display: block
+    cursor: pointer
+    overflow: hidden
+    .highlight
+      // highlight style on search
+    padding: 11px 20px
+    font-size: 14px
+    color: #242424
+  .optgroup-header
+    padding: 5px 8px
+  .optgroup:first-child .optgroup-header
+    border-top: 0 none
+  .optgroup-header
+    color: #303030
+    background: #ffffff
+    cursor: default
+  .active
+    background-color: #fbf8f6
+    &.create
+      color: #495c68
+  .create
+    color: rgba(48, 48, 48, 0.5)
+
+
+.selectize-dropdown-content
+  overflow-y: auto
+  overflow-x: hidden
+  max-height: 138px
+  position: relative
+
+.selectize-control .selectize-dropdown-content
+  .checkbox + .checkbox
+    margin-left: 0
+
+  .checkbox
+    height: auto
+    line-height: normal
+    padding-bottom: 12px
+    padding-top: 14px
+
+    .checkbox__input span
+      line-height: 20px
+
+
+.plugin-custom_scroll.selectize-dropdown .selectize-dropdown-content
+  max-height: none
+  overflow-y: hidden
+
+.selectize-control
+  &.single .selectize-input
+    cursor: pointer
+    input
+      cursor: pointer
+    &.input-active
+      cursor: text
+      input
+        cursor: text
+
+    &:after
+      content: ' '
+      +imgbox('forms/selectbox-arrow-down.png')
+      position: absolute
+      top: 16px
+      right: 9px
+
+    &.dropdown-active:after
+      +imgbox('forms/selectbox-arrow-up.png')
+
+  &.rtl
+    &.single .selectize-input:after
+      left: 15px
+      right: auto
+    .selectize-input > input
+      margin: 0 4px 0 -2px !important
+  .selectize-input.disabled
+    opacity: 0.5
+    background-color: #fafafa
+  &.multi
+    &:after
+      display: none
+  &.multi .selectize-input
+    &.has-items
+      padding-left: 5px
+      padding-right: 5px
+    &.disabled [data-value]
+      color: #999
+      text-shadow: none
+      background: none
+      -webkit-box-shadow: none
+      box-shadow: none
+      border-color: #e6e6e6
+      .remove
+        border-color: #e6e6e6
+        background: none
+    [data-value]
+      text-shadow: 0 1px 0 rgba(0, 51, 83, 0.3)
+      border-radius: 3px
+      background-color: #1b9dec
+      background-image: linear-gradient(to bottom, #1da7ee, #178ee9)
+      background-repeat: repeat-x
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.03)
+      &.active
+        background-color: #0085d4
+        background-image: linear-gradient(to bottom, #008fd8, #0075cf)
+        background-repeat: repeat-x
+  &.single .selectize-input
+
+//for field_search
+
+.field_search
+
+  .selectize-input .person
+    display: inline-block
+    vertical-align: middle
+
+  .selectize-input.has-items
+    padding-top: 4px
+    padding-bottom: 4px
+
+  .selectize-control
+    &:after
+      right: 53px
+
+    &.single .selectize-input
+
+      &:after
+        content: ' '
+        +imgbox('forms/search-icon.png')
+        position: absolute
+        top: 9px
+        right: 19px
+
+      &.dropdown-active:after
+        +imgbox('forms/search-icon.png')
+
+.selectize-dropdown
+  &.single
+    border-color: #e5e5e5
+  .optgroup-header
+    padding-top: 7px
+    font-weight: bold
+    font-size: 0.85em
+  .optgroup
+    border-top: 1px solid #f0f0f0
+    &:first-child
+      border-top: 0 none
+
+// multiple-select
+
+.ms-parent
+  width: 280px !important
+  height: 38px
+  position: relative
+  border-radius: 4px
+
+  +width-lessthan(1024)
+    width: 260px !important
+
+  &:hover
+    .ms-choice
+      border-color: #363636
+
+      +width-lessthan(1024)
+        border-color: #e6e6e6
+
+  &.open
+    .ms-choice
+      border-radius: 4px 4px 0 0
+      border-color: #e6e6e6
+
+  .ms-choice
+    width: 280px
+    height: 38px
+    line-height: 38px
+    outline: none
+    border: 1px solid #e6e6e6
+    border-radius: 4px
+    background-color: #FFF
+    position: relative
+    overflow: hidden
+
+    +width-lessthan(1024)
+      width: 260px
+
+    span
+      display: block
+      padding-left: 20px
+      position: absolute
+      right: 35px
+
+    & > div
+      +imgbox('forms/selectbox-arrow-down.png')
+      top: 16px
+      right: 9px
+
+      &.open
+        +imgbox('forms/selectbox-arrow-up.png')
+
+    &:before
+      content: ''
+      border-left: 1px solid #CDCBC6
+      height: 19px
+      position: absolute
+      top: 9px
+      right: 31px
+
+  .ms-search
+    padding: 10px 20px
+    height: 58px
+
+    input
+      height: 100% !important
+      border-radius: 2px
+      border: 1px solid #e7e7e7
+      font-size: 14px
+      font-weight: 400
+      padding: 0 20px
+      border-radius: 4px
+      background: none
+
+      &:focus
+        border-color: #66cc66
+
+  .ms-drop
+    width: 280px
+    box-sizing: border-box
+    padding: 5px 0 10px
+    background-color: #FFF
+    border-radius: 0 0 4px 4px
+    border: 1px solid #e6e6e6
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+
+    +width-lessthan(1024)
+      width: 260px
+
+    ul
+      max-height: 340px !important
+      padding: 5px 20px 10px 20px
+
+      li
+        line-height: 0
+        display: list-item
+        list-style: none
+
+        label
+          margin-bottom: 0
+
+        & + li
+          label
+            margin-top: 15px
+
+        &.ms-no-results
+          line-height: normal
+
+      .mCSB_scrollTools .mCSB_draggerRail
+        background-color: rgba(124, 124, 124, 0.1)
+        width: 4px
+        border-radius: 2px
+
+      .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+        background-color: rgba(124, 124, 124, 1)
+        border-radius: 2px
+        cursor: pointer
+
+      .mCSB_outside + .mCSB_scrollTools
+        right: -4px
+
+      label
+        display: inline-block
+        color: #242424
+        font-family: "Open Sans"
+        font-size: 14px
+        cursor: pointer
+        font-weight: normal
+        margin-bottom: 20px
+
+        input + span:before
+          top : 10px
+
+        &:hover
+          input + span:before
+            border-color: #303030
+
+        input
+          display: none
+
+          & + span
+            display: block
+            position: relative
+            padding-left: 30px
+            line-height: 20px
+
+            &:hover
+              z-index: 1
+              .checkbox-info
+                display: block
+
+            &:before
+              content: ''
+              width: 18px
+              height: 18px
+              background-color: #FFF
+              border-radius: 2px
+              border: 1px solid #e7e7e7
+              position: absolute
+              top: 0px
+              left: 0
+
+          &:checked + span::before
+            +imgbox('forms/checkbox-checked.png')
+            border: none
+
+.user-select
+  +clearfix
+
+  img
+    display: block
+    width: 21px
+    height: 21px
+    border-radius: 50%
+    float: left
+
+  &__name
+    float: left
+    line-height: 21px
+    max-width: 210px
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+    margin-left: 5px

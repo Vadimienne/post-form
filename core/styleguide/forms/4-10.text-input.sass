@@ -1,0 +1,959 @@
+@import '_imports'
+
+// Forms
+//
+// Элементы формы
+//
+// Styleguide 2.0
+
+// Text-input
+//
+// Базовый блок для всех филдов
+//
+// default - обычное состояние
+// field_inline - Строчное представление
+// field_error - С ошибкой
+// field_valid - Валидный
+// field_disabled - Не активный
+// field_big - Большой
+// field_medium - Средний
+// field_collection - Модификатор для коллецкции радиобатоннов или чекбоксов
+// field_one-line - Когда лейбл и инпут в одну строку
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.field(class='{$modifiers}')
+//   +e('label').label
+//     +e('span').labelvalue Ваше имя:
+//     +e('span').required &nbsp;*
+//     +e.container
+//       +e('input').input(type="text" placeholder="Введите имя")
+//       +e.sidebar
+//         +e.button
+//           .icon
+//       +b.warning-icon
+//       +b.error-message Ошибка ввода. Ребята что то не так.
+//
+// Styleguide 2.4
+
+.field
+  $sidebar-width: 0px
+  position: relative
+
+  &_w80
+    width: 80px
+
+  &_w100
+    width: 100px
+
+  &_w104
+    width: 104px
+    margin-right: 25px
+
+  &_w116
+    width: 116px
+
+  &_w120
+    width: 120px
+
+  &_w139
+    width: 139px
+
+  &_w240
+    width: 240px
+
+  &_w260
+    width: 260px
+
+  &_w278
+    width: 278px
+
+  &_w294
+    width: 294px
+
+  &_w390
+    width: 390px
+
+  & + &
+    margin-left : 15px
+
+  &_clock
+    .field__container
+      float: left
+      width: 45px
+
+    .field__input
+      padding: 0 15px
+
+    .measure + .field__container
+      margin-left: 15px
+
+  &_preparation-time
+    margin-left: 93px
+
+  &_person
+    .field__container
+      float: left
+      width: 80px
+
+  &__label
+    &_w120
+      width: 120px
+      display: inline-block
+    &_w139
+      width: 139px
+      display: inline-block
+    &_w104
+      width: 104px
+      display: inline-block
+
+    &:hover
+      .field__container
+        border-color: #363636
+
+        +width-lessthan(1024)
+          border-color: #e6e6e6
+
+        &.focus
+          border-color: #66cc66
+
+      .field__container_radio
+        border-color: transparent
+
+    &_error
+      position: relative
+
+      .field__labelvalue
+        margin-left: 26px
+        color: #ff451c
+
+      .field__container
+        border-color: #ff451c
+
+      .field__container_radio
+        border-color: #ff451c
+
+      .field__input
+        color: #ff451c !important
+        +placeholder
+          color: #ff451c !important
+
+      .selectize-input
+        border-color: #ff451c
+
+      .warning-icon
+        display: block
+
+        &:hover
+          & + .error-message
+            display: block
+
+    & + .field__label
+      margin-left: 15px
+
+  &__labelvalue
+    display: inline-block
+    font-size: 14px
+    font-weight: 700
+    color: #242424
+    margin-bottom: 15px
+    white-space: nowrap
+
+    &_solo
+      display: block
+
+    &_empty
+      height: 18px
+
+  &__required
+    display: inline-block
+    font-size: 14px
+    font-weight: 700
+    color: #FF3C20
+    margin-bottom: 15px
+
+  &__container
+    border: 1px solid #e6e6e6
+    background-color: #FFF
+    border-radius: 4px
+    height: 38px
+    transition: border-color .25s ease
+    // padding: 0 $sidebar-width 0 20px
+    padding: 0 $sidebar-width 0 0
+    position: relative
+    display: block
+    overflow: hidden
+
+    &.focus
+      border-color: #66cc66
+
+  &__input
+    outline: none
+    border: none
+    background: transparent
+    height: 100%
+    width: 100%
+    box-sizing: border-box
+    font-size: 14px
+    font-weight: 400
+    padding: 0 20px
+    border-radius: 4px
+
+    +placeholder
+      color: #B3B3B3
+
+  &__sidebar
+    position: absolute
+    top: 0
+    right: 0
+    height: 100%
+    width: $sidebar-width
+    background: transparent
+    border: 0
+
+  &_collection
+    .field__container
+      border-color : transparent
+      background : transparent
+      padding-left : 0px
+
+  &_error
+    .field__container
+      border-color: #ff451c
+      overflow: visible
+
+    .field__container_radio
+      padding-left: 38px
+
+    .field__input
+      padding-left: 38px
+      color: #ff451c !important
+      +placeholder
+        color: #ff451c !important
+
+    &:hover
+      .field__container
+        border-color: #ff451c
+
+      .field__container_radio
+        border-color: #ff451c
+
+    .warning-icon
+      display: block
+
+      &:hover
+        & + .error-message
+          display: block
+
+    .selectize-input
+      border-color: #ff451c
+      padding-left: 38px
+
+  &_valid
+    .field__container
+      border-color: red
+
+  &_disabled
+    .field__container
+      border-color: #ccc
+
+
+  &_inline
+    display: inline-block
+    vertical-align: top
+
+  &_big
+    .field__container
+      height: 62px
+
+    .field__input
+      font-family: "Noto Serif"
+      font-size: 22px
+      font-weight: 700
+      +placeholder
+        color: #B3B3B3
+
+  &_medium
+    .field__container
+      height: 50px
+
+    .field__input
+      color: #B3B3B3
+      font-weight: 700
+
+  &_one-line
+    +clearfix
+
+    & + &
+      margin-left: 0
+
+    .field__labelvalue
+      float: left
+      line-height: 40px
+      margin-bottom: 10px
+
+    .field__container
+      float: right
+
+    .selectbox
+      float: right
+
+.field_new-message.field_error
+  .field__container
+    border-color: #ff451c
+
+.error-message
+  display: none
+  max-width: 295px
+  padding: 5px 9px
+  background-color: red
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(71, 44, 6, 0.2)
+  position: absolute
+  top: 35px
+  left: -9px
+  color: white
+  font-family: "Open Sans"
+  font-size: 13px
+  font-weight: 400
+  line-height: normal
+  z-index: 10
+
+  &_image
+    top: 100%
+    left: 50%
+    margin-left: -110px
+    margin-top: 5px
+
+  &_label
+    left: -19px
+    top: 29px
+
+  &_field-description
+    left: 1px
+    top: 44px
+
+  &_drop-down
+    top: 77px
+
+  &_drop-down-new-message
+    top: 37px
+
+  &_big
+    top: 48px
+
+  &_add-recipe
+    top: 35px
+
+  &:before
+    content: ''
+    border-right: 9px solid transparent
+    border-left: 9px solid transparent
+    border-bottom: 5px solid red
+    position: absolute
+    top: -5px
+    left: 19px
+
+.warning-icon
+  display: none
+  position: absolute
+  top: 50%
+  left: 10px
+  margin-top: image-height('forms/warning-icon.png')/-2
+  +imgbox('forms/warning-icon.png')
+  z-index: 10
+
+  &_field-description
+    top: 27px
+    left: 20px
+
+  &_image
+    position: relative
+    vertical-align: middle
+    left: 0
+    top: 4px
+    margin-right: 7px
+
+  &_label
+    top: 12px
+    left: 0
+
+  &_drop-down
+    top: 60px
+
+  &_drop-down-new-message
+    top: 20px
+
+  &_add-recipe
+    top: 20px
+
+// Text-input
+//
+// Выбор даты <br>
+// Надо добавить атрибут data-module="datapicker"
+//
+// default - обычное состояние
+//
+// markup:
+// +b.field_date-picker._inline(data-module="datapicker")
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text")
+//       +e.sidebar
+//         +e.button
+//           .icon
+//
+// Styleguide 2.5
+
+.field_date-picker
+
+  .field__container
+    padding-right: 40px
+
+  .field__sidebar
+    width: 40px
+
+  .field__button
+    width: 100%
+    height: 100%
+
+    .icon
+      +imgbox('forms/date-picker.png')
+      position: absolute
+      top: 10px
+      right: 9px
+      cursor: pointer
+
+      &.active
+        +imgbox('forms/date-picker-active.png')
+  .datepicker
+    table
+      tr
+        td
+          &.new.day
+            color: transparent
+
+// Text-input
+//
+// Поле Поиска
+//
+// default - обычное состояние
+//
+// markup:
+// +b.field_search
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск по рецептам и ингридиентам")
+//       +e.sidebar
+//         +e.button
+//           .icon
+// +b.field_search.field_search_store
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск товаров")
+//       +e.sidebar
+//         +e.button
+//           .icon
+// +b.field_search.field_search_users
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск по имени пользователя")
+//       +e.sidebar
+//         +e.button
+//           .icon
+// +b.field_search._notes
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск по имени пользователя")
+//       +e.sidebar
+//         +e.button Добавить заметку
+// +b.field_search._recipe-book
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск...")
+//       +e.sidebar
+//         +e.button
+//           .icon
+// +b.field_search._width_full
+//   +e('label').label
+//     +e.container
+//       +e('input').input(type="text" placeholder="Поиск по рецептам и ингридиентам")
+//       +e.sidebar
+//         +e.button
+//           .icon
+// +b.field_search._sort-search
+//   +e('label').label
+//     +e.container
+//       +e.sidebar
+//         +e.button
+//           .icon
+//       +e('input').input(type="text" placeholder="Поиск по рецептам и ингридиентам")
+//
+// Styleguide 2.6
+
+.field_search
+  width: 426px
+
+  .field__container
+    border-radius: 20px
+    padding-right: 65px
+
+    &:hover
+      .field__sidebar:before
+        border-color: #363636
+
+    &.focus
+      .field__sidebar:before
+        border-color: #e6e6e6
+
+  .field__sidebar
+    width: 55px
+
+    &:before
+      content: ''
+      border-left: 1px solid #e6e6e6
+      height: 18px
+      position: absolute
+      top: 10px
+      left: 0
+      transition: border-color .25s ease
+
+  .field__button
+
+    .icon
+      +imgbox('forms/search-icon.png')
+      position: absolute
+      top: 9px
+      right: 20px
+      cursor: pointer
+
+      &:after
+        content: ''
+        +imgbox('forms/search-icon_hover.png')
+        display: none
+
+.field_search_store
+  width: 290px
+  display: inline-block
+  vertical-align: middle
+
+  .field__container
+    background-color: transparent
+
+  .field__input
+    display: block
+
+.field_sort-search
+  width: 580px
+  margin: 0 auto
+
+  +width-lessthan(1024)
+    display: none
+
+  .field__container
+    border: 1px solid #d7d2c3
+    padding-left: 55px
+    padding-right: 0
+
+    &.focus
+      border-color: #66cc66
+
+  .field__sidebar
+    left: 0
+    right: auto
+
+    &:before
+      display: none
+
+  .field__input
+    padding: 0
+
+  &-small
+    width: 430px
+
+.field_side-search
+  width: auto
+  margin: 0 -20px 40px
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  +width-lessthan(768)
+    +width-between-property(margin-left, 320, 10, 768, -20, true, true)
+    +width-between-property(margin-right, 320, 10, 768, -20, true, true)
+
+  +width-lessthan(490) 
+    width: 300px
+    margin: 0 auto 40px
+    box-sizing: border-box
+
+  .field__container
+    border: 1px solid #d7d2c3
+    padding-left: 18px
+    padding-right: 55px
+
+    &.focus
+      border-color: #66cc66
+
+  .field__sidebar
+    right: 0
+
+    &:before
+      display: none
+
+  .field__input
+    padding: 0
+    font-size: 13px
+
+.field_search_users
+  display: inline-block
+  vertical-align: middle
+  line-height: normal
+  width: 290px
+  font-size: 13px
+
+  .field__container
+    padding-right: 35px
+    background-color: transparent
+
+  .field__input
+    font-weight: 400
+    font-size: 13px
+    color: #969696
+
+  .messages-list__item &
+    width: 239px
+
+.field_notes
+  width: auto
+
+  .field__sidebar
+    width: 165px
+
+  .field__button
+    display: block
+    width: 100%
+    color: #353535
+    font-size: 12px
+    font-weight: 700
+    text-align: center
+    text-transform: uppercase
+    white-space: nowrap
+    line-height: 38px
+    cursor: pointer
+
+    &:hover
+      color: #ff391e
+
+.field_recipe-book
+  width: 348px
+  margin: 0 auto
+
+  .field__container
+    background: none
+    border-color: #c4beb3
+
+.field_width_full
+  width: 100%
+
+.field_search.field_width_full
+  margin-bottom: 20px
+
+.field_new-message
+
+  .field
+
+    &__container
+      border-radius: 4px
+
+// Text-input
+//
+// Инпут с плюсом и минусом
+//
+// default - обычное состояние
+//
+// markup:
+// +b.field_adjusteble(data-module="counter")
+//   +e.label
+//     +e.container
+//       +e('input').input(type="text" value="1")
+//       +e.sidebar
+//         +e.button_plus
+//           .icon
+//         +e.button_minus
+//           .icon
+//
+// Styleguide 2.7
+
+.field_adjusteble
+
+  .field__container
+    width: 31px
+    padding: 0 18px 0 0
+
+    +width-lessthan(1024)
+      width: 50px
+      padding: 0 40px
+
+  .field__input
+    text-align: center
+    color: #242424
+    font-size: 18px
+    font-weight: 700
+    padding: 0
+    position: relative
+
+    +width-lessthan(1024)
+      border-left: 1px solid #e6e6e6
+      border-right: 1px solid #e6e6e6
+      border-radius: 0
+
+  .field__sidebar
+    width: 16px
+    border-left: 1px solid #e6e6e6
+
+    +width-lessthan(1024)
+      width: auto
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      border: none
+
+  .field__button
+    height: 19px
+    cursor: pointer
+    background-color: #FAF9F8
+    position: relative
+    user-select: none
+
+    +width-lessthan(1024)
+      width: 40px
+      height: 100%
+      position: absolute
+      top: 0
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+    &_plus
+      border-bottom: 1px solid #e6e6e6
+      border-radius: 0 4px 0 0
+      +imgbox('forms/plus-icon.png', '', '.icon')
+
+      +width-lessthan(1024)
+        left: 0
+        border: none
+
+    &_minus
+      height: 18px
+      border-radius: 0 0 4px 0
+      +imgbox('forms/minus-icon.png', '', '.icon')
+
+      +width-lessthan(1024)
+        right: 0
+
+    &:active
+      background-color: #e6e6e6
+
+.field_adjusteble-shop
+
+  .field__container
+    width: 82px
+
+  .field__input
+    font-size: 13px
+    font-weight: 400
+
+// Text-area
+//
+// Поле для ввода описания
+//
+// default - обычное состояние
+//
+// markup:
+// +b('label').field-description
+//   +e.label Описание
+//   textarea.field-description__textarea(placeholder="Раскажите не много о рецепте").
+//
+// Styleguide 2.9
+
+.field-description
+  display: block
+  padding: 15px 20px
+  box-sizing: border-box
+  background-color: #FFF
+  border-radius: 4px
+  border: 1px solid #e6e6e6
+  position: relative
+
+  &.error
+    border-color: #ff451c
+
+    .warning-icon
+      display: block
+
+      &:hover
+        & + .error-message
+          display: block
+
+    .field-description__label
+      margin-left: 30px
+      color: #ff451c
+
+  &__label
+    color: #242424
+    font-size: 14px
+    font-weight: 700
+    margin-bottom: 15px
+
+  &__textarea
+    width: 100%
+    height: 81px
+    resize: none
+    font-size: 15px
+    font-weight: 400
+    padding: 0
+    outline: none
+    border: none
+
+    +placeholder
+      color: #B3B3B3
+
+// Text-area
+//
+// Поле для ввода комментария
+//
+// default - обычное состояние
+//
+// markup:
+// +b.field-comment
+//   +e.emoji
+//   textarea.field-comment__textarea(placeholder="Текст вашего сообщения...").
+// +b.field-comment_error
+//   +e.emoji
+//   textarea.field-comment__textarea(placeholder="Текст вашего сообщения...").
+//   +b.warning-icon
+//   +b.error-message Ошибка ввода. Ребята что то не так.
+// +b.field-comment_chat
+//   +e.emoji
+//   textarea.field-comment__textarea(placeholder="Текст вашего сообщения...").
+// +b.field-comment_chat._error
+//   +e.emoji
+//   textarea.field-comment__textarea(placeholder="Текст вашего сообщения...").
+//   +b.warning-icon
+//   +b.error-message Ошибка ввода. Ребята что то не так.
+//
+// Styleguide 2.10
+
+.field-comment
+  width: auto
+  position: relative
+  box-sizing: border-box
+  line-height: 0
+
+  &:before
+    content: ''
+    +imgbox('forms/field-comment-triangle.png')
+    position: absolute
+    top: 18px
+    left: -5px
+
+  &__textarea
+    width: 100%
+    height: 80px
+    resize: vertical
+    background: #fff
+    border: none
+    outline: none
+    padding: 10px 15px
+    box-sizing: border-box
+    border: 1px solid #d6d2c4
+    border-radius: 3px
+    line-height: normal
+    +placeholder
+      color: #9c9c9c
+      font-size: 13px
+      font-weight: 400
+
+  &__emoji
+    +imgbox('forms/emoji-icon.png')
+    position: absolute
+    top: 10px
+    right: 10px
+    cursor: pointer
+
+    &:hover
+      +imgbox('forms/emoji-icon_hover.png')
+
+    &.active
+      +imgbox('forms/emoji-icon_hover.png')
+
+.field-comment_chat
+  width: 260px
+  margin-bottom: 3px
+  &:before
+    display: none
+
+  .field-comment
+    &__textarea
+      resize: none
+      font-size: 13px
+      color: #9c9c9c
+      padding: 15px 40px 15px 10px
+
+.field-comment_chat-messages
+  margin-bottom: 13px
+  &:before
+    display: none
+
+  .field-comment
+    &__textarea
+      height: 120px
+      box-sizing: border-box
+      resize: none
+      font-size: 14px
+      color: #4c4c4c
+      padding: 15px 40px 15px 20px
+
+      +placeholder
+        font-size: 14px
+
+.field-comment_error
+
+  &:before
+    +imgbox('forms/field-comment-triangle-error.png')
+
+  .warning-icon
+    display: block
+    top: 12px
+    margin-top: 0
+
+    &:hover
+      & + .error-message
+        display: block
+
+  .field-comment
+
+    &__textarea
+      padding-left: 38px
+      border-color: #ff451c
+
+.field-comment_error.field-comment_chat
+
+  .warning-icon
+    top: 15px
+
+.field-comment_chat-messages.field-comment_error
+  .field-comment__textarea
+    border-color: #ff451c
+
+  .warning-icon
+    top: 16px

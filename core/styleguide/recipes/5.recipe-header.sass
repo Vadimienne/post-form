@@ -1,0 +1,102 @@
+@import '_imports'
+
+// Recipe header
+//
+// Заголовок рецепта (номинанта или победителя поединка, рецепта дня, месяца или обычный рецепт)
+//
+// default - обычное состояние
+//
+// markup:
+// +b.recipe-header
+//   +e('h1').name Куриные ножки по-средиземноморски
+// +b.recipe-header_nominated
+//   +e.icon
+//   +e.status Номинант на рецепт дня
+//   +e('h1').name Куриные ножки по-средиземноморски
+//   +b('a').button(href="")
+//     +b('span').fonticon_vote
+//     span Голосовать
+// +b.recipe-header_winner-of-month
+//   +e.icon
+//   +e.status Рецепт месяца
+//   +e('h1').name Куриные ножки по-средиземноморски
+// +b.recipe-header_winner-of-day
+//   +e.icon
+//   +e.status Рецепт дня
+//   +e('h1').name Куриные ножки по-средиземноморски
+// +b.recipe-header_battle-winner
+//   +e.icon
+//   +e.status Рецепт битвы
+//   +e('h1').name Куриные ножки по-средиземноморски
+//
+// Styleguide 7.5
+
+.recipe-header
+  margin-bottom: 30px
+  position: relative
+
+  &_nominated
+    +imgbox('recipes/nominated.png', '', '.recipe-header__icon')
+    padding-left: 75px
+
+    +width-lessthan(600)
+      padding-left: 0
+
+  &_winner-of-month
+    +imgbox('recipes/winner-of-month.png', '', '.recipe-header__icon')
+    padding-left: 75px
+
+    +width-lessthan(600)
+      padding-left: 0
+
+  &_winner-of-day
+    +imgbox('recipes/winner-of-day.png', '', '.recipe-header__icon')
+    padding-left: 75px
+
+    +width-lessthan(600)
+      padding-left: 0
+
+  &_battle-winner
+    +imgbox('recipes/battle-winner.png', '', '.recipe-header__icon')
+    padding-left: 75px
+
+    +width-lessthan(600)
+      padding-left: 0
+
+  &__icon
+    position: absolute
+    top: 5px
+    left: 0
+
+    +width-lessthan(600)
+      position: static
+      margin-bottom: 10px
+
+  &__status
+    color: #FF6000
+    font-size: 14px
+    margin-bottom: 5px
+    font-family: "Noto Serif"
+    font-weight: 700
+
+    +width-lessthan(1024)
+      font-size: 12px
+      line-height: normal
+
+  &__name
+    color: #333
+    font-size: 26px
+    line-height: 30px
+    font-family: "Noto Serif"
+    font-weight: 700
+    margin: 0
+
+    +width-lessthan(1024)
+      font-size: 20px
+      line-height: normal
+
+  .button
+    margin-top: 25px
+
+  .fonticon
+    font-size: 22px

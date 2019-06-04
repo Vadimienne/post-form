@@ -1,0 +1,186 @@
+@import '_imports'
+
+// Text editor
+//
+// Редактор текста, сверстан с расчетом на либу: https://github.com/basecamp/wysihat
+//
+// default - обычное состояние
+//
+// markup:
+// +b.text-editor
+//   +e.header
+//     +e.controls
+//       +e.undo.active
+//         .icon
+//       +e.redo
+//         .icon
+//       +e.item_h1
+//         .icon
+//       +e.item_h2
+//         .icon
+//       +e.item_h3
+//         .icon
+//       +e.item_bold
+//         .icon
+//       +e.item_italic
+//         .icon
+//       +e.item_quote
+//         .icon
+//       +e.item_link
+//         .icon
+//       +e.item_hr
+//         .icon
+//       +e.item_list
+//         .icon
+//       +e.item_image
+//         .icon
+//       +e.item_video
+//         .icon
+//       +e.item_emoji
+//         .icon
+//   textarea.text-editor__textarea(placeholder="Введите текст").
+//
+// Styleguide 2.11
+
+
+.text-editor
+  border-radius: 4px
+  border: 1px solid #e5e5e5
+  position: relative
+  overflow: hidden
+  min-height: 400px
+
+  &.error
+    border-color: #ff451c
+
+    .warning-icon
+      position: absolute
+      display: block
+      top: 75px
+      left: 135px
+
+      &:hover
+        & + .error-message
+          display: block
+
+    .error-message
+      top: 92px
+      left: 116px
+      margin: 0
+
+  &__header
+    height: 40px
+    background-color: #F2F2F2
+
+  &__controls
+    padding: 0 10px
+    width: 518px
+    +clearfix
+
+  .cke_button__redo .cke_button_disabled
+    float: left
+    width: 33px
+    height: 40px
+    position: relative
+    +imgbox('forms/text-editor/undo.png', '', '.icon')
+    cursor: default
+  .cke_button__undo .cke_button_off
+    +imgbox('forms/text-editor/undo_active.png', '', '.icon')
+    cursor: pointer
+
+    &:hover
+      +imgbox('forms/text-editor/undo-hover.png', '', '.icon')
+
+  &__redo
+    float: left
+    width: 33px
+    height: 40px
+    position: relative
+    margin-right: 17px
+    +imgbox('forms/text-editor/redo.png', '', '.icon')
+    cursor: default
+
+    &.active
+      +imgbox('forms/text-editor/redo_active.png', '', '.icon')
+      cursor: pointer
+
+      &:hover
+        +imgbox('forms/text-editor/redo-hover.png', '', '.icon')
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+  &__item
+    float: left
+    width: 36px
+    height: 40px
+    position: relative
+    cursor: pointer
+
+    &_h1
+      +imgbox('forms/text-editor/h1.png', 'texteditor', '.icon')
+
+    &_h2
+      +imgbox('forms/text-editor/h2.png', 'texteditor', '.icon')
+
+    &_h3
+      +imgbox('forms/text-editor/h3.png', 'texteditor', '.icon')
+
+    &_bold
+      +imgbox('forms/text-editor/bold.png', 'texteditor', '.icon')
+
+    &_italic
+      +imgbox('forms/text-editor/italic.png', 'texteditor', '.icon')
+
+    &_quote
+      +imgbox('forms/text-editor/quote.png', 'texteditor', '.icon')
+
+    &_link
+      +imgbox('forms/text-editor/link.png', 'texteditor', '.icon')
+
+    &_hr
+      +imgbox('forms/text-editor/hr.png', 'texteditor', '.icon')
+
+    &_list
+      +imgbox('forms/text-editor/list.png', 'texteditor', '.icon')
+
+    &_image
+      +imgbox('forms/text-editor/image.png', 'texteditor', '.icon')
+
+    &_video
+      +imgbox('forms/text-editor/video.png', 'texteditor', '.icon')
+
+    &_emoji
+      +imgbox('forms/text-editor/emoji.png', 'texteditor', '.icon')
+
+    &:before
+      content: ''
+      width: 1px
+      height: 16px
+      background-color: #CCC
+      position: absolute
+      top: 50%
+      left: 0
+      margin-top: -8px
+
+    .icon
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+
+  &__textarea
+    width: 100%
+    min-height: 450px
+    box-sizing: border-box
+    padding: 20px
+    border: none
+    outline: none
+    resize: none

@@ -1,0 +1,267 @@
+@import '_imports'
+
+// Card recipe special
+//
+// Карточка рецепта дня, месяца или победителя
+//
+// default - обычное состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b('article').card-recipe-special.card(class="{$modifiers}")
+//   a(href="#")
+//     +e.icon_day
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +b.badge_recipes Рецепт дня
+//     +b.title Пирог «Черри-берри»
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer
+//     +b.right
+//       +b.text-icon
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_add
+//        span В избранное
+// +b('article').card-recipe-special.card(class="{$modifiers}")
+//   a(href="#")
+//     +e.icon_month
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +b.badge_recipes Рецепт месяца
+//     +b.title Картошка с грибами и сыром
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer
+//     +b.right
+//       +b.text-icon
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_add
+//        span В избранное
+// +b('article').card-recipe-special.card(class="{$modifiers}")
+//   a(href="#")
+//     +e.icon_competition
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +b.badge_recipes Рецепт поединка
+//     +b.title Картошка с грибами и сыром и мясом тапира тушеном в соусе
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer
+//     +b.right
+//       +b.text-icon
+//         +b('span').fonticon_like
+//         span 1 488
+//     +b.text-icon
+//        +b('span').fonticon_add
+//        span В избранное
+// +b('article').card-recipe-special.card(class="{$modifiers}")
+//   a(href="#")
+//     +e.icon_day
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +b.badge_recipes Рецепт дня
+//     +b.title Пирог «Черри-берри»
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer_vote
+//     +b.text-icon
+//       +b('span').fonticon_vote
+//       span Голосовать
+// +b('article').card-recipe-special.card(class="{$modifiers}")
+//   a(href="#")
+//     +e.icon_day
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +b.badge_recipes Рецепт дня
+//     +b.title Пирог «Черри-берри»
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer_voted
+//     +b.text-icon
+//       +b('span').fonticon_vote
+//       span Голосовать
+// +b('article').card-recipe-special.card(class="{$modifiers}")
+//   a(href="#")
+//     +e.icon_day
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-recipe-img.png 1x, /assets/images/content/card-recipe-img@2x.png 2x, /assets/images/content/card-recipe-img@3x.png 3x")
+//       img(src="/assets/images/content/card-recipe-img.png" alt="")
+//     +b.badge_recipes Рецепт дня
+//     +b.title Пирог «Черри-берри»
+//   +b('a').person_h._lh-small(href="#")
+//     +b.user-avatar_small
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +e.name Анастасия Мацукатова
+//         +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+//   +b('footer').card-footer_vote-complete
+//     +b.text-icon
+//       +b('span').fonticon_vote
+//       span 666
+//
+// Styleguide 4.3
+
+
+.card-recipe-special
+  border: 2px solid #ff6600
+  text-align: center
+  background-color: transparent !important
+
+  &__icon
+    margin: 0 auto 15px
+
+    +width-lessthan(1024)
+      position: absolute
+      left: 0
+      right: 0
+      z-index: 1
+
+    &_day
+      +imgbox('icons/winner-of-the-day.png')
+      margin-top: 12px
+
+      +width-lessthan(1024)
+        margin-top: 0
+        top: 94px
+
+    &_month
+      +imgbox('icons/winner-of-the-month.png')
+      margin-top: 13px
+
+      +width-lessthan(1024)
+        margin-top: 0
+        top: 95px
+
+    &_competition
+      +imgbox('icons/winner-of-the-competition.png')
+      margin-top: 11px
+
+      +width-lessthan(1024)
+        margin-top: 0
+        top: 95px
+
+  &__picture
+    display: block
+    position: relative
+    overflow: hidden
+    width: 180px
+    height: 180px
+    background-color: #FFF
+    border-radius: 50%
+    margin: 0 auto 23px
+
+    +width-lessthan(1024)
+      margin: 20px auto 22px
+
+    +width-lessthan(768)
+      +width-between-property(margin-bottom, 320, 15, 768, 22, true, true)
+
+  .badge
+    display: inline-block
+    margin-bottom: 11px
+
+    +width-lessthan(1024)
+      margin-bottom: 18px
+
+    +width-lessthan(768)
+      +width-between-property(margin-bottom, 320, 8, 768, 18, true, true)
+
+  .title
+    padding: 0 20px
+    line-height: 20px
+    height: 60px
+    position: relative
+    overflow: hidden
+    margin-bottom: 10px
+
+    +width-lessthan(1024)
+      height: 48px
+      margin-bottom: 29px
+      line-height: 1.5
+
+    +width-lessthan(768)
+      +width-between-property(height, 320, 40, 768, 48, true, true)
+      +width-between-property(margin-bottom, 320, 14, 768, 29, true, true)
+      +width-between-property(font-size, 320, 15, 768, 16, true, true)
+      line-height: normal
+
+  .person
+    text-align: left
+    margin-left: 20px
+
+    +width-lessthan(1024)
+      margin: 0 20px
+
+  .card-footer
+    border-radius:  0 0 1px 1px
+
+    &_vote
+      .text-icon
+        color: #ff6600
+
+        .fonticon
+          color: #ff6600
+
+      &:hover
+        background-color: #ff6600
+        .text-icon
+          color: white
+
+    &_voted
+      background-color: #ff6600
+
+    &_vote-complete
+      text-align: center
+
+      .text-icon
+        color: #242424
+
+        .fonticon
+          color: #242424
+          font-size: 18px
+
+        &:hover
+          .fonticon
+            color: #242424 !important
+
+.card-recipe-special.card
+  box-shadow: none
+
+  &:hover
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)

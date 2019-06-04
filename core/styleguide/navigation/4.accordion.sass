@@ -1,0 +1,229 @@
+@import '_imports'
+
+// Accordion
+//
+// Аккордион
+//
+// accordion_default  - обычное состояние
+// accordion_open  - раскрытое состояние
+//
+// markup:
+// +b.accordion(class="{$modifiers}")
+//   +e.headline
+//     | Посты
+//     +b.icon
+//   +e.list
+//     +e.list-item Свежее
+//     +e.list-item Посты Юлии Высоцкой
+//     +e.list-item Новости редакции
+//     +e.list-item Кулинария
+// +b.accordion
+//   +e.headline
+//     | Посты
+//     +b.icon
+//   +e.list
+//     +e.list-item Свежее
+//     +e.list-item Посты Юлии Высоцкой
+//     +e.list-item Новости редакции
+//     +e.list-item Кулинария
+// +b.accordion_with-content(class="{$modifiers}")
+//   +e.headline
+//     span Урок №1
+//     | Знакомство с Хлебопечкой
+//     +b.icon
+//   +e.content
+//     +e.text Что и говорить, это всеми любимый торт! Бисквит здесь как раз по моему предыдущему рецепту. Все сошлось просто идеально - рыхлость и невесомость бисквита, нежность и воздушность суфле, ну очень вкусно.
+//     +b.right
+//       +b.button
+//         +b('span').fonticon_play-icon
+//         span Начать урок
+//     +e.time
+//       +b('span').fonticon_clock-icon
+//       span 15:12
+// +b.accordion_with-content
+//   +e.headline
+//     span Урок №1
+//     | Знакомство с Хлебопечкой
+//     +b.icon
+//   +e.content
+//     +e.text Что и говорить, это всеми любимый торт! Бисквит здесь как раз по моему предыдущему рецепту. Все сошлось просто идеально - рыхлость и невесомость бисквита, нежность и воздушность суфле, ну очень вкусно.
+//     +b.right
+//       +b.button
+//         +b('span').fonticon_play-icon
+//         span Начать урок
+//     +e.time
+//       +b('span').fonticon_clock-icon
+//       span 15:12
+//
+// Styleguide 3.4
+
+.accordion
+  width: 280px
+  padding: 16px 0 9px 0
+  border-top: 1px solid #DED9CC
+  border-bottom: 1px solid #DED9CC
+  margin-top: -1px
+  +clearfix
+
+  &_open
+    .accordion__headline
+      .icon
+        +imgbox('navigation/accordion-arrow-open.png')
+
+      &:hover
+        .icon
+          +imgbox('navigation/accordion-arrow-open_hover.png')
+
+    .accordion__list
+      height: auto
+      margin-bottom: 3px
+
+  &__headline
+    color: #252525
+    font-size: 14px
+    font-weight: 700
+    padding-left: 30px
+    margin-bottom: 9px
+    position: relative
+    cursor: pointer
+    line-height: normal
+
+    span
+      display: block
+      color: #9F9F9F
+      font-size: 12px
+      font-weight: 400
+      margin-bottom: 7px
+
+    .icon
+      position: absolute
+      top: 7px
+      left: 0
+      +imgbox('navigation/accordion-arrow-close.png')
+
+    &:hover
+      .icon
+        +imgbox('navigation/accordion-arrow-close_hover.png')
+
+  &__list
+    margin-bottom: 0
+    position: relative
+    overflow: hidden
+    height: 0
+    transition: all .3s ease
+
+  &__list-item
+    color: #737373
+    font-size: 14px
+    font-weight: 400
+    line-height: 30px
+    padding-left: 30px
+    height: 30px
+    border-radius: 20px
+    cursor: pointer
+
+    &:hover
+      background-color: #FBF8F6
+
+  &__content
+    padding: 0 30px
+    margin-top: -5px
+    position: relative
+    overflow: hidden
+    height: 0
+
+  &__text
+    color: #4D4D4D
+    font-size: 15px
+    font-weight: 400
+    line-height: 24px
+    margin-bottom: 15px
+
+  &__time
+    color: #5B5B5B
+    font-size: 12px
+    font-weight: 400
+    line-height: 40px
+
+    span
+      display: inline-block
+      vertical-align: middle
+
+    .fonticon
+      color: #ed392f
+      margin-right: 5px
+
+.accordion_with-content
+  width: auto
+  border: none
+  padding: 20px 0 20px
+  position: relative
+
+  &:first-child
+    padding-top: 0
+
+  &:last-child
+    padding-bottom: 0
+
+  &.active
+
+    &:after
+      content: ''
+      position: absolute
+      z-index: 4
+      top: 0
+      left: -30px
+      right: -30px
+      bottom: 0
+      background-color: #f2f2f2
+
+    &:first-child
+      &:after
+        top: -25px
+
+    &:last-child
+      &:after
+        bottom: -25px
+        border-radius: 0 0 4px 4px
+
+  & + .accordion_with-content
+
+    &:before
+      content: ''
+      position: absolute
+      z-index: 5
+      top: 0
+      left: -30px
+      right: -30px
+      height: 1px
+      background-color: #DED9CC
+
+  .fonticon
+    &_play-icon
+      font-size: 18px
+
+    &_video
+      font-size: 18px
+
+    &_done
+      font-size: 18px
+
+  .accordion__content
+    position: relative
+    z-index: 5
+    padding: 0 0 0 30px
+
+  .accordion__headline
+    position: relative
+    z-index: 5
+
+    .icon
+      top: 5px
+
+  .accordion__actions
+    border-top: 1px solid #e6e1da
+    margin-top: 6px
+    padding-top: 20px
+
+.playing-now
+  +imgbox('icons/playing-now.png')

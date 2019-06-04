@@ -1,0 +1,44 @@
+@import '_imports'
+
+// Add recipe step
+// 
+// Кнопка добавления шага рецепта
+// 
+// default - обычное состояние
+// :hover - hover
+//
+// markup:
+// +b.add-recipe-button(class="{$modifiers}")
+//   +b.text-icon
+//    +b('span').fonticon_add
+//    span Добавить шаг
+// 
+// Styleguide 7.4
+
+.add-recipe-button
+  width: 576px
+  height: 96px
+  border: 2px solid #cec8bb
+  border-radius: 4px
+  margin-top: 20px
+  position: relative
+  cursor: pointer
+
+  .text-icon
+    color: #242424
+    font-size: 12px
+    font-weight: 700
+    line-height: 17px
+    text-transform: uppercase
+    text-align: center
+    position: absolute
+    top: 50%
+    left: 0
+    right: 0
+    margin-top: -8.5px
+
+  &:hover
+    background: #cec8bb
+
+    .text-icon
+      color: #ff391e

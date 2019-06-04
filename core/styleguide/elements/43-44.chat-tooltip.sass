@@ -1,0 +1,469 @@
+@import '_imports'
+
+// Chat
+//
+// Чат на блоке плеера
+//
+// chat - обычное состояние, вспомогательный блок content-box
+//
+// markup:
+// +b.dark-wrapper
+//   +b.chat.content-box(style="width:280px;")
+//     .content-box__header_padding1520
+//       +b.right
+//         .chat__rollup
+//           span
+//             | Свернуть
+//           +b('span').fonticon_rollup
+//       +b.title_small._sans-serif._uppercase Чат
+//     +b.hr
+//     .content-box__content.content-box__content_wide
+//       +e.container
+//         +e.message
+//           +e('span').author_color_blue Maximka Eronin:
+//           | Все четко, вчера и поза, переводили деньги с карты на карту в Англию — работало все как часы. Может фэйк для паники?
+//         +e.message
+//           +e('span').author_color_pink Tatiana Kuzmenko:
+//           | Похоже на половину моего путешествия следующим
+//         +e.message
+//           +e('span').author_color_green Sergey Shapiro:
+//           | Похоже на половину моего путешествия следующим
+//         +e.message
+//           +e('span').author_color_sea-green Nadia Krivoshta:
+//           | А требуется ли какая-то подготовка? опыт? на кого рассчитано?
+//         +e.message
+//           +e('span').author_color_pink Sergey Shapiro:
+//           | Nadia Krivoshta Хорошо, если вы уже хотя бы минимальное кол-во времени держали инструмент в руках, потому что упражнений с инструментом как таковых я не планировал. Но о самом инструменте и нюансах работы с ним подробно расскажу.
+//         +e.message
+//           +e('span').author_color_pink Sergey Shapiro:
+//           | Nadia Krivoshta Хорошо, если вы уже хотя бы минимальное кол-во времени держали инструмент в руках, потому что упражнений с инструментом как таковых я не планировал. Но о самом инструменте и нюансах работы с ним подробно расскажу.
+//       +e.shadow
+//       +b.scroll
+//         +e.track
+//           +e.drag
+//     +b.hr
+//     .content-box__footer.content-box__footer_padding1020
+//       +b.field-comment_chat
+//         +e.emoji
+//         +e('textarea').textarea(placeholder="Текст вашего сообщения...")
+//       +b.right
+//         +b.button
+//           +b('span').fonticon_publish
+//           span Опубликовать
+//+b.chat_messages.content-box
+//  .content-box__header_padding1520
+//    +b.title_small._sans-serif._uppercase Ольга♥Ч
+//  +b.hr
+//  .content-box__content.content-box__content_wide(data-module="scroll-box")
+//    +e.container
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Ольга♥Ч
+//          +e.message-text Хочу приготовить кулич в хлебопечке, поделись твоим рецептиком.
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Вы
+//          +e.message-text мука — 340 грамм
+//            br
+//            |  дрожжи сухие — 2 ч. ложки (или 24 грамма свежих)
+//            br
+//            |  сахар — 60 грамм
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Ольга♥Ч
+//          +e.message-text Одно «но», куличик получится только один, а чтобы испечь
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Ольга♥Ч
+//          +e.message-text Хочу приготовить кулич в хлебопечке, поделись твоим рецептиком.
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Вы
+//          +e.message-text мука — 340 грамм
+//            br
+//            |  дрожжи сухие — 2 ч. ложки (или 24 грамма свежих)
+//            br
+//            |  сахар — 60 грамм
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Ольга♥Ч
+//          +e.message-text Одно «но», куличик получится только один, а чтобы испечь
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Ольга♥Ч
+//          +e.message-text Хочу приготовить кулич в хлебопечке, поделись твоим рецептиком.
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Вы
+//          +e.message-text мука — 340 грамм
+//            br
+//            |  дрожжи сухие — 2 ч. ложки (или 24 грамма свежих)
+//            br
+//            |  сахар — 60 грамм
+//          +e.message-date 9:15
+//      +e.message
+//        +b.user-avatar_average
+//          +e('img').image(src="/assets/images/content/user-img.png")
+//        +e.message-body
+//          +e.message-user-name.title.title_small Ольга♥Ч
+//          +e.message-text Одно «но», куличик получится только один, а чтобы испечь
+//          +e.message-date 9:15
+//    +e.typing Ольга♥Ч печатает...
+//  +b.hr
+//  form.content-box__footer.chat__footer
+//    +b.field-comment_chat-messages
+//      +e.emoji(data-module="dropdown-emoji")
+//      textarea.field-comment__textarea(placeholder="Введите текст").
+//    +b.right
+//      +b.button_green
+//        span Отправить
+//        +e('input').submit(type='submit' value="")
+//
+// Styleguide 1.43
+
+.chat
+  height: 704px
+  box-shadow: none
+
+  &__rollup
+    font-size: 12px
+    line-height: 12px
+    color: #6e6e6e
+    margin-top: 2px
+    cursor: pointer
+
+    .fonticon
+      display: inline-block
+      vertical-align: middle
+      color: #ff441b
+      margin-left: 10px
+
+  &__container
+    position: relative
+    box-sizing: border-box
+
+  &__message
+    font-size: 13px
+    color: #333
+    line-height: 20px
+    padding-bottom: 13px
+
+    &:last-child
+      padding-bottom: 40px
+
+  &__author
+    font-weight: 700
+    margin-right: 15px
+
+    &_color_blue
+      color: #7da7d9
+
+    &_color_pink
+      color: #f26992
+
+    &_color_green
+      color: #8dc63f
+
+    &_color_sea-green
+      color: #0076a3
+
+  .content-box__content
+    position: relative
+    height: 504px
+    box-sizing: border-box
+    overflow: hidden
+
+.chat_messages
+  width: 580px
+  height: auto
+  box-shadow: 0 1px 4px rgba(71,44,6,.2)
+
+  &.content-box
+    .content-box__content
+      &:after
+        height: 50px
+        background-image: linear-gradient(to top, #fff 50%, rgba(255,255,255,0) 100%)
+
+  .user-avatar
+    float: left
+    margin-right: 10px
+
+  .mCSB_scrollTools .mCSB_draggerRail
+    background-color: rgba(124, 124, 124, 0.1)
+    width: 4px
+    border-radius: 2px
+
+  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+    background-color: rgba(124, 124, 124, 1)
+    border-radius: 2px
+    cursor: pointer
+
+  .mCSB_outside + .mCSB_scrollTools
+    right: -24px
+    z-index: 10
+
+  .mCSB_draggerContainer
+    margin: 3px 0
+
+
+  .chat
+
+    &__container
+      position: relative
+      height: 464px
+      box-sizing: border-box
+      overflow: hidden
+
+    &__typing
+      position: absolute
+      z-index: 10
+      left: 70px
+      bottom: 2px
+      font-size: 11px
+      color: #b3b3b3
+
+    &__footer
+      padding: 10px 20px 20px
+      +clearfix
+
+      &_empty
+        padding: 20px 20px
+
+
+    &__message
+      +clearfix
+
+      &:last-child
+        padding-bottom: 80px
+
+    &__message-body
+      position: relative
+      float: left
+      width: 490px
+
+    &__message-user-name
+      margin-bottom: 7px
+
+    &__message-text
+      font-size: 14px
+      line-height: 22px
+      color: #4c4c4c
+
+      p
+        margin: 0
+
+    &__message-date
+      font-size: 10px
+      color: #cccccc
+      position: absolute
+      right: 0
+      top: 5px
+      line-height: normal
+
+// Tooltip
+//
+// Подсказка
+//
+// tooltip - обычное состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+// div(style="position:relative; height:300px; margin: 50px 0 0 50px;")
+//   +b('a').tooltip(style="visibility:visible;opacity:1" href="#")
+//     +b.title_small.tooltip__place 1 место
+//     +b.title_small Холодильник Oursson RF1000/RD
+//     img(src="/assets/images/content/club/tooltip-prize-image.jpg")
+// div(style="position:relative; height:300px; margin: 50px 0 0 50px;")
+//   +b.tooltip_calendar(style="visibility:visible;opacity:1")
+//     +e('img').image(src="/assets/images/elements/calendar/tooltip.jpg")
+//     +e.content
+//       +e.date 12 июля
+//       +b.title_small Национальный день
+//         br
+//         |  чеснока в США 6546 546 546 56 4 654 654 654 654 654 654 654 654 654 654 654 654
+// div(style="position:relative; height:300px; margin: 50px 0 0 50px;")
+//   +b.tooltip_show
+//     +e.content  Найдено
+//       span 54 423
+//       | рецепта
+//     +b.button_red
+//       span Показать
+//
+// Styleguide 1.44
+
+.tooltip
+  display: block
+  position: absolute
+  padding: 20px 40px
+  background-color: #fff
+  box-shadow: 0 0 20px rgba(0,0,0,.3)
+  border-radius: 4px
+  text-align: center
+  min-width: 170px
+  visibility: hidden
+  opacity: 0
+  z-index: 100
+  transition: all 0.2s ease
+
+  &:after
+    content: ' '
+    position: absolute
+    bottom: -5px
+    left: 60px
+    width: 0
+    height: 0
+    border-style: solid
+    border-width: 5px 9px 0 9px
+    border-color: #fff transparent transparent transparent
+
+  .title
+    line-height: 20px
+    margin-bottom: 10px
+    color: #242424
+
+  &__place.title
+    color: #3cb878
+    margin-bottom: 5px
+
+
+.tooltip_calendar
+  padding: 0
+  min-width: 310px
+  height: 80px
+  box-shadow: 0 2px 8px rgba(18,18,18,.4)
+  text-align: left
+  bottom: 35px
+
+  &:after
+    content: ''
+    display: none
+
+  .title
+    display: block
+    line-height: 16px
+    max-height: 48px
+    position: relative
+    overflow: hidden
+    font-size: 14px
+    margin-bottom: 0
+
+  .tooltip
+
+    &__image
+      float: left
+      width: 80px
+      height: 80px
+      border-radius: 4px 0 0 4px
+
+    &__content
+      width: 230px
+      height: 80px
+      float: left
+      padding: 8px 15px
+      box-sizing: border-box
+      position: relative
+      overflow: hidden
+
+    &__date
+      line-height: normal
+      display: block
+      font-size: 11px
+      color: #999999
+      text-transform: uppercase
+      font-weight: 600
+      margin-bottom: 6px
+
+.tooltip_column_1
+  left: -41px
+
+.tooltip_column_2
+  left: -75px
+
+.tooltip_column_3
+  left: -109px
+
+.tooltip_column_4
+  left: -143px
+
+.tooltip_column_5
+  left: -177px
+
+.tooltip_column_6
+  left: -211px
+
+.tooltip_column_7
+  left: -245px
+
+.tooltip_show
+  display: block
+  height: 36px
+  position: absolute
+  padding: 0
+  background-color: #fff
+  box-shadow: 0 1px 8px rgba(0,0,0,.15)
+  border-radius: 0 4px 4px 0
+  text-align: left
+  min-width: auto
+  visibility: visible
+  opacity: 1
+  z-index: 100
+  transition: none
+  white-space: nowrap
+  transform: translateZ(0)
+  cursor: default
+
+  &:after
+    content: ''
+    bottom: auto
+    top: 0
+    left: -11px
+    border-style: solid
+    border-width: 0
+    +imgbox('elements/tooltip/triangle_show.png')
+
+  .button
+    display: inline-block
+    height: 36px
+    line-height: 36px
+    border-radius: 0 4px 4px 0
+    font-size: 12px
+    font-weight: normal
+    cursor: pointer
+
+  .tooltip
+
+    &__content
+      display: inline-block
+      font-size: 12px
+      line-height: 36px
+      color: #808080
+      padding: 0 10px 0 7px
+      white-space: nowrap
+
+      span
+        color: #242424
+        font-weight: 600
+        margin: 0 4px

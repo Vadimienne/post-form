@@ -1,0 +1,352 @@
+@import '_imports'
+
+// Mobile menu
+//
+// Меню для мобильных устройств
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.search-tags
+//   +e.row
+//     +e.tag_remove-all
+//      span Сбросить все
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Завтрак с Юлией Высоцкой
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Мясо
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Завтрак с Юлией Высоцкой
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Мясо
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Мясо
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Завтрак с Юлией Высоцкой
+//      +b('span').fonticon_cross
+//     +e.tag
+//      span Новые рецепты
+//      +b('span').fonticon_cross
+//     +e.tag
+//      img(src="/assets/images/content/user-img.png")
+//      span Мясо
+//      +b('span').fonticon_cross
+//   +e.row
+//    +e.found Найдено: 1 488 рецептов
+//
+// Styleguide 3.8
+
+.mobile-menu
+  width: 400px
+  height: 100vh
+  position: fixed
+  overflow: auto
+  top: 0
+  right: 0
+  background: #fff
+  z-index: 3
+  visibility: hidden
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  +width-lessthan(525)
+    width: 100%
+
+  &__header
+    height: 60px
+    padding: 10px 40px
+    border-bottom: solid 1px #f2f2f2
+    margin-bottom: 32px
+    box-sizing: border-box
+    +clearfix
+
+    +width-lessthan(768)
+      +width-between-property(padding-left, 320, 10, 768, 40, true, true)
+      +width-between-property(padding-right, 320, 10, 768, 40, true, true)
+
+    +width-lessthan(524)
+      margin-bottom: 20px
+
+    +width-lessthan(400)
+      height: 50px
+
+  &__logo
+    +imgbox('layout/header-logo.png')
+
+    +width-lessthan(1024)
+      width: 122px
+      height: 48px
+      float: none
+      margin: -4px auto 0
+      display: none
+
+    +width-lessthan(525)
+      display: block
+ 
+    +width-lessthan(400)
+      width: 96px
+      height: 37px
+      margin-top: -3px
+
+  &__button-container
+    position: absolute
+    top: 10px
+    left: 40px
+    +clearfix
+
+    +width-lessthan(768)
+      +width-between-property(left, 320, 10, 768, 40)
+
+    +width-lessthan(525)
+      position: static
+      width: 260px
+      margin: 0 auto 22px
+      padding-bottom: 20px
+      border-bottom: solid 1px #f2f2f2
+
+    .button
+      width: 162px
+      padding: 0
+      float: left !important
+      text-align: center
+
+    &_logged-in
+
+      .button_round
+        +width-lessthan(1024)
+          display: block
+          width: 40px
+          margin-left: 0
+
+          &:hover
+            border-color: #e6e6e6
+
+  &__nav
+    padding: 20px 72px 0
+
+    +width-lessthan(525)
+      width: 260px
+      padding: 0
+      margin: 20px auto 0
+ 
+  &__item
+    display: block
+    font-size: 14px
+    font-weight: 600
+    letter-spacing: 1px
+    color: #333333
+    line-height: normal
+    text-transform: uppercase
+
+    & + .mobile-menu__item
+      margin-top: 30px
+
+    &.active
+      color: #e02407
+
+  &__club-menu
+    margin: 20px 40px 30px
+    padding: 20px 32px
+    border-radius: 10px
+    background: #faf8f6
+
+    +width-lessthan(525)
+      width: 260px
+      margin: 20px auto 30px
+      padding: 20px
+
+  &__club-title
+    opacity: 0.2
+    font-size: 14px
+    line-height: normal
+    color: #333333
+    font-weight: 600
+    margin-bottom: 30px
+    text-transform: uppercase
+
+  &__special-title
+    @extend .mobile-menu__club-title
+    margin: 50px 0 13px
+
+  &__special-link
+    display: block
+    font-size: 14px
+    font-weight: 600
+    // line-height: 40px
+    line-height: 20px
+    padding: 10px 0
+    letter-spacing: normal
+    color: #333
+
+    & + .mobile-menu__special-link
+      border-top: 1px solid #ddd9cd
+
+  &__spacer
+    height: 100px
+
+  .calendar-box
+    margin: 20px auto 0
+
+  .close-mobile-menu-button
+    width: 20px
+    height: 18px
+    float: right
+    position: relative
+    margin-top: 11px
+    cursor: pointer
+
+    +width-lessthan(400)
+      margin-top: 5px
+
+    &:before
+      content: ''
+      position: absolute
+      top: -10px
+      right: -10px
+      left: -10px
+      bottom: -10px
+
+    &__line
+      width: 100%
+      height: 2px
+      transform-origin: 50% 50%
+      border-radius: 1px
+      background-color: #000000
+      position: absolute
+      top: 9px
+
+      &_left
+        transform: rotate(45deg)
+      
+      &_right
+        transform: rotate(-45deg)
+
+.mobile-user-menu
+  width: 200px
+  height: 40px
+  border: 1px solid #e6e6e6
+  border-radius: 20px
+  float: right
+  position: relative
+  box-sizing: border-box
+  cursor: pointer
+  margin-left: 20px
+
+  &__item-count
+    min-width: 20px
+    height: 20px
+    padding: 0 4px
+    box-sizing: border-box
+    background-color: #FF391E
+    border-radius: 10px
+    color: #FFF
+    font-family: "Arial"
+    font-size: 12px
+    font-weight: 700
+    line-height: 20px
+    text-align: center
+    position: absolute
+    top: -10px
+    right: -8px
+
+  .icon
+    position: absolute
+    top: 16px
+    right: 20px
+    +imgbox('layout/expandeble-arrow.png')
+
+  .user-avatar
+    position: absolute
+    top: 4px
+    left: 4px
+
+  &__name
+    padding-left: 45px
+    width: 110px
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    color: #666
+    font-family: "Noto Serif"
+    font-size: 12px
+    font-weight: 700
+    line-height: 40px
+
+  &:not(.closed)
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15)
+    border-color: #fff
+
+    .icon
+      +imgbox('layout/expandeble-arrow-open.png')
+
+.hidden-user-menu
+  height: 0
+  margin: -21px 40px 0
+  padding: 0 32px
+  border-radius: 10px
+  background-color: #faf8f6
+  position: relative
+  overflow: hidden
+
+  +width-lessthan(525)
+    width: 260px
+    margin: -23px auto 0 
+    padding: 0 20px
+
+  &__item-count
+    min-width: 20px
+    height: 20px
+    padding: 0 4px
+    box-sizing: border-box
+    background-color: #FF391E
+    border-radius: 10px
+    color: #FFF
+    font-family: "Arial"
+    font-size: 12px
+    font-weight: 700
+    line-height: 20px
+    text-align: center
+    position: absolute
+    top: 50%
+    left: 170px
+    margin-top: -10px
+
+  &__item
+    display: block
+    height: 60px
+    font-size: 14px
+    font-weight: 600
+    line-height: 60px
+    color: #333333
+    position: relative
+
+    & + &
+      border-top: 1px solid #f2f2f2
+
+    span
+      vertical-align: middle
+
+    .fonticon
+      color: black
+      font-size: 16px
+
+      & + span
+        margin-left: 30px

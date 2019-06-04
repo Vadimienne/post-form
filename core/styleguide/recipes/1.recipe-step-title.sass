@@ -1,0 +1,116 @@
+@import '_imports'
+
+// Recipes
+//
+// Элементы рецептов
+//
+// Styleguide 7.0
+
+// Recipe step title
+//
+// Заголовок шага рецепта
+//
+// default - обычное состояние
+//
+// markup:
+// +b.recipe-step-title
+//   +b.text-icon
+//     +b('span').fonticon_trash-can
+//     span Удалить шаг
+//   +e.step 1 шаг
+// +b.recipe-step-title
+//   +b.text-icon
+//     +b('span').fonticon_trash-can
+//       span На весь экран
+//     span Удалить шаг
+//   +e.step 1 шаг
+//
+// Styleguide 7.1
+
+.recipe-step-title
+  height: 50px
+  line-height: 50px
+  margin: -25px -30px 0 -30px
+  padding: 0 30px
+  border-bottom: 1px solid #e6e6e6
+  position: relative
+  overflow: hidden
+
+  +width-lessthan(1024)
+    height: 59px
+    line-height: 59px
+    padding: 0 20px
+    margin-left: -60px
+    margin-right: -60px
+
+  +width-lessthan(768)
+    +width-between-property(margin-left, 600, -20, 768, -60, true, true)
+    +width-between-property(margin-right, 600, -20, 768, -60, true, true)
+
+  +width-lessthan(600)
+    margin-left: -20px
+    margin-right: -20px
+
+  & + .field-row
+    +width-lessthan(1024)
+      margin-left: -60px
+      margin-right: -60px
+      line-height: 0
+
+    +width-lessthan(768)
+      +width-between-property(margin-left, 600, -20, 768, -60, true, true)
+      +width-between-property(margin-right, 600, -20, 768, -60, true, true)
+  
+  &_mb20
+    margin-bottom: 20px !important
+
+  &__centered
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    width: 100%
+    color: #242424
+    font-weight: bold
+    pointer-events: none
+    text-align: center
+
+  &__step
+    color: #242424
+    font-size: 14px
+    font-weight: 700
+    text-transform: uppercase
+
+  .text-icon
+    color: #5E5E5E
+    font-size: 14px
+    font-weight: 400
+    float: right
+    margin-top: -1px
+
+    .fonticon
+      font-size: 20px
+      color: #cccccc
+
+  .right
+    +width-lessthan(1024)
+      display: none
+
+    .fonticon
+      color: #d1d1d1
+      cursor: pointer
+
+      &:hover
+        color: #ff391e
+
+      &_fullscreen
+        vertical-align: middle
+        span
+          display: inline-block
+          vertical-align: bottom
+          color: #242424
+          font-size: 14px
+          font-weight: 400
+          font-family: "Open Sans"
+          margin-left: 10px

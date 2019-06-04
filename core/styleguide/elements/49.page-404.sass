@@ -1,0 +1,65 @@
+@import '_imports'
+
+// Блок 404 страницы
+//
+// Блок 404 страницы
+//
+// default - обычное состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+//  +b.page-404-block
+//    +e.wrapper
+//      +e.header 404
+//      +e.description Такой страницы нет. Вероятно, ссылка, по которой вы сюда попали,
+//        br
+//        |  устарела, или вы ошиблись, когда набирали адрес.
+//      +e.description Вы можете перейти на&nbsp;
+//        a(href="#") главную страницу
+//        | , посмотреть рецепты,
+//        br
+//        |  пообщаться в &nbsp;
+//        a(href="#") клубе
+//        |  или воспользоваться&nbsp;
+//        a(href="#") поиском
+//        | .
+//
+// Styleguide 1.49
+
+.page-404-block
+  margin-bottom: -40px
+  background-color: #eae0cc
+  height: 569px
+  border-radius: 0 0 10px 10px
+  &__wrapper
+    height: 569px
+    +background-image-retina('elements/page-404-block/background.jpg')
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: top center
+    border-radius: 0 0 10px 10px
+    text-align: center
+    overflow: hidden
+
+  &__header
+    margin-top: 72px
+    margin-bottom: 11px
+    font-size: 150px
+    line-height: normal
+    font-family: "Noto Serif"
+    font-weight: 700
+    color: #fff
+
+  &__description
+    font-size: 16px
+    line-height: 24px
+    color: #fff
+    font-family: "Open Sans"
+    margin-bottom: 20px
+
+    a
+      color: #ff391e
+      text-decoration: underline
+
+      &:hover
+        text-decoration: none

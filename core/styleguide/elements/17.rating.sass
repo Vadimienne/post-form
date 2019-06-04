@@ -1,0 +1,122 @@
+@import '_imports'
+
+// Rating
+// 
+// Рейтинг
+// 
+// default - обычное состояние
+//
+// markup:
+// +b.rating
+//   +e.active(style="width:82%")
+//   +e.items
+//     +e.item._1
+//     +e.item._2
+//     +e.item._3
+//     +e.item._4
+//     +e.item._5
+//     +e.item._6
+//     +e.item._7
+//     +e.item._8
+//     +e.item._9
+//     +e.item._10
+//   
+// 
+// Styleguide 1.17
+
+.rating
+  position: relative
+  +background-image-retina('elements/rating/background.png')
+  width: 283px
+  height: 19px
+  background-repeat: no-repeat
+  background-position: center left
+
+  +width-lessthan(600)
+    float: none
+    clear: left
+    margin-top: 35px
+
+  & + .rate
+    clear: both
+
+  &__active
+    position: absolute
+    top: 0
+    left: 0
+    width: 283px
+    height: 19px
+    +background-image-retina('elements/rating/background-active.png')
+    background-repeat: no-repeat
+    background-position: center left
+
+  &__hover
+    position: absolute
+    left: -6px
+    top: -5.5px
+    height: 28px
+    border-radius: 15px
+    border: solid 1px #ffba00
+    visibility: hidden
+
+  &__items
+    position: absolute
+    left: -6px
+    top: - 5.5px
+    width: 289px
+    height: 30px
+
+  &__item
+    position: absolute
+    float: left
+    left: -2px
+    height: 28px
+    width: 28px
+    border: 1px solid transparent
+    border-radius: 50%
+    cursor: pointer
+    .voted &
+      cursor: default
+
+    &.voted
+      border-color: #ffba00
+      &:hover
+        width: 30px
+        height: 30px
+        border: none
+        +background-image-retina('elements/rating/item-delete.png')
+        cursor: pointer
+
+    &_1
+      left: 0px
+
+    &_2
+      left: 29px
+
+    &_3
+      left: 59px
+
+    &_4
+      left: 89px
+
+    &_5
+      left: 117px
+
+    &_6
+      left: 147px
+
+    &_7
+      left: 177px
+
+    &_8
+      left: 205px
+
+    &_9
+      left: 234px
+
+    &_10
+      left: 264px
+
+.rate + .hr
+  margin-left: -20px
+  margin-right: -20px

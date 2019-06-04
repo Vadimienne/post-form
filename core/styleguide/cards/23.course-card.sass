@@ -1,0 +1,55 @@
+@import '_imports'
+
+// Course card
+//
+// Карточка курса
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_course._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/course-card-image.jpg 1x, /assets/images/content/course-card-image@2x.jpg 2x, /assets/images/content/course-card-image@3x.jpg 3x")
+//     img(src="/assets/images/content/course-card-image.jpg" alt="")
+//   +e('main').content
+//     +e.icon
+//     +b.title_medium Кулинарные курсы
+//     +b('p').description-text
+//       | В этом разделе мы собрали для вас
+//       br
+//       | лучшие видео уроки от известных
+//       br
+//       | поворов.
+//     +b('a').button_transparent(href="#") Подробнее
+//
+// Styleguide 4.23
+
+.card_course.card_wide
+  text-align: center
+  cursor: default
+
+  &:hover
+    .card__content .title
+      text-decoration: none
+
+  .button
+    display: inline-block
+
+  .card__content
+    position: relative
+    bottom: auto
+    top: auto
+    left: auto
+    right: auto
+    padding: 75px 40px 0 40px
+    width: 260px
+
+  .card__icon
+    +imgbox('icons/course-icon.png')
+    margin: 0 auto 19px
+
+  .title
+    margin-bottom: 20px
+
+  .description-text
+    margin-bottom: 65px

@@ -1,0 +1,46 @@
+@import '_imports'
+
+// Class rate
+// 
+// Уровень сложности курса
+// 
+// class-rate_advanced - Продвинутый уровень
+// class-rate_intermediate - Средний уровень
+// class-rate_novice - Начальный уровень
+// class-rate_white - Начальный уровень
+//
+// markup:
+// +b.class-rate(class="{$modifiers}")
+//   +e.icon
+//   | Новичек
+// 
+// Styleguide 4.21
+
+.class-rate
+  color: #5B5B5B
+  font-size: 12px
+  font-weight: 400
+  position: relative
+  padding-left: 23px
+  display: inline-block
+  cursor:  default
+  user-select: none
+
+  &__icon 
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    margin: auto 0
+
+  &_advanced
+    +imgbox('elements/text-icon/advanced-rate-icon.png', '', '.class-rate__icon')
+
+  &_intermediate
+    +imgbox('elements/text-icon/intermediate-rate-icon.png', '', '.class-rate__icon')
+
+  &_novice
+    +imgbox('elements/text-icon/novice-rate-icon.png', '', '.class-rate__icon')
+
+  &_white
+    color: #fff

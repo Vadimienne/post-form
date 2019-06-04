@@ -1,0 +1,71 @@
+@import '_imports'
+
+// Recipe step
+//
+// Шаг рецепта
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.content-box
+//   +e.content
+//     +b.recipe-step-title
+//       +b.right
+//         +b('span').fonticon_fullscreen
+//            span На весь экран
+//       +e.step 1 шаг
+//     +b.field-row
+//       +b.step-image-container-posted
+//         img(src="/assets/images/content/recipe-step.jpg")
+//     +b.plain-text
+//       +b.title_small._sans-serif Ингредиенты
+//       +b.ingredient-columns
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Белки
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 г
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Белки
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 г
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Белки
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 г
+//       +b('h4').title_small._sans-serif
+//       | Свинину филе выкладываем в жаропрочное блюдо, сверху посыпаем молотым тмином, солью и перцем. Ставим в разогретую духовку на 200С на 45 мин. Если у вас другая часть свинины - готовьте дольше, чтоб она дошла.
+//
+// Styleguide 7.2
+
+.step-image-container-posted
+  width: 580px
+  height: 386px
+  position: relative
+  overflow: hidden
+  margin-left: -30px
+  cursor: pointer
+
+  +width-lessthan(1024)
+    width: 100%
+    height: auto
+    margin-left: 0
+
+    img
+      width: 100%
+  
+
+.ingredient-columns
+  +clearfix
+  margin-left: -40px
+
+  .definition-list-table
+    width: 240px
+    float: left
+    margin-left: 40px
+    margin-top: 10px

@@ -1,0 +1,567 @@
+@import '_imports'
+
+// Side navigation
+//
+// Навигация по разделам <br>
+// У элемента hidden-content надо удалить inline style. Добавлено для демонстрации открытого состояния.
+// js поведение добавляется атрибутом data-module="side-nav"
+//
+// accordion_default  - обычное состояние
+//
+// markup:
+// +b.side-nav
+//   +e.section.open Рубрики
+//     +e.icon
+//     +e.hidden-content(style="height:auto")
+//       +e('a').item.active(href="#") Кулинария
+//       +e('a').item(href="#") Красота и здоровье
+//       +e('a').item(href="#") Дети
+//       +e('a').item(href="#") Дом и сад
+//       +e('a').item(href="#") Путешествия
+//       +e('a').item(href="#") Разное
+//   +e.section.open Цена
+//     +e.icon
+//     +e.hidden-content(style="height:auto")
+//       +e.item
+//         +b.ui-slider
+//           +e.background-bar
+//             +e.fill-bar
+//             +e.toddler_left
+//             +e.toddler_right
+//           +e.value_max
+//             span до:
+//             | 2
+//           +e.value_min
+//             span от:
+//             | 1
+//   +e.section.open Рецепты Юлии Высоцкой
+//     +e.icon
+//     +e.hidden-content(style="height:auto")
+//       +e.item
+//         +b('label').checkbox(class="{$modifiers}")
+//           +e('input').input(type='checkbox' name="name" value='1')
+//           span Чекбокс
+//       +e.item
+//         +b('label').checkbox(class="{$modifiers}")
+//           +e('input').input(type='checkbox' name="name" value='1')
+//           span Чекбокс
+//       +e.item
+//         +b('label').checkbox(class="{$modifiers}")
+//           +e('input').input(type='checkbox' name="name" value='1')
+//           span Чекбокс
+//       +e.item
+//         +b('label').checkbox(class="{$modifiers}")
+//           +e('input').input(type='checkbox' name="name" value='1')
+//           span Чекбокс
+//       +e.item
+//         +b('label').checkbox(class="{$modifiers}")
+//           +e('input').input(type='checkbox' name="name" value='1')
+//           span Чекбокс
+//       +e.item
+//         +b('label').checkbox(class="{$modifiers}")
+//           +e('input').input(type='checkbox' name="name" value='1')
+//           span Чекбокс
+//   +e.section.open Ингредиенты
+//     +e.icon
+//     +e.hidden-content(style="height:auto")
+//       +e.item
+//         +b.field
+//           +e.label
+//             +e('span').labelvalue Добавить к поиску
+//             +b.selectbox
+//               +b.selectvalue Выберите ...
+//               +b.selectlist
+//                 +e.item Наименование 1
+//                 +e.item Наименование 1
+//                 +e.item Наименование 1
+//                 +b.select-scrollbar
+//                   +b.track
+//                   +b.drag
+//       +e.item
+//         +b.field
+//           +e.label
+//             +e('span').labelvalue Исключить ингридиент
+//             +b.selectbox
+//               +b.selectvalue Выберите ...
+//               +b.selectlist
+//                 +e.item Наименование 1
+//                 +e.item Наименование 1
+//                 +e.item Наименование 1
+//                 +b.select-scrollbar
+//                   +b.track
+//                   +b.drag
+//   +e.section Помощь
+//     +e.icon
+//     +e.hidden-content
+//       +e('a').item(href="#") Кулинария
+//       +e('a').item(href="#") Красота и здоровье
+//       +e('a').item(href="#") Дети
+//       +e('a').item(href="#") Дом и сад
+//       +e('a').item(href="#") Путешествия
+//       +e('a').item(href="#") Разное
+//   +e.section.always-open Помощь
+//     +e.icon
+//     +e.hidden-content
+//       +e('a').item(href="#") Кулинария
+//       +e('a').item(href="#") Красота и здоровье
+//       +e('a').item(href="#") Дети
+//       +e('a').item(href="#") Дом и сад
+//       +e('a').item(href="#") Путешествия
+//       +e('a').item(href="#") Разное
+//
+// Styleguide 3.5
+
+.side-nav
+  margin-bottom: 20px
+
+  +width-lessthan(1024)
+    padding: 0 40px
+    margin-bottom: 0
+
+  +width-lessthan(768)
+    +width-between-property(padding-left, 320, 10, 768, 40, true, true)
+    +width-between-property(padding-right, 320, 10, 768, 40, true, true)
+
+  .side-nav__section + .side-nav__section
+    padding-top: 20px
+
+    .side-nav__icon
+      top: 24px
+
+  .side-nav__section + .button
+    margin-top: 20px
+
+    +width-lessthan(1024)
+      display: none
+
+  .content-box__content
+    padding: 0
+    height: 310px
+    position: relative
+    overflow: hidden
+
+  &__spacer
+    display: none
+    height: 150px
+
+    +width-lessthan(1024)
+      display: block
+
+  &__section
+    color: #252525
+    font-size: 14px
+    line-height: 14px
+    font-weight: 700
+    border-bottom: 1px solid #ded8cb
+    padding-left: 30px
+    position: relative
+    +imgbox('forms/selectbox-arrow-down.png', '', '.side-nav__icon')
+
+    +width-lessthan(768)
+      width: 260px
+      box-sizing: border-box
+      margin: 0 auto
+
+    span
+      display: inline-block
+      position: relative
+
+    &:before
+      content: ''
+      position: absolute
+      top: -20px 
+      left: -20px
+      right: -20px
+      bottom: -1px
+      border-radius: 10px
+      background-color: #ebe4d4
+      opacity: 0
+      transition: opacity 1s ease
+      display: none
+    
+      +width-lessthan(1024)
+        display: block
+
+    & + .side-nav__section
+      &:before
+        top: -1px
+
+    &_tags
+
+      .tags
+        margin-top: 0
+        margin-left: -30px
+
+    &.open
+      +imgbox('forms/selectbox-arrow-up.png', '', '.side-nav__icon')
+
+      &:before
+        opacity: 1
+        
+    .tooltip_show
+      left: 100%
+      margin-left: -10px
+      top: 0
+      margin-top: 9px
+
+  &__title
+    position: relative
+
+    .tooltip_show
+      left: 100%
+      margin-left: -10px
+      top: 50%
+      margin-top: -18px
+
+  &__icon
+    position: absolute
+    top: 4px
+    left: 0
+    &_inside
+      left: -30px
+
+  &__hidden-content
+    height: 0
+    position: relative
+    overflow: hidden
+    margin: 19px 0 0 -30px
+    border-top: 1px solid transparent
+
+    .field__label
+      margin-left: -30px
+
+    .checkbox
+      margin-left: -30px
+
+  &__wrapper
+    height: 310px
+    overflow: hidden
+    position: relative
+    padding-left: 30px
+    margin-left: -30px
+
+    +width-lessthan(1024)
+      overflow: auto
+
+      &:-webkit-scrollbar
+        width: 15px
+        height: 15px
+        border-bottom: 1px solid #eee
+        border-top: 1px solid #eee
+
+      &:-webkit-scrollbar-thumb
+        border-radius: 8px
+        background-color: #C3C3C3
+        border: 2px solid #eee
+
+      &:-webkit-scrollbar-track
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2)
+
+  &__scroller
+    border-bottom: 1px solid transparent
+
+  &__item
+    display: block
+    color: rgba(0, 0, 0, .7)
+    font-size: 14px
+    font-weight: 400
+    line-height: 14px
+    margin-bottom: 20px
+    text-decoration: none
+    position: relative
+    padding-left: 30px
+
+    +width-lessthan(1024)
+      margin-bottom: 20px
+
+      & + .side-nav__item
+        border-top: 1px solid white
+        line-height: normal
+        padding-top: 15px
+        padding-bottom: 15px
+        margin-bottom: 0
+
+    &:first-child
+      .checkbox
+        margin-top: 4px
+
+    &:hover
+      opacity: 1
+      color: $color-orange
+
+    &.active
+      color: $color-orange
+
+    .tooltip_show
+      left: 100%
+      margin-left: -10px
+      top: 50%
+      margin-top: -18px
+
+      +width-lessthan(1024)
+        display: none
+
+  .checkbox__input + span
+    line-height: 14px
+    color: rgba(0, 0, 0, .7)
+    font-size: 14px
+    font-weight: 400
+
+    +width-lessthan(1024)
+      vertical-align: middle
+
+    &:before
+      top: -4px
+
+  .field__labelvalue
+    line-height: 14px
+    color: rgba(0, 0, 0, .7)
+    font-size: 14px
+    font-weight: 400
+
+.ui-slider
+  position: relative
+  +clearfix
+  margin-left: -30px
+  margin-bottom: 30px
+  margin-top: 10px
+
+  &__background-bar
+    width: 280px
+    height: 4px
+    background-color: #DED9CC
+    border-radius: 2px
+    position: relative
+    margin-bottom: 15px
+
+  &__fill-bar
+    width: 192px
+    height: 4px
+    background-color: #FF391E
+    position: absolute
+    top: 0
+    left: 32px
+
+  &__toddler
+    +imgbox('navigation/toddler.png')
+    position: absolute
+    top: -8px
+    cursor: pointer
+
+    &_left
+      left: 28px
+
+    &_right
+      right: 38px
+
+  &__value
+    color: #242424
+    font-size: 14px
+    font-weight: 600
+
+    span
+      font-size: 12px
+      font-weight: 400
+
+    &_max
+      float: right
+
+    &_min
+      float: left
+
+.side-nav_bottom-border_none
+  .side-nav
+
+    &__section
+
+      &:last-child
+        border-bottom: none
+
+.side-nav-button
+  margin-bottom: 20px
+
+.side-nav__section.always-open
+  padding-left: 0
+
+  .side-nav__hidden-content
+    height: auto
+    margin-left: 0
+    padding-left: 0
+
+  .side-nav__item
+    padding-left: 20px
+
+  .side-nav__icon
+    display: none
+
+  .tags
+    margin-left: 0
+
+
+.side-nav__section_tags.always-open
+  .side-nav__item
+    padding-left: 0
+
+.side-filter
+  height: 60px
+  margin: 0 -40px 20px
+  background-color: #ffffff
+  box-shadow: 0 1px 3px 0 rgba(72, 44, 4, 0.3)
+  line-height: 60px
+  +clearfix
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  +width-lessthan(768)
+    +width-between-property(margin-left, 320, -10, 768, -40, true, true)
+    +width-between-property(margin-right, 320, -10, 768, -40, true, true)
+  
+  +width-lessthan(385)
+    position: relative
+
+  &__title
+    display: inline-block
+    font-size: 16px
+    font-weight: 600
+    color: #242424
+    margin-left: 40px
+
+    +width-lessthan(385)
+      text-align: center
+      position: absolute
+      top: 0
+      right: 0
+      left: 0
+      margin: 0
+
+
+  &__clear
+    display: inline-block
+    font-size: 11px
+    color: #b4afa6
+    margin-left: 15px
+    position: relative
+
+    +width-lessthan(385)
+      display: block
+      float: right
+      margin: 0 10px 0 0
+
+    .fonticon
+      display: inline-block
+      vertical-align: middle
+      margin-left: 4px
+
+  &__mobile-close
+    +imgbox('recipes/close-filter.png')
+    position: absolute
+    top: 0
+    left: 11px
+    bottom: 0
+    margin: auto
+    z-index: 3
+    display: none
+
+    &:before
+      content: ''
+      position: absolute
+      top: -10px
+      left: -10px
+      right: -10px 
+      bottom: -10px
+
+    +width-lessthan(385)
+      display: block
+
+.show-filter-result
+  width: 180px
+  height: 40px
+  position: fixed
+  z-index: 999999
+  left: 0
+  margin-left: -90px
+  bottom: 25px
+  border-radius: 20px
+  background-color: #e02407
+  font-size: 12px
+  font-weight: 600
+  line-height: 40px
+  letter-spacing: 1px
+  color: #ffffff
+  text-transform: uppercase
+  text-align: center
+  cursor: pointer
+  visibility: hidden
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  &__count
+    display: inline-block
+    padding: 0 6px
+    height: 20px
+    background-color: #ffffff
+    border-radius: 20px
+    font-size: 11px
+    font-weight: 600
+    line-height: 20px
+    letter-spacing: 0.1px
+    color: #e02407
+    text-align: center
+    margin-left: 5px 
+    letter-spacing: 0.1px
+
+.filter-overlay
+  width: 100%
+  height: 100%
+  position: fixed
+  top: 0
+  left: 0
+  background: black
+  visibility: hidden
+  opacity: 0.85
+  z-index: 10
+  display: none
+
+  +width-lessthan(1024)
+    display: block
+
+  .close-filter
+    width: 20px
+    height: 18px
+    position: absolute
+    top: 20px
+    right: 40px
+    cursor: pointer
+
+    +width-lessthan(768)
+      +width-between-property(right, 320, 10, 768, 40, true, true)
+
+    +width-lessthan(385)
+      display: none
+
+    &:before
+      content: ''
+      position: absolute
+      top: -10px
+      right: -10px
+      left: -10px
+      bottom: -10px
+
+    &__line
+      width: 100%
+      height: 2px
+      transform-origin: 50% 50%
+      border-radius: 1px
+      background-color: white
+      position: absolute
+      top: 9px
+
+      &_left
+        transform: rotate(45deg)
+      
+      &_right
+        transform: rotate(-45deg)

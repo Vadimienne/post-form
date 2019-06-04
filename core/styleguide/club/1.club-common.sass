@@ -1,0 +1,176 @@
+@import '_imports'
+
+// Club
+// 
+// Блоки раздела клуб
+// 
+// Styleguide 8.0
+
+// Contest-info
+// 
+// Информация по конкурсу
+// 
+// contest-info  - обычное состояние
+// contest-info_completed - заверщенный конкурс
+// contest-info_large - увеличенный размер шрифта
+//
+// markup:
+// +b.contest-info(class="{$modifiers}")
+//   | Проводиться с 17.02.2015 по 23.02.2015
+//
+// Styleguide 8.1
+
+.contest-info
+  font-size: 13px
+  line-height: 18px
+  font-family: "Noto Serif"
+  font-style: italic
+  color: #43bb78
+
+  &_completed
+    color: #898989
+
+  &_large
+    font-size: 14px
+
+// Prize
+// 
+// Приз
+// 
+// prize  - обычное состояние
+//
+// markup:
+// +b.prize(class="{$modifiers}")
+//   +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//   +e.overlay
+//   +e.number 1
+//
+// Styleguide 8.2
+
+.prize
+  height: 60px
+  width: 60px
+  border-radius: 50%
+  position: relative
+
+  &:hover
+    .prize__number
+      color: #f12d16
+    .prize__overlay
+      border-color: #f12d16
+
+  &__image
+    position: absolute
+    top: 0
+    left: 0
+    height: 60px
+    width: 60px
+    border-radius: 50%
+
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    background-color: rgba(0,0,0, .4)
+    border-radius: 50%
+    border: 2px solid transparent
+
+  &__number
+    font-size: 24px
+    font-family: "Noto Serif"
+    font-weight: 700
+    position: relative
+    color: #fff
+    line-height: 60px
+    text-align: center
+
+// Winner
+// 
+// Победитель
+// 
+// Winner  - обычное состояние
+//
+// markup:
+// +b.winner
+//  +b.prize
+//    +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//    +e.overlay
+//    +e.number 1
+//  +b.user-avatar_medium
+//    +e('img').image(src="/assets/images/content/user-img.png")
+//  +e.info
+//    +e.place
+//      | 1 место
+//    +b.title_sans-serif Elena
+//    +e.description Холодильник Oursson RF1000/RD
+// +b.winner
+//  +b.prize
+//    +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//    +e.overlay
+//    +e.number 2
+//  +b.user-avatar_medium
+//    +e('img').image(src="/assets/images/content/user-img.png")
+//  +e.info
+//    +e.place
+//      | 2 место
+//    +b.title_sans-serif ВикторияS
+//    +e.description Электрический гриль Oursson
+// +b.winner
+//  +b.prize
+//    +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//    +e.overlay
+//    +e.number 3
+//  +b.user-avatar_medium
+//    +e('img').image(src="/assets/images/content/user-img.png")
+//  +e.info
+//    +e.place
+//      | 3 место
+//    +b.title_sans-serif Dianna
+//    +e.description Мясорубка Oursson MG2010/RD
+//
+// Styleguide 8.3
+
+.winners
+  margin-top: 20px
+  .winner
+    &:last-child
+      margin-bottom: 0
+
+.winner
+  +clearfix
+  margin-bottom: 34px
+
+  .prize, .user-avatar
+    float: left
+  
+  .prize
+    border: 2px solid #fff
+
+  .user-avatar
+    border: 2px solid #fff
+    margin-left: -12px
+  
+  .title
+    font-size: 18px
+
+  &__info
+    // float: left
+    margin-left: 126px
+    overflow: hidden
+
+  &__place
+    font-size: 14px
+    line-height: 20px
+    color: #4cc862
+    font-family: "Noto Serif"
+    font-style: italic
+    margin-bottom: 2px
+
+  &__description
+    font-size: 14px
+    line-height: 20px
+    font-weight: 600
+    color: #4c4c4c

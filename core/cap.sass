@@ -1,0 +1,148 @@
+@import "_imports.sass"
+@import "../fonts/stylesheet.sass"
+
+
+.cap-page
+  background-color: #242424
+  min-height: 827px
+
+  .page-wrapper
+    min-height: 100%
+    height: auto !important
+    height: 100%
+    margin: 0 auto -114px
+    position: relative
+    background: center no-repeat
+    +background-image-retina('cap/back.jpg')
+    background-size: cover
+
+  .page-push
+    height: 114px
+
+.cap-footer
+  height: 114px
+  position: relative
+
+  &__layout
+    padding: 33px 0 33px
+    border-top: 1px solid #3a3a3a
+    width: 1182px
+    margin: 0 auto
+    +clearfix
+
+  .apps
+    float: left
+
+    &_right
+      float: right
+
+    &__text
+      display: inline-block
+      opacity: 1
+      color: white
+      font-size: 12px
+      font-weight: 400
+      line-height: 40px
+      vertical-align: top
+      margin-right: 18px
+
+    &__button
+      display: inline-block
+      width: 157px
+      height: 38px
+      border: 1px solid #3a3a3a
+      border-radius: 20px
+      position: relative
+
+      & + .apps__button
+        margin-left: 10px
+
+      &:hover
+        border-color: #535353
+
+      .icon
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        margin: auto
+
+      &_appstore
+        +imgbox('layout/footer/appstore.png', '', '.icon')
+
+      &_google
+        +imgbox('layout/footer/google-play.png', '', '.icon')
+
+      &_windows
+        +imgbox('layout/footer/windows.png', '', '.icon')
+
+.cap
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 110px
+
+  &__layout
+    width: 1182px
+    height: 100%
+    margin: 0 auto
+    position: relative
+
+  .content
+    position: absolute
+    top: 50%
+    left: 0
+    right: 0
+    margin-top: -302px
+
+    &__plate
+      +imgbox('cap/plate.png')
+      margin: 0 auto
+
+    &__column
+      position: absolute
+      left: 0
+      bottom: 0
+
+      &_right
+        right: 0
+
+  .footer-projects
+    margin: 0
+    padding: 0
+    float: none
+    width: auto
+
+    &__headline
+      text-transform: uppercase
+      margin-bottom: 15px
+      opacity: 1
+
+
+  .footer-social
+    width: 160px
+    text-align: justify
+    font-size: 0.1px
+    line-height: 0
+
+    &:after
+      content: ''
+      display: inline-block
+      width: 100%
+
+    &__text
+      color: white
+      font-size: 11px
+      font-weight: 400
+      line-height: normal
+      text-transform: uppercase
+
+    &__link
+      display: inline-block
+      float: none
+      margin: 17px 0 0 0
+
+      &_placeholder
+        border: none

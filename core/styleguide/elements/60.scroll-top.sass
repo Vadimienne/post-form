@@ -1,0 +1,35 @@
+@import '_imports'
+
+// Scroll top
+//
+// Скролл вверх
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.scroll-top
+//
+// Styleguide 1.60
+
+.scroll-top
+  width: 40px
+  height: 40px
+  position: fixed
+  right: 30px
+  bottom: 50px
+  background-color: white
+  border-radius: 20px
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)
+  cursor: pointer
+  opacity: 0
+  z-index: 3
+
+  &__arrow
+    +imgbox('scroll-top.png')
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    margin: auto

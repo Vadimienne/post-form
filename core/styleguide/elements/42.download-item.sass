@@ -1,0 +1,98 @@
+@import '_imports'
+
+// Download item
+// 
+// Элемент для скачивания
+// 
+// download-item - обычное состояние, download-item_pdf, download-item_doc, donwload-item_zip, download-item_archive
+//
+// markup:
+// +b.content-box(style="width:280px")
+//   +e.header_padding1520
+//     +b.title_small._uppercase._sans-serif  Материалы вебинара
+//   +b.hr
+//   +e.content_wide
+//     +b('a').download-item_pdf(href="#")
+//       +b.title_small._sans-serif Обзор Хлебопечек
+//       +e.meta
+//         +e('span').size 1.3 Mb
+//         +e('span').separator
+//         +e('span').link Скачать
+//     +b('a').download-item_doc(href="#")
+//       +b.title_small._sans-serif 10 рецептов
+//       +e.meta
+//         +e('span').size 12.7 Mb
+//         +e('span').separator
+//         +e('span').link Скачать
+//     +b('a').download-item_doc(href="#")
+//       +b.title_small._sans-serif Метрики и спецификации
+//       +e.meta
+//         +e('span').size 0.3 Mb
+//         +e('span').separator
+//         +e.link Скачать
+//   +b.hr
+//   +e.footer_padding1520
+//     +b('a').download-item_zip._archive(href="#")
+//       +b.title_small._sans-serif Скачать одним архивом
+// 
+// Styleguide 1.42
+
+.download-item
+  background-repeat: no-repeat
+  background-position: left 19px
+  border-bottom: 1px solid #dbdbdb
+  padding: 15px 0 17px 36px
+  min-height: 33px
+  text-decoration: none
+  display: block
+
+  &:first-child
+    padding-top: 0
+    background-position: left 4px
+
+  &:last-child
+    padding-bottom: 0
+    border-bottom: 0
+
+  &_pdf
+    +background-image-retina('icons/download-item-pdf.png')
+
+  &_doc
+    +background-image-retina('icons/download-item-doc.png')
+
+  &_zip
+    +background-image-retina('icons/download-item-zip.png')
+
+  &_archive
+    overflow: hidden
+    .title
+      margin-top: 10px
+      color: #4c4c4c
+
+  .title
+    display: block
+
+  &__meta
+    display: block
+    font-size: 12px
+    line-height: 15px
+
+
+  &__size
+    display: inline-block
+    vertical-align: middle
+    color: #77726a
+
+  &__separator
+    display: inline-block
+    vertical-align: middle
+    width: 4px
+    height: 4px
+    border-radius: 50%
+    background-color: #77726a
+    margin: 0 4px
+
+  &__link
+    color: #ff441b
+    text-decoration: underline
+  

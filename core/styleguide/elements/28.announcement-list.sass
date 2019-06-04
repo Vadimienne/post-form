@@ -1,0 +1,77 @@
+@import '_imports'
+
+// Announcement list
+//
+// Список анонсов
+//
+// default - обычное состояние
+//
+// markup:
+// +b.content-box.announced
+//   +e.header_small
+//     +b.title_small._sans-serif._uppercase Ближайшие
+//   +b.hr
+//   +e.content
+//     +b.announcement-list
+//       +e.announcement
+//         +b.text-icon
+//           +b('span').fonticon_announcement
+//           span 23 февраля, 19:00
+//         +b('a').title(href="#") Мужской класс: мясо под грейпфрутовым соусом, картофельный салат, маффины с кабачком
+//       +e.announcement
+//         +b.text-icon
+//           +b('span').fonticon_announcement
+//           span 1 марта, 19:00
+//         +b('a').title(href="#") Самая настоящая панакота
+//       +e.announcement
+//         +b.text-icon
+//           +b('span').fonticon_announcement
+//           span 2 марта, 19:00
+//         +b('a').title(href="#") Торт Анна Павлова
+//       +e.announcement
+//         +b.text-icon
+//           +b('span').fonticon_announcement
+//           span 2 марта, 19:00
+//         +b('a').title(href="#") Торт Анна Павлова
+//
+// Styleguide 1.28
+
+.announced
+  height: 450px
+
+  .title
+    text-align: center
+    display: block
+
+  .content-box__content
+    height: 389px
+    position: relative
+    overflow: hidden
+    padding: 0
+    box-sizing: border-box
+
+.announcement-list
+  padding: 0 20px
+  position: relative
+  box-sizing: border-box
+
+  &__announcement
+    padding: 15px 0 15px 0
+    border-bottom: 1px solid #ddd
+
+    &:last-child
+      border-bottom: none
+
+    .text-icon
+      font-style: italic
+      font-size: 11px
+      margin-bottom: 15px
+
+      .fonticon
+        color: #38ad9c
+        font-style: normal
+
+    .title
+      text-align: left
+      line-height: 20px
+      border: none

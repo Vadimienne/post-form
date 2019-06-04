@@ -1,0 +1,55 @@
+@import '_imports'
+
+// Sort selectbox
+//
+// Сортировочный селект
+//
+// default - обычное состояние
+//
+// markup:
+// +b.sort-container(class="{$modifiers}")
+//   +e.label Сортировать:
+//   +b.sort-selectbox
+//     +e.selected-value по добавлению
+//     +e.icon
+//
+// Styleguide 2.13
+
+.sort-container
+  position: relative
+  +clearfix
+
+  &_photos
+    margin-right: 58px
+
+  &__label
+    font-size: 13px
+    color: #4D4D4D
+    font-weight: 400
+    float: left
+
+    +width-lessthan(1024)
+      display: none
+
+.sort-selectbox
+  float: left
+  position: relative
+  padding-right: 20px
+  margin-left: 5px
+  cursor: pointer
+
+  &__selected-value
+    font-size: 13px
+    color: #242424
+    font-weight: 700
+
+  &__icon
+    +imgbox('forms/selectbox-arrow-down.png')
+    position: absolute
+    top: 50%
+    right: 0
+    margin-top: image-height('forms/selectbox-arrow-down.png')/-2
+
+  &.active
+    .sort-selectbox__icon
+      +imgbox('forms/selectbox-arrow-up.png')

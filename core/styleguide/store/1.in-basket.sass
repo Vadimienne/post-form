@@ -1,0 +1,38 @@
+@import '_imports'
+
+// Store
+// 
+// Блоки раздела магазин
+// 
+// Styleguide 10.0
+
+// In-basket
+// 
+// Блок в карточке товара показывающий что товар в корзине и позволяющий убрать товар из корзины.
+// 
+// markup:
+// +b.in-basket
+//   span в 
+//   +e('span').important корзине
+//   +b('span').fonticon_cross-wide
+//
+// Styleguide 10.1
+
+.in-basket
+  font-size: 13px
+  color: #414141
+
+  &__important
+    color: #f12d16
+    margin: 0 10px 0 5px
+
+  .fonticon
+    font-size: 8px
+    color: #b2b2b2
+    cursor: pointer
+
+    &:hover
+      color: #f12d16
+
+  span
+    display: inline-block

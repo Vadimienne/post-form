@@ -1,0 +1,694 @@
+@import '_imports'
+
+// Entry stats
+//
+// Entry stats
+//
+// default - обычное состояние
+//
+// markup:
+// +b.entry-stats
+//   +e.item_cooking
+//     +e.name Приготовление
+//     +e.value
+//       span 45
+//       | минут
+//   =" "
+//   +e.item_prepear
+//     +e.name Подготовка
+//     +e.value
+//       span 45
+//       | минут
+//   =" "
+//   +e.item_persons
+//     +e.name Рецепт на:
+//     +e.value
+//       span 2
+//       | персоны
+//   =" "
+//   +e.item_placeholder
+// +b.entry-stats_ignredient-stats
+//   +e.item_category
+//     +e.name Категория
+//     +e.value Молочные продукты
+//   +e.item_recipes
+//     +e.name Рецептов
+//     +e.value 23 рецепта
+// +b.entry-stats
+//   +e.item_date
+//     +e.name Дата
+//     +e.value
+//       span 26 октября - 27 октября
+//   =" "
+//   +e.item_recipes
+//     +e.name Рецептов
+//     +e.value
+//       span 23 рецепта
+// +b.entry-stats_cource-stats
+//   +e.item_dificulty
+//     +e.name Сложность
+//     +e.value Для новичков
+//   +e.item_cooking
+//     +e.name Продолжительность
+//     +e.value 1 час 25 минут
+//
+// Styleguide 1.21
+
+.entry-stats
+  text-align: justify
+  text-justify: distribute
+  line-height: 0
+  font-size: 0.1px
+
+  +width-lessthan(600)
+    height: auto
+
+  &:after
+    content: ''
+    display: inline-block
+    width: 100%
+
+  &__item
+    display: inline-block
+    padding-left: 50px
+    position: relative
+
+    +width-lessthan(600)
+      padding-left: 0
+      padding-top: 50px
+
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+
+    &_cooking
+      &:before
+        +imgbox('elements/entry-stats/cooking-time.png')
+
+    &_prepear
+      &:before
+        +imgbox('elements/entry-stats/prepare-time.png')
+
+    &_persons
+      padding-left: 55px
+      &:before
+        +imgbox('elements/entry-stats/persons-count.png')
+
+    &_dificulty
+      &:before
+        +imgbox('elements/entry-stats/dificulty.png')
+
+    &_category
+      &:before
+        +imgbox('elements/entry-stats/category.png')
+
+    &_date
+      &:before
+        +imgbox('elements/entry-stats/date.png')
+
+    &_recipes
+      &:before
+        +imgbox('elements/entry-stats/recipes.png')
+
+  &__name
+    color: #9F9F9F
+    font-size: 12px
+    font-weight: 400
+    line-height: 16px
+
+    +width-lessthan(1024)
+      font-size: 10px
+      line-height: normal
+
+  &__value
+    color: #000
+    font-family: "Noto Serif"
+    font-size: 15px
+    font-weight: 700
+    line-height: normal
+
+    +width-lessthan(1024)
+      font-size: 14px
+
+    span
+      font-size: 18px
+
+      +width-lessthan(1024)
+        font-size: 14px
+
+.entry-stats_cource-stats
+  text-align: left
+  +clearfix
+
+  .entry-stats__item
+    display: block
+    float: left
+
+    & + .entry-stats__item
+      margin-left: 40px
+
+  .entry-stats__value
+    font-size: 18px
+
+  .entry-stats__value
+    font-size: 18px
+
+.entry-stats_ignredient-stats
+
+  .entry-stats__value
+    font-size: 18px
+
+  .entry-stats__value
+    font-size: 18px
+
+.entry-stats_calendar
+  margin-top: 30px
+  margin-bottom: 25px
+
+// Person
+//
+// Person
+//
+// default - обычное состояние
+//
+// markup:
+// +b.person_h._lh-small
+//   +b.user-avatar_small
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +e.name_italic Анастасия Мацукатова
+//       +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+// +b.person_h._lh-small._white
+//   +b.user-avatar_small
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +e.name_italic Анастасия Мацукатова
+//       +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+// +b.person_h._lh-small
+//   +b.user-avatar_small
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +b.title_small Игна
+// +b.person_h._lh-default
+//   +b.user-avatar
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +e.name Анастасия Мацукатова
+//       +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+// +b.person_h._mention
+//   +b.user-avatar_average
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +e.name Анастасия Мацукатова
+//         +e.mention нравится рецепт: «Курица по китайски»
+//       +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+// +b.person_h._lh-medium
+//   +b.user-avatar_medium
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +b.title_small Игна
+//       +e.additional
+//         +b('span').fonticon_winner-cup
+//         span
+//          | 24
+// +b.person_h._lh-medium
+//   +e.status
+//   +b.user-avatar_medium
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +b.title_small Liza Oliver
+//       +e.special Лидер недели
+//       +e.additional
+//         +b('span').fonticon_heart
+//         span
+//          | 44 467.2
+// +b.person_h._lh-big
+//   +e.status
+//   +b.user-avatar_big
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +e.name Анастасия Мацукатова
+//       +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") 15 минут назад
+// +b.person_w-70._v
+//   +b.user-avatar_medium
+//     +e('img').image(src="/assets/images/content/user-img.png")
+//   +e.wrapper
+//     +e.content
+//       +b.title_small ТатьянаS
+// +b.person-group
+//   +b('a').person_w-70._v(href="#")
+//     +b.user-avatar_medium
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +b.title_small ТатьянаS
+//   = ' '
+//   +b('a').person_w-70._v(href="#")
+//     +b.user-avatar_medium
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +b.title_small Liza Oliver
+//   = ' '
+//   +b('a').person_w-70._v(href="#")
+//     +b.user-avatar_medium
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +b.title_small Ольга♥Ч
+//   = ' '
+//   +b('a').person_w-70._v(href="#")
+//     +b.user-avatar_medium
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +b.title_small ТатьянаS
+//   = ' '
+//   +b('a').person_w-70._v(href="#")
+//     +b.user-avatar_medium
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//     +e.wrapper
+//       +e.content
+//         +b.title_small ТатьянаS
+// +b.person-group
+//   +b('a').person._v
+//     +b.user-avatar
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//   = ' '
+//   +b('a').person._v
+//     +b.user-avatar
+//      +e('img').image(src="/assets/images/content/user-img.png")
+//   = ' '
+//   +b('a').person._v
+//     +b.user-avatar
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//   = ' '
+//   +b('a').person._v
+//    +b.user-avatar
+//      +e('img').image(src="/assets/images/content/user-img.png")
+//   = ' '
+//   +b('a').person._v
+//     +b.user-avatar
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//   = ' '
+//   +e('a').total +250
+// +b.person-group_duel-popup
+//   +b.person_w-80._v._duel-user
+//     +b.user-avatar_big
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//       +b.selection_duel-user
+//         +e.overlay
+//           +e.check
+//             +b.fonticon_check-icon
+//     +e.wrapper
+//       +e.content
+//         +b.title_small Светлана Горбуненко
+//         +e.additional 8125,7
+//   +b.person_w-80._v._duel-user.checked
+//     +b.user-avatar_big
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//       +b.selection_duel-user
+//         +e.overlay
+//           +e.check
+//             +b.fonticon_check-icon
+//     +e.wrapper
+//       +e.content
+//         +b.title_small Светлана Горбуненко
+//         +e.additional 8125,7
+//   +b.person_w-80._v._duel-user
+//     +b.user-avatar_big
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//       +b.selection_duel-user
+//         +e.overlay
+//           +e.check
+//             +b.fonticon_check-icon
+//     +e.wrapper
+//       +e.content
+//         +b.title_small Светлана Горбуненко
+//         +e.additional 8125,7
+//   +b.person_w-80._v._duel-user
+//     +b.user-avatar_big
+//       +e('img').image(src="/assets/images/content/user-img.png")
+//       +b.selection_duel-user
+//         +e.overlay
+//           +e.check
+//             +b.fonticon_check-icon
+//     +e.wrapper
+//       +e.content
+//         +b.title_small Светлана Горбуненко
+//         +e.additional 8125,7
+//
+// Styleguide 1.22
+
+.person
+  cursor: pointer
+  text-decoration: none
+  display: inline-block
+  text-decoration: none
+
+  .card &
+    &:hover
+      .person__name
+        color: #ff391e
+
+  .title
+    display: block
+
+  &__status
+    width: 10px
+    height: 10px
+    background-color: #4cc861
+    border: 2px solid white
+    border-radius: 50%
+    position: absolute
+    top: 6px
+    left: 4px
+
+  &__additional
+    display: block
+    line-height: 13px
+    font-size: 12px
+    color: #4c4c4c
+    font-style: italic
+    font-family: "Noto Serif"
+
+    span
+      display: inline-block
+      vertical-align: middle
+
+  &__special
+    font-size: 12px
+    color: #b7b7b7
+
+  &__content
+    display: block
+
+  &__wrapper
+    display: block
+
+
+.person_h
+  +clearfix
+  display: block
+
+  .user-avatar
+    float: left
+    margin-right: 20px
+
+  .person__name + .person__post-time
+    margin-top: 2.5px
+
+  .title
+    line-height: 11px
+
+  .title + .person__additional
+    margin-top: 9px
+
+  .person__special + .person__additional
+    margin-top: 5px
+
+  .title + .person__special
+    margin-top: 7px
+
+  .person__additional
+    .fonticon
+      color: #ff441b
+      font-size: 13px
+      margin-right: 5px
+      font-style: normal
+
+    .fonticon_heart
+      font-size: 12px
+      line-height: 12px
+
+    .fonticon_heart + span
+      line-height: 12px
+
+  .person
+    &__wrapper
+      // float: left
+      overflow: hidden
+
+    &__content
+      // display: inline-block
+      // vertical-align: middle
+      line-height: normal
+
+    &__name
+      color: #242424
+      font-size: 13px
+      line-height: 13px
+      font-weight: 400
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
+      &_italic
+        font-style: italic
+
+    &__post-time
+      display: block
+      color: #898989
+      font-family: "Noto Serif"
+      font-size: 11px
+      line-height: 13px
+      font-style: italic
+
+.person_lh-default
+  .person
+    &__wrapper
+      line-height: 50px
+
+.person_lh-small
+
+  .user-avatar
+    margin-right: 10px
+
+  .title
+    font-size: 13px
+
+  .person
+    &__wrapper
+      line-height: 30px
+
+.person_lh-medium
+
+  .title
+    line-height: 10px
+
+  .person
+    &__wrapper
+      line-height: 60px
+
+.person_discussed
+  position: relative
+
+  .person__status
+    top: 2px
+    left: 2px
+
+  .title
+    width: 153px
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    line-height: normal
+
+.person_lh-big
+  position: relative
+  width: 410px
+
+  .plain-text &
+    margin: 0
+
+  .user-avatar
+    margin-right: 20px
+
+  .person__name + .person__post-time
+    margin-top: 9px
+
+  .person
+    &__wrapper
+      line-height: 80px
+      width: 310px
+
+    &__post-time
+      font-size: 12px
+      line-height: 9px
+
+    &__name
+      font-size: 18px
+      font-weight: 700
+      font-family: "Noto Serif"
+      line-height: 15px
+
+.person_mention
+
+  .user-avatar
+    margin-right: 0
+
+  .person
+    &__wrapper
+      line-height: 40px
+      margin-left: 50px
+      float: none
+
+    &__content
+      display: inline-block
+      vertical-align: top
+      line-height: normal
+      padding-top: 7px
+
+    &__name
+      color: #242424
+      font-family: "Noto Serif"
+      font-weight: 700
+      line-height: 1
+      white-space: normal
+
+    &__mention
+      display: inline
+      color: #666666
+      font-family: "Open Sans"
+      font-weight: 400
+
+    &__post-time
+      color: #999999
+      font-family: "Open Sans"
+      font-weight: 400
+      font-style: normal
+      margin: 0 0 8px 0
+
+.person_white
+  .person
+    &__name
+      color: #fff
+
+    &__post-time
+      color: #A7A19B
+
+.person_v
+  display: inline-block
+  vertical-align: top
+
+  .user-avatar
+    margin: 0 auto
+
+  .user-avatar + .person__wrapper
+    margin-top: 5px
+
+  .person
+    &__wrapper
+      text-align: center
+
+  .title
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+
+.person_w-70
+  width: 70px
+
+.person_w-80
+  width: 80px
+
+  .user-avatar + .person__wrapper
+    margin-top: 10px
+
+.person_duel-user
+
+  &.checked
+    .selection_duel-user
+      display: block
+
+  &:hover
+    .selection_duel-user
+      display: block
+
+  .title
+    font-size: 13px
+    line-height: 16px
+    margin-bottom: 6px
+
+  .user-avatar
+    position: relative
+
+  .person
+
+    &__additional
+      font-size: 11px
+      color: #808080
+
+.person.person_new-message
+  display: block
+
+.person_top
+  margin-bottom: 18px
+
+// Вспомогательный блок для выравнивания justify
+
+.person-group
+  text-align: justify
+  text-justify: distribute
+  font-size: 0
+  line-height: 0
+
+  &:after
+    content: ''
+    display: inline-block
+    width: 100%
+    height: 0
+
+  &__total
+    display: inline-block
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    border: 1px solid #ff391e
+    color: #FF391E
+    font-size: 14px
+    font-weight: 600
+    line-height: 50px
+    text-align: center
+
+.person-group_duel-popup
+  text-align: left
+  text-justify: auto
+
+  &:after
+    display: none
+
+  .person
+    margin-right: 30px
+
+    &:last-child
+      margin-right: 0
+
+.content-box
+  .person
+    &:hover
+      .user-avatar
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+      .title
+        color: #f24a4a
+
+.content-box__content_article
+  .person_lh-big
+    width: auto
+    color: #333 !important
+    .person__name
+      white-space: normal
+      overflow: visible
+    .person__wrapper
+      width: auto

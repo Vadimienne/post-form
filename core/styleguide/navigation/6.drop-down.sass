@@ -1,0 +1,617 @@
+@import '_imports'
+
+// Drop down
+//
+// выпадающее меню
+//
+// default  - обычное состояние
+//
+// markup:
+// +b.absolute-container
+//   +b.drop-down_main-menu
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       span Кулинария
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       span Красота и здоровье
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       span Дети
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       span Дом и сад
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       span Путешествия
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       span Разное
+//     +e.triangle
+// +b.absolute-container
+//   +b.drop-down_user-menu
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       +b('span').fonticon_profile-user-menu
+//       span Профиль
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       +b('span').fonticon_settings-user-menu
+//       span Настройки
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       +b('span').fonticon_notification-user-menu
+//       span Уведомления
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       +b('span').fonticon_shoping-list-user-menu
+//       span Шоппинг листы
+//     +e('a').item(href="#")
+//       +e('div').item-hover
+//       +b('span').fonticon_favorites-user-menu
+//       span Избранное
+//     +e('a').item_logout(href="#")
+//       +e('div').item-hover
+//       +b('span').fonticon_logout-user-menu
+//       span Выход
+//     +e.triangle
+// +b.absolute-container
+//   +b.drop-down_search(style="display:block")
+//     +e.headline последние поисковые запросы
+//     +e.item
+//       +e('div').item-hover
+//       span Курица
+//     +e.item
+//       +e('div').item-hover
+//       span Картошка
+//     +e.item
+//       +e('div').item-hover
+//       span Кисонька
+//     +e.item
+//       +e('div').item-hover
+//       span Помидорка
+//     +e.triangle
+// +b.absolute-container
+//   +b.drop-down_search._search-empty(style="display:block")
+//     +e.headline НИЧЕГО НЕ НАЙДЕНО
+//     +e.item
+//       span К сожалению, мы ничего не нашли по вашему запросу.
+//     +e.item
+//       span Вы можете ввесте новый запрос или перейти в один
+//         br
+//         | из наших разделов, например
+//         a(href="#")  рецептов
+//         | .
+//     +e.triangle_left
+// +b.absolute-container
+//   +b.drop-down_favorites
+//     +e.item
+//       +e('div').item-hover
+//       span Моя книга
+//     +e.item
+//       +e('div').item-hover
+//       span Сладости
+//     +e.item
+//       +e('div').item-hover
+//       span Печенье
+//     +e.new-book
+//       +b('span').fonticon_new-book
+//       span Новая книга
+//     +e.triangle
+//     +b.scroll
+//       +e.track
+//         +e.drag
+// +b.absolute-container
+//   +b.drop-down_search(style="display:block")
+//     +e.all.right Все
+//     +e.headline Рецепты
+//     +e.item
+//       +e('div').item-hover
+//       span Куриные крылышки и молодой картофель,
+//         br
+//         | запеченные в духовке
+//     +e.item
+//       +e('div').item-hover
+//       span Куринный суп с помпушками
+//     +e.item
+//       +e('div').item-hover
+//       span Куринное филе с соусом песто
+//     +e.hr
+//     +e.headline Ингридиенты
+//     +e.item
+//       +e('div').item-hover
+//       span Курица
+//     +e.item
+//       +e('div').item-hover
+//       span Куринная грудка
+//     +e.hr
+//     +e.all.right Все
+//     +e.headline Люди
+//     +e.item
+//       +e('div').item-hover
+//       span Курицина Валлерия
+//     +e.item
+//       +e('div').item-hover
+//       span Курочкина Анна
+//     +e.item
+//       +e('div').item-hover
+//       span Куринное облочко
+//     +e.hr_fullwidth
+//     +e.show-all-results Показать все результаты поиска
+//     +e.triangle
+// +b.absolute-container
+//   +b.drop-down_sort
+//     +e('a').item.active
+//       +e('div').item-hover
+//       span По популярности
+//     +e('a').item
+//       +e('div').item-hover
+//       span По регистрации
+//     +e('a').item
+//       +e('div').item-hover
+//       span По алфавиту
+//     +e.triangle
+//
+// Styleguide 3.6
+
+.drop-down
+  display: block
+  position: absolute
+  padding: 1px 30px
+  background-color: #FFF
+  border-radius: 4px
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)
+  z-index: 100
+
+  &__triangle
+    +imgbox('elements/global/dropdown-triangle.png')
+    position: absolute
+    top: -10px
+    right: 37px
+
+    &_left
+      left: 20px
+
+  &__scroll-box
+    max-height: 122px
+    position: relative
+    overflow: hidden
+    padding: 0 20px
+
+  &__container
+    position: relative
+
+  &__all
+    display: block
+    color: #666
+    font-size: 12px
+    font-weight: 400
+    text-decoration: none
+    margin-top: -1px
+    cursor: pointer
+
+    &:hover
+      color: #ff391e
+
+  &__hoverer
+    position: absolute
+    top: -13px
+    left: 0
+    right: 0
+    height: 13px
+
+  &__hr
+    height: 1px
+    background-color: #e0e0e0
+    margin: 15px 0
+
+    &_fullwidth
+      margin-left: -20px
+      margin-right: -20px
+
+  &__new-book
+    height: 40px
+    padding: 0 20px
+    color: #4D4D4D
+    font-size: 14px
+    font-weight: 600
+    line-height: 40px
+    border-top: 1px solid #f2f2f2
+    cursor: pointer
+
+    span
+      display: inline-block
+      vertical-align: middle
+      margin-top: -2px
+
+    .fonticon
+      color: #ccc
+      font-size: 18px
+      margin-right: 10px
+
+    &:hover
+      color: #000
+
+      .fonticon
+        color: #ff391e
+
+  &__item
+    display: block
+    height: 56px
+    border-top: 1px solid #f2f2f2
+    color: #666
+    font-size: 12px
+    font-weight: 600
+    text-transform: uppercase
+    line-height: 56px
+    text-decoration: none
+    white-space: nowrap
+    position: relative
+
+    span
+      display: inline-block
+      position: relative
+
+    &:first-child
+      border: none
+
+    &:hover
+      color: #000
+
+      .fonticon
+        color: #ff391e
+
+      .drop-down__item-hover
+        display: block
+    
+    &_selected
+      .drop-down__item-hover
+        display: block
+
+  &__item-hover
+    display: none
+    position: absolute
+    top: -1px
+    left: -30px
+    right: -30px
+    bottom: -1px
+    background-color: #f2f2f2
+
+  &__show-all-results
+    height: 53px
+    margin: -15px -20px
+    color: #999
+    font-size: 12px
+    font-weight: 600
+    text-transform: uppercase
+    line-height: 53px
+    text-align: center
+    cursor: pointer
+
+    &:hover
+      color: #ff391e
+
+.drop-down_main-menu
+  .drop-down__item
+
+    &.active
+      color: $color-orange
+
+    &:first-child
+      &:hover
+        &:before
+          content: ''
+          border-left: 10px solid transparent
+          border-right: 10px solid transparent
+          border-bottom: 10px solid #f2f2f2
+          position: absolute
+          top: -11px
+          right: 8px
+          z-index: 2
+
+    &:last-of-type
+      &:hover
+        .drop-down__item-hover
+          border-radius: 0 0 4px 4px
+
+
+.drop-down_user-menu
+  padding: 0 20px
+
+  .drop-down__item
+    height: 40px
+    border-bottom: 1px solid #f2f2f2
+    border-top: 0
+    line-height: 40px
+    text-transform: none
+    font-size: 13px
+
+    &:first-child
+
+      .drop-down__item-hover
+        border-radius: 4px 4px 0 0
+
+      &:hover
+        &:before
+          content: ''
+          border-left: 10px solid transparent
+          border-right: 10px solid transparent
+          border-bottom: 10px solid #f2f2f2
+          position: absolute
+          top: -10px
+          right: -1px
+          z-index: 2
+
+    &_logout
+      height: 49px
+      line-height: 49px
+      border-bottom: none
+
+      .drop-down__item-hover
+        border-radius: 0 0 4px 4px
+        bottom: 0
+
+    span
+      vertical-align: middle
+      padding-left: 35px
+
+    .fonticon
+      padding: 0
+      position: absolute
+      font-size: 16px
+
+  .drop-down__item-hover
+    left: -20px
+    right: -20px
+
+  .drop-down__triangle
+    right: 17px
+
+.drop-down_search
+  padding: 15px 20px
+  box-sizing: border-box
+  width: 100%
+  margin-top: 21px
+  display: none // for js
+
+  +width-lessthan(1024)
+    max-height: calc(100vh - 150px)
+    overflow: auto
+
+  .drop-down__headline
+    color: #999
+    font-size: 11px
+    font-weight: 600
+    text-transform: uppercase
+    margin-bottom: 15px
+
+  .drop-down__item
+    height: auto
+    font-size: 14px
+    text-transform: none
+    border: none
+    line-height: normal
+    font-weight: 400
+    padding: 5px 0
+    cursor: pointer
+    white-space: normal
+
+  .drop-down__item-hover
+    left: -20px
+    right: -20px
+
+  .drop-down__triangle
+    right: 15px
+
+.drop-down_search-empty
+  .drop-down__headline
+    margin-bottom: 10px
+
+  .drop-down__item
+    font-size: 13px
+    cursor: default
+
+    &:hover
+      color: #666
+
+    a
+      color: #e12407
+
+      &:hover
+        text-decoration: underline
+
+.drop-down_favorites
+  width: 275px
+  padding: 0
+
+  .drop-down__hover-triangle
+    border-left: 10px solid transparent
+    border-right: 10px solid transparent
+    border-bottom: 10px solid #f2f2f2
+    position: absolute
+    top: -10px
+    left: 27px
+    z-index: 2
+    display: none
+
+  .drop-down__item
+    height: 40px
+    color: #4D4D4D
+    font-size: 14px
+    font-weight: 600
+    text-transform: none
+    line-height: 40px
+    cursor: pointer
+
+    & + .drop-down__item
+      border-top: 1px solid #f2f2f2
+
+  .drop-down__item-hover
+    left: -20px
+    right: -20px
+
+  .drop-down__triangle
+    left: 27px
+
+  .right &
+    .drop-down__triangle
+      left: auto
+      right: 7px
+
+      +width-lessthan(1024)
+        right: 11px
+
+.drop-down_sort
+  top: 32px
+  right: -25px
+  padding-left: 20px
+  padding-right: 20px
+  box-sizing: border-box
+  min-width: 364px
+  
+  +width-lessthan(1024)
+    right: -10px
+
+  +width-lessthan(600)
+    min-width: 300px
+    right: 10px
+  
+  .drop-down
+
+    &__header
+      font-size: 11px
+      font-weight: 600
+      color: #999999
+      text-transform: uppercase
+      margin: 11px 0 6px
+
+    &__triangle
+      right: 20px
+
+      +width-lessthan(1024)
+        right: 5px
+
+      +width-lessthan(600)
+        display: none
+
+    &__item-hover
+      left: -20px
+      right: -20px
+
+    &__item
+      border-top: none
+      height: 40px
+      line-height: 40px
+      font-size: 14px
+      font-weight: 400
+      text-transform: none
+
+      &:first-of-type
+        &:hover
+          .drop-down__item-hover
+            border-radius: 4px 4px 0 0
+
+      &:last-of-type
+        &:hover
+          .drop-down__item-hover
+            border-radius: 0 0 4px 4px
+
+      &.active
+        color: #ff391e
+        cursor: default
+
+        &:hover
+          .drop-down__item-hover
+            display: none
+
+        .drop-down__item-hover
+          cursor: default
+
+        span
+          cursor: default
+
+      &:first-child
+        &:hover
+          &:before
+            content: ''
+            border-left: 10px solid transparent
+            border-right: 10px solid transparent
+            border-bottom: 10px solid #f2f2f2
+            position: absolute
+            top: -11px
+            right: -9px
+            z-index: 2
+
+      span
+        cursor: pointer
+
+    &__item-hover
+      cursor: pointer
+
+.drop-down_emoji
+  box-sizing: border-box
+  min-width: 506px
+  padding: 0
+  right: -22px
+  left: auto
+  bottom: auto
+  top: 40px
+
+  .drop-down
+
+    &__container
+      padding: 15px 15px
+      height: 170px
+      box-sizing: border-box
+      overflow: hidden
+
+    &__triangle
+      right: 20px
+      left: auto
+
+.drop-down_print
+  position: relative
+  top: auto
+  right: 0
+
+  .drop-down
+    &__item
+      height: 43px
+      text-transform: none
+      font-weight: 400
+      font-size: 13px
+
+      &:first-child
+
+        .drop-down__item-hover
+          border-radius: 4px 4px 0 0
+
+        &:hover
+          &:before
+            content: ''
+            border-left: 10px solid transparent
+            border-right: 10px solid transparent
+            border-bottom: 10px solid #f2f2f2
+            position: absolute
+            top: -11px
+            right: -14px
+            z-index: 2
+
+      & + .drop-down__item
+        .drop-down__item-hover
+          border-radius: 0 0 4px 4px
+
+      .plain-text &
+        color: #242424
+
+      span
+        line-height: 43px
+        margin: 0
+        vertical-align: top
+
+      &:hover
+        .plain-text &
+          color: black
+
+    &__triangle
+      right: 15px

@@ -1,0 +1,102 @@
+@import '_imports'
+
+// News from julia
+//
+// Блок новостей Юлии Высоцкой на главной странице
+//
+// default - обычное состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+//  +b.news-from-julia.card
+//    +e('a').header(href="#")
+//      +e.julia
+//      +b.title._sans-serif._white._uppercase Новости
+//        br
+//        |  Юлии высоцкой
+//    +e.content
+//      +e('a').item(href="#")
+//        +e.icon_video
+//        +e.item-content
+//          +e.item-category Видео блог Юлии Высоцкой
+//          +e.item-title.title Что я читаю
+//      +e('a').item(href="#")
+//        +e.icon_theatre
+//        +e.item-content
+//          +e.item-category Театр
+//          +e.item-title.title Премьера спектакля «Вишневый сад»
+//
+// Styleguide 1.50
+
+.news-from-julia
+
+  &__header
+    display: block
+    position: relative
+    height: 249px
+    +imgbox('elements/news-from-julia/header.jpg')
+
+    .title
+      bottom: 20px
+      left: 20px
+      position: absolute
+      font-size: 14px
+      line-height: 18px
+
+  &__julia
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    margin: 0 auto
+    +imgbox('elements/news-from-julia/julia.png')
+
+  &__content
+    padding: 30px 20px 0
+    overflow: hidden
+
+  &__item
+    display: block
+    border-bottom: 1Px solid #dddddd
+    +clearfix
+    margin-bottom: 20px
+    padding-bottom: 10px
+
+    &:last-child
+      border-bottom: 0
+      margin-bottom: 20px
+
+    &:hover
+      .news-from-julia__item-title
+        text-decoration: underline
+
+  &__icon
+    float: left
+    font-size: 26px
+    color: #ff391e
+
+    &_video
+      +imgbox('elements/news-from-julia/video.png')
+
+    &_theatre
+      +imgbox('elements/news-from-julia/theatre.png')
+
+  &__item-content
+    float: right
+    width: 194px
+
+  &__item-category
+    font-size: 11px
+    color: #ff391e
+    text-transform: uppercase
+    font-weight: 700
+    margin-bottom: 2px
+    line-height: normal
+    margin-top: -3px
+
+  &__item-title
+    line-height: 22px
+    height: 44px
+    overflow: hidden
+
+

@@ -1,0 +1,64 @@
+@import '_imports'
+
+// Navigation
+//
+// Элементы навигации
+//
+// Styleguide 3.0
+
+// Breadcrumbs
+//
+// Хлебные крошки
+//
+// breadcrumbs_default  - обычное состояние
+//
+// markup:
+// +b.breadcrumbs
+//   a(href="#") Главная
+//   a(href="#") Магазин
+//   a(href="#") Кухонные принадлежности
+//   +e.last Миски
+//
+// Styleguide 3.1
+
+.breadcrumbs
+  font-size: 12px
+  font-weight: 500
+  position: relative
+  overflow: hidden
+  color: black
+
+  &__last
+    max-width: 480px
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    display: inline-block
+    vertical-align: top
+
+  a
+    color: #b4afa5
+    text-decoration: none
+    display: inline-block
+    position: relative
+    word-spacing: normal
+    margin-right: 15px
+
+    &:hover
+      color: #242424
+
+    &.active
+      color: black
+
+    // С определённым умыслом закоменчено. Разделитель теперь явно стоит в разметке
+    // &:after
+      // content: '»'
+      // color: #b4afa5
+      // margin-left: 15px
+      // display: inline-block
+      // vertical-align: top
+
+  span
+    margin-right: 15px
+    color: #b4afa5

@@ -1,0 +1,169 @@
+@import '_imports'
+
+// Placeholder card
+//
+// Карточка плейсхолдер, когда нет данных
+//
+// default - обычное состояние
+//
+// markup:
+// +b.placeholder-card
+//   +e.row
+//     +e.cell
+//       +e.icon
+//         +b('span').fonticon_posts
+//       +b.title_medium Нет постов
+//       +e.text Пользователь еще не написла ни одного
+//         br
+//         | поста, возможно он это сделает позже.
+// +b.placeholder-card_small
+//   +e.row
+//     +e.cell
+//       +e.icon
+//         +b('span').fonticon_profile-user-menu
+//       +b.title_medium Пригласите друга
+//       +e.text Пишите рецепты,
+//         br
+//         | эксперементируйте и участвуйте
+//         br
+//         | в конкурсах вместе.
+// +b.placeholder-card_photo
+//   +e.row
+//     +e.cell
+//       +e.icon
+//       +b.title_medium
+//         | Загрузить
+//         br
+//         | фотографию
+// +b.placeholder-card_album
+//   +e.row
+//     +e.cell
+//       +e.icon
+//       +b.title_medium Создать альбом
+//       +e.text Создать альбом
+//         br
+//         | эксперементируйте и участвуйте
+//         br
+//         | в конкурсах вместе.
+//
+// Styleguide 4.17
+
+.placeholder-card
+  width: 580px
+  height: 450px
+  box-sizing: border-box
+  border: 1px solid #d6cdbf
+  border-radius: 4px
+  display: table
+  margin-bottom: 20px
+
+  +width-lessthan(1024)
+    width: 688px
+    height: 424px
+
+  +width-lessthan(820)
+    width: 100%
+
+  +width-lessthan(768)
+    +width-between-property(height, 320, 382, 768, 424, true, true)
+
+  &_duel
+    height: 417px
+
+  &_search
+    width: 100%
+
+  &__row
+    display: table-row
+
+  &__cell
+    display: table-cell
+    vertical-align: middle
+    text-align: center
+
+  &__icon
+    width: 60px
+    height: 60px
+    border: 2px solid #d6cdbf
+    border-radius: 50%
+    margin: 0 auto 20px
+    line-height: 60px
+
+    .fonticon
+      font-size: 28px
+      color: #d6cdbf
+      vertical-align: center
+
+  .title
+    margin-bottom: 10px
+    font-size: 18px
+
+  &__text
+    color: #888175
+    font-size: 13px
+    font-weight: 400
+    line-height: 18px
+
+    a
+      display: inline
+
+.placeholder-card_small
+  width: 280px
+  height: 215px
+
+  .title
+    font-size: 18px
+    margin-bottom: 5px
+
+  .placeholder-card
+    &__icon
+      margin-bottom: 6px
+
+.placeholder-card_photo
+  width: 280px
+  height: 280px
+  cursor: pointer
+  +imgbox('forms/upload-image.png', '', '.placeholder-card__icon')
+
+  &:hover
+    border-color: #e52b12
+
+  .placeholder-card__icon
+    border: none
+    border-radius: 0
+    line-height: normal
+
+.placeholder-card_invite-friend
+  &:hover
+    background-color: white
+    border-color: white
+    cursor: pointer
+
+.placeholder-card_album
+  width: 280px
+  height: 450px
+  cursor: pointer
+  +imgbox('forms/upload-image.png', '', '.placeholder-card__icon')
+
+  &:hover
+    border-color: #e52b12
+
+  .placeholder-card__icon
+    border: none
+    border-radius: 0
+    line-height: normal
+
+.placeholder-card_search
+  width: 100%
+
+  .placeholder-card
+
+    &__text
+      & + .placeholder-card__text
+        margin-top: 5px
+
+      a
+        color: #e12407
+
+        &:hover
+          text-decoration: underline

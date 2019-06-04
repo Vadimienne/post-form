@@ -1,0 +1,776 @@
+@import '_imports'
+
+// Card wide
+//
+// Широкая карточка
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card_wide
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//       img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//       +b.card__videoicon
+//     +e.overlay
+//     +b.badge_recipes Рецепты
+//   +e('main').content
+//     a(href="#")
+//       +b.title_white Куриные крылышки с коричневым маслом и медом
+//       +b('p').description-text_white Рецепты: минестроне с рисом, кебаб из цыпленка с чили и мятой, кофейная гранита.
+//     +b.person_h._lh-small._white
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Едим Дома
+//           +e('time').post-time(datetime="2015-10-13T12:33:00+03:00") Сегодня
+//   +b('footer').card-footer_white
+//     +b.right
+//       .card-footer__add
+//         +b.text-icon_white
+//           +b('span').fonticon_add
+//           span В избранное
+//         +b.absolute-container
+//           +b.drop-down_favorites
+//             +e.scroll-box
+//               +e.container
+//                 +e.item
+//                   +e('div').item-hover
+//                   span Моя книга
+//                 +e.item
+//                   +e('div').item-hover
+//                   span Сладости
+//                 +e.item
+//                   +e('div').item-hover
+//                   span Печенье
+//             +e.new-book
+//               +b('span').fonticon_new-book
+//               span Новая книга
+//             +e.triangle
+//     +b.text-icon_grey
+//       +b('span').fonticon_views
+//       span 1 488
+//     +b.text-icon_grey
+//       +b('span').fonticon_message
+//       span 88
+//     +b.text-icon_grey
+//       +b('span').fonticon_like
+//       span 1 488
+// +b('article').card_wide
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//       img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//     +e.overlay
+//     +b.badge_cooking-school кулинарные Советы
+//   +e('main').content
+//     a(href="#")
+//       +b.title_white Мужской класс: мясо под грейпфрутовым соусом, картофельный салат, маффины с кабачком
+//     +b.person_h._lh-small._white
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Едим Дома
+//   +b('footer').card-footer_white
+//     +b.text-icon_grey
+//       +b('span').fonticon_views
+//       span 1 488
+//     +b.text-icon_grey
+//       +b('span').fonticon_message
+//       span 88
+//     +b.text-icon_grey
+//       +b('span').fonticon_like
+//       span 1 488
+//
+// Styleguide 4.6
+
+.card_wide
+  position: relative
+
+  .card__picture
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border: none
+
+    +width-lessthan(1024)
+      height: 100%
+
+    +width-lessthan(600)
+
+      img
+        width: auto
+        position: absolute
+        top: 0
+        left: 50%
+        transform: translate(-50%, 0)
+
+  .card__overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,.04))
+    border-radius: 4px
+
+  .badge
+    position: absolute
+    top: 20px
+    left: 20px
+
+  .card__content
+    padding: 0 20px
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 55px
+
+  .title
+    margin-bottom: 5px
+
+  .description-text
+    +width-lessthan(600)
+      display: none
+
+  .person
+    margin-top: 8px
+
+  &.card_live
+    overflow: hidden
+    background: white
+
+// Card wide big footer
+//
+// Широкая карточка c большим футером
+//
+// card_wide_big-footer - карточка с большим футером
+//
+// markup:
+// +b('article').card_big-footer._wide
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//       img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//     +e.overlay
+//     +b.badge_cooking-school кулинарные Советы
+//   +e('main').content
+//     a(href="#")
+//       +b('h1').title_white Мужской класс: мясо под грейпфрутовым соусом, картофельный салат, маффины с кабачком
+//     +b.right
+//       +b.class-rate_novice._white
+//         +e.icon
+//         | Для начинающих
+//     +b.person_h._lh-small._white
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Едим Дома
+//   +b('footer').card-footer
+//     +b.button_green В корзину
+//     +b.right
+//       +b.price_big 1 488 руб.
+//
+// Styleguide 4.7
+
+.card_big-footer
+
+  .card-footer
+    line-height: 72px
+
+  .card__content
+    bottom: 83px
+
+  .class-rate
+    line-height: 30px
+    margin-top: 3px
+
+// Card webinar
+//
+// Широкая карточка вебинара
+//
+// card_wide-webinar - Широкая карточка вебинара
+//
+// markup:
+// +b('article').card_big-footer._wide._wide-webinar
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//       img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//     +e.overlay
+//     +b.center
+//       +b.badge_cooking-school Сегодня • 25 июля
+//   +e('main').content
+//     +b.class-rate_novice._white
+//       +e.icon
+//       | Для начинающих
+//     a(href="#")
+//      +b('h1').title_white Мужской класс: мясо под грейпфрутовым соусом, картофельный салат, маффины с кабачком
+//     +b.person_h._lh-small._white
+//       +b.right
+//         +b.price 600 руб.
+//       +b.user-avatar_small
+//         +e('img').image(src="/assets/images/content/user-img.png")
+//       +e.wrapper
+//         +e.content
+//           +e.name Леонид Жарков
+//   +b('footer').card-footer
+//     +b('a').button_green(href="#") Учавствовать
+//     +b.right
+//       +b.countdown
+//         +b.description-text До начала занятия осталось:
+//         +e.container
+//           +e.item
+//             +e('span').item-number 12
+//             +e('span').item-name часов
+//           +e.item
+//             +e('span').item-number 38
+//             +e('span').item-name минут
+//
+// Styleguide 4.8
+
+.card_wide-webinar
+  cursor: default
+
+  &:hover
+    .card__content .title
+      text-decoration: none
+
+  .badge
+    position: relative
+
+  .person
+    margin-top: 25px
+    display: block
+
+  .class-rate
+    margin-top: 0
+    margin-bottom: 7px
+
+  .price
+    margin-top: 2px
+
+  .countdown
+    margin-top: 14px
+
+  .card-footer
+    border-top: 1px solid rgba(255, 255, 255, .4)
+
+  .button
+    display: inline-block
+
+
+// Card wide promo
+//
+// Широкая промо карточка
+//
+// card_wide_promo - обычное состояние
+//
+// markup:
+// +b('article').card_promo-wide._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/card-promo-wide.png 1x, /assets/images/content/card-promo-wide@2x.png 2x, /assets/images/content/card-promo-wide@3x.png 3x")
+//     img(src="/assets/images/content/card-promo-wide.png" alt="")
+//   +b.badge_shop Кухонные принадлжености
+//   +e('main').content
+//     +b('h1').title_medium Фартук Polka Dot Red
+//     +b('p').description-text Серия фартуков Polka Dot – это сочетание игривого горошка и кокетливого фасона с двойной оборкой по подолу.
+//     +b('a').button(href="#") Подробнее
+//
+// Styleguide 4.9
+
+.card_promo-wide
+  cursor: default
+
+  &:hover
+    .card__content .title
+      text-decoration: none
+
+  .card__content
+    width: 290px
+    bottom: 30px
+
+  .button
+    display: inline-block
+
+  .title
+    margin-bottom: 10px
+
+  .description-text
+    margin-bottom: 28px
+
+// Card wide events
+//
+// Широкая промо соревнования или события / праздника
+//
+// card_wide_event - обычное состояние
+//
+// markup:
+// +b('article').card_event._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//     img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//   +e.overlay
+//   +e('main').content
+//     +e.icon_competition
+//     +b.badge_club кулиарная битва
+//     +b('h1').title_medium Закускина любой случай
+//     +b('p').description-text Закуски из овощей и бобовых - отличное дополнение к основным блюдам или же вкусный самостоятельный гарнир!
+//     +e.button-container
+//       +b('a').button_pink(href="#") Учавствовать
+// +b('article').card_event._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/card-wide-recipe.png 1x, /assets/images/content/card-wide-recipe@2x.png 2x, /assets/images/content/card-wide-recipe@3x.png 3x")
+//     img(src="/assets/images/content/card-wide-recipe.png" alt="")
+//   +e.overlay
+//   +e('main').content
+//     +e.icon_holiday
+//     +b.badge_holidays кулиарная битва
+//     +b('h1').title_medium Закускина любой случай
+//     +b('p').description-text Закуски из овощей и бобовых - отличное дополнение к основным блюдам или же вкусный самостоятельный гарнир!
+//     +e.button-container
+//       +b('a').button_pink(href="#") 10 рецептов для праздника
+//
+// Styleguide 4.10
+
+.card_custom
+  .card__icon
+    margin: 20px auto 0
+    display: inline-block
+    &_competition
+      +imgbox('icons/competition-icon.png')
+  .badge
+    margin-top: 0 !important
+
+.card_event
+  cursor: default
+
+  &:hover
+    .card__content .title
+      text-decoration: none
+
+  .button
+    display: inline-block
+
+  .card__icon
+    position: absolute
+    top: 20px
+    left: 0
+    right: 0
+    margin: 0 auto
+
+    &_competition
+      +imgbox('icons/competition-icon.png')
+
+    &_holiday
+      +imgbox('icons/holiday-icon.png')
+
+  .card__button-container
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 24px
+    text-align: center
+
+  .card__content
+    width: 320px
+    height: 320px
+    background-color: #FFF
+    top: 0
+    bottom: 0
+    margin: auto
+    text-align: center
+    box-sizing: border-box
+
+  .badge
+    position: static
+    margin: 65px 0 15px 0
+
+  .title
+    margin-bottom: 15px
+
+  .description-text
+    margin-bottom: 35px
+    font-size: 13px
+    span
+      display: block
+
+  .slider-paginator-dotted
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 37px
+
+  .slider-arrow
+    position: absolute
+    top: 0
+    bottom: 0
+    margin: auto 0
+
+    &_prev
+      left: 20px
+
+    &_next
+      right: 20px
+
+// Card wide encyclopedia
+//
+// Хайлайт энциклопедии
+//
+// card_wide_encyclopedia - обычное состояние
+//
+// markup:
+// +b('article').card_encyclopedia._wide
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-enciclopedia.png 1x, /assets/images/content/card-enciclopedia@2x.png 2x, /assets/images/content/card-enciclopedia@3x.png 3x")
+//       img(src="/assets/images/content/card-enciclopedia.png" alt="")
+//     +e('main').content
+//       +b.badge_wiki Энциколпедия
+//       +b('h1').title_big Ингредиенты
+//
+// Styleguide 4.11
+
+.card_encyclopedia
+  text-align: center
+
+  .card__content
+    top: 30px
+
+  .badge
+    position: static
+    margin-bottom: 40px
+
+// Card wide ingredient
+//
+// Хайлайт ингредиента
+//
+// card_wide_igredient - обычное состояние
+//
+// markup:
+// +b('article').card_ingredient._wide
+//   a(href="#")
+//     +e('picture').picture
+//       source(srcset="/assets/images/content/card-ingredient.png 1x, /assets/images/content/card-ingredient@2x.png 2x, /assets/images/content/card-ingredient@3x.png 3x")
+//       img(src="/assets/images/content/card-ingredient.png" alt="")
+//     +e.overlay
+//     +e('main').content
+//       +b.badge_wiki Энциколпедия
+//       +e.icon
+//       +b('h1').title_big Грибы
+//       +e.note 6 статей
+//       +b('p').description-text Пожалуй, сложно найти человека, который не любит грибы. Однако далеко не все знают, что блюда из грибов гораздо более разнообразны, чем мы привыкли считать. На сайте «Едим Дома!» мы собрали только лучшие домашние рецепты с грибами.
+//
+// Styleguide 4.12
+
+.card_ingredient
+  text-align: center
+
+  .card__content
+    top: 30px
+
+  .card__overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0%, transparent 50%, rgba(0, 0, 0, 0.25) 100%)
+
+  .badge
+    position: static
+    margin-bottom: 40px
+
+  .card__icon
+    +imgbox('icons/ingredient.png')
+    margin: 0 auto 10px
+
+  .card__note
+    color: #656565
+    font-family: "Noto Serif"
+    font-size: 12px
+    font-style: italic
+    margin-bottom: 25px
+
+    &_white
+      color: white
+
+  .description-text
+    padding: 0 45px
+
+// Card contest
+//
+// Карточка конкурса
+//
+// card_contest - обычное состояние
+//
+// markup:
+// +b('article').card_contest._contest-current._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/club/card-contest.jpg 1x, /assets/images/content/club/card-contest@2x.jpg 2x, /assets/images/content/club/card-contest@3x.jpg 3x")
+//     img(src="/assets/images/content/club/card-contest.jpg" alt="")
+//   +b.badge_shop Конкурс
+//   +b.contest-info
+//     | Проводиться с 17.02.2015 по 23.02.2015
+//   +e.content
+//     +b.title_medium
+//       | Масленица
+//       br
+//       | с «Едим дома»
+//     +b.description-text
+//       | Блины, панкейки, крепы, оладушки! Тонкие ажурные или воздушные пышки, с клубничным вареньем, сливками, медом, с сытной мясной или рыбной начинкой!
+//     +e.prizes
+//       +b.prize
+//         +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//         +e.overlay
+//         +e.number 1
+//         +b.tooltip
+//           +b.title_small.tooltip__place 1 место
+//           +b.title_small Холодильник Oursson RF1000/RD
+//           img(src="/assets/images/content/club/tooltip-prize-image.jpg")
+//       +b.prize
+//         +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//         +e.overlay
+//         +e.number 2
+//         +b.tooltip
+//           +b.title_small.tooltip__place 2 место
+//           +b.title_small Холодильник Oursson RF1000/RD
+//           img(src="/assets/images/content/club/tooltip-prize-image.jpg")
+//       +b.prize
+//         +e('img').image(src="/assets/images/content/club/prize.jpg" alt="")
+//         +e.overlay
+//         +e.number 3
+//         +b.tooltip
+//           +b.title_small.tooltip__place 3 место
+//           +b.title_small Холодильник Oursson RF1000/RD
+//           img(src="/assets/images/content/club/tooltip-prize-image.jpg")
+//   +e.button-container
+//     +b('a').button_pink._fit._transparent(href="#")
+//       span
+//         | Принять Участие
+// +b('article').card_contest._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/club/card-contest-2.jpg 1x, /assets/images/content/club/card-contest-2@2x.jpg 2x, /assets/images/content/club/card-contest-2@3x.jpg 3x")
+//     img(src="/assets/images/content/club/card-contest-2.jpg" alt="")
+//   +b.badge_shop Конкурс
+//   +e.content
+//     +b.title_medium
+//       | Ваше любимое
+//       br
+//       | новогоднеее блюдо
+//     +b.description-text
+//       | Новый год — это волшебный семейный праздник. Это подарки, встречи с друзьями, семейные обеды и ужины. Редакция сайта «Едим Дома!» в преддверии праздников решила узнать, а какое у вас любимое новогоднее блюдо.
+//     +b.contest-info_completed
+//       | Конкурс завершен 12.01.2015
+//   +e.button-container
+//     +b('a').button_transparent._fit(href="#")
+//       span
+//         | Победители
+// +b('article').card_contest._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/club/card-contest-3.jpg 1x, /assets/images/content/club/card-contest-3@2x.jpg 2x, /assets/images/content/club/card-contest-3@3x.jpg 3x")
+//     img(src="/assets/images/content/club/card-contest-3.jpg" alt="")
+//   +b.badge_shop Конкурс
+//   +e.content
+//     +b.title_medium
+//       | Итальянския ужин
+//     +b.description-text
+//       | Сайт «Едим Дома!» и компания De Cecco объявляют конкурс! В преддверии Дня святого Валентина мы предлагаем вам вдохновиться романтической Италией и приготовить самый настоящий итальянский ужин!
+//     +b.contest-info_completed
+//       | Конкурс завершен 16.02.2015
+//   +e.button-container
+//     +b('a').button_transparent._fit(href="#")
+//       span
+//         | Победители
+// +b('article').card_contest._contest-dark._wide
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/club/card-contest-4.jpg 1x, /assets/images/content/club/card-contest-4@2x.jpg 2x")
+//     img(src="/assets/images/content/club/card-contest-4.jpg" alt="")
+//   +e.overlay
+//   +b.badge_club Конкурс
+//   +e.content
+//     +b.title_medium
+//       |  Ваше любимое
+//       br
+//       |  новогоднеее блюдо
+//     +b.description-text
+//       | Сайт «Едим Дома!» и компания De Cecco объявляют конкурс! В преддверии Дня святого Валентина мы предлагаем вам вдохновиться романтической Италией и приготовить самый настоящий итальянский ужин!
+//     +b.contest-info_completed
+//       | Конкурс завершен 16.02.2015
+//   +e.button-container
+//     +b('a').button_transparent._fit._white(href="#")
+//       span
+//         | Победители
+// +b('article').card_contest._contents-half-width._contest-dark
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/club/card-contest-half-width.jpg 1x, /assets/images/content/club/card-contest-half-width@2x.jpg 2x")
+//     img(src="/assets/images/content/club/card-contest-half-width.jpg" alt="")
+//   +e.overlay
+//   +e.content
+//     +b.badge_club Конкурс
+//   +e.button-container
+//     +b('a').button_red._fit(href="#")
+//       span
+//         | Принять участие
+//   +b.title_medium
+//     |  Ваше любимое
+//     br
+//     |  новогоднеее блюдо
+//
+// Styleguide 4.13
+
+.card_contest
+  overflow: visible
+  cursor: default
+
+  &:hover
+    .card__content .title
+      text-decoration: none
+
+  .badge
+    left: 30px
+    top: 30px
+
+  .title
+    margin-bottom: 8px
+    max-height: 72px
+    overflow: hidden
+
+  .description-text
+    font-size: 13px
+    color: #323232
+    margin-bottom: 23px
+    max-height: 120px
+    overflow: hidden
+  .contest-info
+    position: absolute
+    left: 120px
+    top: 32px
+    width: 280px
+
+  .contest-info_completed
+    margin-top: -10px
+    position: static
+    left: auto
+    top: auto
+
+  .card
+
+    &__picture
+      border-radius: 4px
+
+    &__button-container
+      position: absolute
+      bottom: 25px
+      left: 30px
+      width: 172px
+
+    &__content
+      position: absolute
+      top: 128px
+      left: 30px
+      // width: 280px
+      width: 500px
+      right: auto
+      bottom: auto
+      padding: 0
+
+    &__prizes
+      +clearfix
+
+      .prize
+        float: left
+        margin-right: 10px
+
+        .tooltip
+          left: -40px
+          bottom: 53px
+
+        &:hover
+          .tooltip
+            visibility: visible
+            opacity: 1
+
+      .prize_count
+        text-decoration: none
+
+        .prize__overlay
+          border-color: white
+
+        &:hover
+          .prize__overlay
+            border-color: #f12d16
+  &:hover
+    .button
+      border-color: #fff
+
+.card_contest-dark
+
+  .title
+    color: #fff
+
+  .description-text
+    color: #fff
+
+  .contest-info
+    color: #fff
+
+  .contest-info_completed
+    color: #b4b4b4
+
+  .card
+
+    &__overlay
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: rgba(0, 0, 0, 0.6)
+      border-radius: 4px
+
+.card_contest-current
+
+  .card
+
+    &__content
+      top: 80px
+
+
+.card_contents-half-width
+
+  .badge
+    margin-top: 30px
+
+  .title
+    position: absolute
+    bottom: 75px
+    left: 0
+    right: 0
+    text-align: center
+    padding: 0 40px
+    max-height: 120px
+
+  .card
+
+    &__picture
+      position: absolute
+      height: 100%
+      border: none
+
+    &__content
+      top: 0
+      left: 0
+      width: 100%
+      text-align: center
+
+    &__button-container
+      left: 54px

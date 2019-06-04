@@ -1,0 +1,50 @@
+@import '_imports'
+
+// Comment disable/enable
+//
+// Включение\выключение комментов
+//
+// default - обычное состояние
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.comment-disabler
+//   +e.text Вкл
+//   +e.switch-container
+//     +e.switch
+//   +e.text Откл
+//
+// Styleguide 1.48
+
+.comment-disabler
+
+  &__text
+    display: inline-block
+    color: #6e6e6e
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 400
+    line-height: 18px
+
+  &__switch-container
+    display: inline-block
+    width: 34px
+    height: 18px
+    background-color: #ff391e
+    border-radius: 9px
+    position: relative
+    vertical-align: middle
+
+  &__switch
+    width: 14px
+    height: 14px
+    background-color: white
+    border-radius: 7px
+    position: absolute
+    top: 2px
+    left: 2px
+    cursor: pointer
+
+    &.active
+      left: auto
+      right: 2px

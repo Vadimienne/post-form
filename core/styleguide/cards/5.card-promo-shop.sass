@@ -1,0 +1,45 @@
+@import '_imports'
+
+// Card promo shop
+//
+// Промо карточка магазина
+//
+// default - обычное состояние
+//
+// markup:
+// +b('article').card-promo-shop.card(class="{$modifiers}")
+//   +b.badge_shop Посуда
+//   +e('picture').picture
+//     source(srcset="/assets/images/content/card-shop-promo-img.png 1x, /assets/images/content/card-shop-promo-img@2x.png 2x, /assets/images/content/card-shop-promo-img@3x.png 3x")
+//     img(src="/assets/images/content/card-shop-promo-img.png" alt="")
+//   +b.title_medium Обеденные
+//     br
+//     | сервизы
+//   +b('a').button(href="#")
+//     +b.icon
+//     span Подробнее
+//
+// Styleguide 4.5
+
+.card-promo-shop
+  text-align: center
+  cursor: default
+
+  .button
+    display: inline-block
+
+  .badge
+    margin: 20px 0 30px
+
+  &__picture
+    display: block
+    width: 220px
+    height: 220px
+    background-color: #F8DB9E
+    border-radius: 50%
+    margin: 0 auto 20px
+    position: relative
+    overflow: hidden
+
+  .title
+    margin-bottom: 18px

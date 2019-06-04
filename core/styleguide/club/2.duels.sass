@@ -1,0 +1,899 @@
+@import '_imports'
+
+// Duel
+// 
+// Поединок
+// 
+// duel - обычное состояние, duel_nothing - нету поединков, open - класс у открытого поединка
+//
+// markup:
+// +b.duel
+//   +b.center
+//     .duel__icon
+//     +b.title_medium Поединок 654
+//     .duel__description Завершен
+//   +e.items
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Свекольное ризотто с морковью и бататом
+//         +e.card-vote-result
+//           +b.fonticon_vote
+//           +e.card-vote-result-text 33
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e.card-image-wrapper
+//           +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//           +e.card-image-winner-overlay
+//           +e.card-image-icon
+//           +e.card-image-winner.title.title_white.title_medium Победитель
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Бутерброд с пикантным творогом
+//         +e.card-vote-result
+//           +b.fonticon_vote
+//           +e.card-vote-result-text 100
+//     +e.vs
+//   +b.hr
+//   +e.control
+//     +b('span').fonticon_expand-arrow
+//     span Подробнее
+// +b.duel
+//   +b.center
+//     .duel__icon
+//     +b.title_medium Поединок 654
+//     .duel__description Начат 10 февраля 2015
+//   +e.items
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Свекольное ризотто с морковью и бататом
+//         +e.card-vote
+//           +b.fonticon_vote
+//           +e.card-vote-text Голосовать
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Бутерброд с пикантным творогом
+//         +e.card-vote
+//           +b.fonticon_vote
+//           +e.card-vote-text Голосовать
+//     +e.vs
+//   +b.hr
+//   +e.control
+//     +b('span').fonticon_expand-arrow
+//     span Подробнее
+// +b.duel
+//   +b.center
+//     .duel__icon
+//     +b.title_medium Поединок 654
+//     .duel__description Начат 10 февраля 2015
+//   +e.items
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Свекольное ризотто с морковью и бататом
+//         +e.card-vote.disabled
+//           +b.fonticon_vote
+//           +e.card-vote-text Голосовать
+//     +b.duel-recipe_waiting
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-waiting.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Ожидаем добавление рецепта
+//         +e.card-vote.disabled
+//           +b.fonticon_vote
+//           +e.card-vote-text Голосовать
+//     +e.vs
+//   +b.hr
+//   +e.control
+//     +b('span').fonticon_expand-arrow
+//     span Подробнее
+// +b.duel.open
+//   +b.center
+//     .duel__icon
+//     +b.title_medium Поединок 654
+//     .duel__description Начат 10 февраля 2015
+//   +e.items
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Свекольное ризотто с морковью и бататом
+//         +e.card-vote.voted
+//           +e.card-vote-text Вы проголосовали
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Бутерброд с пикантным творогом
+//         +e.card-vote
+//           +b.fonticon_vote
+//           +e.card-vote-text Голосовать
+//     +e.vs
+//   +e.more
+//     +b.duel-recipe-info
+//       +e.section
+//         +b.title_small._sans-serif Основные
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Хлеб серый
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 2 куска
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Салями
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 куска
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Сыр гауда
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 2 шт.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Салат романо
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 шт.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Помидоры
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 шт.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Ветчина варено-копченая
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 2 куска
+//       +e.section
+//         +b.title_small._sans-serif Дополнительно
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Майонез домашний
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 ст. л.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Горчица дижонская
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 0.5 ч. л.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Бальзамический уксус
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value по вкусу
+//       +b('a').button_transparent(href="#")
+//         span Рецепт полностью
+//     +b.duel-recipe-info
+//       +e.section
+//         +b.title_small._sans-serif Основные
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Хлеб серый
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 2 куска
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Салями
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 3 куска
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Сыр гауда
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 2 шт.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Салат романо
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 шт.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Помидоры
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 1 шт.
+//         +b('table').definition-list-table
+//           +e('tr').tr
+//             +e('td').td Ветчина варено-копченая
+//             +e('td').td_dashes
+//               span
+//             +e('td').td_value 2 куска
+//       +b('a').button_transparent(href="#")
+//         span Рецепт полностью
+//   +b.hr
+//   +e.control_more
+//     +b('span').fonticon_expand-arrow
+//     span Подробнее
+//   +e.control_roll-up
+//     +b('span').fonticon_collaps-arrow
+//     span Свернуть
+// +b.duel_nothing
+//   +b.center
+//     .duel__icon
+//     +b.title_medium Поединков для этого задания больше нет
+//     .duel__description Вы можете выбрать соперника
+//     +b.button_pink._transparent
+//       +b('span').fonticon_profile-user-menu
+//       span Выбрать соперника
+// +b.duel
+//   +e.remove
+//     +b.fonticon_cross-wide
+//   +b.center
+//     .duel__icon
+//     +b.title_medium Постные сладости
+//     .duel__description Новый поединок
+//   +e.items
+//     +b.duel-recipe-process
+//       +e.text Вас вызвали
+//         br
+//         |  на битву
+//       +b('a').button(href="#")
+//         span Принять
+//     +b.duel-recipe
+//       +e.card
+//         +e.card-header
+//           +b.person_h._lh-small
+//             +b.user-avatar_small
+//               +e('img').image(src="/assets/images/content/user-img.png")
+//             +e.wrapper
+//               +e.content
+//                 +b.title_small Людмила
+//         +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//         +e.card-content
+//           +e.card-name
+//             +b.title_small Бутерброд с пикантным творогом
+//     +e.vs_white
+//
+// Styleguide 8.4
+
+.duel
+  box-sizing: border-box
+  width: 580px
+  padding: 20px 18px 0
+  border: 2px solid #e6e0d3
+  border-radius: 4px
+  margin-bottom: 20px
+  position: relative
+
+  &:last-child
+    margin-bottom: 0
+
+  &.open
+    border-color: #ff441b
+
+    .duel__more
+      display: block
+
+    .duel__control_more
+      display: none
+
+    .duel__control_roll-up
+      display: block
+
+  .center .title
+    width: 80%
+    margin: 0 auto 5px
+
+  &__icon
+    display: inline-block
+    +imgbox('icons/competition-icon-green.png')
+    margin-bottom: 5px
+
+  &__description
+    font-size: 13px
+    line-height: 20px
+    color: #323232
+    font-family: "Noto Serif"
+    font-style: italic
+    margin-bottom: 20px
+
+  &__items
+    position: relative
+    +clearfix
+    margin-bottom: 20px
+    width: 540px
+
+    .duel-recipe + .duel-recipe
+      float: right
+    
+    .duel-recipe-process + .duel-recipe
+      float: right
+
+  &__more
+    display: none
+    +clearfix
+    margin-bottom: 20px
+    width: 540px
+
+  &__vs
+    position: absolute
+    top: 50%
+    left: 50%
+    margin: -24px 0 0 -24px
+    +imgbox('icons/duels-vs.png')
+
+    &_white
+      +imgbox('icons/duels-vs-white.png')
+
+  &__remove
+    position: absolute
+    right: 8px
+    top: 8px
+
+    .fonticon
+      cursor: pointer
+      font-size: 11px
+      color: #c0b8a7
+
+
+  &__control
+    text-transform: uppercase
+    font-weight: bold
+    font-size: 12px
+    color: #5f5e5e
+    line-height: 18px
+    padding: 12px 0 15px
+    text-align: center
+    cursor: pointer
+
+
+    &:hover
+      color: #ff441b
+ 
+    &_roll-up
+      display: none
+      .fonticon
+        color: #ff441b
+
+    .fonticon
+      font-size: 8px
+
+    span
+      vertical-align: middle
+      display: inline-block
+      margin-left: 10px
+
+.duel_nothing
+  padding: 35px 18px
+
+
+// Duel recipe
+// 
+// Рецепт поединка
+// 
+// duel-recipe - обычное состояние
+//
+// markup:
+// +b.duel-recipe
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Бутерброд с пикантным творогом
+//     +e.card-vote
+//       +b.fonticon_vote
+//       +e.card-vote-text Голосовать
+// +b.duel-recipe_waiting
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e('img').card-image(src="/assets/images/content/club/duel-recipe-waiting.jpg")
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Бутерброд с пикантным творогом
+//     +e.card-vote.disabled
+//       +b.fonticon_vote
+//       +e.card-vote-text Голосовать
+// +b.duel-recipe
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Бутерброд с пикантным творогом
+//     +e.card-vote.voted
+//       +e.card-vote-text Вы проголосовали
+// +b.duel-recipe
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e.card-image-wrapper
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Бутерброд с пикантным творогом
+//     +e.card-vote.voted-another
+//       +b.fonticon_vote
+//       +e.card-vote-text Голосовать
+// +b.duel-recipe
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e.card-image-wrapper
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//       +e.card-image-winner-overlay
+//       +e.card-image-icon
+//       +e.card-image-winner.title.title_white.title_medium Победитель
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Бутерброд с пикантным творогом
+//     +e.card-vote-result
+//       +b.fonticon_vote
+//       +e.card-vote-result-text 33
+// hr(style="clear:both")
+// +b.duel-recipe
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e.card-image-wrapper
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Бутерброд с пикантным творогом
+// +b.duel-recipe_waiting
+//   +e.card
+//     +e.card-header
+//       +b.person_h._lh-small
+//         +b.user-avatar_small
+//           +e('img').image(src="/assets/images/content/user-img.png")
+//         +e.wrapper
+//           +e.content
+//             +b.title_small Людмила
+//     +e('img').card-image(src="/assets/images/content/club/duel-recipe-waiting.jpg")
+//     +e.card-content
+//       +e.card-name
+//         +b.title_small Ожидаем
+//           br
+//           |  ответа
+// +b.duel-recipe-process
+//   +e.text Вас вызвали
+//     br
+//     |  на битву
+//   +b('a').button(href="#")
+//     span Принять
+// hr(style="clear:both")
+// +b.duel-recipes-container
+//   +b.duel-recipe_small
+//     +e.card
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//       +e.card-content
+//         +e.card-name
+//           +b.title_small Круассаны:французская нежность
+//     +b.selection_duel-recipe
+//       +e.overlay
+//         +e.check
+//           +b.fonticon_check-icon
+//   +b.duel-recipe_small.checked
+//     +e.card
+//       +e('img').card-image(src="/assets/images/content/club/duel-recipe-image.jpg")
+//       +e.card-content
+//         +e.card-name
+//           +b.title_small Круассаны:французская нежность
+//     +b.selection_duel-recipe
+//       +e.overlay
+//         +e.check
+//           +b.fonticon_check-icon
+//
+// Styleguide 8.5
+
+.duel-recipe
+  float: left
+
+  &__card
+    width: 260px
+    border-radius: 4px
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)
+    background-color: #fff
+
+  &__card-header
+    overflow: hidden
+    height: 50px
+    box-sizing: border-box
+    padding: 10px 20px 0
+
+  &__card-image
+    display: block
+    width: 260px
+    height: 150px
+
+  &__card-image-wrapper
+    position: relative
+    width: 260px
+    height: 150px
+
+    .duel-recipe__card-image
+      position: absolute
+      top: 0
+      left: 0
+
+  &__card-image-winner-overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: #ffa900
+    opacity: .9
+  
+  &__card-image-icon
+    +imgbox('club/duel-winner.png')
+    position: absolute
+    left: 50%
+    margin: 24px 0 0 -34px
+
+  &__card-image-winner
+    position: absolute
+    width: 100%
+    text-align: center
+    bottom: 26px
+
+  &__card-content
+    padding: 5px 20px
+    box-sizing: border-box
+    height: 60px
+    line-height: 50px
+    text-align: center
+    overflow: hidden
+
+  &__card-name
+    margin-top: -2px
+    display: inline-block
+    vertical-align: middle
+
+    .title
+      line-height: 18px
+
+  &__card-vote
+    border-top: 1px solid #dddddd
+    height: 36px
+    text-align: center
+    cursor: pointer
+    color: #ff441b
+    font-size: 11px
+    border-radius: 0 0 4px 4px
+
+    &:hover
+      color: #fff
+      background-color: #ff441b
+
+    &.voted
+      color: #ffffff
+      background-color: #ff441b
+      border-color: #ff441b
+      cursor: default
+
+    &.voted-another
+      color: #333333
+      &:hover
+        background-color: transparent
+        
+    &.disabled
+      color: #dddddd
+      cursor: default
+      &:hover
+        background-color: transparent
+
+    .fonticon
+      font-size: 20px
+      line-height: 36px
+      display: inline-block
+      vertical-align: middle
+
+  &__card-vote-text
+    display: inline-block
+    vertical-align: middle
+    margin-left: 10px
+    line-height: 36px
+    font-weight: 700
+    text-transform: uppercase
+
+  &__card-vote-result
+    height: 36px
+    text-align: center
+    color: #ff441b
+    font-size: 11px
+    border-radius: 0 0 4px 4px
+
+    .fonticon
+      line-height: 20px
+      font-size: 13px
+      color: #414141
+      display: inline-block
+      vertical-align: middle
+      margin-top: 1px
+
+  &__card-vote-result-text
+    margin-top: 3px
+    display: inline-block
+    vertical-align: middle
+    margin-left: 5px
+    line-height: 20px
+    font-size: 13px
+    font-weight: 600
+    color: #414141
+    text-transform: uppercase
+
+.duel-recipe_waiting
+  .duel-recipe__card-name
+    .title
+      color: #e4c995
+
+  .duel-recipe
+
+.duel-recipes-container
+  +clearfix
+  height: 250px
+  margin: 0 auto 30px
+  width: 860px
+
+  .duel-recipe + .duel-recipe
+    margin-left: 20px
+
+.duel-recipe_small
+  cursor: pointer
+  position: relative
+
+  &.checked
+    .selection
+      display: block
+
+  &:hover
+    .selection
+      display: block
+  
+  &:last-child
+    margin-right: 0
+  
+  .title
+    font-size: 12px
+
+  .duel-recipe
+
+    &__card
+      width: 200px
+
+    &__card-image
+      width: 200px
+      height: 200px
+      border-radius: 4px 4px 0 0
+
+    &__card-content
+      height: 50px
+      line-height: 40px
+
+
+.duel-recipe-process
+  width: 260px
+  height: 260px
+  border-radius: 4px
+  float: left
+  background-color: #38dc80
+  text-align: center
+
+  &__text
+    font-family: "Noto Serif"
+    font-style: italic
+    font-size: 16px
+    line-height: 20px
+    color: #ffffff
+    margin: 90px 0 33px
+
+  .button
+    border-color: #fff
+    color: #43bb78
+    width: 170px
+    display: block
+    margin: 0 auto
+    font-weight: 700
+
+    &:hover
+      border-color: #fff
+
+
+// Duel recipe info
+// 
+// Подробная информация по рецепту поединка
+// 
+// duel-recipe-info - обычное состояние
+//
+// markup:
+// +b.duel-recipe-info
+//   +e.section
+//     +b.title_small._sans-serif Основные
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Хлеб серый
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 2 куска
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Салями
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 3 куска
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Сыр гауда
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 2 шт.
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Салат романо
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 1 шт.
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Помидоры
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 1 шт.
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Ветчина варено-копченая
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 2 куска
+//   +e.section
+//     +b.title_small._sans-serif Дополнительно
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Майонез домашний
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 1 ст. л.
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Горчица дижонская
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value 0.5 ч. л.
+//     +b('table').definition-list-table
+//       +e('tr').tr
+//         +e('td').td Бальзамический уксус
+//         +e('td').td_dashes
+//           span
+//         +e('td').td_value по вкусу
+//   +b('a').button_transparent(href="#")
+//     span Рецепт полностью
+//
+// Styleguide 8.6
+
+.duel-recipe-info
+  float: left
+  width: 260px
+
+  &__section
+    margin-bottom: 20px
+
+  .title
+    margin-bottom: 10px
+
+  .definition-list-table
+    font-size: 13px
+  
+  .definition-list-table__tr
+    margin-top: 10px
+
+  .definition-list-table__td_dashes
+    padding: 0 10px
+
+
+.duel-recipe-info + .duel-recipe-info
+  float: right

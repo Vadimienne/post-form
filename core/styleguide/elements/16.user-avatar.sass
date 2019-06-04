@@ -1,0 +1,45 @@
+@import '_imports'
+
+// Users avatar
+//
+// Аватарка пользователя
+//
+// default - обычное состояние
+// user-avatar_small - маленькая аватара
+// user-avatar_average - чуть меньше средней
+// user-avatar_medium - средняя аватара
+// user-avatar_big - большаяя аватара
+//
+// markup:
+// +b.user-avatar(class="{$modifiers}")
+//   +e('img').image(src="/assets/images/content/user-img.png")
+//
+// Styleguide 1.16
+
+.user-avatar
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  position: relative
+  overflow: hidden
+  display: block
+
+  &_big
+    width: 80px
+    height: 80px
+
+  &_medium
+    width: 60px
+    height: 60px
+
+  &_average
+    width: 40px
+    height: 40px
+
+  &_small
+    width: 30px
+    height: 30px
+
+  &__image
+    width: 100%
+    display: block

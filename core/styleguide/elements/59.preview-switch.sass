@@ -1,0 +1,76 @@
+@import '_imports'
+
+// Preview switch
+//
+// выключатель превью
+//
+// default - обычная
+//
+// markup:
+// - bemto_settings_context_replace = false
+// +b.preview-switch
+//
+// Styleguide 1.59
+
+.preview-switch
+
+  &__state
+    color: #9f9f9f
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 400
+    line-height: 40px
+    display: inline-block
+    vertical-align: middle
+
+  &__switch-container
+    display: inline-block
+    width: 97px
+    height: 40px
+    background-color: #ff451c
+    border-radius: 20px
+    position: relative
+    vertical-align: middle
+    margin: 0 10px
+
+  &.active
+    background-color: #27d287
+
+  &__toddler
+    width: 46px
+    height: 36px
+    background-color: white
+    border-radius: 18px
+    position: absolute
+    top: 2px
+    right: 2px
+
+  &__button
+    width: 46px
+    height: 40px
+    line-height: 40px
+    position: relative
+    cursor: pointer
+
+    .fonticon
+      color: white
+      vertical-align: middle
+      transition: color 0.3s ease
+
+    &_on
+      margin-left: 2px
+
+      .fonticon
+        font-size: 14px
+
+    &_off
+      float: right
+      margin-right: 2px
+
+      .fonticon
+        font-size: 10px
+        margin-left: 2px
+
+    &.active
+      .fonticon
+        color: #242424

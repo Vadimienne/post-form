@@ -1,0 +1,264 @@
+@import '_imports'
+
+// Checkbox-input
+//
+// Чекбокс
+//
+// checkbox_default  - обычное состояние
+// checkbox:hover  - hover
+// checkbox_disabled  - неактивное состояние
+// checkbox_info  - чекбокс с информацией
+//
+// markup:
+// +b('label').checkbox(class="{$modifiers}")
+//  +e('input').input(type='checkbox' name="name" value='1')
+//  span Чекбокс
+//    +b.checkbox-info
+//      +e.image-container
+//        img(src="")
+//      +e.head-info
+//        +e.name Базилик
+//        +e.type Ингредиент
+//      +e.description В советское время сушеную зелень базилика именовали словом «райхон», что буквально означает «душистый». Сухой базилик можно добавлять в салатные заправки вместе с орегано и другими травами или, например, в омлеты и овощные соте.
+//      +e('a').learn-more(href="#") узнать больше
+//
+// Styleguide 2.3
+
+
+.checkbox
+  display: inline-block
+  color: #242424
+  font-family: "Open Sans"
+  font-size: 14px
+  font-weight: 700
+  cursor: pointer
+
+  .field &
+    font-weight: normal
+    line-height: 38px
+    height: 38px
+
+    & + .checkbox
+      margin-left: 10px
+
+    &__input + span:before
+      top: 10px
+
+  .field_preparation &
+    font-weight: 700
+
+    .checkbox__input+span:before
+      top: 0
+
+  &:hover
+    .checkbox__input
+      & + span
+        &:before
+          border-color: #303030
+
+          +width-lessthan(1024)
+            border-color: #e7e7e7
+
+  &_disabled
+    cursor: default
+
+    .checkbox__input
+      & + span::before
+        +imgbox('forms/checkbox-disabled.png')
+        border: none
+      &:checked + span::before
+        +imgbox('forms/checkbox-disabled.png')
+        border: none
+
+  &__input
+    display: none
+
+    & + span
+      display: block
+      position: relative
+      padding-left: 30px
+      line-height: 20px
+
+      &:hover
+        // z-index: 1
+        .checkbox-info-container
+          display: block
+
+          +width-lessthan(1024)
+            display: inline-block
+
+      &:before
+        content: ''
+        width: 18px
+        height: 18px
+        background-color: #FFF
+        border-radius: 2px
+        border: 1px solid #e7e7e7
+        position: absolute
+        top: 0px
+        left: 0
+
+    &:checked + span::before
+      +imgbox('forms/checkbox-checked.png')
+      border: none
+
+.checkbox-info-container
+  display: none
+  width: 100%
+  height: 20px
+  position: absolute
+  top: 0
+  left: 0
+  padding-right: 40px
+  z-index: 2
+
+  +width-lessthan(1024)
+    width: 20px
+    height: 20px
+    background: center no-repeat
+    +background-image-retina('recipes/question.png')
+    padding: 0
+    position: static
+    border: solid 2px #000000
+    border-radius: 50%
+    vertical-align: middle
+    opacity: 0.3
+
+  &.showtip
+    +width-lessthan(1024)
+      opacity: 1
+
+    .checkbox-info
+      display: block
+
+.checkbox-info
+  width: 369px
+  padding: 20px 20px 0 20px
+  box-sizing: border-box
+  background-color: #fefefe
+  border-radius: 4px
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+  position: absolute
+  top: -40px
+  right: -345px
+  white-space: normal
+  z-index: 2
+
+  +width-lessthan(1024)
+    width: 300px
+    border-radius: 10px
+    box-shadow: 0 0 6px 0 rgba(72, 44, 4, 0.3) 
+    display: none
+    top: auto
+    left: -10px
+    right: auto
+    bottom: 150%
+
+  &:before
+    content: ''
+    position: absolute
+    transform: rotate(45deg)
+    width: 15Px
+    height: 15Px
+    top: 42px
+    left: -8px
+    z-index: -1
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+
+    +width-lessthan(1024)
+      display: none
+
+  &:after
+    content: ''
+    border-top: 10px solid transparent
+    border-right: 10px solid white
+    border-bottom: 10px solid transparent
+    position: absolute
+    left: -10px
+    top: 40px
+
+    +width-lessthan(1024)
+      display: none
+
+  &__blanker
+    position: absolute
+    top: 35px
+    left: 0
+    background: #fff
+    width: 20px
+    height: 30px
+    z-index: 1
+
+  &__image-container
+    width: 60px
+    height: 60px
+    background-color: grey
+    border: 1px solid #f2f2f2
+    border-radius: 2px
+    position: relative
+    overflow: hidden
+    float: left
+    margin: 0 20px 15px 0
+
+    +width-lessthan(1024)
+      width: 50px
+      height: 50px
+      border: none
+      border-radius: 0
+
+    img
+      height: 100%
+
+  &__head-info
+    float: left
+    padding-top: 10px
+    margin-bottom: 15px
+
+    +width-lessthan(1024)
+      padding-top: 5px
+      font-size: 16px
+
+  &__name
+    color: #242424
+    font-family: "Noto Serif"
+    font-size: 14px
+    font-weight: 700
+
+  &__type
+    color: #999
+    font-family: "Open Sans"
+    font-size: 12px
+    font-style: italic
+
+  &__description
+    clear: both
+    color: #4d4d4d
+    font-family: "Noto Serif"
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+    margin-bottom: 25px
+
+    +width-lessthan(1024)
+      margin-bottom: 20px
+
+  &__learn-more
+    display: block
+    height: 48px
+    margin: 0 -20px
+    border-top: 1px solid #ddd
+    color: #4d4d4d
+    font-family: "Open Sans"
+    font-size: 12px
+    font-weight: 700
+    text-transform: uppercase
+    text-decoration: none
+    line-height: 48px
+    text-align: center
+
+    +width-lessthan(1024)
+      height: 50px
+      line-height: 50px
+
+    &:hover
+      color: #EF4E46

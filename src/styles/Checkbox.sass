@@ -15,7 +15,7 @@
     content: ''
     display: inline-block
     width: 10px
-    height: 6px
+    height: 4px
     border-left: 2px solid white
     border-bottom: 2px solid white
     transform: rotate(-45deg)
@@ -33,7 +33,7 @@
   label::after
     position: absolute
     left: 4px
-    top: 6px
+    top: 5px
 
   label::after
     content: none
@@ -41,7 +41,7 @@
   &.active
     label::before
       background-color: #FF451C
-      border: none
+      border-color: #FF451C
 
   &.active
     label::after
@@ -52,3 +52,7 @@
 
   label:hover::before
     border: 1px solid black
+
+  &.active
+    label:hover::before
+      border-color: #FF451C

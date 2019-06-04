@@ -1,0 +1,76 @@
+@import '_imports'
+
+// Nutritional value
+//
+// Пищевая ценность
+//
+// default - обычное состояние
+//
+// markup:
+// +b.shoping-list
+//   +e.header
+//     +b.title_sans-serif._uppercase Праздничный ужин
+//      +b('span').fonticon_edit-list
+//     +e.date от 10.06.2015
+//    +e.list-item
+//      +b.title_small._sans-serif Приправы
+//      +b('table').definition-list-table
+//        +e('tr').tr
+//          +e('td').td Белки
+//          +e('td').td_dashes
+//            span
+//          +e('td').td_value 3 г
+//      +b('table').definition-list-table
+//        +e('tr').tr
+//          +e('td').td Белки
+//          +e('td').td_dashes
+//            span
+//          +e('td').td_value 3 г
+//    +e.list-item
+//      +b.title_small._sans-serif Приправы
+//      +b('table').definition-list-table
+//        +e('tr').tr
+//          +e('td').td Белки
+//          +e('td').td_dashes
+//            span
+//          +e('td').td_value 3 г
+//      +b('table').definition-list-table
+//        +e('tr').tr
+//          +e('td').td Белки
+//          +e('td').td_dashes
+//            span
+//          +e('td').td_value 3 г
+//
+// Styleguide 7.7
+
+.shoping-list
+  position: relative
+
+  &__header
+    padding-bottom: 15px
+    border-bottom: 1px solid #e6e1da
+    margin-bottom: 20px
+
+    .fonticon
+      float: right
+      color: #ccc
+      cursor: pointer
+
+      &:hover
+        color: #ff391e
+
+  &__date
+    color: #999
+    font-size: 12px
+    font-weight: 400
+    margin-top: 5px
+    line-height: normal
+
+  &__list-item
+
+    & + &
+      margin-top: 20px
+
+  .definition-list-table
+    margin-top: 15px
+    line-height: normal

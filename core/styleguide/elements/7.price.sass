@@ -1,0 +1,55 @@
+@import '_imports'
+
+// Price
+// 
+// Цена
+// 
+// default - дефолтный вид
+// price_big - больший размер шрифта
+// price_ribbon - бирка
+// price_discount - цена со скидкой
+// price_old - старая цена
+//
+// markup:
+// +b.price(class="{$modifiers}") 1 488 руб.
+// +b.price(class="{$modifiers}") 
+//   span 1 488
+//   +b('span').fonticon_rub
+// 
+// Styleguide 1.7
+
+.price
+  color: #4FBE7B
+  font-family: "Noto Serif"
+  font-size: 16px
+  font-weight: 700
+
+  .fonticon
+    font-size: 11px
+    margin-left: 5px
+
+  &_big
+    font-size: 22px
+
+    .fonticon
+      font-size: 16px
+
+  &_ribbon  
+    +imgbox('elements/global/price-ribbon.png')
+    padding-left: 15px
+    width: 136px
+    font-size: 18px
+    text-align: center
+    line-height: 40px
+
+  &_discount
+    color: #ff391e
+    display: inline-block
+
+  &_old
+    display: inline-block
+    text-decoration: line-through
+    color: #ababab
+
+    & + .price_discount
+      margin-left: 5px

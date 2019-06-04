@@ -1,0 +1,65 @@
+@import '_imports'
+
+// Card body
+//
+// Каркас карточки
+//
+// default - узкая карточка
+// card_wide - широкая карточка
+// card_small - широкая карточка
+//
+// markup:
+// +b('article').card(class="{$modifiers}")
+//
+// Styleguide 4.20
+
+.card
+  display: inline-block
+  width: 280px
+  height: 450px
+  background-color: #FFF
+  border-radius: 4px
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)
+  position: relative
+  //overflow: hidden
+  box-sizing : border-box
+
+  +width-lessthan(1024)
+    width: 333px
+    height: 424px
+
+  +width-lessthan(768)
+    width: calc(50% - 10px)
+    +width-between-property(height, 320, 382, 768, 424, true, true)
+
+  +width-lessthan(600)
+    width: 100%
+
+  &:hover
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+
+  &_wide
+    width: 580px
+    height: 450px
+
+    +width-lessthan(1024)
+      width: 688px
+      height: 424px
+      margin-left: auto
+      margin-right: auto
+
+    +width-lessthan(820)
+      width: 100%
+
+    +width-lessthan(768)
+      +width-between-property(height, 320, 382, 768, 424, true, true)
+
+  &_small
+    height: 215px
+
+  .grid-three-column__column_right &
+    display: block
+    margin-bottom: 20px
+
+.slider:hover .card
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
