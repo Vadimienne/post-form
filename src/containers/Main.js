@@ -107,21 +107,23 @@ class Main extends Component {
     //console.log(this.state.json.checkboxes.boxes)
     return (
       <form id="article-form">
-        <div className='left-column'>
-          <CollapsibleCheckboxes data={this.state.json.checkboxes} onChange={(val)=> this.stateUpdater('checkboxes', val)}/>
-        </div>
-        <div className='main-column'>
-          <div className='field-container field-big'>
-            <input className='main-column__input_title text-input' onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
+        <div className='flex-wrapper'>
+          <div className='left-column form-column'>
+            <CollapsibleCheckboxes data={this.state.json.checkboxes} onChange={(val)=> this.stateUpdater('checkboxes', val)}/>
           </div>
-          <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
-          <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
-          <Timings data={timeInfo} onChange={(val) => this.stateUpdater('timeInfo', val)} />
-          <IngredientGroups data={ingredientGroups} onChange={(val)=>this.stateUpdater('ingredientGroups',val)} />
-          <Steps data={steps} onChange={(val) => this.stateUpdater('steps', val)}/>
-          <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
+          <div className='main-column form-column'>
+            <div className='field-container field-big'>
+              <input className='main-column__input_title text-input' onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
+            </div>
+            <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
+            <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
+            <Timings data={timeInfo} onChange={(val) => this.stateUpdater('timeInfo', val)} />
+            <IngredientGroups data={ingredientGroups} onChange={(val)=>this.stateUpdater('ingredientGroups',val)} />
+            <Steps data={steps} onChange={(val) => this.stateUpdater('steps', val)}/>
+            <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
+          </div>
+          <div className="right-column form-column">hi</div>
         </div>
-        <div className="right-column">hi</div>
       </form>
     );
   }
