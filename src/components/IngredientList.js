@@ -60,7 +60,7 @@ class Ingredients extends Component {
     return (
       <>
         <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle>{mappedIngredients}</SortableContainerIng>
-        <ConstructorBtn text='Добавить ингредиент' img={AddBtn} onClick={()=>this.addIngredient()} />
+        <ConstructorBtn icon='&#xea0d;' text='Добавить ингредиент' img={AddBtn} onClick={()=>this.addIngredient()} />
       </>
     );
   }

@@ -6,7 +6,7 @@ import img from 'images/trashCan.png'
 function Comp (props) {
   return (
     <>
-      <button type='button' role='button' tabIndex={0} className='trash-can-btn' onClick={props.onClick}/>
+      <button type='button' role='button' tabIndex={0} className='trash-can-btn edimdoma-icons-trashcan' onClick={props.onClick}>&#xea5a;</button>
     </>
   )
 }

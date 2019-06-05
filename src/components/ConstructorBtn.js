@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import 'styles/ConstructorBtn.css'
+import 'styles/ConstructorBtn.sass'
 
-function ConstructorBtn (props) {
+function RoundBtn (props) {
   return (
-    <button type='button' role='button' tabIndex={0} className='add-module-btn' onClick={props.onClick}>
-      {props.img && <img className='add-module-img' src={props.img} />}
-      <div className='add-module-text'>{props.text}</div>
+    <button type='button' role='button' tabIndex={0} className={`round-btn + ${props.className}`} onClick={props.onClick}>
+      {props.icon && <div className='edimdoma-icon'>{props.icon}</div>}
+      <div className='round-btn-text'>{props.text}</div>
     </button>
   )
 }
 
-export default ConstructorBtn;
+export default RoundBtn;

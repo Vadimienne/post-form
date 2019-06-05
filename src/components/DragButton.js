@@ -10,7 +10,7 @@ import img from 'images/drag.png'
 function Comp (props) {
   return (
     <>
-      <div role='button' tabIndex={0} >⣿</div>
+      <div role='button' tabIndex={0} className='edimdoma-icon-drag'>&#xea2a;</div>
     </>
   )
 }

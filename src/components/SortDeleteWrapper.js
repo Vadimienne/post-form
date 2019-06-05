@@ -16,6 +16,11 @@ function SortDeleteWrapper (props) {
         <DragButton/>
         <div className='module-name'>{props.name}</div>
         <TrashCanButton onClick={props.onDelete}/>
+        {
+          props.deleteDesc
+          ?<div className='delete-desc'>{props.deleteDesc}</div>
+          :''
+        }
       </div>
       <div className='module'>{props.children}</div>
     </div>

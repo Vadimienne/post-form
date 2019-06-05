@@ -21,6 +21,7 @@ import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
 import 'styles/index.css'
 //import 'styles/Main.sass'
 import 'styles/MainMain.sass'
+import 'styles/EdimDomaIcons.sass'
 
 
 
