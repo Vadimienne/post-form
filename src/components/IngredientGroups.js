@@ -50,8 +50,10 @@ class IngedientGroup extends Component {
   render() {
 
     let items = this.props.data.map((elem, index)=> (
-      <SortDeleteWrapper className='sort-delete-ingredients' index={index} key={`sortable-step-${index}`} onDelete={()=>{}}>
-        <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.groupName}/>
+      <SortDeleteWrapper  name='Укажите ингредиенты' className='sort-delete-ingredients' index={index} key={`sortable-step-${index}`} onDelete={()=>{}}>
+        <div className='input-ingredient-group'>
+          <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.groupName} placeholder='Основные'/>
+        </div>
         <IngredientList data={elem.ingredients} onChange={(val) => this.onIngChange(index, val)} />
       </SortDeleteWrapper>
     ))
@@ -61,7 +63,7 @@ class IngedientGroup extends Component {
       <SortableContainer useWindowAsScrollContainer onSortEnd={this.onSortEnd} useDragHandle lockAxis='y' key='sortable-container'>
         {items}
       </SortableContainer>
-      <Button onClick={this.addGroup} text='Добавить группу'/>
+      <Button onClick={this.addGroup} text='Добавить подраздел'/>
       </>
     );
   }

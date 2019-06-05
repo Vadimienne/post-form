@@ -12,7 +12,6 @@ function SortDeleteWrapper (props) {
   return (
     <>
     <div key={props.key} className={' '+props.className}>
-
       <div className='block-managment'>
         <DragButton/>
         <div className='module-name'>{props.name}</div>

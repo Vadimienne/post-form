@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 import Dropzone from 'components/Dropzone'
-import Editor from 'components/MyEditor'
+import Editor from 'components/MyEditorDescription'
 import IngredientList from 'components/IngredientList'
 
 import 'styles/Step.sass'
