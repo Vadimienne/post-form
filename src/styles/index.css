@@ -24,3 +24,7 @@ html {
   display: block;
   color: -internal-root-color;
 }
+
+ul {
+  padding-inline-start: 0;
+}

@@ -29,7 +29,7 @@ class CollapsibleCheckboxes extends Component {
 
     return (
       <div className='checkboxes-component'>
-        <span onClick={() => this.setState({isOpen: !this.state.isOpen})}>{head}</span>
+        <span className="list-name" onClick={() => this.setState({isOpen: !this.state.isOpen})}>{head}</span>
         <div className={'checkboxes-list' + (this.state.isOpen? '': ' closed')}>
           {checkboxes}
         </div>

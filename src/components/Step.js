@@ -24,10 +24,12 @@ class Step extends Component {
     return (
       <div className='step-presentational'>
         <Dropzone onChange={(val) => this.onFieldChange('image', val)} data={image}/>
-        <span>Описание</span>
-        <Editor onChange={(val) => this.onFieldChange('description', val)} data = {description}/>
-        <span>Ингредиенты</span>
-        <IngredientList onChange={(val) => this.onFieldChange('ingredients', val)} data= {ingredients}/>
+        <div className='content-box__content' >
+          <span>Описание</span>
+          <Editor onChange={(val) => this.onFieldChange('description', val)} data = {description}/>
+          <span>Ингредиенты</span>
+          <IngredientList onChange={(val) => this.onFieldChange('ingredients', val)} data= {ingredients}/>
+        </div>
       </div>
     );
   }

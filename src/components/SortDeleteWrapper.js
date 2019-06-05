@@ -5,13 +5,13 @@ import {sortableContainer, sortableElement, sortableHandle} from 'react-sortable
 import DragButton from 'components/DragButton'
 import TrashCanButton from 'components/TrashCanButton'
 
-import 'styles/SortDeleteWrapper.css'
+import 'styles/SortDeleteWrapper.sass'
 
 
 function SortDeleteWrapper (props) {
   return (
     <>
-    <div key={props.key} className={'sort-delete-wrapper '+props.className}>
+    <div key={props.key} className={'content-box '+props.className}>
 
       <div className='block-managment'>
         <DragButton/>

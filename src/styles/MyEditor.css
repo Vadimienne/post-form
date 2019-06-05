@@ -13,11 +13,11 @@
 
 .toolbox {
   display: flex;
-  border-bottom: 1px solid #3d3d3d;
+  border-bottom: 1px solid #e5e5e5;
   padding: 10px;
 }
 
 .editor{
-  border: 1px solid #3d3d3d;
-  border-radius: 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
 }

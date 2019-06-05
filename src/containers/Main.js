@@ -104,25 +104,37 @@ class Main extends Component {
   render() {
     const { title, titlePic, titleDescription, timeInfo, ingredientGroups, steps, tags } = this.state.json
 
-    //console.log(this.state.json.checkboxes.boxes)
+    console.log(this.state.json.timeInfo.hours)
     return (
       <form id="article-form">
         <div className='flex-wrapper'>
           <div className='left-column form-column'>
-            <CollapsibleCheckboxes data={this.state.json.checkboxes} onChange={(val)=> this.stateUpdater('checkboxes', val)}/>
+            <div className='content-box'>
+              <div className='content-box__content'>
+                <CollapsibleCheckboxes data={this.state.json.checkboxes} onChange={(val)=> this.stateUpdater('checkboxes', val)}/>
+              </div>
+            </div>
           </div>
           <div className='main-column form-column'>
-            <div className='field-container field-big'>
-              <input className='main-column__input_title text-input' onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
+            <div className='content-box'>
+              <div className='content-box__content'>
+                <div className='field-container field-big'>
+                  <input className='main-column__input_title text-input' onChange={(e)=> this.stateUpdater('title', e.target.value)} defaultValue={title}/>
+                </div>
+              </div>
+              <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
+              <div className='content-box__content'>
+                <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
+                <Timings data={timeInfo} onChange={(val) => this.stateUpdater('timeInfo', val)} />
+                <IngredientGroups data={ingredientGroups} onChange={(val)=>this.stateUpdater('ingredientGroups',val)} />
+              </div>
             </div>
-            <Dropzone data={titlePic} onChange={(val)=> this.stateUpdater('titlePic', val)} />
-            <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
-            <Timings data={timeInfo} onChange={(val) => this.stateUpdater('timeInfo', val)} />
-            <IngredientGroups data={ingredientGroups} onChange={(val)=>this.stateUpdater('ingredientGroups',val)} />
             <Steps data={steps} onChange={(val) => this.stateUpdater('steps', val)}/>
             <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
           </div>
-          <div className="right-column form-column">hi</div>
+          <div className="right-column form-column">
+            <div className="content-box">hi</div>
+          </div>
         </div>
       </form>
     );

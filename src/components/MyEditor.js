@@ -44,6 +44,7 @@ class Editor  extends Component {
   render() {
 
     let tools = ['italic','bold', 'underline', 'createLink', 'unlink', 'insertHTML', 'removeFormat']
+    tools = []
 
     let filteredCommands = tools ? tools.map((elem) => commands.hasOwnProperty(elem)? commands[elem]: undefined): []
 

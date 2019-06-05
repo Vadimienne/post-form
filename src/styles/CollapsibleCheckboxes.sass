@@ -1,9 +1,15 @@
 .checkboxes-component
+  overflow: hidden
+  width: 100%
+  .list-name
+    display: block
+    width: 100%
   .checkboxes-list
-    max-height: 300px
-    transition: max-height 1s
+    height: auto
+    position: relative
     overflow: hidden
+    transition: height 1s
     &.closed
-      max-height: 0px
-
-      transition: max-height 1s
+      height: 0
+      overflow: hidden
+      transition: height 1s

@@ -23,7 +23,7 @@ function postPic () {
 class Dropzone extends Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
       hightlight: false,
       selectedImg:''}
@@ -114,13 +114,14 @@ class Dropzone extends Component {
 
     return (
       <div
-        className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}`}
+        className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}
+          ${url.length? 'uploaded':''}`}
         onDragOver={this.onDragOver}
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
         onClick={this.openFileDialog}
         style={{ cursor: this.props.disabled ? 'default' : 'pointer',
-      backgroundImage: 'url(' + ( url.length ? url: this.defaultImg ) + ')'}}
+          backgroundImage: 'url(' + ( url.length ? url: this.defaultImg ) + ')'}}
       >
         <input
           ref={this.fileInputRef}

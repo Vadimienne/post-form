@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import Check from 'components/Checkbox'
 
+import Input from 'components/Input'
+
 class Timings extends Component {
   constructor(props) {
     super(props);
@@ -31,14 +33,14 @@ class Timings extends Component {
     const { hours, minutes, portions, preparationHours, preparationMinutes } = this.props.data
     return (
       <>
-        <input type='number' value={hours} onChange={(e) => this.onInput('hours',e)}/>
-        <input value={minutes} onChange={(e) => this.onInput('minutes',e)}/>
-        <input value={portions} onChange={(e) => this.onInput('portions',e)}/>
+        <Input className='text-input' type='number' value={hours} onChange={(e) => this.onInput('hours',e)}/>
+        <Input value={minutes} onChange={(e) => this.onInput('minutes',e)}/>
+        <Input value={portions} onChange={(e) => this.onInput('portions',e)}/>
         <Check onToggle={() => this.onToggle()} isActive={isChecked}/>
         {isChecked? (
           <>
-          <input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
-          <input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
+          <Input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
+          <Input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
           </>
         ): ''
         }
