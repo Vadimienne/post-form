@@ -64,7 +64,7 @@ class Steps extends Component {
         <SortableContainer useWindowAsScrollContainer onSortEnd={this.onSortEnd} useDragHandle lockAxis='y' key='sortable-container'>
           {items}
         </SortableContainer>
-        <Button onClick={this.addStep} text='Add Step'/>
+        <Button onClick={this.addStep} text='Добавить шаг' className='add-step-button'  icon='&#xea0d;'/>
       </>
     );
   }
