@@ -126,6 +126,8 @@ class Main extends Component {
               <div className='content-box__content'>
                 <Editor data={titleDescription} onChange={(val)=>{this.stateUpdater('titleDescription',val)}}/>
                 <Timings data={timeInfo} onChange={(val) => this.stateUpdater('timeInfo', val)} />
+              </div>
+              <div className='content-box__content_ingredients'>
                 <IngredientGroups data={ingredientGroups} onChange={(val)=>this.stateUpdater('ingredientGroups',val)} />
               </div>
             </div>
@@ -133,7 +135,7 @@ class Main extends Component {
             <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
           </div>
           <div className="right-column form-column">
-            <div className="content-box">hi</div>
+            <div className="content-box">hi<input/></div>
           </div>
         </div>
       </form>

@@ -14,7 +14,7 @@ html, [dynamic-compile] {
 }
 
 * {
-    cursor: default !important;
+    cursor: default;
     outline: none;
     -webkit-tap-highlight-color: transparent;
 

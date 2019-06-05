@@ -7,6 +7,7 @@ import arrayMove from 'array-move';
 import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Button from 'components/ConstructorBtn'
 import IngredientList from 'components/IngredientList'
+import Input from 'components/Input'
 
 const SortableContainer = sortableContainer(({children}) => {
   return <ul>{children}</ul>;
@@ -49,8 +50,8 @@ class IngedientGroup extends Component {
   render() {
 
     let items = this.props.data.map((elem, index)=> (
-      <SortDeleteWrapper index={index} key={`sortable-step-${index}`} onDelete={()=>{}}>
-        <input  onChange={(e) => this.onNameChange(e, index)} value={elem.groupName}/>
+      <SortDeleteWrapper className='sort-delete-ingredients' index={index} key={`sortable-step-${index}`} onDelete={()=>{}}>
+        <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.groupName}/>
         <IngredientList data={elem.ingredients} onChange={(val) => this.onIngChange(index, val)} />
       </SortDeleteWrapper>
     ))

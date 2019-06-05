@@ -11,7 +11,7 @@ import 'styles/SortDeleteWrapper.sass'
 function SortDeleteWrapper (props) {
   return (
     <>
-    <div key={props.key} className={'content-box '+props.className}>
+    <div key={props.key} className={' '+props.className}>
 
       <div className='block-managment'>
         <DragButton/>
