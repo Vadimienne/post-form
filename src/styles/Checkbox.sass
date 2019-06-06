@@ -2,14 +2,15 @@
 
   .checkbox-input
     opacity: 0
+    overflow: visible
 
   label::before
     content: ''
     display: inline-block
-    width: 1.125rem
-    height: 1.125rem
+    width: 20px
+    height: 20px
     border: 1px solid #e7e7e7
-    border-radius: 0.125rem
+    border-radius: 2px
 
   label::after
     content: ''
@@ -21,19 +22,18 @@
     transform: rotate(-45deg)
 
   label::before
-    display: inline-block
+    position: relative
     margin-right: 10px
+    top: 2px
 
   label
     position: absolute
-    line-height: 0.875rem
-    font-size: 0.875rem
-
+    font-size: 14px
 
   label::after
     position: absolute
     left: 4px
-    top: 5px
+    top: 9px
 
   label::after
     content: none
