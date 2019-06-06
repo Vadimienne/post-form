@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 import Select from 'react-select'
+import Input from 'components/Input'
 
 import 'styles/IngredientItem.sass'
 
@@ -67,8 +68,8 @@ class Ingredient extends Component {
 
     return (
       <div className='ingredient-item'>
-        <input value={name} onChange={(e)=>this.onInput('name',e)}/>
-        <input value={quantity} onChange={(e)=>this.onInput('quantity',e)}/>
+        <Input className='input' value={name} onChange={(e)=>this.onInput('name',e)}/>
+        <Input className='input input-quantity' value={quantity} onChange={(e)=>this.onInput('quantity',e)}/>
         <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onSelect.bind(this)} value={defaultValue} />
       </div>
     );

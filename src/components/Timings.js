@@ -34,28 +34,47 @@ class Timings extends Component {
     const { isChecked } = this.state
     const { hours, minutes, portions, preparationHours, preparationMinutes } = this.props.data
     return (
-      <>
-        <div className='timing-clock-icon'/>
-        <div className='input-timings-width'>
-          <Input className='text-input' type='number' value={hours} onChange={(e) => this.onInput('hours',e)} maxlength={2}/>
-          <Input value={minutes} onChange={(e) => this.onInput('minutes',e)} maxlength={2}/>
-        </div>
-        <div className='timing-portions-icon' />
-        <div className='input-portions-width'>
-          <Input value={portions} onChange={(e) => this.onInput('portions',e)}/>
-        </div>
-        <Check onToggle={() => this.onToggle()} isActive={isChecked}/>
-        {isChecked? (
-          <>
-          <div className='timing-clock-icon'/>
-          <div className='input-timings-width'>
-            <Input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
-            <Input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
+      <div className='timings-component'>
+        <div className='outer-flex-container'>
+          <div>
+              <span className='title'>Время приготовления</span>
+
+              <div className='input-timings-width timing-flex-container'>
+                <div className='timing-clock-icon'/>
+                <Input className='text-input' type='number' value={hours} onChange={(e) => this.onInput('hours',e)} maxlength={2}/>
+                <span className='input-label'>часов</span>
+                <Input className='text-input' value={minutes} onChange={(e) => this.onInput('minutes',e)} maxlength={2}/>
+                <span className='input-label'>минут</span>
+              </div>
+            </div>
+            <div>
+              <span className='title'>Количество персон </span>
+              <div className='input-portions-width timing-flex-container'>
+                <div className='timing-portions-icon' />
+                <Input value={portions} onChange={(e) => this.onInput('portions',e)}/>
+                <span className='input-label'>человек</span>
+              </div>
+            </div>
           </div>
-          </>
-        ): ''
-        }
-      </>
+              <div className='outer-flex-container'>
+              <div className='field_w260'>
+              <Check onToggle={() => this.onToggle()} isActive={isChecked} text='Требуется подготовка'/>
+              </div>
+              {isChecked? (
+                <div>
+                  <span className='title'>Время подготовки</span>
+                  <div className='input-timings-width timing-flex-container'>
+                    <div className='timing-clock-icon'/>
+                    <Input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
+                    <span className='input-label'>часов</span>
+                    <Input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
+                    <span className='input-label'>минут</span>
+                  </div>
+                </div>
+              ): undefined
+              }
+            </div>
+      </div>
     );
   }
 }

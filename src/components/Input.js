@@ -5,6 +5,7 @@ import 'styles/Input.sass'
 
 function Comp (props) {
   return (
+    <div className={props.className}>
     <div className='field-container'>
         <input className='text-input' value={props.value}
           onChange={props.onChange}
@@ -12,6 +13,7 @@ function Comp (props) {
           maxLength={props.maxlength}
         />
     </div>
+  </div>
   )
 }
 

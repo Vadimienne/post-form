@@ -11,6 +11,8 @@ import ConstructorBtn from 'components/ConstructorBtn'
 
 import AddBtn from 'images/addIcon.png'
 
+import 'styles/IngredientList.sass'
+
 const SortableContainerIng = sortableContainer(({children}) => {
   return <ul>{children}</ul>;
 });
@@ -58,10 +60,12 @@ class Ingredients extends Component {
       </SortDeleteWrapperInline>)) : []
 
     return (
-      <>
-        <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle>{mappedIngredients}</SortableContainerIng>
-        <ConstructorBtn icon='&#xea0d;' text='Добавить ингредиент' img={AddBtn} onClick={()=>this.addIngredient()} />
-      </>
+      <div className='ingredient-list-component'>
+        <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle lockAxis='y'>{mappedIngredients}</SortableContainerIng>
+        <div className='constructor-button-offset'>
+          <ConstructorBtn icon='&#xea0d;' text='Добавить ингредиент' img={AddBtn} onClick={()=>this.addIngredient()} />
+        </div>
+      </div>
     );
   }
 }

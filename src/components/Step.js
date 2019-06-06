@@ -26,7 +26,7 @@ class Step extends Component {
         <Dropzone onChange={(val) => this.onFieldChange('image', val)} data={image}/>
         <div className='content-box__content' >
           <Editor onChange={(val) => this.onFieldChange('description', val)} data = {description}/>
-          <span>Укажите необходимые ингредиенты</span>
+          <span className='ingredients-label'>Укажите необходимые ингредиенты</span>
           <IngredientList onChange={(val) => this.onFieldChange('ingredients', val)} data= {ingredients}/>
         </div>
       </div>

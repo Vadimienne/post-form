@@ -12,4 +12,5 @@
 
 .icon:active{
   cursor: grabbing;
+  color: #e7e7e7;
 }
