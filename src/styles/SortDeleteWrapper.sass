@@ -27,21 +27,84 @@
 //   background-color: #f2f2f2;
 // }
 
-.block-managment
-  display: flex
-  width: 100%
-  justify-content: space-between
+
+.sort-delete-wrapper
+  > .block-managment
+    display: flex
+    width: 100%
+    justify-content: space-between
+    > .drag-n-desc, .delete-n-desc
+      display: flex
+      margin-top: 15px
+      margin-bottom: 15px
+
+    > .drag-n-desc
+      margin-left: 15px
+      > .drag-button
+        margin-right: 10px
+        cursor: move
+        //following code increase drag button active zone
+        position: relative
+        &::before
+          position: absolute
+          content: ''
+          width: 10px
+          height: 20px
+          right: 7px
+          top: 2px
+        &::after
+          position: absolute
+          content: ''
+          width: 10px
+          height: 20px
+          left: 7px
+          top: 2px
+      > .module-name
+        line-height: 22px
+    > .delete-n-desc
+      position: relative
+      bottom: 3px
+
+
+    > .delete-n-desc
+      margin-right: 15px
+      &:hover
+        >.trash-can
+          color: #ff451c
+      > .trash-can
+        font-size: 20px
+      > .delete-desc
+        color: #5e5e5e
+        font-size: 14px
+        font-weight: 400
+        line-height: 30px
+        cursor: pointer
+
 
 .sort-delete-ingredients
   background-color: #FBF8F6
-  .module-name
-    line-height: 24px
-    font-size: 14px
-    font-weight: 700
+
+
+  > .block-managment
+    > .drag-n-desc
+      > .module-name
+        line-height: 24px
+        font-size: 14px
+        font-weight: 700
+    > .delete-n-desc
+      > .delete-desc
+        color: #666
+        font-family: "Open Sans"
+        font-size: 13px
+        font-weight: 600
+        user-select: none
+        line-height: 30px
 
 .sort-delete-steps
+  > .block-managment
+    border-bottom: 1px solid #e6e6e6
   .module-name
     text-transform: uppercase
     font-weight: 700
     font-size: 14px
-    line-height: 50px
+    line-height: 24px
