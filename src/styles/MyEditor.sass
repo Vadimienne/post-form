@@ -1,0 +1,41 @@
+[placeholder]:empty::before
+    content: attr(placeholder)
+    color: #555
+
+
+[placeholder]:empty:focus::before
+    content: ""
+
+
+.editor-text
+  padding: 10px
+
+
+.toolbox
+  display: flex
+  border-bottom: 1px solid #e5e5e5
+  padding: 10px
+
+
+.editor
+  border: 1px solid #e5e5e5
+  border-radius: 4px
+  &.invalid
+    border: 1px solid red
+    > .text-toolbox
+      color: red
+      position: relative
+      &::before
+        position: relative
+        content: ''
+        right: 6px
+        top: 2px
+        width: 18px
+        height: 18px
+        background-image: url('https://e3.edimdoma.ru/assets/forms/warning-icon-4bc3fcd05f0d98d651dfc00aedbe2f1f.png')
+
+
+.toolbox.text-toolbox
+  border-bottom: 0
+  font-weight: 700
+  font-size: 14px

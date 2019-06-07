@@ -6,7 +6,7 @@ import {commands} from 'config/execCommands'
 
 import ToolBtn from 'components/EditorToolBtn'
 
-import 'styles/MyEditor.css'
+import 'styles/MyEditor.sass'
 
 class Editor  extends Component {
   constructor(props) {
@@ -57,10 +57,9 @@ class Editor  extends Component {
                       {text: '°C', name: 'celsius'}]
 
     let mappedInsertions = insertions.map((elem) => <ToolBtn cmd={elem.name} key={elem.name} onClick={()=>this.execCommand({cmd:'insertText'}, elem.text)}/>)
-
     return (
-      <div className='editor'>
-        <div className='toolbox text-toolbox'>Описание</div>
+      <div className={'editor ' + (this.props.data && this.props.data.length ? '' : 'invalid' )}>
+        <span className='toolbox text-toolbox'>Описание</span>
 
         <ContentEditable className='editor-text'
           html={this.props.data? this.props.data: ''}

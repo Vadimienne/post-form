@@ -6,7 +6,7 @@ import {commands} from 'config/execCommands'
 
 import ToolBtn from 'components/EditorToolBtn'
 
-import 'styles/MyEditor.css'
+import 'styles/MyEditor.sass'
 
 class Editor  extends Component {
   constructor(props) {

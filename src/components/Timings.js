@@ -51,10 +51,6 @@ class Timings extends Component {
 
   onToggle(){
     if (this.state.isChecked){
-      // let data = this.props.data
-      // data.preparationHours = '0'
-      // data.preparationMinutes = '0'
-      // this.props.onChange(data)
       this.props.onPrepTimeChange(0)
     }
     this.setState({isChecked: !this.state.isChecked})

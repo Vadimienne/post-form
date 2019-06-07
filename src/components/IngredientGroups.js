@@ -27,8 +27,18 @@ class IngedientGroup extends Component {
 
   onSortEnd({oldIndex, newIndex}) {
     let array = this.props.data
+
+    //sort array
     array = arrayMove(array, oldIndex, newIndex)
+
+    //refresh array's position fields
+    array = array.map((elem, index)=> {
+      elem.position = index
+      return elem
+    })
+
     this.props.onChange(array)
+
     this.forceUpdate()
   }
 
@@ -40,13 +50,15 @@ class IngedientGroup extends Component {
 
   onNameChange(e, index){
     let array = this.props.data
-    array[index].groupName = e.target.value
+    array[index].title = e.target.value
     this.props.onChange(array)
   }
 
+
+// #tofix add position
   addGroup(){
     let array = this.props.data
-    array.push({groupName:'', ingredients:[{name:'',quantity:'', metric:''}]})
+    array.push({title:'', recipe_ingredients:[{name:'',quantity:'', metric:''}]})
     this.props.onChange(array)
   }
 
@@ -66,7 +78,7 @@ class IngedientGroup extends Component {
         idType='ingredients'
         onDelete={()=>this.deleteGroup(index)}>
         <div className='input-ingredient-group'>
-          <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.groupName} placeholder='Основные'/>
+          <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.title} placeholder='Основные'/>
         </div>
         <IngredientList data={elem.ingredients} onChange={(val) => this.onIngChange(index, val)} ingredientItem={Ingredient}/>
       </SortDeleteWrapper>

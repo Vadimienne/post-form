@@ -40,9 +40,9 @@ class Main extends Component {
         servings: 3,
         cooking_time: 105,
         preparation_time: 0,
-        ingredientGroups:[
+        ingredient_groups:[
           {
-            groupName:'Primary',
+            title:'Primary',
             ingredients:[
               {
                 name: 'Chicken',
@@ -55,7 +55,7 @@ class Main extends Component {
         steps: [
           {
             image: 'https://i.redd.it/flnarodfujvz.jpg',
-            description: 'hi hello privet',
+            description: '',
             ingredients: [
               {
                 name: 'Chicken',
@@ -99,7 +99,7 @@ class Main extends Component {
   }
 
   render() {
-    const { title, image, description, cooking_time, preparation_time, servings, ingredientGroups, steps, tags } = this.state.json
+    const { title, image, description, cooking_time, preparation_time, servings, ingredient_groups, steps, tags } = this.state.json
 
     console.log(this.state.json)
     return (
@@ -153,7 +153,7 @@ class Main extends Component {
 
               <div className='content-box__content_ingredients'>
                 <IngredientGroups
-                  data={ingredientGroups}
+                  data={ingredient_groups}
                   onChange={(val)=>this.stateUpdater('ingredientGroups',val)}
                 />
               </div>

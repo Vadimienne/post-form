@@ -34,6 +34,7 @@ class Ingredients extends Component {
     this.props.onChange(data)
   }
 
+//#tofix refresh positions in array
   onSortEnd({oldIndex, newIndex}){
     let array = this.props.data
     array = arrayMove (array, oldIndex, newIndex)
@@ -41,6 +42,7 @@ class Ingredients extends Component {
     this.forceUpdate()
   }
 
+//#tofix add position
   addIngredient(){
     let array = this.props.data
     array.push({name:'',quantity:'', metric:''})
