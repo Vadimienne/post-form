@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import Select from 'react-select'
 import Input from 'components/Input'
+import SelectAsync from 'react-select/async'
+import { requestIngredients } from 'api/requests'
 
 import 'styles/IngredientItem.sass'
 
@@ -26,6 +28,13 @@ class Ingredient extends Component {
     let data = this.props.data
     data.metric = selectedOption.value
     this.props.onChange(data)
+  }
+
+  async loadOptions(str){
+    let ingredients = await requestIngredients(str)
+    console.log (await ingredients)
+    let mappedIngredients = ingredients.map((elem) => {return {label: elem.name, value: elem.id}})
+    return mappedIngredients
   }
 
   render() {
@@ -74,9 +83,27 @@ class Ingredient extends Component {
 
     }
 
+    const customStylesAsync = {
+      container: (provided, state) => ({
+        ...provided,
+        width:'270px'
+      }),
+      control: (provided, state) => ({
+        ...provided,
+        borderColor: '#e6e6e6',
+        '&:hover': {
+           borderColor: '#363636'
+        },
+        boxShadow: 0
+      })
+
+    }
+
     return (
       <div className='ingredient-item'>
-        <Input className='input' value={name} onChange={(e)=>this.onInput('name',e)}/>
+        <SelectAsync className='input' value={name} onChange={(e)=>this.onInput('name',e)}
+          loadOptions={this.loadOptions}
+          styles={customStylesAsync}/>
         <Input className='input input-quantity' value={quantity} onChange={(e)=>this.onInput('quantity',e)}/>
         <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onSelect.bind(this)} value={defaultValue} />
       </div>

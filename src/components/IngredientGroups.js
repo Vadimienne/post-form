@@ -8,6 +8,7 @@ import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Button from 'components/ConstructorBtn'
 import IngredientList from 'components/IngredientList'
 import Input from 'components/Input'
+import Ingredient from 'components/IngredientItemAsync'
 
 import 'styles/IngredientGroups.sass'
 
@@ -67,7 +68,7 @@ class IngedientGroup extends Component {
         <div className='input-ingredient-group'>
           <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.groupName} placeholder='Основные'/>
         </div>
-        <IngredientList data={elem.ingredients} onChange={(val) => this.onIngChange(index, val)} />
+        <IngredientList data={elem.ingredients} onChange={(val) => this.onIngChange(index, val)} ingredientItem={Ingredient}/>
       </SortDeleteWrapper>
     ))
     //idType props used to separate different groups of SortDeleteWrappers and make clickable labels for buttons

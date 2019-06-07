@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import Dropzone from 'components/Dropzone'
 import Editor from 'components/MyEditorDescription'
 import IngredientList from 'components/IngredientList'
+import IngredientItem from 'components/IngredientItem'
 
 import 'styles/Step.sass'
 
@@ -27,7 +28,7 @@ class Step extends Component {
         <div className='content-box__content' >
           <Editor onChange={(val) => this.onFieldChange('description', val)} data = {description}/>
           <span className='ingredients-label'>Укажите необходимые ингредиенты</span>
-          <IngredientList onChange={(val) => this.onFieldChange('ingredients', val)} data= {ingredients}/>
+          <IngredientList onChange={(val) => this.onFieldChange('ingredients', val)} data= {ingredients} ingredientItem={IngredientItem}/>
         </div>
       </div>
     );

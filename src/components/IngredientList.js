@@ -5,7 +5,7 @@ import arrayMove from 'array-move'
 
 import DragButton from 'components/DragButton'
 import TrashCanButton from 'components/TrashCanButton'
-import Ingredient from 'components/IngredientItem'
+//import Ingredient from 'components/IngredientItem'
 import SortDeleteWrapperInline from 'components/SortDeleteWrapperInline'
 import ConstructorBtn from 'components/ConstructorBtn'
 
@@ -54,6 +54,7 @@ class Ingredients extends Component {
   }
 
   render() {
+    let Ingredient = this.props.ingredientItem
     let mappedIngredients = this.props.data ? this.props.data.map((elem, index) => (
       <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
           <Ingredient data={elem} key={'ingredient'+index} onChange={(value)=>this.onIngChange(index, value)}/>

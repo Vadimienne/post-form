@@ -60,7 +60,7 @@ class Dropzone extends Component {
     //  reader.readAsDataURL(file);
 
     let getUrl = () => {
-      return postPic().then((resolve) =>this.props.onChange({url:resolve}))
+      return postPic().then((resolve) =>this.props.onChange(resolve))
     }
     getUrl()
 
@@ -109,7 +109,7 @@ class Dropzone extends Component {
 
     let url = ''
     if(this.props.data) {
-      url=this.props.data.url
+      url = this.props.data
     }
 
     return (

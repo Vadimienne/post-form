@@ -14,25 +14,69 @@ class Timings extends Component {
     this.onInput = this.onInput.bind(this)
   }
 
-  onInput(field, value) {
+
+// this implementation caused by the way data is stored in json
+  onInput(field, valueObj) {
+    const { onTimeChange, onPrepTimeChange, onServingsChange } = this.props
     let data = this.props.data
-    data[field] = value.target.value
-    this.props.onChange(data)
+    let value = valueObj.target.value
+
+    let minutes = data.cooking_time % 60
+    let preparationMinutes = data.preparation_time % 60
+
+    switch (field) {
+      case 'hours':
+        onTimeChange(value * 60 + minutes)
+        break;
+
+      case 'minutes':
+        onTimeChange(data.cooking_time + (value - minutes))
+        break;
+
+      case 'preparationHours':
+        onPrepTimeChange(value * 60 + preparationMinutes)
+        break;
+
+      case 'preparationMinutes':
+        onPrepTimeChange(data.preparation_time + (value - preparationMinutes))
+        break;
+
+      case 'servings':
+        onServingsChange(value)
+        break;
+
+      default: console.error('Error in Timings component')
+    }
   }
 
   onToggle(){
     if (this.state.isChecked){
-      let data = this.props.data
-      data.preparationHours = '0'
-      data.preparationMinutes = '0'
-      this.props.onChange(data)
+      // let data = this.props.data
+      // data.preparationHours = '0'
+      // data.preparationMinutes = '0'
+      // this.props.onChange(data)
+      this.props.onPrepTimeChange(0)
     }
     this.setState({isChecked: !this.state.isChecked})
   }
 
   render() {
     const { isChecked } = this.state
-    const { hours, minutes, portions, preparationHours, preparationMinutes } = this.props.data
+    const { cooking_time, preparation_time, servings } = this.props.data
+
+    let minutes = cooking_time % 60
+    let hours = (cooking_time - minutes) / 60
+
+    let preparationMinutes = preparation_time % 60
+    let preparationHours = (preparation_time - preparationMinutes) / 60
+
+    // to avoid to render '0' in input field when field should be empty
+    minutes = minutes ? minutes : ''
+    hours   = hours   ? hours   : ''
+
+    preparationMinutes  = preparationMinutes  ? preparationMinutes  : ''
+    preparationHours    = preparationHours    ? preparationHours    : ''
+
     return (
       <div className='timings-component'>
         <div className='outer-flex-container'>
@@ -51,7 +95,7 @@ class Timings extends Component {
               <span className='title'>Количество персон </span>
               <div className='input-portions-width timing-flex-container'>
                 <div className='timing-portions-icon' />
-                <Input value={portions} onChange={(e) => this.onInput('portions',e)}/>
+                <Input value={servings} onChange={(e) => this.onInput('servings',e)}/>
                 <span className='input-label'>человек</span>
               </div>
             </div>
