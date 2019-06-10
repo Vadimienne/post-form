@@ -1,5 +1,10 @@
 //column styles
 
+.separation-line
+  border-top: 1px solid #e6e1da
+  margin-bottom: 20px
+  margin-top: 10px
+
 .form-column
   display: block
 
@@ -15,9 +20,42 @@
   margin-right: 20px
 
 .right-column
+  font-size: 13px
   width: 280px
-  white-space: nowrap
-  height: auto
+  > .content-box
+    padding: 20px
+    > .instruction
+      text-align: center
+      > span
+        display: inline-block
+        font-size: 13px
+        line-height: 20px
+        font-weight: 400
+        color: #242424
+        margin-bottom: 20px
+
+    > .preview
+      text-align: center
+      > .slider-container
+        display: flex
+        justify-content: space-around
+        > .toggle-label
+          color: #9f9f9f
+          font-size: 12px
+          line-height: 40px
+      > .preview-label
+        display: inline-block
+        margin-top: 20px 
+      > .draft-label
+        display: block
+        margin-top: 10px
+
+    > .publish
+      text-align: center
+      > .publish-label
+        display: block
+        margin-top: 10px
+
 
 .left-column
   width: 280px

@@ -49,10 +49,23 @@ class Steps extends Component {
     this.props.onChange(array)
   }
 
+  deleteStep(index){
+    let array = this.props.data
+    console.log('array')
+    console.log(array)
+    array.splice(index,1)
+    this.props.onChange(array)
+  }
+
   render() {
 
     let items = this.props.data.map((elem, index)=> (
-        <SortDeleteWrapper name={`${index + 1} шаг`} deleteDesc='Удалить шаг' className='content-box sort-delete-steps' index={index} key={'sortable-step-'+index} onDelete={()=>{}}>
+        <SortDeleteWrapper name={`${index + 1} шаг`}
+          deleteDesc='Удалить шаг'
+          className='content-box sort-delete-steps'
+          index={index}
+          key={'sortable-step-'+index}
+          onDelete={()=>this.deleteStep(index)}>
           <Step data={elem} onChange={(val) => this.onStepChange(index, val)} />
         </SortDeleteWrapper>
     ))

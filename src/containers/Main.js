@@ -17,6 +17,11 @@ import Tags from 'components/Tags'
 import IngredientGroups from 'components/IngredientGroups'
 import Timings from 'components/Timings'
 import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
+import ConstructorBtn from 'components/ConstructorBtn'
+import Input from 'components/Input'
+import Check from 'components/ExpCheckbox'
+
+import SwitchSlider from 'components/SwitchSlider'
 
 import 'styles/index.css'
 //import 'styles/Main.sass'
@@ -88,8 +93,30 @@ class Main extends Component {
           ]
         }
 
+      },
+      validation: {
+        title: true,
+        category: true,
+        national_cuisine: true,
+        timing: true,
+        ingredient: true,
+        step: true,
+        steps_description: true,
       }
     };
+    this.stateUpdater = this.stateUpdater.bind(this)
+    //this.isFormValid = this.isFormValid.bind(this)
+  }
+
+  // isFormValid(){
+  //   let values = Object.values(this.state.validation)
+  //   return !values.includes(false)
+  // }
+
+  validationUpdater(field, value){
+    let obj = this.state.validation
+    obj[field] = value
+    this.setState({validation: obj})
   }
 
   stateUpdater(field, val){
@@ -100,6 +127,8 @@ class Main extends Component {
 
   render() {
     const { title, image, description, cooking_time, preparation_time, servings, ingredient_groups, steps, tags } = this.state.json
+
+    let isFormValid = 0//this.isFormValid()
 
     console.log(this.state.json)
     return (
@@ -120,15 +149,13 @@ class Main extends Component {
           <div className='main-column form-column'>
             <div className='content-box'>
               <div className='content-box__content'>
-                <div className='field-container field-big'>
-
-                  <input
-                    className='main-column__input_title text-input'
+                  <Input
+                    className='main-column__input_title text-input '
                     onChange={(e)=> this.stateUpdater('title', e.target.value)}
                     defaultValue={title}
+                    isBig
+                    validation={(val)=>this.validationUpdater('title', val)}
                   />
-
-                </div>
               </div>
 
               <Dropzone
@@ -166,7 +193,39 @@ class Main extends Component {
             <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
           </div>
           <div className="right-column form-column">
-            <div className="content-box">hi<input/></div>
+
+            <div className='content-box'>
+              <div className='instruction'>
+                <span>В первый раз на сайте или забыли, как пользоваться формой создания рецепта? Тогда посмотрите инструкцию.</span>
+                <div className='separation-line'></div>
+                <ConstructorBtn className='submit-btn' text='инструкция' isActive/>
+              </div>
+            </div>
+
+            <div className='content-box'>
+              <div className='preview'>
+                <div className='slider-container'>
+                  <span className='toggle-label'>Включен</span>
+                  <SwitchSlider />
+                  <span className='toggle-label'>Выключен</span>
+                </div>
+                <span className='preview-label'>Предварительный просмотр</span>
+                <div className='separation-line'></div>
+                <ConstructorBtn className='draft-btn' text="В ЧЕРНОВИК" icon='&#xea22;' />
+                <span className='draft-label'>Если Вы не готовы выложить рецепт, хотите его дополнить позже, сохраните черновик.</span>
+              </div>
+            </div>
+
+            <div className="content-box">
+              <div className='publish'>
+                <Check isActive={true} text='Получать комментарии и оценки от пользователей' />
+                <Check isActive={false} text='Участвует в голосовании?' />
+                <div className='separation-line'></div>
+                <ConstructorBtn className='submit-btn' text='опубликовать' isActive={isFormValid}/>
+                <span className='publish-label'>Рецепт будет опубликован после прохождения модерации. Время модерации с 9 до 21 по Москве.</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </form>

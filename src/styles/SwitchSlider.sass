@@ -1,0 +1,37 @@
+.preview-switch
+  display: inline-block
+  background-color: #ff451c
+  width: 97px
+  height: 40px
+  border-radius: 20px
+  position: relative
+  > .slider
+    width: 46px
+    height: 36px
+    background-color: #fff
+    border-radius: 40px
+    position: relative
+    top: 2px
+    right: -49px
+    transition: right 0.2s ease
+  > span
+    position: absolute
+    font-family: 'EdimDoma-Icons'
+    z-index: 1
+    user-select: none
+
+
+  > .icon-hide
+    right: 14px
+    top: 10px
+    font-size: 10px
+  > .icon-show
+    font-size: 14px
+    right: 62px
+    top: 8px
+
+
+  &.active
+    > .slider
+      right: -2px
+      transition: right 0.2s ease

@@ -91,28 +91,26 @@ class Timings extends Component {
               <span className='title'>Количество персон </span>
               <div className='input-portions-width timing-flex-container'>
                 <div className='timing-portions-icon' />
-                <Input value={servings} onChange={(e) => this.onInput('servings',e)}/>
+                  <Input value={servings} onChange={(e) => this.onInput('servings',e)}/>
                 <span className='input-label'>человек</span>
               </div>
             </div>
           </div>
               <div className='outer-flex-container'>
-              <div className='field_w260'>
-              <Check onToggle={() => this.onToggle()} isActive={isChecked} text='Требуется подготовка'/>
-              </div>
-              {isChecked? (
-                <div>
-                  <span className='title'>Время подготовки</span>
-                  <div className='input-timings-width timing-flex-container'>
-                    <div className='timing-clock-icon'/>
-                    <Input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
-                    <span className='input-label'>часов</span>
-                    <Input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
-                    <span className='input-label'>минут</span>
-                  </div>
+                <div className='field_w260 preparation_check'>
+                  <Check onToggle={() => this.onToggle()} isActive={isChecked} text='Требуется подготовка'/>
                 </div>
-              ): undefined
-              }
+                {isChecked? (
+                  <div className='preparation_time_container'>
+                    <span className='title'>Время подготовки</span>
+                    <div className='input-timings-width timing-flex-container'>
+                      <div className='timing-clock-icon'/>
+                      <Input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
+                      <Input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
+                    </div>
+                  </div>
+                ): undefined
+                }
             </div>
       </div>
     );

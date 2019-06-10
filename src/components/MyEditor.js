@@ -43,18 +43,20 @@ class Editor  extends Component {
 
   render() {
 
-    let tools = ['italic','bold', 'underline', 'createLink', 'unlink', 'insertHTML', 'removeFormat']
-    tools = []
+    let tools = ['removeFormat', 'insertUnorderedList', 'insertOrderedList']
+    // tools = []
 
     let filteredCommands = tools ? tools.map((elem) => commands.hasOwnProperty(elem)? commands[elem]: undefined): []
 
-    let mappedCommands = filteredCommands.map((elem)=> <ToolBtn cmd={elem.cmd} key={elem.cmd} onClick={()=>{this.execCommand(elem)}}>{elem.cmd}</ToolBtn>)
+    //button below contains class from ToolBtn.sass that resets default button styles
+    let mappedCommands = filteredCommands.map((elem)=> <button className={"icon-tool-btn fas fa-" + elem.icon} key={elem.cmd} onClick={()=>{this.execCommand(elem)}}/>)
 
     let insertions = [{text:'«', name: 'guillemet-left'},
                       {text:'»', name:'guillemet-right'},
                       {text: '—', name: 'long-dash'},
                       {text: '–', name: 'dash'},
                       {text: '°C', name: 'celsius'}]
+    insertions = []
 
     let mappedInsertions = insertions.map((elem) => <ToolBtn cmd={elem.name} key={elem.name} onClick={()=>this.execCommand({cmd:'insertText'}, elem.text)}/>)
 

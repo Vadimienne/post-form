@@ -52,3 +52,33 @@
       font-weight: 700
       font-size: 12px
       line-height: 17px
+
+.submit-btn
+  width: 183px
+  &:hover
+    border-color: #ccc
+  > .round-btn-text
+    vertical-align: middle
+    text-transform: uppercase
+    font-size: 12px
+    font-weight: 600
+    position: static
+    color: #ccc
+    margin: 0
+
+  &.active
+    border: none
+    background-color: #66cc66
+    > .round-btn-text
+      color: white
+
+
+.draft-btn
+  width: 183px
+  > .round-btn-text
+    font-size: 12px
+    font-weight: 600
+    position: relative
+    top: -3px
+  > .edimdoma-icon
+      font-size: 16px

@@ -58,7 +58,8 @@ class Editor  extends Component {
 
     let mappedInsertions = insertions.map((elem) => <ToolBtn cmd={elem.name} key={elem.name} onClick={()=>this.execCommand({cmd:'insertText'}, elem.text)}/>)
     return (
-      <div className={'editor ' + (this.props.data && this.props.data.length ? '' : 'invalid' )}>
+      <div className={'editor ' + (this.props.data && this.props.data.length ? '' : 'invalid' )}
+        onClick={()=>this.editorRef.current.focus()}>
         <span className='toolbox text-toolbox'>Описание</span>
 
         <ContentEditable className='editor-text'
