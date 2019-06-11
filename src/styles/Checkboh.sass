@@ -1,0 +1,58 @@
+.checkbox
+
+  .checkbox-input
+    opacity: 0
+    overflow: visible
+
+  label::before
+    content: ''
+    display: inline-block
+    width: 20px
+    height: 20px
+    border: 1px solid #e7e7e7
+    border-radius: 2px
+
+  label::after
+    content: ''
+    display: inline-block
+    width: 10px
+    height: 4px
+    border-left: 2px solid white
+    border-bottom: 2px solid white
+    transform: rotate(-45deg)
+
+  label::before
+    position: relative
+    margin-right: 10px
+    top: 2px
+
+  label
+    position: absolute
+    font-size: 14px
+
+  label::after
+    position: absolute
+    left: 4px
+    top: 9px
+
+  label::after
+    content: none
+
+  &.active
+    label::before
+      background-color: #FF451C
+      border-color: #FF451C
+
+  &.active
+    label::after
+      content: ""
+
+  .checkbox-input:focus + label::before
+    outline: rgb(59, 153, 252) auto 5px
+
+  label:hover::before
+    border: 1px solid black
+
+  &.active
+    label:hover::before
+      border-color: #FF451C

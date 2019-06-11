@@ -49,7 +49,7 @@ class Editor  extends Component {
     let filteredCommands = tools ? tools.map((elem) => commands.hasOwnProperty(elem)? commands[elem]: undefined): []
 
     //button below contains class from ToolBtn.sass that resets default button styles
-    let mappedCommands = filteredCommands.map((elem)=> <button className={"icon-tool-btn fas fa-" + elem.icon} key={elem.cmd} onClick={()=>{this.execCommand(elem)}}/>)
+    let mappedCommands = filteredCommands.map((elem)=> <button type='button' className={"icon-tool-btn fas fa-" + elem.icon} key={elem.cmd} onClick={()=>{this.execCommand(elem)}}/>)
 
     let insertions = [{text:'«', name: 'guillemet-left'},
                       {text:'»', name:'guillemet-right'},

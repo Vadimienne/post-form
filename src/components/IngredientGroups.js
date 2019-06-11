@@ -44,13 +44,13 @@ class IngedientGroup extends Component {
 
   onIngChange(index, value){
     let array = this.props.data
-    array[index].ingredients = value
+    array[index].recipe_ingredients = value
     this.props.onChange(array)
   }
 
   onNameChange(e, index){
     let array = this.props.data
-    array[index].title = e.target.value
+    array[index].element = e.target.value
     this.props.onChange(array)
   }
 
@@ -58,7 +58,7 @@ class IngedientGroup extends Component {
 // #tofix add position
   addGroup(){
     let array = this.props.data
-    array.push({title:'', recipe_ingredients:[{name:'',quantity:'', metric:''}]})
+    array.push({element:'', recipe_ingredients:[]})
     this.props.onChange(array)
   }
 
@@ -78,9 +78,9 @@ class IngedientGroup extends Component {
         idType='ingredients'
         onDelete={()=>this.deleteGroup(index)}>
         <div className='input-ingredient-group'>
-          <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.title} placeholder='Основные'/>
+          <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.element} placeholder='Основные'/>
         </div>
-        <IngredientList data={elem.ingredients} onChange={(val) => this.onIngChange(index, val)} ingredientItem={Ingredient}/>
+        <IngredientList data={elem.recipe_ingredients} onChange={(val) => this.onIngChange(index, val)} ingredientItem={Ingredient}/>
       </SortDeleteWrapper>
     ))
     //idType props used to separate different groups of SortDeleteWrappers and make clickable labels for buttons

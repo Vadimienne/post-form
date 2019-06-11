@@ -19,7 +19,7 @@ import Timings from 'components/Timings'
 import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
 import ConstructorBtn from 'components/ConstructorBtn'
 import Input from 'components/Input'
-import Check from 'components/ExpCheckbox'
+import Check from 'components/Checkbox'
 
 import SwitchSlider from 'components/SwitchSlider'
 
@@ -27,6 +27,9 @@ import 'styles/index.css'
 //import 'styles/Main.sass'
 import 'styles/MainMain.sass'
 import 'styles/EdimDomaIcons.sass'
+
+
+import { getRecipe, getUnits, getTags } from 'api/requests'
 
 
 
@@ -45,16 +48,33 @@ class Main extends Component {
         servings: 3,
         cooking_time: 105,
         preparation_time: 0,
+        setting_commentable: true,
+        setting_rateable: false,
+        contest_id: 49,
+        contest: {
+          id: 234525,
+          title: 'Конкурс рецептов «С дымком!»'
+        },
         ingredient_groups:[
           {
-            title:'Primary',
-            ingredients:[
+            element:'Primary',
+            element_position: 0,
+            recipe_ingredients:[
               {
-                name: 'Chicken',
-                quantity: '2',
-                metric: 'шт.'
+                id: 1,
+                recipe_id: 23,
+                amount: 1.5,
+                unit_id: 2,
+                ingredient_id: 6,
+                ingredient:{
+                  id: 1,
+                  title:'Фейоха',
+                  unit_ids: [
+                    41, 1, 2
+                  ]
+                }
               }
-            ]
+            ],
           }
         ],
         steps: [
@@ -63,9 +83,18 @@ class Main extends Component {
             description: '',
             ingredients: [
               {
-                name: 'Chicken',
-                quantity: '2',
-                metric: 'шт.'
+                id: 1,
+                recipe_id: 23,
+                amount: 1.5,
+                unit_id: 2,
+                ingredient_id: 6,
+                ingredient:{
+                  id: 1,
+                  title:'Фейоха',
+                  unit_ids: [
+                    41, 1, 2
+                  ]
+                }
               },
             ]
           },
@@ -74,9 +103,18 @@ class Main extends Component {
             description: 'hi',
             ingredients: [
               {
-                name: 'ken',
-                quantity: '1',
-                metric: 'г'
+                id: 1,
+                recipe_id: 23,
+                amount: 1.5,
+                unit_id: 2,
+                ingredient_id: 6,
+                ingredient:{
+                  id: 1,
+                  title:'Фейоха',
+                  unit_ids: [
+                    41, 1, 2
+                  ]
+                }
               },
             ]
           },
@@ -102,10 +140,26 @@ class Main extends Component {
         ingredient: true,
         step: true,
         steps_description: true,
-      }
+      },
+
     };
     this.stateUpdater = this.stateUpdater.bind(this)
     //this.isFormValid = this.isFormValid.bind(this)
+  }
+
+  async requestRecipe(id){
+    let response = getRecipe(id)
+    return response
+  }
+
+  async componentDidMount(){
+    let recipe = await this.requestRecipe(128117)
+    let tags = await getTags()
+    let units = await getUnits()
+    // this.setState({json: recipe})
+    // this.setState({tags})
+    // this.setState({units})
+
   }
 
   // isFormValid(){
@@ -126,11 +180,13 @@ class Main extends Component {
   }
 
   render() {
-    const { title, image, description, cooking_time, preparation_time, servings, ingredient_groups, steps, tags } = this.state.json
+    const { title, image, description, cooking_time, preparation_time, servings,
+        ingredient_groups, steps, tags,
+        setting_commentable, setting_rateable} = this.state.json
 
     let isFormValid = 0//this.isFormValid()
 
-    console.log(this.state.json)
+    console.log(this.state.json.ingredient_groups[0].recipe_ingredients[0].ingredient)
     return (
       <form id="article-form">
         <div className='flex-wrapper'>
@@ -218,11 +274,21 @@ class Main extends Component {
 
             <div className="content-box">
               <div className='publish'>
-                <Check isActive={true} text='Получать комментарии и оценки от пользователей' />
-                <Check isActive={false} text='Участвует в голосовании?' />
+                <div className='checkboxes'>
+                  <Check className='bold-label' isActive={setting_commentable}
+                    text='Получать комментарии и оценки от пользователей'
+                    onToggle={() => this.stateUpdater('setting_commentable', !setting_commentable)}
+                  />
+                  <Check className='bold-label' isActive={setting_rateable}
+                    text='Участвует в голосовании?'
+                    onToggle={() => this.stateUpdater('setting_rateable', !setting_rateable)}
+                  />
+                </div>
                 <div className='separation-line'></div>
-                <ConstructorBtn className='submit-btn' text='опубликовать' isActive={isFormValid}/>
-                <span className='publish-label'>Рецепт будет опубликован после прохождения модерации. Время модерации с 9 до 21 по Москве.</span>
+                <div className='publish-button'>
+                  <ConstructorBtn className='submit-btn' text='опубликовать' isActive={isFormValid}/>
+                  <span className='publish-button__label'>Рецепт будет опубликован после прохождения модерации. Время модерации с 9 до 21 по Москве.</span>
+                </div>
               </div>
             </div>
 

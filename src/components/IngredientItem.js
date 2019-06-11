@@ -10,6 +10,8 @@ class Ingredient extends Component {
   constructor(props) {
     super(props);
     this.data = this.props.data
+    this.onUnitSelect = this.onUnitSelect.bind(this)
+    this.onIngSelect = this.onIngSelect.bind(this)
   }
 
   componentDidUpdate(){
@@ -22,14 +24,22 @@ class Ingredient extends Component {
     this.props.onChange(data)
   }
 
-  onSelect(selectedOption){
+  onUnitSelect(selectedOption){
     let data = this.props.data
-    data.metric = selectedOption.value
+    data.unit_id = 42
     this.props.onChange(data)
   }
 
+  onIngSelect(selectedOption){
+  let data = this.props.data
+  data.ingredient_id = selectedOption.value
+  data.ingredient.title = selectedOption.label
+  this.props.onChange(data)
+  }
+
   render() {
-    const {name, quantity, metric} = this.data
+    const {amount, unit_id, ingredient, ingredient_id} = this.data
+    const { title, unit_ids } = ingredient
     const { onChange } = this.props
 
     const options = [
@@ -46,17 +56,17 @@ class Ingredient extends Component {
 
 
     //setting initial metric value
-    let defaultValue
-    if(metric.length){
-    for (let i = 0; i < options.length; i++){
-      if(options[i].value == metric){
-        defaultValue = options[i]
-        break
-      }
-    }}
-    else {
-      defaultValue = null
-    }
+    let defaultValue = options[0]
+    // if(metric.length){
+    // for (let i = 0; i < options.length; i++){
+    //   if(options[i].value == metric){
+    //     defaultValue = options[i]
+    //     break
+    //   }
+    // }}
+    // else {
+    //   defaultValue = null
+    // }
 
     const customStyles = {
       container: (provided, state) => ({
@@ -74,11 +84,27 @@ class Ingredient extends Component {
 
     }
 
+    const customStylesAsync = {
+      container: (provided, state) => ({
+        ...provided,
+        width:'270px'
+      }),
+      control: (provided, state) => ({
+        ...provided,
+        borderColor: '#e6e6e6',
+        '&:hover': {
+           borderColor: '#363636'
+        },
+        boxShadow: 0
+      })
+
+    }
+
     return (
       <div className='ingredient-item'>
-        <Input className='input' value={name} onChange={(e)=>this.onInput('name',e)}/>
-        <Input className='input input-quantity' value={quantity} onChange={(e)=>this.onInput('quantity',e)}/>
-        <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onSelect.bind(this)} value={defaultValue} />
+        <Select className='input' value={{label: title, value: ingredient_id}} onChange={this.onIngSelect} styles={customStylesAsync}/>
+        <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('',e)}/>
+        <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onUnitSelect} value={defaultValue} />
       </div>
     );
   }

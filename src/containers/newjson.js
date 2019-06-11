@@ -1,4 +1,4 @@
-{
+export let json = {
   "id": 1,
   "title": "Борщ",
   "slug": "borsch",
@@ -10,9 +10,11 @@
   "setting_rateable": true,
   "status": "draft",
   "servings": 4,
-  "contest_ids": [
-    49
-  ],
+  "contest_id": 49,
+  "contest": {
+    "id": 234525,
+    "title": "Конкурс рецептов «С дымком!»"
+  },
   "recipe_category": 49,
   "recipe_subcategories": [
     49
@@ -36,14 +38,14 @@
   "recipe_mealtimes": [
     49
   ],
-  "holiday_ids": [
+  "recipe_holidays": [
     49
   ],
   "battle_id": 15,
   "ingredient_groups": [
     {
-      "title": 1,
-      "position": 17,
+      "element": 1,
+      "element_position": 17,
       "recipe_ingredients": [
         {
           "id": 1,
@@ -51,6 +53,11 @@
           "amount": 1.5,
           "unit_id": 5,
           "ingredient_id": 6,
+          "ingredient": {
+            "id": 1,
+            "title": "Фейхоа",
+            "unit_ids": 6
+          },
           "position": 17
         }
       ]
