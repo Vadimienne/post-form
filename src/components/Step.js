@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import Dropzone from 'components/Dropzone'
 import Editor from 'components/MyEditorDescription'
 import IngredientList from 'components/IngredientList'
-import IngredientItem from 'components/IngredientItem'
+import IngredientItem from 'components/IngredientItemStep'
 
 import 'styles/Step.sass'
 
@@ -21,14 +21,24 @@ class Step extends Component {
   }
 
   render() {
-    const { image, description, ingredients } = this.props.data
+    const { image, body, step_ingredients } = this.props.data
+    // in the name of compability
+    let ingredients = step_ingredients
+    //console.log(this.props.ingredientsAvailable)
+
     return (
       <div className='step-presentational'>
         <Dropzone onChange={(val) => this.onFieldChange('image', val)} data={image}/>
         <div className='content-box__content' >
-          <Editor onChange={(val) => this.onFieldChange('description', val)} data = {description}/>
+          <Editor onChange={(val) => this.onFieldChange('body', val)} data = {body}/>
           <span className='ingredients-label'>Укажите необходимые ингредиенты</span>
-          <IngredientList onChange={(val) => this.onFieldChange('ingredients', val)} data= {ingredients} ingredientItem={IngredientItem}/>
+          <IngredientList
+            data={step_ingredients}
+            units={this.props.units}
+            ingredientsAvailable={this.props.ingredientsAvailable}
+            onChange={(val) => this.onFieldChange('step_ingredients', val)}
+            ingredientItem={IngredientItem}
+          />
         </div>
       </div>
     );

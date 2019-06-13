@@ -39,7 +39,7 @@ class Ingredient extends Component {
 
   render() {
     const {amount, unit_id, ingredient, ingredient_id} = this.data
-    const { title, unit_ids } = ingredient
+    //const { title, unit_ids } = ingredient
     const { onChange } = this.props
 
     const options = [
@@ -102,7 +102,7 @@ class Ingredient extends Component {
 
     return (
       <div className='ingredient-item'>
-        <Select className='input' value={{label: title, value: ingredient_id}} onChange={this.onIngSelect} styles={customStylesAsync}/>
+        <Select className='input' value={{label: '', value: ingredient_id}} onChange={this.onIngSelect} styles={customStylesAsync}/>
         <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('',e)}/>
         <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onUnitSelect} value={defaultValue} />
       </div>

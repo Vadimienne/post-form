@@ -59,14 +59,25 @@ class Ingredients extends Component {
     let Ingredient = this.props.ingredientItem
     let mappedIngredients = this.props.data ? this.props.data.map((elem, index) => (
       <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
-          <Ingredient data={elem} key={'ingredient'+index} onChange={(value)=>this.onIngChange(index, value)}/>
+          <Ingredient
+            data={elem} key={'ingredient'+index}
+            units={this.props.units}
+            ingredientsAvailable={this.props.ingredientsAvailable ? this.props.ingredientsAvailable : undefined}
+            onChange={(value)=>this.onIngChange(index, value)}
+          />
       </SortDeleteWrapperInline>)) : []
 
     return (
       <div className='ingredient-list-component'>
-        <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle lockAxis='y'>{mappedIngredients}</SortableContainerIng>
+        <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle lockAxis='y'>
+          {mappedIngredients}
+        </SortableContainerIng>
         <div className='constructor-button-offset'>
-          <ConstructorBtn icon='&#xea0d;' text='Добавить ингредиент' img={AddBtn} onClick={()=>this.addIngredient()} />
+          <ConstructorBtn
+            icon='&#xea0d;'
+            text='Добавить ингредиент'
+            onClick={()=>this.addIngredient()}
+          />
         </div>
       </div>
     );

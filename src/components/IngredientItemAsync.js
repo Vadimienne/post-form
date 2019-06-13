@@ -58,23 +58,30 @@ class IngredientAsync extends Component {
     //console.log(ingredient)
     //const { title, unit_ids } = ingredient
     const { title, unit_ids } = ingredient
-    const { onChange } = this.props
+    const { onChange, units } = this.props
 
-    const options = [
-      { value: 1, label: 'шт.' },
-      { value: 'г', label: 'г' },
-      { value: 'кг', label: 'кг' },
-      { value: 'ч.л.', label: 'ч.л.' },
-      { value: 'ст.л.', label: 'ст.л.' },
-      { value: 'л', label: 'л' },
-      { value: 'мл', label: 'мл' },
-      { value: 'см', label: 'см' },
-      { value: 'м', label: 'м' },
-    ];
+    let filteredOptions = unit_ids.map((elem) => units.find((x)=> x.id===elem ))
+    let options = filteredOptions.map((elem)=>{
+      if(elem) {
+        return { label: elem.title, value: elem.id }
+      }
+      else {
+        return { label: '', value: '' }
+      }
+    })
 
 
     //setting initial metric value
     let defaultValue
+    if (unit_id && units){
+      let temp = units.find((x)=> x.id===unit_id)
+      if(temp){
+        defaultValue = {label: temp.title, value: temp.id}
+      }
+      else{
+        defaultValue = {label: '', value: ''}
+      }
+    }
     // if(metric.length){
     // for (let i = 0; i < options.length; i++){
     //   if(options[i].value == metric){

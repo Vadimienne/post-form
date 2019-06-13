@@ -10,7 +10,7 @@ import 'styles/Timings.sass'
 class Timings extends Component {
   constructor(props) {
     super(props);
-    this.state = { isChecked: (parseInt(props.data.preparationHours) || parseInt(props.data.preparationMinutes))}
+    this.state = { isChecked: (props.data.preparation_time? true: false)}
     this.onInput = this.onInput.bind(this)
   }
 
@@ -56,8 +56,9 @@ class Timings extends Component {
     this.setState({isChecked: !this.state.isChecked})
   }
 
+
+
   render() {
-    const { isChecked } = this.state
     const { cooking_time, preparation_time, servings } = this.props.data
 
     let minutes = cooking_time % 60
@@ -65,6 +66,8 @@ class Timings extends Component {
 
     let preparationMinutes = preparation_time % 60
     let preparationHours = (preparation_time - preparationMinutes) / 60
+
+    let isChecked = this.props.data.preparation_time? true: false
 
     // to avoid to render '0' in input field when field should be empty
     minutes = minutes ? minutes : ''

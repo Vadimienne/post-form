@@ -70,7 +70,7 @@ class IngedientGroup extends Component {
 
   render() {
 
-    let items = this.props.data.map((elem, index)=> (
+    let items = this.props.data? this.props.data.map((elem, index)=> (
       <SortDeleteWrapper  name='Укажите ингредиенты' deleteDesc='Удалить подраздел'
         className='sort-delete-ingredients'
         index={index}
@@ -80,11 +80,16 @@ class IngedientGroup extends Component {
         <div className='input-ingredient-group'>
           <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.element} placeholder='Основные'/>
         </div>
-        <IngredientList data={elem.recipe_ingredients} onChange={(val) => this.onIngChange(index, val)} ingredientItem={Ingredient}/>
+        <IngredientList
+          data={elem.recipe_ingredients}
+          units={this.props.units}
+          onChange={(val) => this.onIngChange(index, val)}
+          ingredientItem={Ingredient}
+        />
       </SortDeleteWrapper>
-    ))
+    )): []
     //idType props used to separate different groups of SortDeleteWrappers and make clickable labels for buttons
-    console.log(items.length)
+    //console.log(items.length)
 
     return (
       <div className='ingredient-groups-component'>

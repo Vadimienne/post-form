@@ -41,97 +41,9 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      json: {
-        title: 'Recipe',
-        image: 'https://pbs.twimg.com/profile_images/956981887687380993/RFfhvjkm_400x400.jpg',
-        description: 'hi my name is hi my name is hi my name is',
-        servings: 3,
-        cooking_time: 105,
-        preparation_time: 0,
-        setting_commentable: true,
-        setting_rateable: false,
-        contest_id: 49,
-        contest: {
-          id: 234525,
-          title: 'Конкурс рецептов «С дымком!»'
-        },
-        ingredient_groups:[
-          {
-            element:'Primary',
-            element_position: 0,
-            recipe_ingredients:[
-              {
-                id: 1,
-                recipe_id: 23,
-                amount: 1.5,
-                unit_id: 2,
-                ingredient_id: 6,
-                ingredient:{
-                  id: 1,
-                  title:'Фейоха',
-                  unit_ids: [
-                    41, 1, 2
-                  ]
-                }
-              }
-            ],
-          }
-        ],
-        steps: [
-          {
-            image: 'https://i.redd.it/flnarodfujvz.jpg',
-            description: '',
-            ingredients: [
-              {
-                id: 1,
-                recipe_id: 23,
-                amount: 1.5,
-                unit_id: 2,
-                ingredient_id: 6,
-                ingredient:{
-                  id: 1,
-                  title:'Фейоха',
-                  unit_ids: [
-                    41, 1, 2
-                  ]
-                }
-              },
-            ]
-          },
-          {
-            image: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-            description: 'hi',
-            ingredients: [
-              {
-                id: 1,
-                recipe_id: 23,
-                amount: 1.5,
-                unit_id: 2,
-                ingredient_id: 6,
-                ingredient:{
-                  id: 1,
-                  title:'Фейоха',
-                  unit_ids: [
-                    41, 1, 2
-                  ]
-                }
-              },
-            ]
-          },
-        ],
-        tags: ['bolognese','chicken'],
-        checkboxes:{
-          head:'Методы приготовления',
-          boxes: [
-            {name: 'взбивать', isChecked: true},
-            {name: 'варить, тушить', isChecked: true},
-            {name: 'гриль, мангал', isChecked: false},
-            {name: 'замораживать, охлаждать', isChecked: false},
-            {name: 'фритюр', isChecked: true},
-          ]
-        }
-
-      },
+      json: {},
+      tags: {},
+      units: [],
       validation: {
         title: true,
         category: true,
@@ -144,22 +56,37 @@ class Main extends Component {
 
     };
     this.stateUpdater = this.stateUpdater.bind(this)
+    this.updateIngredients = this.updateIngredients.bind(this)
     //this.isFormValid = this.isFormValid.bind(this)
   }
 
-  async requestRecipe(id){
-    let response = getRecipe(id)
-    return response
-  }
-
   async componentDidMount(){
-    let recipe = await this.requestRecipe(128117)
+    let recipe = await getRecipe(128237)
     let tags = await getTags()
     let units = await getUnits()
-    // this.setState({json: recipe})
-    // this.setState({tags})
-    // this.setState({units})
+    this.setState({json: recipe})
+    this.setState({tags})
+    this.setState({units})
+    this.updateIngredients()
+  }
 
+  updateIngredients(){
+    let ingredients = []
+    this.state.json.ingredient_groups.map(
+      (elem) => elem.recipe_ingredients.map(
+        (ingredient) => ingredients.push(ingredient)
+      )
+    )
+    this.setState({ingredients})
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (!Object.keys(prevState.json).length ||
+      ((prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())
+      && Object.keys(prevState.json).length
+      && Object.keys(this.state.json).length)){
+        this.updateIngredients()
+    }
   }
 
   // isFormValid(){
@@ -180,13 +107,18 @@ class Main extends Component {
   }
 
   render() {
+    const { json, units, tags, ingredients } = this.state
+
     const { title, image, description, cooking_time, preparation_time, servings,
-        ingredient_groups, steps, tags,
-        setting_commentable, setting_rateable} = this.state.json
+        ingredient_groups, recipe_steps,
+        setting_commentable, setting_rateable} = json
+
+
 
     let isFormValid = 0//this.isFormValid()
 
-    console.log(this.state.json.ingredient_groups[0].recipe_ingredients[0].ingredient)
+    //console.log(this.state.json.ingredient_groups[0].recipe_ingredients[0].ingredient)
+    console.log(this.state.json)
     return (
       <form id="article-form">
         <div className='flex-wrapper'>
@@ -194,10 +126,10 @@ class Main extends Component {
           <div className='left-column form-column'>
             <div className='content-box'>
               <div className='content-box__content'>
-                <CollapsibleCheckboxes
+                {/*<CollapsibleCheckboxes
                   data={this.state.json.checkboxes}
                   onChange={(val)=> this.stateUpdater('checkboxes', val)}
-                />
+                />*/}
               </div>
             </div>
           </div>
@@ -208,7 +140,7 @@ class Main extends Component {
                   <Input
                     className='main-column__input_title text-input '
                     onChange={(e)=> this.stateUpdater('title', e.target.value)}
-                    defaultValue={title}
+                    value={title}
                     isBig
                     validation={(val)=>this.validationUpdater('title', val)}
                   />
@@ -237,13 +169,16 @@ class Main extends Component {
               <div className='content-box__content_ingredients'>
                 <IngredientGroups
                   data={ingredient_groups}
-                  onChange={(val)=>this.stateUpdater('ingredientGroups',val)}
+                  units={units}
+                  onChange={(val)=>this.stateUpdater('ingredient_groups',val)}
                 />
               </div>
 
             </div>
             <Steps
-              data={steps}
+              data={recipe_steps}
+              ingredientsAvailable={ingredients}
+              units={units}
               onChange={(val) => this.stateUpdater('steps', val)}
             />
             <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>

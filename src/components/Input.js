@@ -7,7 +7,7 @@ function Comp (props) {
   return !props.isBig? (
     <div className={props.className}>
       <div className='field-container'>
-          <input className='text-input' value={props.value}
+          <input className='text-input' defaultValue={props.value}
             onChange={props.onChange}
             placeholder={props.placeholder}
             maxLength={props.maxlength}
@@ -16,7 +16,7 @@ function Comp (props) {
     </div>
   ):
   (  <div className='field-big field-container'>
-        <input className='main-column__input_title text-input' value={props.value}
+        <input className='main-column__input_title text-input' defaultValue={props.value}
           onChange={props.onChange}
           placeholder={props.placeholder}
           maxLength={props.maxlength}
