@@ -38,6 +38,7 @@ class Step extends Component {
             ingredientsAvailable={this.props.ingredientsAvailable}
             onChange={(val) => this.onFieldChange('step_ingredients', val)}
             ingredientItem={IngredientItem}
+            listType='step'
           />
         </div>
       </div>

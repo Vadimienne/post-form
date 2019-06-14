@@ -11,9 +11,14 @@ import 'styles/IngredientItem.sass'
 class IngredientAsync extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      ingredients: []
+    }
     this.data = this.props.data
+    this.ingredients = []
     this.onUnitSelect = this.onUnitSelect.bind(this)
     this.onIngSelect = this.onIngSelect.bind(this)
+    this.loadOptions = this.loadOptions.bind(this)
   }
 
   componentDidUpdate(){
@@ -34,33 +39,36 @@ class IngredientAsync extends Component {
 
   onUnitSelect(selectedOption){
     let data = this.props.data
-    data.unit_id = 42
+    data.unit_id = selectedOption.value
     this.props.onChange(data)
   }
 
   onIngSelect(selectedOption){
-  let data = this.props.data
-  data.ingredient_id = selectedOption.value
-  data.ingredient.title = selectedOption.label
-  this.props.onChange(data)
+    let data = this.props.data
+    data.ingredient_id = selectedOption.value
+    data.ingredient.id = selectedOption.value
+    data.ingredient.title = selectedOption.label
+    data.ingredient.unit_ids = this.ingredients.find((el)=>el.id===selectedOption.value).validAmountTypes
+    this.props.onChange(data)
   }
 
   async loadOptions(str){
-    let ingredients = await requestIngredients(str)
-    console.log (await ingredients)
+    let ingredients = await getIngredients(str)
     let mappedIngredients = ingredients.map((elem) => {return {label: elem.name, value: elem.id}})
+    //console.log(ingredients)
+    this.setState({ingredients})
+    this.ingredients = ingredients
     return mappedIngredients
   }
 
   render() {
-    //console.log(this.props.data)
     const { ingredient, amount, unit_id, ingredient_id } = this.props.data
-    //console.log(ingredient)
-    //const { title, unit_ids } = ingredient
     const { title, unit_ids } = ingredient
     const { onChange, units } = this.props
 
-    let filteredOptions = unit_ids.map((elem) => units.find((x)=> x.id===elem ))
+
+    //getting array of all available metrics for
+    let filteredOptions = units?  unit_ids.map((elem) => units.find((x)=> x.id===elem )): []
     let options = filteredOptions.map((elem)=>{
       if(elem) {
         return { label: elem.title, value: elem.id }
@@ -82,6 +90,7 @@ class IngredientAsync extends Component {
         defaultValue = {label: '', value: ''}
       }
     }
+    //console.log(defaultValue)
     // if(metric.length){
     // for (let i = 0; i < options.length; i++){
     //   if(options[i].value == metric){

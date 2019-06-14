@@ -45,7 +45,27 @@ class Ingredients extends Component {
 //#tofix add position
   addIngredient(){
     let array = this.props.data
-    array.push({name:'',quantity:'', metric:''})
+    if( this.props.listType==='groups'){
+      array.push({
+        amount: '',
+        ingredient_id: '',
+        position: '',
+        unit_id: '',
+        ingredient: {
+          title: '',
+          id: '',
+          unit_ids: []
+        },
+      })
+    }
+    if( this.props.listType === 'step'){
+      array.push({
+        amount: '',
+        ingredient_id: '',
+        position: '',
+        unit_id: '', 
+      })
+    }
     this.props.onChange(array)
   }
 

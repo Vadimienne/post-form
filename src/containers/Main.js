@@ -21,6 +21,8 @@ import ConstructorBtn from 'components/ConstructorBtn'
 import Input from 'components/Input'
 import Check from 'components/Checkbox'
 
+import SideTags from 'components/SideTags'
+
 import SwitchSlider from 'components/SwitchSlider'
 
 import 'styles/index.css'
@@ -43,7 +45,6 @@ class Main extends Component {
     this.state = {
       json: {},
       tags: {},
-      units: [],
       validation: {
         title: true,
         category: true,
@@ -110,28 +111,44 @@ class Main extends Component {
     const { json, units, tags, ingredients } = this.state
 
     const { title, image, description, cooking_time, preparation_time, servings,
-        ingredient_groups, recipe_steps,
-        setting_commentable, setting_rateable} = json
+      ingredient_groups, recipe_steps,
+      setting_commentable, setting_rateable,
+      recipe_category, recipe_cooking_methods,
+      recipe_cuisine, recipe_cuisine_apps,
+      recipe_cuisine_types, recipe_holidays,
+      recipe_mealtimes, recipe_nutrition_types,
+      recipe_user_tags, recipe_subcategories} = json
 
+    const checkedTags = {
+      recipe_category:        recipe_category,
+      recipe_subcategories:   recipe_subcategories,
+      recipe_cooking_methods: recipe_cooking_methods,
+      recipe_cuisine:         recipe_cuisine,
+      recipe_cuisine_apps:    recipe_cuisine_apps,
+      recipe_cuisine_types:   recipe_cuisine_types,
+      recipe_holidays:        recipe_holidays,
+      recipe_mealtimes:       recipe_mealtimes,
+      recipe_nutrition_types: recipe_nutrition_types,
+      recipe_user_tags:       recipe_user_tags,
+    }
 
 
     let isFormValid = 0//this.isFormValid()
 
     //console.log(this.state.json.ingredient_groups[0].recipe_ingredients[0].ingredient)
-    console.log(this.state.json)
+    //console.log(this.state.json)
     return (
-      <form id="article-form">
+      <>
+      { this.state.json && this.state.tags && this.state.units ?
+      (<form id="article-form">
         <div className='flex-wrapper'>
 
           <div className='left-column form-column'>
-            <div className='content-box'>
-              <div className='content-box__content'>
                 {/*<CollapsibleCheckboxes
                   data={this.state.json.checkboxes}
                   onChange={(val)=> this.stateUpdater('checkboxes', val)}
                 />*/}
-              </div>
-            </div>
+                <SideTags tags={tags} checked={checkedTags} stateUpdater={this.stateUpdater}/>
           </div>
 
           <div className='main-column form-column'>
@@ -229,7 +246,10 @@ class Main extends Component {
 
           </div>
         </div>
-      </form>
+      </form>):
+        (<div>loading..</div>)
+      }
+      </>
     );
   }
 }

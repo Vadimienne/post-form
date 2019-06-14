@@ -49,10 +49,12 @@ class Steps extends Component {
     this.props.onChange(array)
   }
 
+
+
   deleteStep(index){
     let array = this.props.data
-    console.log('array')
-    console.log(array)
+    // console.log('array')
+    // console.log(array)
     array.splice(index,1)
     this.props.onChange(array)
   }

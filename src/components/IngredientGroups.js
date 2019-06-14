@@ -85,6 +85,7 @@ class IngedientGroup extends Component {
           units={this.props.units}
           onChange={(val) => this.onIngChange(index, val)}
           ingredientItem={Ingredient}
+          listType='groups'
         />
       </SortDeleteWrapper>
     )): []

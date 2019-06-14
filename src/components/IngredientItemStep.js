@@ -5,6 +5,7 @@ import Select from 'react-select'
 import Input from 'components/Input'
 import SelectAsync from 'react-select/async'
 import { getIngredients } from 'api/requests'
+import { selectStyleShort, selectStyleMedium, selectStyleLong } from 'config/selectStyles'
 
 import 'styles/IngredientItem.sass'
 
@@ -12,15 +13,10 @@ class IngredientStep extends Component {
   constructor(props) {
     super(props);
     this.state={
-      isIngSelected: false
+      isIngSelected: true
     }
-    this.data = this.props.data
     this.onUnitSelect = this.onUnitSelect.bind(this)
     this.onIngSelect = this.onIngSelect.bind(this)
-  }
-
-  componentDidUpdate(){
-    this.data = this.props.data
   }
 
   onInput(type, e){
@@ -29,123 +25,65 @@ class IngredientStep extends Component {
     this.props.onChange(data)
   }
 
-  onSelect(selectedOption){
-    let data = this.props.data
-    data.metric = selectedOption.value
-    this.props.onChange(data)
-  }
-
   onUnitSelect(selectedOption){
     let data = this.props.data
-    data.unit_id = 42
+    data.unit_id = selectedOption.value
     this.props.onChange(data)
   }
 
   onIngSelect(selectedOption){
     let data = this.props.data
     data.ingredient_id = selectedOption.value
-    data.ingredient.title = selectedOption.label
     this.props.onChange(data)
   }
 
   render() {
-    console.log(this.props)
     const { onChange, units, ingredientsAvailable, data } = this.props
-    const { ingredient, amount, unit_id, ingredient_id } = data
-    //const { title, unit_ids } = ingredient
+    const { amount, unit_id, ingredient_id } = this.props.data
+
+    // Have ingredient ID from .data. Select ingredeint with same id from
+    // all available ingredients
+    let selectedIngredient = ingredientsAvailable? ingredientsAvailable.find((elem) => elem.ingredient_id === data.ingredient_id): undefined
 
 
-    // let filteredOptions = unit_ids.map((elem) => units.find((x)=> x.id===elem ))
-    // let options = filteredOptions.map((elem)=>{
-    //   if(elem) {
-    //     return { label: elem.title, value: elem.id }
-    //   }
-    //   else {
-    //     return { label: '', value: '' }
-    //   }
-    // })
-
-    let enrichedData = data
-
-    enrichedData.title = ingredientsAvailable? ingredientsAvailable.find((elem) => elem.ingredient_id === data.ingredient_id).ingredient.title: ''
-    console.log(enrichedData)
+    // figure out what title and available units are
+    const { title, unit_ids } = (selectedIngredient? selectedIngredient.ingredient : {})
 
 
-    //setting initial metric value
-    // let defaultValue
-    // if (unit_id && units){
-    //   let temp = units.find((x)=> x.id===unit_id)
-    //   if(temp){
-    //     defaultValue = {label: temp.title, value: temp.id}
-    //   }
-    //   else{
-    //     defaultValue = {label: '', value: ''}
-    //   }
-    // }
+    // Have valid units ids. Select units with same ids from all units list to get title
+    // Then map unit options for ingredient
+    let filteredOptions = units && unit_ids ? unit_ids.map((elem) => units.find((x)=> x.id===elem )) : []
+    let metricOptions = filteredOptions.map((elem)=>{
+      if(elem) {
+        return { label: elem.title, value: elem.id }
+      }
+      else {
+        return { label: '', value: '' }
+      }
+    })
 
-    let options = ingredientsAvailable? ingredientsAvailable.map(
+    // Select current unit value based on ingredeint's unit_id
+    let metric = units && unit_ids && unit_id? {value: unit_id, label: metricOptions.find((el) => el.value === unit_id).label}: null
+
+    // Select ingredients from available ingredients
+    let ingredientOptions = ingredientsAvailable? ingredientsAvailable.map(
       (elem) => { return { label: elem.ingredient.title, value: elem.ingredient_id } }
     ): undefined
 
-    const customStyles = {
-      container: (provided, state) => ({
-        ...provided,
-        width:'100px'
-      }),
-      control: (provided, state) => ({
-        ...provided,
-        borderColor: '#e6e6e6',
-        '&:hover': {
-           borderColor: '#363636'
-        },
-        boxShadow: 0
-      })
-
-    }
-
-    const customStylesAsync = {
-      container: (provided, state) => ({
-        ...provided,
-        width:'270px'
-      }),
-      control: (provided, state) => ({
-        ...provided,
-        borderColor: '#e6e6e6',
-        '&:hover': {
-           borderColor: '#363636'
-        },
-        boxShadow: 0
-      })
-    }
-
-    const customStylesLong = {
-      container: (provided, state) => ({
-        ...provided,
-        width:'570px'
-      }),
-      control: (provided, state) => ({
-        ...provided,
-        borderColor: '#e6e6e6',
-        '&:hover': {
-           borderColor: '#363636'
-        },
-        boxShadow: 0
-      })
-    }
-
-    //let selectValue = { value: ingredient_id, label: title }
+    // Value of selected ingredient
+    let selectedValue = { value: ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
 
     return (
       <>
       {this.state.isIngSelected ?(
         <div className='ingredient-item'>
-          <Select className='input' value={{label: 'title', value: ingredient_id}} onChange={this.onIngSelect} styles={customStylesAsync}/>
+          <Select className='input' options={ingredientOptions} value={selectedValue} onChange={this.onIngSelect} styles={selectStyleMedium}/>
           <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('amount',e)}/>
-          <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onUnitSelect} value={defaultValue} />
+          <Select className='ingredient-select' options={metricOptions} styles={selectStyleShort} onChange={this.onUnitSelect} value={metric} />
         </div>)
         :(
         <div className='ingredient-item'>
-          <Select className='input' onChange={this.onIngSelect} styles={customStylesLong} options={options}/>
+          <Select className='input' onChange={this.onIngSelect} styles={selectStyleLong} options={metricOptions}/>
         </div>)
       }
       </>

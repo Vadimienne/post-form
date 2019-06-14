@@ -24,7 +24,7 @@ export function getRecipe(id){
   {
      method: 'get',
      headers: new Headers({
-       'Authorization': 'Basic '+btoa('ed4stage:ed4stage'),
+       'Authorization': 'Basic '+btoa('ed4stage:ed4stage'), 
      })
   }
   )
