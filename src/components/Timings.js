@@ -83,9 +83,9 @@ class Timings extends Component {
       <div className='timings-component'>
         <div className='outer-flex-container'>
           <div>
-              <span className='title'>Время приготовления</span>
+              <span className={'title' + (this.props.isValid? '': ' invalid')}>Время приготовления</span>
 
-              <div className='input-timings-width timing-flex-container'>
+              <div className={'input-timings-width timing-flex-container' + (this.props.isValid? '': ' invalid')}>
                 <div className='timing-clock-icon'/>
                 <Input className='text-input' type='number' value={hours} onChange={(e) => this.onInput('hours',e)} maxlength={2}/>
                 <span className='input-label'>часов</span>
@@ -94,7 +94,7 @@ class Timings extends Component {
               </div>
             </div>
             <div>
-              <span className='title'>Количество персон </span>
+              <span className={'title' + (this.props.isServingsValid? '': ' invalid')}>Количество персон </span>
               <div className='input-portions-width timing-flex-container'>
                 <div className='timing-portions-icon' />
                   <Input value={servings} onChange={(e) => this.onInput('servings',e)}/>

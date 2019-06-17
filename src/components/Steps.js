@@ -82,6 +82,7 @@ class Steps extends Component {
         <SortableContainer useWindowAsScrollContainer onSortEnd={this.onSortEnd} useDragHandle lockAxis='y' key='sortable-container'>
           {items}
         </SortableContainer>
+        {!this.props.isValid? <span className='step-validation-warning'>Нужно указать хотя бы один шаг</span>: undefined}
         <Button onClick={this.addStep} text='Добавить шаг' className='add-step-button'  icon='&#xea0d;'/>
       </>
     );

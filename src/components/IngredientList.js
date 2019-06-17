@@ -63,7 +63,7 @@ class Ingredients extends Component {
         amount: '',
         ingredient_id: '',
         position: '',
-        unit_id: '', 
+        unit_id: '',
       })
     }
     this.props.onChange(array)

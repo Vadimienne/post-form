@@ -69,7 +69,6 @@ class IngedientGroup extends Component {
   }
 
   render() {
-
     let items = this.props.data? this.props.data.map((elem, index)=> (
       <SortDeleteWrapper  name='Укажите ингредиенты' deleteDesc='Удалить подраздел'
         className='sort-delete-ingredients'
@@ -80,6 +79,7 @@ class IngedientGroup extends Component {
         <div className='input-ingredient-group'>
           <Input  onChange={(e) => this.onNameChange(e, index)} value={elem.element} placeholder='Основные'/>
         </div>
+        {!this.props.isValid? (<span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>): undefined}
         <IngredientList
           data={elem.recipe_ingredients}
           units={this.props.units}

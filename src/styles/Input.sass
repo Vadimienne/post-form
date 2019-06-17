@@ -33,6 +33,16 @@
       font-size: 22px
       font-weight: 700
 
+  &.invalid
+    border-color: #ff451c
+    input
+      &::placeholder
+        color: #ff451c
+      &::before
+        content: '&#xea3a;'
+
+
+
   &:hover
     border-color: #363636
 

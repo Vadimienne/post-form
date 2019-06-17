@@ -45,16 +45,6 @@ class Main extends Component {
     this.state = {
       json: {},
       tags: {},
-      validation: {
-        title: true,
-        category: true,
-        national_cuisine: true,
-        timing: true,
-        ingredient: true,
-        step: true,
-        steps_description: true,
-      },
-
     };
     this.stateUpdater = this.stateUpdater.bind(this)
     this.updateIngredients = this.updateIngredients.bind(this)
@@ -73,7 +63,8 @@ class Main extends Component {
 
   updateIngredients(){
     let ingredients = []
-    this.state.json.ingredient_groups.map(
+    let ingredient_groups = [...this.state.json.ingredient_groups]
+    ingredient_groups.map(
       (elem) => elem.recipe_ingredients.map(
         (ingredient) => ingredients.push(ingredient)
       )
@@ -82,10 +73,15 @@ class Main extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if (!Object.keys(prevState.json).length ||
-      ((prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())
-      && Object.keys(prevState.json).length
-      && Object.keys(this.state.json).length)){
+    // if (!Object.keys(prevState.json).length ||
+    //   ((prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())
+    //   && Object.keys(prevState.json).length
+    //   && Object.keys(this.state.json).length)){
+    console.log(prevState.json.ingredient_groups)
+    console.log(this.state.json.ingredient_groups)
+    if (prevState && this.state && prevState.json.ingredient_groups
+      && (prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())){
+        console.log('UPD')
         this.updateIngredients()
     }
   }
@@ -94,12 +90,6 @@ class Main extends Component {
   //   let values = Object.values(this.state.validation)
   //   return !values.includes(false)
   // }
-
-  validationUpdater(field, value){
-    let obj = this.state.validation
-    obj[field] = value
-    this.setState({validation: obj})
-  }
 
   stateUpdater(field, val){
     let array = this.state.json
@@ -117,7 +107,8 @@ class Main extends Component {
       recipe_cuisine, recipe_cuisine_apps,
       recipe_cuisine_types, recipe_holidays,
       recipe_mealtimes, recipe_nutrition_types,
-      recipe_user_tags, recipe_subcategories} = json
+      recipe_user_tags, recipe_subcategories,
+      contest, contest_id} = json
 
     const checkedTags = {
       recipe_category:        recipe_category,
@@ -130,10 +121,34 @@ class Main extends Component {
       recipe_mealtimes:       recipe_mealtimes,
       recipe_nutrition_types: recipe_nutrition_types,
       recipe_user_tags:       recipe_user_tags,
+      contest:                contest,
+      contest_id:             contest_id
     }
 
 
-    let isFormValid = 0//this.isFormValid()
+    //this.isFormValid()
+
+    let validation =  {}
+    if( title && this.state.ingredients ){
+      validation = {
+        title: title.length? true: false,
+        category: recipe_category.toString().length? true: false,
+        national_cuisine: recipe_cuisine.toString().length? true: false,
+        timing: parseInt(cooking_time)? true: false,
+        servings: parseInt(servings)? true: false,
+        ingredients: this.state.ingredients.length? true: false,
+        step: recipe_steps.length? true: false,
+        steps_description: recipe_steps.find((elem) => elem.body.length === 0)? false: true,
+      }
+    }
+    let isFormValid = (Object.values(validation).find(elem => elem === false) === false && Object.values(validation).length)? false: true
+    console.log('1')
+    console.log(Object.values(validation).find(elem => elem === false))
+    console.log('2')
+
+
+    console.log(Object.values(validation))
+    console.log('isValid',isFormValid)
 
     //console.log(this.state.json.ingredient_groups[0].recipe_ingredients[0].ingredient)
     //console.log(this.state.json)
@@ -148,18 +163,22 @@ class Main extends Component {
                   data={this.state.json.checkboxes}
                   onChange={(val)=> this.stateUpdater('checkboxes', val)}
                 />*/}
-                <SideTags tags={tags} checked={checkedTags} stateUpdater={this.stateUpdater}/>
+                <SideTags tags={tags} checked={checkedTags} stateUpdater={this.stateUpdater}
+                  isCategoryValid={validation.category}
+                  isCuisineValid={validation.national_cuisine}
+                />
           </div>
 
           <div className='main-column form-column'>
             <div className='content-box'>
               <div className='content-box__content'>
                   <Input
-                    className='main-column__input_title text-input '
+                    className={''}
                     onChange={(e)=> this.stateUpdater('title', e.target.value)}
                     value={title}
                     isBig
-                    validation={(val)=>this.validationUpdater('title', val)}
+                    isValid={title.length}
+                    placeholder='Введите название рецепта'
                   />
               </div>
 
@@ -175,6 +194,8 @@ class Main extends Component {
                 />
 
                 <Timings
+                  isValid={validation.timing}
+                  isServingsValid={validation.servings}
                   data={{cooking_time: cooking_time, preparation_time: preparation_time, servings: servings}}
                   onTimeChange={(val) => this.stateUpdater('cooking_time', val)}
                   onPrepTimeChange={(val) => this.stateUpdater('preparation_time', val)}
@@ -185,6 +206,7 @@ class Main extends Component {
 
               <div className='content-box__content_ingredients'>
                 <IngredientGroups
+                  isValid={validation.ingredients}
                   data={ingredient_groups}
                   units={units}
                   onChange={(val)=>this.stateUpdater('ingredient_groups',val)}
@@ -193,10 +215,11 @@ class Main extends Component {
 
             </div>
             <Steps
+              isValid={validation.step}
               data={recipe_steps}
               ingredientsAvailable={ingredients}
               units={units}
-              onChange={(val) => this.stateUpdater('steps', val)}
+              onChange={(val) => this.stateUpdater('recipe_steps', val)}
             />
             <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
           </div>

@@ -15,8 +15,8 @@ function Comp (props) {
       </div>
     </div>
   ):
-  (  <div className='field-big field-container'>
-        <input className='main-column__input_title text-input' defaultValue={props.value}
+  (  <div className={'field-big field-container ' + props.className + (props.isValid? '': ' invalid')}>
+        <input className={'main-column__input_title text-input'} defaultValue={props.value}
           onChange={props.onChange}
           placeholder={props.placeholder}
           maxLength={props.maxlength}

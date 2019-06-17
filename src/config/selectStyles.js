@@ -3,15 +3,7 @@ export const selectStyleShort = {
     ...provided,
     width:'100px'
   }),
-  control: (provided, state) => ({
-    ...provided,
-    borderColor: '#e6e6e6',
-    '&:hover': {
-       borderColor: '#363636'
-    },
-    boxShadow: 0
-  })
-
+  ...borderColorize
 }
 
 export const selectStyleMedium = {
@@ -19,6 +11,18 @@ export const selectStyleMedium = {
     ...provided,
     width:'270px'
   }),
+  ...borderColorize
+}
+
+export const selectStyleLong = {
+  container: (provided, state) => ({
+    ...provided,
+    width:'570px'
+  }),
+  ...borderColorize
+}
+
+export const borderColorize = {
   control: (provided, state) => ({
     ...provided,
     borderColor: '#e6e6e6',
@@ -29,17 +33,10 @@ export const selectStyleMedium = {
   })
 }
 
-export const selectStyleLong = {
-  container: (provided, state) => ({
-    ...provided,
-    width:'570px'
-  }),
+export const borderInvalid = {
   control: (provided, state) => ({
     ...provided,
-    borderColor: '#e6e6e6',
-    '&:hover': {
-       borderColor: '#363636'
-    },
+    borderColor: '#ff451c',
     boxShadow: 0
   })
 }
