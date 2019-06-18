@@ -65,7 +65,9 @@ class Main extends Component {
     let ingredients = []
     let ingredient_groups = [...this.state.json.ingredient_groups]
     ingredient_groups.map(
-      (elem) => elem.recipe_ingredients.map(
+      (elem) => //ingredients.push({label: elem.element, value: elem.recipe_ingredients})
+
+       elem.recipe_ingredients.map(
         (ingredient) => ingredients.push(ingredient)
       )
     )
@@ -73,12 +75,8 @@ class Main extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    // if (!Object.keys(prevState.json).length ||
-    //   ((prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())
-    //   && Object.keys(prevState.json).length
-    //   && Object.keys(this.state.json).length)){
-    console.log(prevState.json.ingredient_groups)
-    console.log(this.state.json.ingredient_groups)
+    console.log('prev',prevState.json.ingredient_groups)
+    console.log('curr',this.state.json.ingredient_groups)
     if (prevState && this.state && prevState.json.ingredient_groups
       && (prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())){
         console.log('UPD')
@@ -92,10 +90,14 @@ class Main extends Component {
   // }
 
   stateUpdater(field, val){
-    let array = this.state.json
+    let array = {...this.state.json}
     array[field] = val
     this.setState({json: array})
   }
+
+  // let array = {...this.state.json}
+  // //array[field] = val
+  // this.setState((prevState, props) => {return {json: Object.defineProperty(array, field, val)}})
 
   render() {
     const { json, units, tags, ingredients } = this.state
@@ -142,13 +144,13 @@ class Main extends Component {
       }
     }
     let isFormValid = (Object.values(validation).find(elem => elem === false) === false && Object.values(validation).length)? false: true
-    console.log('1')
-    console.log(Object.values(validation).find(elem => elem === false))
-    console.log('2')
-
-
-    console.log(Object.values(validation))
-    console.log('isValid',isFormValid)
+    // console.log('1')
+    // console.log(Object.values(validation).find(elem => elem === false))
+    // console.log('2')
+    //
+    //
+    // console.log(Object.values(validation))
+    // console.log('isValid',isFormValid)
 
     //console.log(this.state.json.ingredient_groups[0].recipe_ingredients[0].ingredient)
     //console.log(this.state.json)

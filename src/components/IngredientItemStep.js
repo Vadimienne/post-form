@@ -43,6 +43,7 @@ class IngredientStep extends Component {
 
     // Have ingredient ID from .data. Select ingredeint with same id from
     // all available ingredients
+    //console.log(ingredientsAvailable)
     let selectedIngredient = ingredientsAvailable? ingredientsAvailable.find((elem) => elem.ingredient_id === data.ingredient_id): undefined
 
 
@@ -73,9 +74,12 @@ class IngredientStep extends Component {
     // Value of selected ingredient
     let selectedValue = { value: ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
 
+    let groupedOptions = [{label: 'colors',options: [{label:'red'},{label:'blue'}]}]
+    //let availableIngOptions = ingredeints.
+
     return (
       <>
-      {this.state.isIngSelected ?(
+      {this.props.data.ingredient_id ?(
         <div className='ingredient-item'>
           <Select className='input' options={ingredientOptions} value={selectedValue} onChange={this.onIngSelect} styles={selectStyleMedium}/>
           <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('amount',e)}/>
@@ -83,7 +87,7 @@ class IngredientStep extends Component {
         </div>)
         :(
         <div className='ingredient-item'>
-          <Select className='input' onChange={this.onIngSelect} styles={selectStyleLong} options={metricOptions}/>
+          <Select className='input' onChange={this.onIngSelect} styles={selectStyleLong} options={groupedOptions}/>
         </div>)
       }
       </>
