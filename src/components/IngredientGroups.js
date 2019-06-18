@@ -25,8 +25,17 @@ class IngedientGroup extends Component {
     this.addGroup = this.addGroup.bind(this)
   }
 
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
   onSortEnd({oldIndex, newIndex}) {
-    let array = this.props.data
+    let array = [...this.props.data]
 
     //sort array
     array = arrayMove(array, oldIndex, newIndex)
@@ -43,13 +52,13 @@ class IngedientGroup extends Component {
   }
 
   onIngChange(index, value){
-    let array = this.props.data
+    let array = [...this.props.data]
     array[index].recipe_ingredients = value
     this.props.onChange(array)
   }
 
   onNameChange(e, index){
-    let array = this.props.data
+    let array = [...this.props.data]
     array[index].element = e.target.value
     this.props.onChange(array)
   }
@@ -57,13 +66,13 @@ class IngedientGroup extends Component {
 
 // #tofix add position
   addGroup(){
-    let array = this.props.data
+    let array = [...this.props.data]
     array.push({element:'', recipe_ingredients:[]})
     this.props.onChange(array)
   }
 
   deleteGroup(index){
-    let array = this.props.data
+    let array = [...this.props.data]
     array.splice(index,1)
     this.props.onChange(array)
   }
@@ -81,7 +90,7 @@ class IngedientGroup extends Component {
         </div>
         {!this.props.isValid? (<span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>): undefined}
         <IngredientList
-          data={elem.recipe_ingredients}
+          data={[...elem.recipe_ingredients]}
           units={this.props.units}
           onChange={(val) => this.onIngChange(index, val)}
           ingredientItem={Ingredient}

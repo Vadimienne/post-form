@@ -20,19 +20,19 @@ class IngredientStep extends Component {
   }
 
   onInput(type, e){
-    let data = this.props.data
+    let data = [...this.props.data]
     data[type] = e.target.value
     this.props.onChange(data)
   }
 
   onUnitSelect(selectedOption){
-    let data = this.props.data
+    let data = [...this.props.data]
     data.unit_id = selectedOption.value
     this.props.onChange(data)
   }
 
   onIngSelect(selectedOption){
-    let data = this.props.data
+    let data = [...this.props.data]
     data.ingredient_id = selectedOption.value
     this.props.onChange(data)
   }

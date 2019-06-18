@@ -23,20 +23,23 @@ class Ingredients extends Component {
   }
 
   componentDidMount(){
-    if(!this.props.data){
-      this.props.onChange([])
+    if (this.props.data.length ==  8){
+      //console.log(this.props.data)
+      let data = [...this.props.data]
+      data.splice(1,1)
     }
+
   }
 
   onIngChange(index, value){
-    let data = this.props.data
+    let data = [...this.props.data]
     data[index] = value
     this.props.onChange(data)
   }
 
 //#tofix refresh positions in array
   onSortEnd({oldIndex, newIndex}){
-    let array = this.props.data
+    let array = [...this.props.data]
     array = arrayMove (array, oldIndex, newIndex)
     this.props.onChange(array)
     this.forceUpdate()
@@ -44,7 +47,7 @@ class Ingredients extends Component {
 
 //#tofix add position
   addIngredient(){
-    let array = this.props.data
+    let array = [...this.props.data]
     if( this.props.listType==='groups'){
       array.push({
         amount: '',
@@ -70,9 +73,12 @@ class Ingredients extends Component {
   }
 
   removeIngredient(index){
-    let array = this.props.data
-    array.splice(index,1)
-    this.props.onChange(array)
+    let array = [...this.props.data]
+    //array.splice(index,1)
+    let filtered = array.filter((el, i)=> index!==i)
+    this.props.onChange(filtered)
+    filtered = array.filter((el, i)=> 0!==i)
+    //array.splice(0,1)
   }
 
   render() {
@@ -80,7 +86,7 @@ class Ingredients extends Component {
     let mappedIngredients = this.props.data ? this.props.data.map((elem, index) => (
       <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
           <Ingredient
-            data={elem} key={'ingredient'+index}
+            data={{...elem}} key={'ingredient'+index}
             units={this.props.units}
             ingredientsAvailable={this.props.ingredientsAvailable ? this.props.ingredientsAvailable : undefined}
             onChange={(value)=>this.onIngChange(index, value)}

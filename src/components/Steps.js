@@ -20,6 +20,15 @@ class Steps extends Component {
     this.addStep = this.addStep.bind(this)
   }
 
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
   onSortEnd({oldIndex, newIndex}){
     let array = this.props.data
     array = arrayMove(array, oldIndex, newIndex)

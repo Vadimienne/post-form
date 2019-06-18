@@ -14,6 +14,15 @@ class Timings extends Component {
     this.onInput = this.onInput.bind(this)
   }
 
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
 
 // this implementation caused by the way data is stored in json
   onInput(field, valueObj) {

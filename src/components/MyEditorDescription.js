@@ -16,6 +16,15 @@ class Editor  extends Component {
     this.updateEditorContent = this.updateEditorContent.bind(this)
   }
 
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
   execCommand(cmd, insertion) {
     let val = insertion ? insertion : undefined
     if(cmd.cmd==='createLink') {

@@ -7,7 +7,7 @@ export function getIngredients( str ) {
 }
 
 export function getUnits(){
-  return fetch('//stage4.edimdoma.ru/retsepty/units',
+  return fetch('http://stage4.edimdoma.ru/retsepty/units',
   {
      method: 'get',
      headers: new Headers({
@@ -20,11 +20,11 @@ export function getUnits(){
 
 
 export function getRecipe(id){
-  return fetch('//stage4.edimdoma.ru/retsepty/' + id,
+  return fetch('http://stage4.edimdoma.ru/retsepty/' + id,
   {
      method: 'get',
      headers: new Headers({
-       'Authorization': 'Basic '+btoa('ed4stage:ed4stage'), 
+       'Authorization': 'Basic '+btoa('ed4stage:ed4stage'),
      })
   }
   )
@@ -33,7 +33,7 @@ export function getRecipe(id){
 }
 
 export function getTags(){
-  return fetch('//stage4.edimdoma.ru/retsepty/tags',
+  return fetch('http://stage4.edimdoma.ru/retsepty/tags',
   {
      method: 'get',
      headers: new Headers({

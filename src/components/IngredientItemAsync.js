@@ -14,37 +14,32 @@ class IngredientAsync extends Component {
     this.state={
       ingredients: []
     }
-    this.data = this.props.data
     this.ingredients = []
     this.onUnitSelect = this.onUnitSelect.bind(this)
     this.onIngSelect = this.onIngSelect.bind(this)
     this.loadOptions = this.loadOptions.bind(this)
   }
 
-  componentDidUpdate(){
-    this.data = this.props.data
-  }
-
   onInput(type, e){
-    let data = this.props.data
+    let data = [...this.props.data]
     data[type] = e.target.value
     this.props.onChange(data)
   }
 
   onSelect(selectedOption){
-    let data = this.props.data
+    let data = [...this.props.data]
     data.metric = selectedOption.value
     this.props.onChange(data)
   }
 
   onUnitSelect(selectedOption){
-    let data = this.props.data
+    let data = [...this.props.data]
     data.unit_id = selectedOption.value
     this.props.onChange(data)
   }
 
   onIngSelect(selectedOption){
-    let data = this.props.data
+    let data = [...this.props.data]
     data.ingredient_id = selectedOption.value
     data.ingredient.id = selectedOption.value
     data.ingredient.title = selectedOption.label

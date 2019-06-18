@@ -21,6 +21,7 @@ import ConstructorBtn from 'components/ConstructorBtn'
 import Input from 'components/Input'
 import Check from 'components/Checkbox'
 
+import SideSubmitColumn from 'components/SideSubmitColumn'
 import SideTags from 'components/SideTags'
 
 import SwitchSlider from 'components/SwitchSlider'
@@ -75,10 +76,16 @@ class Main extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    console.log('prev',prevState.json.ingredient_groups)
-    console.log('curr',this.state.json.ingredient_groups)
-    if (prevState && this.state && prevState.json.ingredient_groups
-      && (prevState.json.ingredient_groups.toString() !== this.state.json.ingredient_groups.toString())){
+    let prev = {...prevState}
+    let state = {...this.state}
+    // prev && prev.json && prev.json.ingredient_groups && prev.json.ingredient_groups.recipe_ingredients?  console.log('prev', prev.json.ingredient_groups): console.log('NOPE', prev, prev.json, prev.json.ingredient_groups)
+    //console.log('curr', state.json.ingredient_groups)
+    // console.log('////////////////////////')
+    if(prevState.json.ingredient_groups) {//console.log('INGREDIENT GROUPS')
+       // console.log(JSON.stringify(prevState.json.ingredient_groups))
+       // console.log(JSON.stringify(this.state.json.ingredient_groups))
+    }
+    if (prevState.json.ingredient_groups && (JSON.stringify(prevState.json.ingredient_groups) != JSON.stringify(this.state.json.ingredient_groups))){
         console.log('UPD')
         this.updateIngredients()
     }
@@ -100,7 +107,8 @@ class Main extends Component {
   // this.setState((prevState, props) => {return {json: Object.defineProperty(array, field, val)}})
 
   render() {
-    const { json, units, tags, ingredients } = this.state
+    const { json, units, tags, ingredients } = JSON.parse(JSON.stringify(this.state))
+    console.log('new render')
 
     const { title, image, description, cooking_time, preparation_time, servings,
       ingredient_groups, recipe_steps,
@@ -227,47 +235,7 @@ class Main extends Component {
           </div>
           <div className="right-column form-column">
 
-            <div className='content-box'>
-              <div className='instruction'>
-                <span>В первый раз на сайте или забыли, как пользоваться формой создания рецепта? Тогда посмотрите инструкцию.</span>
-                <div className='separation-line'></div>
-                <ConstructorBtn className='submit-btn' text='инструкция' isActive/>
-              </div>
-            </div>
-
-            <div className='content-box'>
-              <div className='preview'>
-                <div className='slider-container'>
-                  <span className='toggle-label'>Включен</span>
-                  <SwitchSlider />
-                  <span className='toggle-label'>Выключен</span>
-                </div>
-                <span className='preview-label'>Предварительный просмотр</span>
-                <div className='separation-line'></div>
-                <ConstructorBtn className='draft-btn' text="В ЧЕРНОВИК" icon='&#xea22;' />
-                <span className='draft-label'>Если Вы не готовы выложить рецепт, хотите его дополнить позже, сохраните черновик.</span>
-              </div>
-            </div>
-
-            <div className="content-box">
-              <div className='publish'>
-                <div className='checkboxes'>
-                  <Check className='bold-label' isActive={setting_commentable}
-                    text='Получать комментарии и оценки от пользователей'
-                    onToggle={() => this.stateUpdater('setting_commentable', !setting_commentable)}
-                  />
-                  <Check className='bold-label' isActive={setting_rateable}
-                    text='Участвует в голосовании?'
-                    onToggle={() => this.stateUpdater('setting_rateable', !setting_rateable)}
-                  />
-                </div>
-                <div className='separation-line'></div>
-                <div className='publish-button'>
-                  <ConstructorBtn className='submit-btn' text='опубликовать' isActive={isFormValid}/>
-                  <span className='publish-button__label'>Рецепт будет опубликован после прохождения модерации. Время модерации с 9 до 21 по Москве.</span>
-                </div>
-              </div>
-            </div>
+            <SideSubmitColumn settingRateable={setting_rateable} settingCommentable={setting_commentable} stateUpdater={this.stateUpdater} isFormValid={isFormValid} />
 
           </div>
         </div>

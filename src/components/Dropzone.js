@@ -38,6 +38,15 @@ class Dropzone extends Component {
     this.onDrop = this.onDrop.bind(this)
   }
 
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
   openFileDialog() {
     if (this.props.disabled) return
     this.fileInputRef.current.click()

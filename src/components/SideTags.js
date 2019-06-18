@@ -11,6 +11,16 @@ class SideTags extends Component {
   constructor(props) {
     super(props);
   }
+  
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
   render() {
     const {
       recipe_category,
