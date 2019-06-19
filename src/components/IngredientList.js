@@ -20,6 +20,7 @@ const SortableContainerIng = sortableContainer(({children}) => {
 class Ingredients extends Component {
   constructor(props) {
     super(props);
+    this.onSortEnd = this.onSortEnd.bind(this)
   }
 
   componentDidMount(){
@@ -39,7 +40,7 @@ class Ingredients extends Component {
 
 //#tofix refresh positions in array
   onSortEnd({oldIndex, newIndex}){
-    let array = [...this.props.data]
+    let array = JSON.parse(JSON.stringify(this.props.data))
     array = arrayMove (array, oldIndex, newIndex)
     this.props.onChange(array)
     this.forceUpdate()
@@ -86,7 +87,7 @@ class Ingredients extends Component {
     let mappedIngredients = this.props.data ? this.props.data.map((elem, index) => (
       <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
           <Ingredient
-            data={{...elem}} key={'ingredient'+index}
+            data={elem} key={'ingredient'+index}
             units={this.props.units}
             ingredientsAvailable={this.props.ingredientsAvailable ? this.props.ingredientsAvailable : undefined}
             onChange={(value)=>this.onIngChange(index, value)}
@@ -95,7 +96,7 @@ class Ingredients extends Component {
 
     return (
       <div className='ingredient-list-component'>
-        <SortableContainerIng onSortEnd={(payload)=> this.onSortEnd(payload)} useDragHandle lockAxis='y'>
+        <SortableContainerIng onSortEnd={this.onSortEnd} useDragHandle lockAxis='y'>
           {mappedIngredients}
         </SortableContainerIng>
         <div className='constructor-button-offset'>

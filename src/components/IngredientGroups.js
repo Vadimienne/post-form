@@ -26,6 +26,12 @@ class IngedientGroup extends Component {
   }
 
   shouldComponentUpdate(nextProps){
+    // console.log(this.props)
+    // return true
+
+    console.log('/////////////////////////////')
+    console.log(JSON.stringify(this.props.data[0].recipe_ingredients[0]))
+    console.log(JSON.stringify(nextProps.data[0].recipe_ingredients[0]))
     if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
       return false
     }

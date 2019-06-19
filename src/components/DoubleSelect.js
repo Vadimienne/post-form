@@ -19,7 +19,7 @@ class DoubleSelect extends Component {
   }
 
   toggleCheck(id, isActive){
-    let array = this.props.subcategories
+    let array = [...this.props.subcategories]
     isActive ?
     array.splice( array.indexOf(id), 1 )
     :
@@ -46,7 +46,7 @@ class DoubleSelect extends Component {
         onToggle={()=> this.toggleCheck(elem.id, isActive)}
       />
     )}
-    ) 
+    )
 
     return (
       <>

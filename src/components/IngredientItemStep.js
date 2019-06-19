@@ -44,7 +44,9 @@ class IngredientStep extends Component {
     // Have ingredient ID from .data. Select ingredeint with same id from
     // all available ingredients
     //console.log(ingredientsAvailable)
-    let selectedIngredient = ingredientsAvailable? ingredientsAvailable.find((elem) => elem.ingredient_id === data.ingredient_id): undefined
+    let parsedAvailable = []
+    ingredientsAvailable ? ingredientsAvailable.map((elem) => elem.value.map((ing) => parsedAvailable.push(ing))): []
+    let selectedIngredient = parsedAvailable? parsedAvailable.find((elem) => elem.ingredient_id === data.ingredient_id): undefined
 
 
     // figure out what title and available units are
@@ -67,9 +69,19 @@ class IngredientStep extends Component {
     let metric = units && unit_ids && unit_id? {value: unit_id, label: metricOptions.find((el) => el.value === unit_id).label}: null
 
     // Select ingredients from available ingredients
-    let ingredientOptions = ingredientsAvailable? ingredientsAvailable.map(
-      (elem) => { return { label: elem.ingredient.title, value: elem.ingredient_id } }
-    ): undefined
+    // let ingredientOptions = ingredientsAvailable? ingredientsAvailable.map(
+    //   (elem) => { return { label: elem.ingredient.title, value: elem.ingredient_id } }
+    // ): undefined
+
+    let ingredientOptions = ingredientsAvailable ? ingredientsAvailable.map(
+      (elem) => {
+        return { label: elem.label, options: elem.value.map(
+          (ing) => {
+            return { label: ing.ingredient.title, value: ing.ingredient.id }
+          }
+        )}
+      }
+    ): []
 
     // Value of selected ingredient
     let selectedValue = { value: ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
@@ -79,17 +91,13 @@ class IngredientStep extends Component {
 
     return (
       <>
-      {this.props.data.ingredient_id ?(
+
         <div className='ingredient-item'>
           <Select className='input' options={ingredientOptions} value={selectedValue} onChange={this.onIngSelect} styles={selectStyleMedium}/>
           <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('amount',e)}/>
           <Select className='ingredient-select' options={metricOptions} styles={selectStyleShort} onChange={this.onUnitSelect} value={metric} />
-        </div>)
-        :(
-        <div className='ingredient-item'>
-          <Select className='input' onChange={this.onIngSelect} styles={selectStyleLong} options={groupedOptions}/>
-        </div>)
-      }
+        </div>
+
       </>
     );
   }

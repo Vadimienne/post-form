@@ -30,28 +30,28 @@ class Steps extends Component {
   }
 
   onSortEnd({oldIndex, newIndex}){
-    let array = this.props.data
+    let array = [...this.props.data]
     array = arrayMove(array, oldIndex, newIndex)
     this.props.onChange(array)
     this.forceUpdate()
   }
 
   onStepChange(index, value) {
-    let array = this.props.data
+    let array = [...this.props.data]
     array[index] = value
     this.props.onChange(array)
   }
 
   addStep(){
-    let array = this.props.data
+    let array = [...this.props.data]
     array.push({
-      image: {url:''},
-      description: '',
-      ingredients: [
+      image: '',
+      body: '',
+      step_ingredients: [
         {
-          name: '',
-          quantity: '',
-          metric: 'шт.'
+          ingredient_id: '',
+          amount: '',
+          unit_id: ''
         },
       ]
     })
@@ -61,7 +61,7 @@ class Steps extends Component {
 
 
   deleteStep(index){
-    let array = this.props.data
+    let array = [...this.props.data]
     // console.log('array')
     // console.log(array)
     array.splice(index,1)

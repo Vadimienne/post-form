@@ -14,8 +14,17 @@ class Step extends Component {
     this.onFieldChange = this.onFieldChange.bind(this)
   }
 
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
   onFieldChange(field, val) {
-    let data = this.props.data
+    let data = {...this.props.data}
     data[field] = val
     this.props.onChange(data)
   }

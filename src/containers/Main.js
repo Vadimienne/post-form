@@ -66,11 +66,11 @@ class Main extends Component {
     let ingredients = []
     let ingredient_groups = [...this.state.json.ingredient_groups]
     ingredient_groups.map(
-      (elem) => //ingredients.push({label: elem.element, value: elem.recipe_ingredients})
+      (elem) => ingredients.push({label: elem.element, value: elem.recipe_ingredients})
 
-       elem.recipe_ingredients.map(
-        (ingredient) => ingredients.push(ingredient)
-      )
+      //  elem.recipe_ingredients.map(
+      //   (ingredient) => ingredients.push(ingredient)
+      // )
     )
     this.setState({ingredients})
   }
