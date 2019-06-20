@@ -1,28 +1,27 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 
 import 'styles/SwitchSlider.sass'
 
 class Cont extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {isOn: false}
-    this.onClick =this.onClick.bind(this)
-  }
+    constructor(props) {
+        super(props);
+        this.state = {isOn: false}
+        this.onClick =this.onClick.bind(this)
+    }
 
-  onClick(){
-    this.setState({isOn: !this.state.isOn})
-    this.props.onClick? this.props.onClick(): null
-  }
+    onClick(){
+        this.setState({isOn: !this.state.isOn})
+        this.props.onClick? this.props.onClick(): null
+    }
 
-  render() {
-    return (
-        <div className={"preview-switch" + (this.state.isOn? ' active': '')} onClick={this.onClick}>
-          <span className='icon-show'>&#xea43;</span>
-          <span className='icon-hide'>&#xea42;</span>
-          <div className='slider' />
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div className={"preview-switch" + (this.state.isOn? ' active': '')} onClick={this.onClick}>
+                <span className='icon-show'>&#xea43;</span>
+                <span className='icon-hide'>&#xea42;</span>
+                <div className='slider' />
+            </div>
+        );
+    }
 }
 export default Cont;
