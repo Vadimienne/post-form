@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
 
 
 function Comp (props) {
-  return (
-    <>
-    </>
-  )
+    return (
+        <>
+        </>
+    )
 }
 
 export default Comp;

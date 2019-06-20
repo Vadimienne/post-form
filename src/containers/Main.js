@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { fromJS } from 'immutable'
 
 import Dropzone from 'components/Dropzone';
 import Editor from 'components/MyEditor';

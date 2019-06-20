@@ -4,6 +4,7 @@ import Select from 'react-select'
 import Input from 'components/Input'
 import SelectAsync from 'react-select/async'
 import { getIngredients } from 'api/requests'
+import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
 
 import 'styles/IngredientItem.sass'
 
@@ -85,48 +86,16 @@ class IngredientAsync extends Component {
             }
         }
 
-        const customStyles = {
-            container: (provided, state) => ({
-                ...provided,
-                width:'100px'
-            }),
-            control: (provided, state) => ({
-                ...provided,
-                borderColor: '#e6e6e6',
-                '&:hover': {
-                    borderColor: '#363636'
-                },
-                boxShadow: 0
-            })
-
-        }
-
-        const customStylesAsync = {
-            container: (provided, state) => ({
-                ...provided,
-                width:'270px'
-            }),
-            control: (provided, state) => ({
-                ...provided,
-                borderColor: '#e6e6e6',
-                '&:hover': {
-                    borderColor: '#363636'
-                },
-                boxShadow: 0
-            })
-
-        }
-
         return (
             <div className='ingredient-item'>
                 <SelectAsync
                     className='' value={{ value: ingredient_id, label: title }}
                     loadOptions={this.loadOptions}
-                    styles={customStylesAsync}
+                    styles={selectStyleMedium}
                     onChange={this.onIngSelect}
                 />
                 <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('amount',e)}/>
-                <Select className='ingredient-select' options={options} styles={customStyles} onChange={this.onUnitSelect} value={defaultValue} />
+                <Select className='ingredient-select' options={options} styles={selectStyleShort} onChange={this.onUnitSelect} value={defaultValue} />
             </div>
         );
     }

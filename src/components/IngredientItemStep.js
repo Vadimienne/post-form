@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Select from 'react-select'
 import Input from 'components/Input'
-import { selectStyleShort, selectStyleMedium, selectStyleLong } from 'config/selectStyles'
+import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
 
 import 'styles/IngredientItem.sass'
 
@@ -35,6 +35,7 @@ class IngredientStep extends Component {
     }
 
     render() {
+        
         const { units, ingredientsAvailable, data } = this.props
         const { amount, unit_id, ingredient_id } = this.props.data
 

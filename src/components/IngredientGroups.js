@@ -29,8 +29,8 @@ class IngedientGroup extends Component {
     // return true
 
         console.log('/////////////////////////////')
-        console.log(JSON.stringify(this.props.data[0].recipe_ingredients[0]))
-        console.log(JSON.stringify(nextProps.data[0].recipe_ingredients[0]))
+        console.log(JSON.stringify(this.props.data[0].recipe_ingredients[0]), JSON.stringify(this.props.data[0].recipe_ingredients[1]))
+        console.log(JSON.stringify(nextProps.data[0].recipe_ingredients[0]), JSON.stringify(nextProps.data[0].recipe_ingredients[1]))
         if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
             return false
         }
@@ -57,7 +57,7 @@ class IngedientGroup extends Component {
     }
 
     onIngChange(index, value){
-        let array = [...this.props.data]
+        let array = JSON.parse(JSON.stringify(this.props.data))
         array[index].recipe_ingredients = value
         this.props.onChange(array)
     }

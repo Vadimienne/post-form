@@ -34,10 +34,11 @@ class Ingredients extends Component {
 
     //#tofix refresh positions in array
     onSortEnd({oldIndex, newIndex}){
+        // console.log('Ing LIST onsortEND ',this.props.data)
         let array = JSON.parse(JSON.stringify(this.props.data))
         array = arrayMove (array, oldIndex, newIndex)
         this.props.onChange(array)
-        this.forceUpdate()
+        //this.forceUpdate()
     }
 
     //#tofix add position

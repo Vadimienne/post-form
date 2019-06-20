@@ -1,3 +1,14 @@
+export const borderColorize = {
+    control: (provided, state) => ({
+        ...provided,
+        borderColor: '#e6e6e6',
+        '&:hover': {
+            borderColor: '#363636'
+        },
+        boxShadow: 0
+    })
+}
+
 export const selectStyleShort = {
     container: (provided, state) => ({
         ...provided,
@@ -20,17 +31,6 @@ export const selectStyleLong = {
         width:'570px'
     }),
     ...borderColorize
-}
-
-export const borderColorize = {
-    control: (provided, state) => ({
-        ...provided,
-        borderColor: '#e6e6e6',
-        '&:hover': {
-            borderColor: '#363636'
-        },
-        boxShadow: 0
-    })
 }
 
 export const borderInvalid = {
