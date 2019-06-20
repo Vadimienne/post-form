@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import {sortableContainer, sortableElement, sortableHandle} from 'react-sortable-hoc';
+import { sortableContainer } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
 import SortDeleteWrapper from 'components/SortDeleteWrapper'

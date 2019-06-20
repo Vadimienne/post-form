@@ -30,9 +30,6 @@ class Step extends Component {
 
     render() {
         const { image, body, step_ingredients } = this.props.data
-        // in the name of compability
-        let ingredients = step_ingredients
-        //console.log(this.props.ingredientsAvailable)
 
         return (
             <div className='step-presentational'>
