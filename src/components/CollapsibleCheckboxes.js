@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { clone } from 'helpers'
 
 import Check from 'components/Checkbox'
 
@@ -11,7 +12,7 @@ class CollapsibleCheckboxes extends Component {
     }
 
     toggleCheck(id, isChecked){
-        let array = [...this.props.checked]
+        let array = clone(this.props.checked)
         if (isChecked){
             array.splice(array.indexOf(id), 1)
         }

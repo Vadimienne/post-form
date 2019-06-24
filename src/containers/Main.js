@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fromJS } from 'immutable'
+import { clone } from 'helpers'
 
 import Dropzone from 'components/Dropzone';
 import Editor from 'components/MyEditor';
@@ -59,13 +59,13 @@ class Main extends Component {
     }
 
     stateUpdater(field, val){
-        let array = {...this.state.json}
+        let array = clone(this.state.json)
         array[field] = val
         this.setState({json: array})
     }
 
     render() {
-        const { json, units, tags, ingredients } = JSON.parse(JSON.stringify(this.state))
+        const { json, units, tags, ingredients } = Object.freeze(clone(this.state))
         console.log('new render')
 
         const { title, image, description, cooking_time, preparation_time, servings,

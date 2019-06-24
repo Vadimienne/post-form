@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { clone } from 'helpers'
 
 import Select from 'react-select'
 
@@ -18,7 +19,7 @@ class DoubleSelect extends Component {
     }
 
     toggleCheck(id, isActive){
-        let array = [...this.props.subcategories]
+        let array = clone(this.props.subcategories)
         isActive ?
             array.splice( array.indexOf(id), 1 )
             :
