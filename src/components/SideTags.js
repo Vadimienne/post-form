@@ -36,7 +36,9 @@ class SideTags extends Component {
             contest
         } = this.props.checked
 
-        const { tags } = this.props
+        const { tags, contests } = this.props
+        contests
+        console.log('contests SideTags: ', contests);
 
 
         return (
@@ -55,7 +57,7 @@ class SideTags extends Component {
                 <div className='content-box'>
                     <div className='content-box__content'>
                         <CategorySelect
-                            header='Рецепт для конкурса' categoryScaffold={[{id: contest_id, name: contest.title}]} selectedCategory={contest_id}
+                            header='Рецепт для конкурса' categoryScaffold={contests} selectedCategory={contest_id}
                             onChange={(val) => this.props.stateUpdater('recipe_cuisine', val)}
                         />
                     </div>

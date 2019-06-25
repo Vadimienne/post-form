@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { clone } from 'helpers'
+import parser from 'helpers/toPostRecipeParser'
 
 import Dropzone from 'components/Dropzone';
 import Editor from 'components/MyEditor';
@@ -17,7 +18,7 @@ import 'styles/MainMain.sass'
 import 'styles/EdimDomaIcons.sass'
 
 
-import { getRecipe, getUnits, getTags } from 'api/requests'
+import { getRecipe, getUnits, getTags, getContests } from 'api/requests'
 
 
 class Main extends Component {
@@ -32,12 +33,18 @@ class Main extends Component {
     }
 
     async componentDidMount(){
-        const recipe = await getRecipe(128237)
+        const recipe = await getRecipe(67122)
         const tags = await getTags()
         const units = await getUnits()
+        const contests = await getContests()
+        console.log('PARSER')
+        parser(recipe, tags)
+        contests
+        console.log('contests: ', contests.contests);
         this.setState({json: recipe})
         this.setState({tags})
         this.setState({units})
+        this.setState({contests: contests.contests})
         this.updateIngredients()
     }
 
@@ -65,8 +72,11 @@ class Main extends Component {
     }
 
     render() {
-        const { json, units, tags, ingredients } = Object.freeze(clone(this.state))
+        const { json, units, tags, ingredients, contests } = Object.freeze(clone(this.state))
         console.log('new render')
+
+        contests 
+        console.log('contests Main : ', contests );
 
         const { title, image, description, cooking_time, preparation_time, servings,
             ingredient_groups, recipe_steps,
@@ -117,7 +127,8 @@ class Main extends Component {
 
                             <div className='left-column form-column'>
                                 <SideTags 
-                                    tags={tags} checked={checkedTags} stateUpdater={this.stateUpdater}
+                                    tags={tags} checked={checkedTags} contests={[{id: 205, name: "Конкурс рецептов «Летняя рыбалка с ТМ „Капитан Вкусов“»"}]}
+                                    stateUpdater={this.stateUpdater}
                                     isCategoryValid={validation.category}
                                     isCuisineValid={validation.national_cuisine}
                                 />

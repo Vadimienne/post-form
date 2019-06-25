@@ -22,23 +22,27 @@ class CategorySelect extends Component {
 
     render() {
 
-        const { categoryScaffold, selectedCategory, isValid } = this.props
+        const { categoryScaffold, selectedCategory, isValid, header } = this.props
         // Map options and find default value of select depending on whether it is array or single value
+        categoryScaffold
+        console.log(`categoryScaffold: ${header} `, categoryScaffold);
         let options = categoryScaffold.map((elem)=> {return{ label: elem.name, value: elem.id }})
         let defaultValue
 
-        if (this.props.isMulti){
-            let filteredCategories = selectedCategory.map((selected) => categoryScaffold.find((elem) => elem.id == selected))
-            defaultValue = filteredCategories.map((elem)=> {return{ label: elem.name, value: elem.id }})
-        }
-        else{
-            let foundCategory = categoryScaffold.find((elem)=> elem.id == selectedCategory)
-            defaultValue = { label: foundCategory.name, value: foundCategory.id }
+        if( selectedCategory ){
+            if (this.props.isMulti){
+                let filteredCategories = selectedCategory.map((selected) => categoryScaffold.find((elem) => elem.id == selected))
+                defaultValue = filteredCategories.map((elem)=> {return{ label: elem.name, value: elem.id }})
+            }
+            else{
+                let foundCategory = categoryScaffold.find((elem)=> elem.id == selectedCategory)
+                defaultValue = { label: foundCategory.name, value: foundCategory.id }
+            }
         }
 
         return (
             <>
-                <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>{this.props.header}</span>
+                <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>{header}</span>
                 <Select
                     isMulti={this.props.isMulti} onChange={this.onSelect} options={options} defaultValue={defaultValue}
                     styles={isValid !== false ? borderColorize : borderInvalid} placeholder='Начните вводить название'

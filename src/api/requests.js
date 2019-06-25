@@ -43,3 +43,15 @@ export function getTags(){
         .then((response) => response.json())
         .catch((error) => {console.log(error); return 0})
 }
+
+export function getContests() {
+    return fetch(`http://stage4.edimdoma.ru/retsepty/contests`,
+        {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': 'Basic '+btoa('ed4stage:ed4stage'),
+            })
+        })
+        .then((response) => response.json())
+        .catch((error) => {console.log(error); return 0})
+}

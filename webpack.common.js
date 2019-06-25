@@ -3,6 +3,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 require('babel-polyfill')
 var path = require('path')
 
+const DeepScopePlugin = require('webpack-deep-scope-plugin').default
+
 module.exports = {
     entry: ['babel-polyfill', './src/index.js'],
     module: {
@@ -59,6 +61,7 @@ module.exports = {
             template: "./src/index.html",
             filename: "./index.html"
         }),
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin(),
+        new DeepScopePlugin(),
     ]
 };
