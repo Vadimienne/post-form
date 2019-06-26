@@ -28,9 +28,9 @@ class IngedientGroup extends Component {
     // console.log(this.props)
     // return true
 
-        console.log('/////////////////////////////')
+       /*  console.log('/////////////////////////////')
         console.log(JSON.stringify(this.props.data[0].recipe_ingredients[0]), JSON.stringify(this.props.data[0].recipe_ingredients[1]))
-        console.log(JSON.stringify(nextProps.data[0].recipe_ingredients[0]), JSON.stringify(nextProps.data[0].recipe_ingredients[1]))
+        console.log(JSON.stringify(nextProps.data[0].recipe_ingredients[0]), JSON.stringify(nextProps.data[0].recipe_ingredients[1])) */
         if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
             return false
         }

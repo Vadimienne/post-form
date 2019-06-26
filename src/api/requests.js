@@ -1,4 +1,5 @@
 
+const apiPath = 'http://stage4.edimdoma.ru'
 
 export function getIngredients( str ) {
     return fetch(`https://www.edimdoma.ru/retsepty/ingredients/filter?q=${str}`)
@@ -7,7 +8,7 @@ export function getIngredients( str ) {
 }
 
 export function getUnits(){
-    return fetch('http://stage4.edimdoma.ru/retsepty/units',
+    return fetch(apiPath + '/retsepty/units',
         {
             method: 'get',
             headers: new Headers({
@@ -20,7 +21,7 @@ export function getUnits(){
 
 
 export function getRecipe(id){
-    return fetch(`http://stage4.edimdoma.ru/retsepty/${  id}`,
+    return fetch(apiPath + `/retsepty/${  id}`,
         {
             method: 'get',
             headers: new Headers({
@@ -33,7 +34,7 @@ export function getRecipe(id){
 }
 
 export function getTags(){
-    return fetch('http://stage4.edimdoma.ru/retsepty/tags',
+    return fetch(apiPath + '/retsepty/tags',
         {
             method: 'get',
             headers: new Headers({
@@ -45,7 +46,7 @@ export function getTags(){
 }
 
 export function getContests() {
-    return fetch(`http://stage4.edimdoma.ru/retsepty/contests`,
+    return fetch(apiPath + `/retsepty/contests`,
         {
             method: 'get',
             headers: new Headers({

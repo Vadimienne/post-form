@@ -1,11 +1,13 @@
 export default function parser(json, tags) {
 
+    // find name in list of objects by id
     function findName(elem, list) {
         let result = list.find((iter) => iter.id === elem)
         return result.name
     }
 
-    function findMultipleNames (idsArray, targetArray){
+    // find multiple names in list of objects by id 
+    function findNames (idsArray, targetArray){
         let result = []
         idsArray.map((elem) => {
             result.push(
@@ -21,7 +23,7 @@ export default function parser(json, tags) {
     Object.freeze(tags)
     let result = {}
 
-    console.log(tags)
+    console.log(tags.recipe_user_tag)
 
     const {
         setting_commentable,
@@ -60,36 +62,36 @@ export default function parser(json, tags) {
     }
 
     // category
-    result.recipe_category_list = [findName(recipe_category, tags.recipe_category)]
+    result.recipe_category_list = findNames([recipe_category], tags.recipe_category)
 
     // subcategories 
     let subcategories = tags.recipe_category.find((iter) => iter.id === recipe_category).recipe_subcategory
 
-    result.recipe_subcategory_list = findMultipleNames(recipe_subcategories, subcategories)
+    result.recipe_subcategory_list = findNames(recipe_subcategories, subcategories)
 
     // cuisine type 
-    result.recipe_cuisine_type_list = recipe_cuisine_types
+    result.recipe_cuisine_type_list = findNames(recipe_cuisine_types, tags.recipe_cuisine_type)
 
     // cuisine
-    result.recipe_cuisine_list = [recipe_cuisine]
+    result.recipe_cuisine_list = findNames([recipe_cuisine], tags.recipe_cuisine) 
 
     // nutrition types
-    result.recipe_nutrition_type_list = recipe_nutrition_types
+    result.recipe_nutrition_type_list = findNames(recipe_nutrition_types, tags.recipe_nutrition_type)
 
     // mealtimes
-    result.recipe_mealtime_list = recipe_mealtimes
+    result.recipe_mealtime_list = findNames(recipe_mealtimes, tags.recipe_mealtime)
 
     // cooking methods
-    result.recipe_cooking_method_list = recipe_cooking_methods
+    result.recipe_cooking_method_list = findNames(recipe_cooking_methods, tags.recipe_cooking_method)
 
     // cuisine_apps
-    result.recipe_cuisine_app_list = recipe_cuisine_apps
+    result.recipe_cuisine_app_list = findNames(recipe_cuisine_apps, tags.recipe_cuisine_app)
 
     // holidays
-    result.recipe_holiday_list = recipe_holidays
+    result.recipe_holiday_list = findNames(recipe_holidays, tags.recipe_holiday)
 
     // user tags
-    result.recipe_user_tag_list = recipe_user_tags
+    // result.recipe_user_tag_list = findNames(recipe_user_tags, tags.recipe_user_tag)
 
 
 

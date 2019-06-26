@@ -24,8 +24,8 @@ class CategorySelect extends Component {
 
         const { categoryScaffold, selectedCategory, isValid, header } = this.props
         // Map options and find default value of select depending on whether it is array or single value
-        categoryScaffold
-        console.log(`categoryScaffold: ${header} `, categoryScaffold);
+        /*    categoryScaffold
+        console.log(`categoryScaffold: ${header} `, categoryScaffold); */
         let options = categoryScaffold.map((elem)=> {return{ label: elem.name, value: elem.id }})
         let defaultValue
 

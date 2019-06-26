@@ -33,14 +33,14 @@ class Main extends Component {
     }
 
     async componentDidMount(){
-        const recipe = await getRecipe(67122)
+        const recipe = await getRecipe(128239)
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
         console.log('PARSER')
         parser(recipe, tags)
-        contests
-        console.log('contests: ', contests.contests);
+        /* contests
+        console.log('contests: ', contests.contests); */
         this.setState({json: recipe})
         this.setState({tags})
         this.setState({units})
@@ -75,8 +75,8 @@ class Main extends Component {
         const { json, units, tags, ingredients, contests } = Object.freeze(clone(this.state))
         console.log('new render')
 
-        contests 
-        console.log('contests Main : ', contests );
+        /* contests 
+        console.log('contests Main : ', contests ); */
 
         const { title, image, description, cooking_time, preparation_time, servings,
             ingredient_groups, recipe_steps,
@@ -108,7 +108,7 @@ class Main extends Component {
             validation = {
                 title: title.length? true: false,
                 category: recipe_category.toString().length? true: false,
-                national_cuisine: recipe_cuisine.toString().length? true: false,
+                national_cuisine: recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
                 timing: parseInt(cooking_time, 10)? true: false,
                 servings: parseInt(servings, 10)? true: false,
                 ingredients: this.state.ingredients.length? true: false,

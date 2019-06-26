@@ -37,8 +37,8 @@ class SideTags extends Component {
         } = this.props.checked
 
         const { tags, contests } = this.props
-        contests
-        console.log('contests SideTags: ', contests);
+        /* contests
+        console.log('contests SideTags  : ', contests); */
 
 
         return (
@@ -56,8 +56,12 @@ class SideTags extends Component {
 
                 <div className='content-box'>
                     <div className='content-box__content'>
+                        {/*if there is a contest selected, there is also contests' description in contest field*/}
+                        {/* otherwise all available contests should be passed as select options */}
                         <CategorySelect
-                            header='Рецепт для конкурса' categoryScaffold={contests} selectedCategory={contest_id}
+                            header='Рецепт для конкурса' 
+                            categoryScaffold={contest_id? [{name: contest.title, id: contest.id}]: contests}
+                            selectedCategory={contest_id}
                             onChange={(val) => this.props.stateUpdater('recipe_cuisine', val)}
                         />
                     </div>
