@@ -1,12 +1,15 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 require('babel-polyfill')
 var path = require('path')
 
-const DeepScopePlugin = require('webpack-deep-scope-plugin').default
+// const DeepScopePlugin = require('webpack-deep-scope-plugin').default
 
 module.exports = {
     entry: ['babel-polyfill', './src/index.js'],
+    output: {
+        path: path.resolve(__dirname, 'dist')
+    },
     module: {
         rules: [
             {
@@ -47,7 +50,9 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: ['file-loader']
+                use: {
+                    loader: 'url-loader',
+                }
             }
         ]
     },
@@ -61,7 +66,5 @@ module.exports = {
             template: "./src/index.html",
             filename: "./index.html"
         }),
-        new BundleAnalyzerPlugin(),
-        new DeepScopePlugin(),
     ]
 };

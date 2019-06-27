@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
 import DoubleSelect from 'components/DoubleSelect'
 import CategorySelect from 'components/CategorySelect'
+import Draft from 'components/DraftCard'
 
 import 'styles/SideTags.sass'
 
@@ -109,6 +110,7 @@ class SideTags extends Component {
                         />
                     </div>
                 </div>
+                <Draft />
             </div>
         );
     }
