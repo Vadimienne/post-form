@@ -22,3 +22,5 @@ app.get('/main.js', (req, res) => {
 app.get('/main.css', (req, res) => {
   res.sendFile('dist/main.css', {root: __dirname})
 })
+
+app.use(express.static(__dirname))
