@@ -23,8 +23,6 @@ export default function parser(json, tags) {
     Object.freeze(tags)
     let result = {}
 
-    console.log(tags.recipe_user_tag)
-
     const {
         setting_commentable,
         setting_rateable,
@@ -91,9 +89,39 @@ export default function parser(json, tags) {
     result.recipe_holiday_list = findNames(recipe_holidays, tags.recipe_holiday)
 
     // user tags
-    // result.recipe_user_tag_list = findNames(recipe_user_tags, tags.recipe_user_tag)
+    result.recipe_user_tag_list = findNames(recipe_user_tags, tags.recipe_user_tag)
 
 
+
+    // STEPS
+
+    result.recipe_steps_attributes = recipe_steps.map((elem) => {
+        return {
+            body: elem.body,
+            position: elem.position,
+            step_ingredient_attributes: elem.step_ingredients
+        }
+    })
+
+
+    // INGREDIENTS GROUPS
+
+    let ingredientsAccumulated = []
+
+    ingredient_groups.map((elem) => {
+        elem.recipe_ingredients.map((ing) => {
+            ingredientsAccumulated.push({
+                position: ing.position,
+                ingredient_id: ing.id,
+                amount: ing.amount,
+                unit_id: ing.unit_id,
+                element: elem.element,
+                element_position: elem.element_position
+            })
+        })
+    })
+
+    result.recipe_ingredients_attributes = ingredientsAccumulated
 
     console.log(result)
 

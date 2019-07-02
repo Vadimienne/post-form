@@ -33,7 +33,7 @@ class Main extends Component {
     }
 
     async componentDidMount(){
-        const recipe = await getRecipe(128239)
+        const recipe = await getRecipe(128709)
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
