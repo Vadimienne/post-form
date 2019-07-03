@@ -58,7 +58,7 @@ class Cont extends PureComponent {
                         </div>
                         <div className='separation-line'></div>
                         <div className='publish-button'>
-                            <ConstructorBtn className='submit-btn' text='опубликовать' isActive={isFormValid}/>
+                            <ConstructorBtn className='submit-btn' text='опубликовать' isActive={isFormValid} onClick={this.props.onSubmit}/>
                             <span className='publish-button__label'>Рецепт будет опубликован после прохождения модерации. Время модерации с 9 до 21 по Москве.</span>
                         </div>
                     </div>

@@ -73,3 +73,33 @@ export function getContests() {
         .then((response) => response.json())
         .catch((error) => {console.log(error); return 0})
 }
+
+export function createRecipe () {
+    return fetch(apiPath + '/retsepty', 
+        {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic '+btoa('ed4stage:ed4stage')
+            },
+            body: JSON.stringify({recipe: {title: ''}})
+        }
+    )
+        .then((response) => response.json())
+        .catch((error) => {console.log(error); return 0})
+}
+
+export function updateRecipe (id, json) {
+    return fetch (apiPath + `/retsepty/${id}`,
+        {
+            method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic '+btoa('ed4stage:ed4stage')
+            },
+            body: JSON.stringify(json)
+        }
+    )
+}

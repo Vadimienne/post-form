@@ -4,6 +4,8 @@ import Select from 'react-select'
 import Input from 'components/Input'
 import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
 
+import {clone} from 'helpers'
+
 import 'styles/IngredientItem.sass'
 
 class IngredientStep extends Component {
@@ -29,23 +31,27 @@ class IngredientStep extends Component {
     }
 
     onIngSelect(selectedOption){
-        let data = [...this.props.data]
-        data.ingredient_id = selectedOption.value
+        console.log(this.props.data)
+        let data = clone(this.props.data)
+        data.recipe_ingredient_id = selectedOption.value
         this.props.onChange(data)
     }
 
     render() {
         
         const { units, ingredientsAvailable, data } = this.props
-        const { amount, unit_id, ingredient_id } = this.props.data
+        const { amount, recipe_ingredient_id } = this.props.data
 
-        // Have ingredient ID from .data. Select ingredeint with same id from
+        // Have ingredient ID from .data. Select ingredient with same id from
         // all available ingredients
         //console.log(ingredientsAvailable)
         let parsedAvailable = []
         ingredientsAvailable ? ingredientsAvailable.map((elem) => elem.value.map((ing) => parsedAvailable.push(ing))): []
-        let selectedIngredient = parsedAvailable? parsedAvailable.find((elem) => elem.ingredient_id === data.ingredient_id): undefined
+        let selectedIngredient = parsedAvailable? parsedAvailable.find((elem) => elem.id === data.recipe_ingredient_id): undefined
+        selectedIngredient
 
+        // extract unit_id from selectedIngredient
+        const unit_id = selectedIngredient ? selectedIngredient.unit_id : null
 
         // figure out what title and available units are
         const { unit_ids } = (selectedIngredient? selectedIngredient.ingredient : {})
@@ -72,22 +78,39 @@ class IngredientStep extends Component {
             (elem) => {
                 return { label: elem.label, options: elem.value.map(
                     (ing) => {
-                        return { label: ing.ingredient.title, value: ing.ingredient.id }
+                        return { label: ing.ingredient.title, value: ing.id }
                     }
                 )}
             }
         ): []
+        console.log(ingredientsAvailable)
 
         // Value of selected ingredient
-        let selectedValue = { value: ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
+        let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
 
         return (
             <>
 
                 <div className='ingredient-item'>
-                    <Select className='input' options={ingredientOptions} value={selectedValue} onChange={this.onIngSelect} styles={selectStyleMedium}/>
-                    <Input className='input input-quantity' value={amount} onChange={(e)=>this.onInput('amount',e)}/>
-                    <Select className='ingredient-select' options={metricOptions} styles={selectStyleShort} onChange={this.onUnitSelect} value={metric} />
+                    <Select 
+                        className='input' 
+                        options={ingredientOptions} 
+                        value={selectedValue} 
+                        onChange={this.onIngSelect} 
+                        styles={selectStyleMedium}
+                    />
+                    <Input 
+                        className='input input-quantity' 
+                        value={amount} 
+                        onChange={(e)=>this.onInput('amount',e)}
+                    />
+                    <Select 
+                        className='ingredient-select' 
+
+                        styles={selectStyleShort} 
+                        onChange={this.onUnitSelect} 
+                        value={metric} 
+                    />
                 </div>
 
             </>

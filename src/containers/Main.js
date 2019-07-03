@@ -18,7 +18,7 @@ import 'styles/MainMain.sass'
 import 'styles/EdimDomaIcons.sass'
 
 
-import { getRecipe, getUnits, getTags, getContests } from 'api/requests'
+import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe } from 'api/requests'
 
 
 class Main extends Component {
@@ -30,13 +30,16 @@ class Main extends Component {
         };
         this.stateUpdater = this.stateUpdater.bind(this)
         this.updateIngredients = this.updateIngredients.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     async componentDidMount(){
-        const recipe = await getRecipe(128709)
+        const recipe = await getRecipe(110258)
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
+        /* const newRecipe = await createRecipe()
+        console.log(newRecipe) */
         console.log('PARSER')
         parser(recipe, tags)
         /* contests
@@ -69,6 +72,10 @@ class Main extends Component {
         let array = clone(this.state.json)
         array[field] = val
         this.setState({json: array})
+    }
+
+    onSubmit() {
+        const updatedRecipe = updateRecipe(this.state.json.id, parser(this.state.json, this.state.tags))
     }
 
     render() {
@@ -116,8 +123,12 @@ class Main extends Component {
                 steps_description: recipe_steps.find((elem) => elem.body.length === 0)? false: true,
             }
         }
+        else{
+            validation = {
+                title: false
+            }
+        }
         const isFormValid = (Object.values(validation).find(elem => elem === false) === false && Object.values(validation).length)? false: true
-
         // console.log(this.state.json)
         return (
             <>
@@ -190,7 +201,13 @@ class Main extends Component {
                             </div>
                             <div className="right-column form-column">
 
-                                <SideSubmitColumn settingRateable={setting_rateable} settingCommentable={setting_commentable} stateUpdater={this.stateUpdater} isFormValid={isFormValid} />
+                                <SideSubmitColumn 
+                                    settingRateable={setting_rateable} 
+                                    settingCommentable={setting_commentable} 
+                                    stateUpdater={this.stateUpdater} 
+                                    isFormValid={isFormValid} 
+                                    onSubmit={this.onSubmit}
+                                />
 
                             </div>
                         </div>
