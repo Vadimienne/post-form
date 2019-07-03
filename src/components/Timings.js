@@ -13,12 +13,23 @@ class Timings extends Component {
         this.onInput = this.onInput.bind(this)
     }
 
-    shouldComponentUpdate(nextProps){
+    shouldComponentUpdate(nextProps, nextState){
         if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
+            if (JSON.stringify(this.state) === JSON.stringify(nextState)){
+                return false
+            }
+            else{
+                return true
+            }
         }
         else {
             return true
+        }
+    }
+
+    componentDidMount(){
+        if (this.props.preparation_time){
+            this.setState({isChecked: true})
         }
     }
 
@@ -58,7 +69,7 @@ class Timings extends Component {
     }
 
     onToggle(){
-        if (this.props.data.preparation_time || this.state.isChecked){
+        if (this.state.isChecked){
             this.props.onPrepTimeChange(0)
             this.setState({isChecked: false})
         }
@@ -78,7 +89,7 @@ class Timings extends Component {
         let preparationMinutes = preparation_time % 60
         let preparationHours = (preparation_time - preparationMinutes) / 60
 
-        let isChecked = this.props.data.preparation_time || this.state.isChecked? true: false
+        // let isChecked = this.props.data.preparation_time || this.state.isChecked? true: false
 
         // to avoid to render '0' in input field when field should be empty
         minutes = minutes ? minutes : ''
@@ -112,9 +123,9 @@ class Timings extends Component {
                 </div>
                 <div className='outer-flex-container'>
                     <div className='field_w260 preparation_check'>
-                        <Check onToggle={() => this.onToggle()} isActive={isChecked} text='Требуется подготовка'/>
+                        <Check onToggle={() => this.onToggle()} isActive={this.state.isChecked} text='Требуется подготовка'/>
                     </div>
-                    {isChecked? (
+                    {this.state.isChecked ? (
                         <div className='preparation_time_container'>
                             <span className='title'>Время подготовки</span>
                             <div className='input-timings-width timing-flex-container'>
