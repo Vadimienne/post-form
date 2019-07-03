@@ -14,8 +14,9 @@ class DoubleSelect extends Component {
     }
 
     onCategorySelect(selected){
-        this.props.onCategoryChange(selected.value)
-        this.props.onSubcategoryChange([])
+        console.log('ONCATEGORYSELECT: ', selected)
+        this.props.onCategoryChange(selected.value, () => this.props.onSubcategoryChange([]))
+        
     }
 
     toggleCheck(id, isActive){
@@ -33,9 +34,9 @@ class DoubleSelect extends Component {
 
         let options = categoryScaffold.map((elem)=>{return{label: elem.name, value: elem.id}})
         let selectedCategory = categoryScaffold.find((elem) => elem.id === category)
-        let selectedValue = {label: selectedCategory.name, value: selectedCategory.id}
+        let selectedValue = selectedCategory ? {label: selectedCategory.name, value: selectedCategory.id} : null
 
-        let allSubcategories = categoryScaffold.find((elem) => elem.id === category).recipe_subcategory
+        let allSubcategories = category ? categoryScaffold.find((elem) => elem.id === category).recipe_subcategory : []
 
         let checkboxes = allSubcategories.map((elem, index)=> {
             let isActive = subcategories.includes(elem.id)? true: false
@@ -53,8 +54,11 @@ class DoubleSelect extends Component {
             <>
                 <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>{this.props.header}</span>
                 <Select
-                    options={options} onChange={this.onCategorySelect} defaultValue={selectedValue} onChange={this.onCategorySelect}
-                    styles={isValid !== false ? borderColorize : borderInvalid} placeholder='Начните вводить название'
+                    options={options} 
+                    onChange={this.onCategorySelect} 
+                    defaultValue={selectedValue} 
+                    styles={isValid !== false ? borderColorize : borderInvalid} 
+                    placeholder='Начните вводить название'
                 />
                 <div>{checkboxes}</div>
             </>

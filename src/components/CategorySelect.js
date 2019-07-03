@@ -44,8 +44,12 @@ class CategorySelect extends Component {
             <>
                 <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>{header}</span>
                 <Select
-                    isMulti={this.props.isMulti} onChange={this.onSelect} options={options} defaultValue={defaultValue}
-                    styles={isValid !== false ? borderColorize : borderInvalid} placeholder='Начните вводить название'
+                    isMulti={this.props.isMulti} 
+                    onChange={this.onSelect} 
+                    options={options} 
+                    defaultValue={defaultValue}
+                    styles={isValid !== false ? borderColorize : borderInvalid} 
+                    placeholder='Начните вводить название'
                 />
             </>
         );

@@ -78,12 +78,13 @@ export function createRecipe () {
     return fetch(apiPath + '/retsepty', 
         {
             method: 'post',
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic '+btoa('ed4stage:ed4stage')
             },
-            body: JSON.stringify({recipe: {title: ''}})
+            body: JSON.stringify({recipe: {status: 'draft'}})
         }
     )
         .then((response) => response.json())
@@ -94,6 +95,7 @@ export function updateRecipe (id, json) {
     return fetch (apiPath + `/retsepty/${id}`,
         {
             method: 'put',
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

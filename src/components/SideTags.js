@@ -47,10 +47,13 @@ class SideTags extends Component {
                 <div className='content-box'>
                     <div className='content-box__content'>
                         <DoubleSelect
-                            header='Опубликовать в категории' isValid={this.props.isCategoryValid}
-                            category={recipe_category}  subcategories={recipe_subcategories} categoryScaffold={tags.recipe_category}
-                            onCategoryChange={(val)=>this.props.stateUpdater('recipe_category', val)}
-                            onSubcategoryChange={(val)=>this.props.stateUpdater('recipe_subcategories', val)}
+                            header='Опубликовать в категории' 
+                            isValid={this.props.isCategoryValid}
+                            category={recipe_category}  
+                            subcategories={recipe_subcategories} 
+                            categoryScaffold={tags.recipe_category}
+                            onCategoryChange=   {(val, callback) => this.props.stateUpdater('recipe_category', val, callback)}
+                            onSubcategoryChange={(val) => this.props.stateUpdater('recipe_subcategories', val)}
                         />
                     </div>
                 </div>

@@ -34,14 +34,14 @@ class Main extends Component {
     }
 
     async componentDidMount(){
-        const recipe = await getRecipe(110258)
+        const recipe = await createRecipe()// getRecipe(110258)
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
-        /* const newRecipe = await createRecipe()
+       /*  const newRecipe = await createRecipe()
         console.log(newRecipe) */
-        console.log('PARSER')
-        parser(recipe, tags)
+        // console.log('PARSER')
+        // parser(recipe, tags)
         /* contests
         console.log('contests: ', contests.contests); */
         this.setState({json: recipe})
@@ -68,10 +68,10 @@ class Main extends Component {
         }
     }
 
-    stateUpdater(field, val){
+    stateUpdater(field, val, callback){
         let array = clone(this.state.json)
         array[field] = val
-        this.setState({json: array})
+        this.setState({json: array}, callback)
     }
 
     onSubmit() {
@@ -85,15 +85,19 @@ class Main extends Component {
         /* contests 
         console.log('contests Main : ', contests ); */
 
-        const { title, image, description, cooking_time, preparation_time, servings,
-            ingredient_groups, recipe_steps,
-            setting_commentable, setting_rateable,
-            recipe_category, recipe_cooking_methods,
-            recipe_cuisine, recipe_cuisine_apps,
-            recipe_cuisine_types, recipe_holidays,
-            recipe_mealtimes, recipe_nutrition_types,
-            recipe_user_tags, recipe_subcategories,
-            contest, contest_id} = json
+        const { 
+            title,                  image, 
+            description,            cooking_time,  
+            preparation_time,       servings,
+            ingredient_groups,      recipe_steps,
+            setting_commentable,    setting_rateable,
+            recipe_category,        recipe_cooking_methods,
+            recipe_cuisine,         recipe_cuisine_apps,
+            recipe_cuisine_types,   recipe_holidays,
+            recipe_mealtimes,       recipe_nutrition_types,
+            recipe_user_tags,       recipe_subcategories,
+            contest,                contest_id
+        } = json
 
         const checkedTags = {
             recipe_category:        recipe_category,
@@ -111,23 +115,19 @@ class Main extends Component {
         }
 
         let validation =  {}
-        if( title && this.state.ingredients ){
-            validation = {
-                title: title.length? true: false,
-                category: recipe_category.toString().length? true: false,
-                national_cuisine: recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
-                timing: parseInt(cooking_time, 10)? true: false,
-                servings: parseInt(servings, 10)? true: false,
-                ingredients: this.state.ingredients.length? true: false,
-                step: recipe_steps.length? true: false,
-                steps_description: recipe_steps.find((elem) => elem.body.length === 0)? false: true,
-            }
+        
+        validation = {
+            title: title ? true: false,
+            category: recipe_category ? (recipe_category.toString().length? true: false) : false,
+            national_cuisine: recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
+            timing: parseInt(cooking_time, 10)? true: false,
+            servings: parseInt(servings, 10)? true: false,
+            ingredients: this.state.ingredients ? (this.state.ingredients.length? true: false) : false,
+            step: recipe_steps ? (recipe_steps.length? true: false) : false,
+            steps_description: recipe_steps ? (recipe_steps.find((elem) => elem.body.length === 0)? true: false) : false,
         }
-        else{
-            validation = {
-                title: false
-            }
-        }
+        console.log(validation)
+
         const isFormValid = (Object.values(validation).find(elem => elem === false) === false && Object.values(validation).length)? false: true
         // console.log(this.state.json)
         return (
@@ -153,7 +153,7 @@ class Main extends Component {
                                             onChange={(e)=> this.stateUpdater('title', e.target.value)}
                                             value={title}
                                             isBig
-                                            isValid={title.length}
+                                            isValid={title ? true : false}
                                             placeholder='Введите название рецепта'
                                         />
                                     </div>

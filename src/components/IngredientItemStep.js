@@ -14,7 +14,7 @@ class IngredientStep extends Component {
         this.state={
             isIngSelected: true
         }
-        this.onUnitSelect = this.onUnitSelect.bind(this)
+        /* this.onUnitSelect = this.onUnitSelect.bind(this) */
         this.onIngSelect = this.onIngSelect.bind(this)
     }
 
@@ -24,11 +24,11 @@ class IngredientStep extends Component {
         this.props.onChange(data)
     }
 
-    onUnitSelect(selectedOption){
+    /* onUnitSelect(selectedOption){
         let data = [...this.props.data]
         data.unit_id = selectedOption.value
         this.props.onChange(data)
-    }
+    } */
 
     onIngSelect(selectedOption){
         console.log(this.props.data)
@@ -42,38 +42,26 @@ class IngredientStep extends Component {
         const { units, ingredientsAvailable, data } = this.props
         const { amount, recipe_ingredient_id } = this.props.data
 
-        // Have ingredient ID from .data. Select ingredient with same id from
-        // all available ingredients
-        //console.log(ingredientsAvailable)
+        // PROCESSING AVAILABLE INGREDIENTS
+        // push ingredients from all groups into one array
         let parsedAvailable = []
-        ingredientsAvailable ? ingredientsAvailable.map((elem) => elem.value.map((ing) => parsedAvailable.push(ing))): []
-        let selectedIngredient = parsedAvailable? parsedAvailable.find((elem) => elem.id === data.recipe_ingredient_id): undefined
-        selectedIngredient
+        ingredientsAvailable ? ingredientsAvailable.map(
+            (elem) => elem.value.map(
+                (ing) => parsedAvailable.push(ing)
+            )
+        ): []
+
+        // select one ingredient that matches data's recipe_ingredient_id 
+        let selectedIngredient = parsedAvailable? parsedAvailable.find(
+            (elem) => elem.id === data.recipe_ingredient_id
+        ): undefined
 
         // extract unit_id from selectedIngredient
         const unit_id = selectedIngredient ? selectedIngredient.unit_id : null
 
-        // figure out what title and available units are
-        const { unit_ids } = (selectedIngredient? selectedIngredient.ingredient : {})
 
-
-        // Have valid units ids. Select units with same ids from all units list to get title
-        // Then map unit options for ingredient
-        let filteredOptions = units && unit_ids ? unit_ids.map((elem) => units.find((x)=> x.id===elem )) : []
-        let metricOptions = filteredOptions.map((elem)=>{
-            if(elem) {
-                return { label: elem.title, value: elem.id }
-            }
-            else {
-                return { label: '', value: '' }
-            }
-        })
-
-        // Select current unit value based on ingredeint's unit_id
-        let metric = units && unit_ids && unit_id? {value: unit_id, label: metricOptions.find((el) => el.value === unit_id).label}: null
-
-        // Select ingredients from available ingredients
-
+        // PROCESS INGREDIENTS FOR SELECTOR 
+        // map ingredient options
         let ingredientOptions = ingredientsAvailable ? ingredientsAvailable.map(
             (elem) => {
                 return { label: elem.label, options: elem.value.map(
@@ -83,10 +71,38 @@ class IngredientStep extends Component {
                 )}
             }
         ): []
-        console.log(ingredientsAvailable)
 
-        // Value of selected ingredient
+        // gen selected ingredient object
         let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
+
+
+
+        // PROCESSING UNITS
+        // get available units for current ingredient
+        const { unit_ids } = (selectedIngredient? selectedIngredient.ingredient : {})
+
+
+        // Have valid units ids. Select units with same ids from all units list to get title
+        let filteredOptions = units && unit_ids ? unit_ids.map(
+            (elem) => units.find(
+                (x)=> x.id===elem
+            )
+        ) : []
+
+        // Then map unit options for selector
+        let metricOptions = filteredOptions.map((elem)=>{
+            if(elem) {
+                return { label: elem.title, value: elem.id }
+            }
+            else {
+                return { label: '', value: '' }
+            }
+        })
+
+        // Select current unit value based on ingredient's unit_id
+        let metric = units && unit_ids && unit_id ? 
+            {value: unit_id, label: metricOptions.find((el) => el.value === unit_id).label}
+            : null
 
         return (
             <>
@@ -106,7 +122,7 @@ class IngredientStep extends Component {
                     />
                     <Select 
                         className='ingredient-select' 
-
+                        isDisabled
                         styles={selectStyleShort} 
                         onChange={this.onUnitSelect} 
                         value={metric} 
