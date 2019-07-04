@@ -19,7 +19,7 @@ class IngredientStep extends Component {
     }
 
     onInput(type, e){
-        let data = [...this.props.data]
+        let data = clone(this.props.data)
         data[type] = e.target.value
         this.props.onChange(data)
     }
@@ -31,7 +31,6 @@ class IngredientStep extends Component {
     } */
 
     onIngSelect(selectedOption){
-        console.log(this.props.data)
         let data = clone(this.props.data)
         data.recipe_ingredient_id = selectedOption.value
         this.props.onChange(data)
@@ -55,6 +54,15 @@ class IngredientStep extends Component {
         let selectedIngredient = parsedAvailable? parsedAvailable.find(
             (elem) => elem.id === data.recipe_ingredient_id
         ): undefined
+       /*  data
+        console.log('///////////////////////////////////: ');
+        console.log('data: ', data);
+        parsedAvailable
+        console.log('parsedAvailable: ', parsedAvailable);
+        selectedIngredient
+        console.log('selectedIngredient: ', selectedIngredient);
+        console.log('///////////////////////////////////: ');
+ */
 
         // extract unit_id from selectedIngredient
         const unit_id = selectedIngredient ? selectedIngredient.unit_id : null
@@ -74,7 +82,6 @@ class IngredientStep extends Component {
 
         // gen selected ingredient object
         let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
-
 
 
         // PROCESSING UNITS
@@ -118,7 +125,7 @@ class IngredientStep extends Component {
                     <Input 
                         className='input input-quantity' 
                         value={amount} 
-                        onChange={(e)=>this.onInput('amount',e)}
+                        onChange={(e) => this.onInput('amount',e)}
                     />
                     <Select 
                         className='ingredient-select' 

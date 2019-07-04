@@ -55,6 +55,7 @@
     "react-dom": "^16.8.6",
     "react-select": "^3.0.3",
     "react-sortable-hoc": "^1.9.1",
+    "react-window": "^1.8.4",
     "styled-components": "^4.2.0"
   },
   "proxy": "http://localhost:5000"

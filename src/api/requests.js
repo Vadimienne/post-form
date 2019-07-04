@@ -1,5 +1,5 @@
 
-const apiPath = 'http://stage4.edimdoma.ru'
+export const apiPath = 'http://stage4.edimdoma.ru'
 
 let headers = {
     'Authorization': 'Basic '+btoa('ed4stage:ed4stage'),
@@ -12,7 +12,11 @@ function decoratedFetch(url, options){
 }
 
 export function getIngredients( str ) {
-    return fetch(`https://www.edimdoma.ru/retsepty/ingredients/filter?q=${str}`)
+    return fetch(apiPath + `/retsepty/ingredients/filter?q=${str}`, 
+        {
+            headers: headers
+        }
+    )
         .then((response) => response.json())
         .catch((error) => {console.log(error); return 0})
 }

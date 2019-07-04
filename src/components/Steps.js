@@ -7,6 +7,8 @@ import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Step from 'components/Step'
 import Button from 'components/ConstructorBtn'
 
+import {clone} from 'helpers'
+
 const SortableContainer = sortableContainer(({children}) => {
     return <ul>{children}</ul>;
 });
@@ -29,30 +31,24 @@ class Steps extends Component {
     }
 
     onSortEnd({oldIndex, newIndex}){
-        let array = [...this.props.data]
+        let array = clone(this.props.data)
         array = arrayMove(array, oldIndex, newIndex)
         this.props.onChange(array)
         this.forceUpdate()
     }
 
     onStepChange(index, value) {
-        let array = [...this.props.data]
+        let array = clone(this.props.data)
         array[index] = value
         this.props.onChange(array)
     }
 
     addStep(){
-        let array = [...this.props.data]
+        let array = clone(this.props.data)
         array.push({
             image: '',
             body: '',
-            step_ingredients: [
-                {
-                    ingredient_id: '',
-                    amount: '',
-                    unit_id: ''
-                },
-            ]
+            step_ingredients: []
         })
         this.props.onChange(array)
     }
@@ -60,9 +56,7 @@ class Steps extends Component {
 
 
     deleteStep(index){
-        let array = [...this.props.data]
-        // console.log('array')
-        // console.log(array)
+        let array = clone(this.props.data)
         array.splice(index,1)
         this.props.onChange(array)
     }

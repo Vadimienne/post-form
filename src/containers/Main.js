@@ -34,7 +34,7 @@ class Main extends Component {
     }
 
     async componentDidMount(){
-        const recipe = await createRecipe()// getRecipe(110258)
+        const recipe = await     getRecipe(110258)
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
@@ -96,8 +96,10 @@ class Main extends Component {
             recipe_cuisine_types,   recipe_holidays,
             recipe_mealtimes,       recipe_nutrition_types,
             recipe_user_tags,       recipe_subcategories,
-            contest,                contest_id
+            contest,                contest_id,
         } = json
+
+        const recipeId = json.id
 
         const checkedTags = {
             recipe_category:        recipe_category,
@@ -126,7 +128,6 @@ class Main extends Component {
             step: recipe_steps ? (recipe_steps.length? true: false) : false,
             steps_description: recipe_steps ? (recipe_steps.find((elem) => elem.body.length === 0)? true: false) : false,
         }
-        console.log(validation)
 
         const isFormValid = (Object.values(validation).find(elem => elem === false) === false && Object.values(validation).length)? false: true
         // console.log(this.state.json)
@@ -138,7 +139,9 @@ class Main extends Component {
 
                             <div className='left-column form-column'>
                                 <SideTags 
-                                    tags={tags} checked={checkedTags} contests={[{id: 205, name: "Конкурс рецептов «Летняя рыбалка с ТМ „Капитан Вкусов“»"}]}
+                                    tags={tags} 
+                                    checked={checkedTags} 
+                                    contests={[{id: 205, name: "Конкурс рецептов «Летняя рыбалка с ТМ „Капитан Вкусов“»"}]}
                                     stateUpdater={this.stateUpdater}
                                     isCategoryValid={validation.category}
                                     isCuisineValid={validation.national_cuisine}
@@ -182,6 +185,7 @@ class Main extends Component {
 
                                     <div className='content-box__content_ingredients'>
                                         <IngredientGroups
+                                            recipeId={recipeId}
                                             isValid={validation.ingredients}
                                             data={ingredient_groups}
                                             units={units}

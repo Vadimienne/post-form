@@ -9,6 +9,8 @@ import IngredientList from 'components/IngredientList'
 import Input from 'components/Input'
 import Ingredient from 'components/IngredientItemAsync'
 
+import { clone } from 'helpers'
+
 import 'styles/IngredientGroups.sass'
 
 const SortableContainer = sortableContainer(({children}) => {
@@ -25,12 +27,6 @@ class IngedientGroup extends Component {
     }
 
     shouldComponentUpdate(nextProps){
-    // console.log(this.props)
-    // return true
-
-       /*  console.log('/////////////////////////////')
-        console.log(JSON.stringify(this.props.data[0].recipe_ingredients[0]), JSON.stringify(this.props.data[0].recipe_ingredients[1]))
-        console.log(JSON.stringify(nextProps.data[0].recipe_ingredients[0]), JSON.stringify(nextProps.data[0].recipe_ingredients[1])) */
         if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
             return false
         }
@@ -40,30 +36,30 @@ class IngedientGroup extends Component {
     }
 
     onSortEnd({oldIndex, newIndex}) {
-        let array = [...this.props.data]
+        let array = clone(this.props.data)
 
         //sort array
         array = arrayMove(array, oldIndex, newIndex)
 
         //refresh array's position fields
         array = array.map((elem, index)=> {
-            elem.position = index
+            elem.element_position = index + 1
             return elem
         })
 
         this.props.onChange(array)
 
-        this.forceUpdate()
+        // this.forceUpdate()
     }
 
     onIngChange(index, value){
-        let array = JSON.parse(JSON.stringify(this.props.data))
+        let array = clone(this.props.data)
         array[index].recipe_ingredients = value
         this.props.onChange(array)
     }
 
     onNameChange(e, index){
-        let array = [...this.props.data]
+        let array = clone(this.props.data)
         array[index].element = e.target.value
         this.props.onChange(array)
     }
@@ -71,13 +67,15 @@ class IngedientGroup extends Component {
 
     // #tofix add position
     addGroup(){
-        let array = [...this.props.data]
-        array.push({element:'', recipe_ingredients:[]})
+        let array = clone(this.props.data)
+        array.push(
+            {
+                element:'', element_position: array.length + 1, recipe_ingredients:[]})
         this.props.onChange(array)
     }
 
     deleteGroup(index){
-        let array = [...this.props.data]
+        let array = clone(this.props.data)
         array.splice(index,1)
         this.props.onChange(array)
     }
@@ -96,6 +94,8 @@ class IngedientGroup extends Component {
                 </div>
                 {!this.props.isValid? (<span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>): undefined}
                 <IngredientList
+                    groupInfo={{element: elem.element, element_position: elem.element_position}}
+                    recipeId={this.props.recipeId}
                     data={[...elem.recipe_ingredients]}
                     units={this.props.units}
                     onChange={(val) => this.onIngChange(index, val)}
