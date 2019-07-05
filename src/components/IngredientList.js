@@ -19,14 +19,7 @@ class Ingredients extends Component {
         this.onSortEnd = this.onSortEnd.bind(this)
     }
 
-    componentDidMount(){
-        if (this.props.data.length ==  8){
-            let data = [...this.props.data]
-            data.splice(1,1)
-        }
-
-    }
-
+    // send ingredient changes to state
     onIngChange(index, value){
         let data = clone(this.props.data)
         data[index] = value
@@ -34,6 +27,7 @@ class Ingredients extends Component {
     }
 
     //#tofix refresh positions in array
+    // triggers when sort-button is released
     onSortEnd({oldIndex, newIndex}){
         let array = clone(this.props.data)
         array = arrayMove (array, oldIndex, newIndex)
@@ -41,7 +35,6 @@ class Ingredients extends Component {
         //this.forceUpdate()
     }
 
-    //#tofix add position
     addIngredient(){
         let array = clone(this.props.data)
         if( this.props.listType==='groups'){

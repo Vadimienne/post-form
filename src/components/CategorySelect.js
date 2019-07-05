@@ -23,19 +23,38 @@ class CategorySelect extends Component {
     render() {
 
         const { categoryScaffold, selectedCategory, isValid, header } = this.props
-        // Map options and find default value of select depending on whether it is array or single value
-        /*    categoryScaffold
-        console.log(`categoryScaffold: ${header} `, categoryScaffold); */
-        let options = categoryScaffold.map((elem)=> {return{ label: elem.name, value: elem.id }})
+
+        // Map options for Select
+        let options = categoryScaffold.map(
+            (elem) => { 
+                return { label: elem.name, value: elem.id }
+            }
+        )
+
+        // calc defaultValue for multi- or regular Select
         let defaultValue
 
         if( selectedCategory ){
             if (this.props.isMulti){
-                let filteredCategories = selectedCategory.map((selected) => categoryScaffold.find((elem) => elem.id == selected))
-                defaultValue = filteredCategories.map((elem)=> {return{ label: elem.name, value: elem.id }})
+                // find intersection of selectedCategory[] and categoryScaffold[]
+                let filteredCategories = selectedCategory.map(
+                    (selected) => categoryScaffold.find(
+                        (elem) => elem.id == selected
+                    )
+                )
+                
+                // map value for Select
+                defaultValue = filteredCategories.map(
+                    (elem) => { 
+                        return { label: elem.name, value: elem.id }
+                    }
+                )
             }
             else{
-                let foundCategory = categoryScaffold.find((elem)=> elem.id == selectedCategory)
+                // find selectedCategory in scaffold and make a value for Select
+                let foundCategory = categoryScaffold.find(
+                    (elem) => elem.id == selectedCategory
+                )
                 defaultValue = { label: foundCategory.name, value: foundCategory.id }
             }
         }

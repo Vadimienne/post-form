@@ -3,6 +3,8 @@ import React from "react";
 import 'styles/Input.sass'
 
 function Comp (props) {
+
+    // big Input field has a html-structure different from default input field
     return !props.isBig? (
         <div className={props.className}>
             <div className='field-container'>

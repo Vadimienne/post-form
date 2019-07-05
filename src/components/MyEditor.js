@@ -24,6 +24,17 @@ class Editor  extends Component {
         }
     }
 
+    componentDidMount(){
+        this.props.data ? this.updateEditorContent() : null
+    }
+
+    // update text
+    updateEditorContent(){
+        const node = this.editorRef.current
+        node.innerHTML = this.props.data
+    }
+
+    // command executed when buttons (italic, bold, link, etc.) are pressed
     execCommand(cmd, insertion) {
         let val = insertion ? insertion : undefined
         if(cmd.cmd==='createLink') {
@@ -35,15 +46,7 @@ class Editor  extends Component {
         document.execCommand(cmd.cmd, false, (val || ''))
     }
 
-    updateEditorContent(){
-        const node = this.editorRef.current
-        node.innerHTML = this.props.data
-    }
-
-    componentDidMount(){
-        this.props.data ? this.updateEditorContent() : null
-    }
-
+    // send changes to state
     onInput(){
         const node = this.editorRef.current
         this.props.onChange(node.innerHTML)
@@ -51,22 +54,45 @@ class Editor  extends Component {
 
     render() {
 
+        // tool list can be found in config/execCommands
         let tools = ['removeFormat', 'insertUnorderedList', 'insertOrderedList']
         // tools = []
 
-        let filteredCommands = tools ? tools.map((elem) => commands.hasOwnProperty(elem)? commands[elem]: undefined): []
+        // withdraw needed tools
+        let filteredCommands = tools ? tools.map(
+            (elem) => commands.hasOwnProperty(elem)? commands[elem]: undefined
+        ): []
 
+        // map tool-buttons
         //button below contains class from ToolBtn.sass that resets default button styles
-        let mappedCommands = filteredCommands.map((elem)=> <button type='button' className={"icon-tool-btn fas fa-" + elem.icon} key={elem.cmd} onClick={()=>{this.execCommand(elem)}}/>)
+        let mappedCommands = filteredCommands.map(
+            (elem) => 
+                <button 
+                    type='button' 
+                    className={"icon-tool-btn fas fa-" + elem.icon} 
+                    key={elem.cmd} 
+                    onClick={()=>{this.execCommand(elem)}}
+                />
+        )
 
-        let insertions = [{text:'«', name: 'guillemet-left'},
+        // buttons for inserting characters
+        let insertions = [
+            {text:'«', name: 'guillemet-left'},
             {text:'»', name:'guillemet-right'},
             {text: '—', name: 'long-dash'},
             {text: '–', name: 'dash'},
-            {text: '°C', name: 'celsius'}]
+            {text: '°C', name: 'celsius'}
+        ]
         insertions = []
 
-        let mappedInsertions = insertions.map((elem) => <ToolBtn cmd={elem.name} key={elem.name} onClick={()=>this.execCommand({cmd:'insertText'}, elem.text)}/>)
+        let mappedInsertions = insertions.map(
+            (elem) => 
+                <ToolBtn 
+                    cmd={elem.name} 
+                    key={elem.name} 
+                    onClick={()=>this.execCommand({cmd:'insertText'}, elem.text)}
+                />
+        )
 
         return (
             <div className='editor'>

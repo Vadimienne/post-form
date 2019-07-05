@@ -68,6 +68,7 @@ class Timings extends Component {
         }
     }
 
+    // toggle preparation time collapsible
     onToggle(){
         if (this.state.isChecked){
             this.props.onPrepTimeChange(0)
@@ -83,13 +84,12 @@ class Timings extends Component {
     render() {
         const { cooking_time, preparation_time, servings } = this.props.data
 
+        // calculate hours and minutes
         let minutes = cooking_time % 60
         let hours = (cooking_time - minutes) / 60
 
         let preparationMinutes = preparation_time % 60
         let preparationHours = (preparation_time - preparationMinutes) / 60
-
-        // let isChecked = this.props.data.preparation_time || this.state.isChecked? true: false
 
         // to avoid to render '0' in input field when field should be empty
         minutes = minutes ? minutes : ''
@@ -106,9 +106,21 @@ class Timings extends Component {
 
                         <div className={'input-timings-width timing-flex-container' + (this.props.isValid? '': ' invalid')}>
                             <div className='timing-clock-icon'/>
-                            <Input className='text-input' type='number' value={hours} onChange={(e) => this.onInput('hours',e)} maxlength={2}/>
+                            <Input 
+                                className='text-input' 
+                                type='number' 
+                                value={hours} 
+                                onChange={(e) => this.onInput('hours',e)} 
+                                maxlength={2}
+                            />
                             <span className='input-label'>часов</span>
-                            <Input className='text-input' value={minutes} onChange={(e) => this.onInput('minutes',e)} maxlength={2}/>
+
+                            <Input 
+                                className='text-input' 
+                                value={minutes} 
+                                onChange={(e) => this.onInput('minutes',e)} 
+                                maxlength={2}
+                            />
                             <span className='input-label'>минут</span>
                         </div>
                     </div>
@@ -116,22 +128,35 @@ class Timings extends Component {
                         <span className={'title' + (this.props.isServingsValid? '': ' invalid')}>Количество персон </span>
                         <div className='input-portions-width timing-flex-container'>
                             <div className='timing-portions-icon' />
-                            <Input value={servings} onChange={(e) => this.onInput('servings',e)}/>
+                            <Input 
+                                value={servings} 
+                                onChange={(e) => this.onInput('servings',e)}
+                            />
                             <span className='input-label'>человек</span>
                         </div>
                     </div>
                 </div>
                 <div className='outer-flex-container'>
                     <div className='field_w260 preparation_check'>
-                        <Check onToggle={() => this.onToggle()} isActive={this.state.isChecked} text='Требуется подготовка'/>
+                        <Check 
+                            onToggle={() => this.onToggle()} 
+                            isActive={this.state.isChecked} 
+                            text='Требуется подготовка'
+                        />
                     </div>
                     {this.state.isChecked ? (
                         <div className='preparation_time_container'>
                             <span className='title'>Время подготовки</span>
                             <div className='input-timings-width timing-flex-container'>
                                 <div className='timing-clock-icon'/>
-                                <Input value={preparationHours} onChange={(e) => this.onInput('preparationHours',e)}/>
-                                <Input value={preparationMinutes} onChange={(e) => this.onInput('preparationMinutes',e)}/>
+                                <Input 
+                                    value={preparationHours} 
+                                    onChange={(e) => this.onInput('preparationHours',e)}
+                                />
+                                <Input 
+                                    value={preparationMinutes} 
+                                    onChange={(e) => this.onInput('preparationMinutes',e)}
+                                />
                             </div>
                         </div>
                     ): undefined

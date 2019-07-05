@@ -11,6 +11,7 @@ class CollapsibleCheckboxes extends Component {
         this.state = {isOpen:true}
     }
 
+    // send checkbox toggles to state
     toggleCheck(id, isChecked){
         let array = clone(this.props.checked)
         if (isChecked){
@@ -25,6 +26,7 @@ class CollapsibleCheckboxes extends Component {
     render() {
         const { head, tags, checked } = this.props
 
+        // map checkboxes
         let checkboxes = tags.map((elem, index) => {
             let isChecked = checked.includes(elem.id)? true: false
             return(

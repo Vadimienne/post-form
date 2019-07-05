@@ -20,6 +20,17 @@ class Editor  extends Component {
         }
     }
 
+    componentDidMount(){
+        this.props.data ? this.updateEditorContent() : null
+    }
+
+    // update text
+    updateEditorContent(){
+        const node = this.editorRef.current
+        node.innerHTML = this.props.data
+    }
+
+    // command executed when buttons (italic, bold, link, etc.) are pressed
     execCommand(cmd, insertion) {
         let val = insertion ? insertion : undefined
         if(cmd.cmd==='createLink') {
@@ -31,15 +42,7 @@ class Editor  extends Component {
         document.execCommand(cmd.cmd, false, (val || ''))
     }
 
-    updateEditorContent(){
-        const node = this.editorRef.current
-        node.innerHTML = this.props.data
-    }
-
-    componentDidMount(){
-        this.props.data ? this.updateEditorContent() : null
-    }
-
+    // send changes to state
     onInput(){
         const node = this.editorRef.current
         this.props.onChange(node.innerHTML)

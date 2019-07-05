@@ -13,18 +13,17 @@ class DoubleSelect extends Component {
         this.onCategorySelect = this.onCategorySelect.bind(this)
     }
 
+    // send category change to state
     onCategorySelect(selected){
-        console.log('ONCATEGORYSELECT: ', selected)
-        this.props.onCategoryChange(selected.value, () => this.props.onSubcategoryChange([]))
-        
+        this.props.onCategoryChange(selected.value, () => this.props.onSubcategoryChange([])) 
     }
 
+    // send subcategory change to state
     toggleCheck(id, isActive){
         let array = clone(this.props.subcategories)
         isActive ?
             array.splice( array.indexOf(id), 1 )
-            :
-            array.push( id )
+            :array.push( id )
         this.props.onSubcategoryChange(array)
     }
 
@@ -32,12 +31,24 @@ class DoubleSelect extends Component {
 
         const { categoryScaffold, subcategories, category, isValid } = this.props
 
-        let options = categoryScaffold.map((elem)=>{return{label: elem.name, value: elem.id}})
-        let selectedCategory = categoryScaffold.find((elem) => elem.id === category)
-        let selectedValue = selectedCategory ? {label: selectedCategory.name, value: selectedCategory.id} : null
+        // map options for Select
+        let options = categoryScaffold.map(
+            (elem) => {
+                return{ label: elem.name, value: elem.id }
+            }
+        )
 
-        let allSubcategories = category ? categoryScaffold.find((elem) => elem.id === category).recipe_subcategory : []
-
+        // find selected option
+        let selectedValue = options.find(
+            (elem) => elem.value === category
+        )
+        
+        // get subcategories array
+        let allSubcategories = category ? 
+            categoryScaffold.find( (elem) => elem.id === category ).recipe_subcategory 
+            : []
+        
+        // map checkboxes
         let checkboxes = allSubcategories.map((elem, index)=> {
             let isActive = subcategories.includes(elem.id)? true: false
             return(

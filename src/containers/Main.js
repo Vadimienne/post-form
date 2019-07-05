@@ -33,6 +33,8 @@ class Main extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    
+    // fetch data from the server when app launches
     async componentDidMount(){
         const recipe = await     getRecipe(110258)
         const tags = await getTags()
@@ -51,10 +53,10 @@ class Main extends Component {
         this.updateIngredients()
     }
 
+
+    // write group ingredients to state
     updateIngredients(){
-    // eslint-disable-next-line prefer-const
         let ingredients = []
-        // eslint-disable-next-line prefer-const
         let ingredientGroups = [...this.state.json.ingredient_groups]
         ingredientGroups.map(
             (elem) => ingredients.push({label: elem.element, value: elem.recipe_ingredients})
@@ -63,27 +65,27 @@ class Main extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
+        // update available ingredients when changed
         if (prevState.json.ingredient_groups && (JSON.stringify(prevState.json.ingredient_groups) != JSON.stringify(this.state.json.ingredient_groups))){
             this.updateIngredients()
         }
     }
 
+    // update particular state field with passed value. Optional callback when state update finished
     stateUpdater(field, val, callback){
         let array = clone(this.state.json)
         array[field] = val
         this.setState({json: array}, callback)
     }
 
+    // submit form
     onSubmit() {
-        const updatedRecipe = updateRecipe(this.state.json.id, parser(this.state.json, this.state.tags))
+        updateRecipe(this.state.json.id, parser(this.state.json, this.state.tags))
     }
 
     render() {
         const { json, units, tags, ingredients, contests } = Object.freeze(clone(this.state))
         console.log('new render')
-
-        /* contests 
-        console.log('contests Main : ', contests ); */
 
         const { 
             title,                  image, 
@@ -99,6 +101,7 @@ class Main extends Component {
             contest,                contest_id,
         } = json
 
+        // because json.id isn't clear enough
         const recipeId = json.id
 
         const checkedTags = {
@@ -115,10 +118,9 @@ class Main extends Component {
             contest:                contest,
             contest_id:             contest_id
         }
-
-        let validation =  {}
         
-        validation = {
+        // object describes which fields are filled or empty
+        let validation = {
             title: title ? true: false,
             category: recipe_category ? (recipe_category.toString().length? true: false) : false,
             national_cuisine: recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
@@ -129,8 +131,12 @@ class Main extends Component {
             steps_description: recipe_steps ? (recipe_steps.find((elem) => elem.body.length === 0)? true: false) : false,
         }
 
-        const isFormValid = (Object.values(validation).find(elem => elem === false) === false && Object.values(validation).length)? false: true
-        // console.log(this.state.json)
+        // form is valid when all required fields are filled
+        const isFormValid = (
+            Object.values(validation).find(elem => elem === false) === false 
+            && Object.values(validation).length
+        ) ? false: true
+
         return (
             <>
                 { this.state.json && this.state.tags && this.state.units ?
@@ -141,7 +147,7 @@ class Main extends Component {
                                 <SideTags 
                                     tags={tags} 
                                     checked={checkedTags} 
-                                    contests={[{id: 205, name: "Конкурс рецептов «Летняя рыбалка с ТМ „Капитан Вкусов“»"}]}
+                                    contests={contests}
                                     stateUpdater={this.stateUpdater}
                                     isCategoryValid={validation.category}
                                     isCuisineValid={validation.national_cuisine}

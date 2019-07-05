@@ -24,6 +24,7 @@ class Step extends Component {
         }
     }
 
+    // send field changes to state
     onFieldChange(field, val) {
         let data = clone(this.props.data)
         data[field] = val
@@ -35,9 +36,15 @@ class Step extends Component {
 
         return (
             <div className='step-presentational'>
-                <Dropzone onChange={(val) => this.onFieldChange('image', val)} data={image}/>
+                <Dropzone 
+                    onChange={(val) => this.onFieldChange('image', val)} 
+                    data={image}
+                />
                 <div className='content-box__content' >
-                    <Editor onChange={(val) => this.onFieldChange('body', val)} data = {body}/>
+                    <Editor 
+                        onChange={(val) => this.onFieldChange('body', val)} 
+                        data={ body }
+                    />
                     <span className='ingredients-label'>Укажите необходимые ингредиенты</span>
                     <IngredientList
                         data={step_ingredients}

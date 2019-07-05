@@ -9,6 +9,7 @@ class Cont extends Component {
         this.onClick =this.onClick.bind(this)
     }
 
+    // toggle slider and call onClick from props
     onClick(){
         this.setState({isOn: !this.state.isOn})
         this.props.onClick? this.props.onClick(): null

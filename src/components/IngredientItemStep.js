@@ -18,18 +18,21 @@ class IngredientStep extends Component {
         this.onIngSelect = this.onIngSelect.bind(this)
     }
 
+    // triggers on amount input
     onInput(type, e){
         let data = clone(this.props.data)
         data[type] = e.target.value
         this.props.onChange(data)
     }
 
+    // no need in this as unit is fixed in Step
     /* onUnitSelect(selectedOption){
         let data = [...this.props.data]
         data.unit_id = selectedOption.value
         this.props.onChange(data)
     } */
 
+    // triggers when ingredient is selected
     onIngSelect(selectedOption){
         let data = clone(this.props.data)
         data.recipe_ingredient_id = selectedOption.value
@@ -54,15 +57,6 @@ class IngredientStep extends Component {
         let selectedIngredient = parsedAvailable? parsedAvailable.find(
             (elem) => elem.id === data.recipe_ingredient_id
         ): undefined
-       /*  data
-        console.log('///////////////////////////////////: ');
-        console.log('data: ', data);
-        parsedAvailable
-        console.log('parsedAvailable: ', parsedAvailable);
-        selectedIngredient
-        console.log('selectedIngredient: ', selectedIngredient);
-        console.log('///////////////////////////////////: ');
- */
 
         // extract unit_id from selectedIngredient
         const unit_id = selectedIngredient ? selectedIngredient.unit_id : null

@@ -30,6 +30,7 @@ class Steps extends Component {
         }
     }
 
+    // triggers when sort-button is released
     onSortEnd({oldIndex, newIndex}){
         let array = clone(this.props.data)
         array = arrayMove(array, oldIndex, newIndex)
@@ -37,6 +38,7 @@ class Steps extends Component {
         this.forceUpdate()
     }
 
+    // send Step changes to state
     onStepChange(index, value) {
         let array = clone(this.props.data)
         array[index] = value
@@ -53,8 +55,6 @@ class Steps extends Component {
         this.props.onChange(array)
     }
 
-
-
     deleteStep(index){
         let array = clone(this.props.data)
         array.splice(index,1)
@@ -70,7 +70,7 @@ class Steps extends Component {
                 className='content-box sort-delete-steps'
                 index={index}
                 key={'sortable-step-'+index}
-                onDelete={()=>this.deleteStep(index)}>
+                onDelete={ () => this.deleteStep(index) }>
                 <Step
                     data={elem}
                     units={this.props.units}
@@ -82,11 +82,26 @@ class Steps extends Component {
 
         return (
             <>
-                <SortableContainer useWindowAsScrollContainer onSortEnd={this.onSortEnd} useDragHandle lockAxis='y' key='sortable-container'>
+                <SortableContainer 
+                    useWindowAsScrollContainer 
+                    onSortEnd={this.onSortEnd} 
+                    useDragHandle 
+                    lockAxis='y' 
+                    key='sortable-container'
+                >
                     {items}
                 </SortableContainer>
-                {!this.props.isValid? <span className='step-validation-warning'>Нужно указать хотя бы один шаг</span>: undefined}
-                <Button onClick={this.addStep} text='Добавить шаг' className='add-step-button'  icon='&#xea0d;'/>
+                {
+                    !this.props.isValid? 
+                        <span className='step-validation-warning'>Нужно указать хотя бы один шаг</span>
+                        : undefined
+                }
+                <Button 
+                    onClick={this.addStep} 
+                    text='Добавить шаг' 
+                    className='add-step-button'  
+                    icon='&#xea0d;'
+                />
             </>
         );
     }

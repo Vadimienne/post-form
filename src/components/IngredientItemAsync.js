@@ -29,18 +29,25 @@ class IngredientAsync extends Component {
     }
 
     componentDidMount(){
+        // set initial state
         this.setState({selectedIngredient: this.props.data.ingredient})
         this.setState({amount: this.props.data.amount})
         this.setState({selectedUnit: this.props.data.unit_id})
         this.setState({data: this.props.data})
     }
 
+
+    // send valid ingredient to server and write it to Local and Main state
     async createIngredientOnServer(){
         let data = clone(this.state.data)
-        console.log('Entry', data.amount, data.ingredient_id, data.unit_id)
+
+        // when all fields of ing are valid and ing has no recipe_ingredient_id (id) 
+        // send ing to the server
+        // get recipe_ingredient_id and write ing to local state and Main state
         if (data.amount && data.ingredient_id && data.unit_id && !data.id) {
             if (!data.id) {
-                console.log('if')
+
+                // prepare data and send it to the server
                 data.element = this.props.groupInfo.element
                 data.element_position = this.props.groupInfo.element_position
                 let response = await createIngredient(this.props.recipeId, data)
@@ -58,24 +65,11 @@ class IngredientAsync extends Component {
             }
         }
         else {
-            console.log('else')
             return -1
         }
     }
 
-    onInput(type, e){
-        let data = clone(this.state.data)
-        data[type] = e.target.value
-        this.setState({data}, this.createIngredientOnServer)
-    }
-
-    onUnitSelect(selectedOption){
-        let data = clone(this.state.data)
-        data.unit_id = selectedOption.value
-        this.setState({data}, this.createIngredientOnServer)
-        
-    }
-
+    //triggers when ingredient is selected
     onIngSelect(selectedOption){
         let data = clone(this.state.data)
         data.ingredient_id = selectedOption.value.id
@@ -85,6 +79,22 @@ class IngredientAsync extends Component {
         this.setState({data}, this.createIngredientOnServer)
     }
 
+    // triggers on amount input
+    onInput(type, e){
+        let data = clone(this.state.data)
+        data[type] = e.target.value
+        this.setState({data}, this.createIngredientOnServer)
+    }
+
+    // triggers when unit is selected
+    onUnitSelect(selectedOption){
+        let data = clone(this.state.data)
+        data.unit_id = selectedOption.value
+        this.setState({data}, this.createIngredientOnServer)
+        
+    }
+
+    // load ingredients
     async loadOptions(str){
         if(str && str.length > 1) {
             let throttleIngs = throttle(() => getIngredients(str), 1000)
@@ -103,7 +113,7 @@ class IngredientAsync extends Component {
         const { units } = this.props
 
 
-        //getting array of all available metrics for
+        //getting array of all available metrics for Unit Select
         let filteredOptions = units && unit_ids?  unit_ids.map((elem) => units.find((x)=> x.id===elem )): []
         let options = filteredOptions.map((elem)=>{
             if(elem) {
