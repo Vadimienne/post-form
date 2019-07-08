@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import ContentEditable from 'react-contenteditable'
 
 import {commands} from 'config/execCommands'
@@ -7,32 +7,22 @@ import ToolBtn from 'components/EditorToolBtn'
 
 import 'styles/MyEditor.sass'
 
-class Editor  extends Component {
+class Editor  extends PureComponent {
     constructor(props) {
         super(props);
-        this.editorRef = React.createRef()
-        this.onInput = this.onInput.bind(this)
-        this.updateEditorContent = this.updateEditorContent.bind(this)
+        // this.updateEditorContent = this.updateEditorContent.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
-    shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
-    }
-
-    componentDidMount(){
+    /* componentDidMount(){
         this.props.data ? this.updateEditorContent() : null
     }
-
+ */
     // update text
-    updateEditorContent(){
+   /*  updateEditorContent(){
         const node = this.editorRef.current
         node.innerHTML = this.props.data
-    }
+    } */
 
     // command executed when buttons (italic, bold, link, etc.) are pressed
     execCommand(cmd, insertion) {
@@ -46,11 +36,11 @@ class Editor  extends Component {
         document.execCommand(cmd.cmd, false, (val || ''))
     }
 
-    // send changes to state
-    onInput(){
-        const node = this.editorRef.current
-        this.props.onChange(node.innerHTML)
+    onChange(e){
+        this.props.stateUpdater(['description'], e.target.value)
     }
+
+    // send changes to state
 
     render() {
 
@@ -101,8 +91,7 @@ class Editor  extends Component {
                 <ContentEditable
                     className='editor-text'
                     html={this.props.data? this.props.data: ''}
-                    onChange={this.onInput}
-                    innerRef={this.editorRef}
+                    onChange={this.onChange}
                 />
             </div>
         );

@@ -7,14 +7,14 @@ class Cont extends Component {
         super(props);
     }
 
-    shouldComponentUpdate(nextProps){
+    /* shouldComponentUpdate(nextProps){
         if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
             return false
         }
         else {
             return true
         }
-    }
+    } */
 
 
     render() {

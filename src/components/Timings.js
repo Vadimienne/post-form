@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import Check from 'components/Checkbox'
 
@@ -6,25 +6,12 @@ import Input from 'components/Input'
 
 import 'styles/Timings.sass'
 
-class Timings extends Component {
+class Timings extends PureComponent {
     constructor(props) {
         super(props);
         this.state = { isChecked: false}
         this.onInput = this.onInput.bind(this)
-    }
-
-    shouldComponentUpdate(nextProps, nextState){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            if (JSON.stringify(this.state) === JSON.stringify(nextState)){
-                return false
-            }
-            else{
-                return true
-            }
-        }
-        else {
-            return true
-        }
+        this.onHours = this.onHours.bind(this)
     }
 
     componentDidMount(){
@@ -34,9 +21,16 @@ class Timings extends Component {
     }
 
 
+    onHours(e){
+        let value = e.target.value
+        let minutes = this.props.cooking_time % 60
+        this.props.stateUpdater(['cooking_time'], value * 60 + minutes)
+    }
+
+
     // this implementation caused by the way data is stored in json
     onInput(field, valueObj) {
-        const { onTimeChange, onPrepTimeChange, onServingsChange } = this.props
+        const { onTimeChange, onPrepTimeChange, onServingsChange, stateUpdater } = this.props
         let data = this.props.data
         let value = valueObj.target.value
 
@@ -45,19 +39,19 @@ class Timings extends Component {
 
         switch (field) {
         case 'hours':
-            onTimeChange(value * 60 + minutes)
+            this.props.stateUpdater(['cooking_time'], value * 60 + minutes)
             break;
 
         case 'minutes':
-            onTimeChange(data.cooking_time + (value - minutes))
+            this.props.stateUpdater(['cooking_time'], data.cooking_time + (value - minutes))
             break;
 
         case 'preparationHours':
-            onPrepTimeChange(value * 60 + preparationMinutes)
+            this.props.stateUpdater(['preparation_time'], value * 60 + preparationMinutes)
             break;
 
         case 'preparationMinutes':
-            onPrepTimeChange(data.preparation_time + (value - preparationMinutes))
+            this.props.stateUpdater(['preparation_time'], data.preparation_time + (value - preparationMinutes))
             break;
 
         case 'servings':
@@ -82,7 +76,7 @@ class Timings extends Component {
 
 
     render() {
-        const { cooking_time, preparation_time, servings } = this.props.data
+        const { cooking_time, preparation_time, servings } = this.props
 
         // calculate hours and minutes
         let minutes = cooking_time % 60
@@ -110,7 +104,7 @@ class Timings extends Component {
                                 className='text-input' 
                                 type='number' 
                                 value={hours} 
-                                onChange={(e) => this.onInput('hours',e)} 
+                                onChange={this.onHours} 
                                 maxlength={2}
                             />
                             <span className='input-label'>часов</span>
@@ -118,7 +112,7 @@ class Timings extends Component {
                             <Input 
                                 className='text-input' 
                                 value={minutes} 
-                                onChange={(e) => this.onInput('minutes',e)} 
+                                
                                 maxlength={2}
                             />
                             <span className='input-label'>минут</span>

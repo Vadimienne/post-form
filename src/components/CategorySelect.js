@@ -21,6 +21,7 @@ class CategorySelect extends Component {
     }
 
     render() {
+        // console.log('CategorySelect: ', this.props)
 
         const { categoryScaffold, selectedCategory, isValid, header } = this.props
 

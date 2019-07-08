@@ -1,8 +1,6 @@
 export let json = {
   "id": 1,
   "title": "Борщ",
-  "slug": "borsch",
-  "position": 25,
   "description": "string",
   "preparation_time": 0,
   "cooking_time": 67,

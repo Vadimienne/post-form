@@ -19,11 +19,8 @@ class Ingredients extends Component {
         this.onSortEnd = this.onSortEnd.bind(this)
     }
 
-    componentDidMount(){
+    /* componentDidMount(){
         let array = clone(this.props.data)
-
-        //refresh array's position fields
-        console.log('sorting array BEF: ',array.map((elem) => elem.position))
         array = array.sort(
             (a, b) => {
                 if (a.position < b.position){
@@ -35,10 +32,8 @@ class Ingredients extends Component {
                 return 0
             }
         )
-        console.log('sorting array AFT: ',array.map((elem) => elem.position))
-        console.log('——————————————————————————————————————————————————————————')
         this.props.onChange(array)
-    }
+    } */
 
     // send ingredient changes to state
     onIngChange(index, value){
@@ -106,7 +101,7 @@ class Ingredients extends Component {
         // Ingredient component can be IngredientItemAsync or IngredientItemStep
         let Ingredient = this.props.ingredientItem
 
-        let cloned = this.props.data? clone(this.props.data) : []
+        // let cloned = this.props.data? clone(this.props.data) : []
         // sort ingredients according to position property
         /* let sortedIngredients = cloned.length ? cloned.sort(
             (a, b) => {
@@ -129,7 +124,7 @@ class Ingredients extends Component {
 
 
         // map ingredients
-        let mappedIngredients = cloned.length ? cloned.map((elem, index) => (
+        let mappedIngredients = this.props.data.length ? this.props.data.map((elem, index) => (
             <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
                 <Ingredient
                     groupInfo={this.props.groupInfo ? this.props.groupInfo : undefined}

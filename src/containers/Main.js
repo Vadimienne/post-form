@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { clone } from 'helpers'
 import parser from 'helpers/toPostRecipeParser'
+import Immutable, { fromJS } from 'immutable'
 
 import Dropzone from 'components/Dropzone';
 import Editor from 'components/MyEditor';
@@ -31,12 +32,13 @@ class Main extends Component {
         this.stateUpdater = this.stateUpdater.bind(this)
         this.updateIngredients = this.updateIngredients.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.onTitleInput = this.onTitleInput.bind(this)
     }
 
     
     // fetch data from the server when app launches
     async componentDidMount(){
-        const recipe = await     getRecipe(110258) //createRecipe()
+        const recipe = await getRecipe(110258) //createRecipe()
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
@@ -46,11 +48,11 @@ class Main extends Component {
         // parser(recipe, tags)
         /* contests
         console.log('contests: ', contests.contests); */
-        this.setState({json: recipe})
+        this.setState({json: fromJS(recipe)})
         this.setState({tags})
         this.setState({units})
         this.setState({contests: contests.contests})
-        this.updateIngredients()
+        // this.updateIngredients()
     }
 
 
@@ -68,23 +70,21 @@ class Main extends Component {
     componentDidUpdate(prevProps, prevState){
         // update available ingredients when changed
         if (prevState.json.ingredient_groups && (JSON.stringify(prevState.json.ingredient_groups) != JSON.stringify(this.state.json.ingredient_groups))){
-            this.updateIngredients()
+            // this.updateIngredients()
         }
     }
 
     // update particular state field with passed value. Optional callback when state update finished
-    stateUpdater(field, val, callback){
-        let array = clone(this.state.json)
-        array[field] = val
+    stateUpdater(path, value, callback){
+        console.log('isImmutable')
+        console.log(Immutable.isImmutable(this.state.json))
 
-        if( field === 'ingredient_groups'){
-            console.log('state UPDATER')
-            console.log(val[0].recipe_ingredients[0].position)
-            console.log(val[0].recipe_ingredients[0])
-        }
-        //this.setState({json: array}, callback)
-        this.state.json = array
-        this.forceUpdate()
+        this.setState({json: this.state.json.setIn(path, value)}, ()=> console.log(this.state.json.toJS().title))
+
+    }
+
+    onTitleInput(e){
+        this.stateUpdater(['title'], e.target.value)
     }
 
     // submit form
@@ -93,10 +93,15 @@ class Main extends Component {
     }
 
     render() {
-        const { json, units, tags, ingredients, contests } = Object.freeze(clone(this.state))
+        const { json, units, tags, ingredients, contests } = this.state
+        // json.toJS()
         console.log('new render')
 
-        const { 
+        if ( !Object.keys(json).length ){
+            return 0
+        }
+
+        /* const { 
             title,                  image, 
             description,            cooking_time,  
             preparation_time,       servings,
@@ -108,7 +113,32 @@ class Main extends Component {
             recipe_mealtimes,       recipe_nutrition_types,
             recipe_user_tags,       recipe_subcategories,
             contest,                contest_id,
-        } = json
+        } = json */
+        const recipe_category =         json.get('recipe_category')
+        const recipe_cuisine =          json.get('recipe_cuisine')
+        const recipe_cuisine_types =    json.get('recipe_cuisine_types')
+        const recipe_mealtimes =        json.get('recipe_mealtimes')
+        const recipe_user_tags =        json.get('recipe_user_tags')
+        const recipe_cooking_methods =  json.get('recipe_cooking_methods')
+        const recipe_cuisine_apps =     json.get('recipe_cuisine_apps')
+        const recipe_holidays =         json.get('recipe_holidays')
+        const recipe_nutrition_types =  json.get('recipe_nutrition_types')
+        const recipe_subcategories =    json.get('recipe_subcategories')
+        const recipe_steps =            json.get('recipe_steps')
+        const title =                   json.get('title')
+        const description =             json.get('description')
+        const preparation_time =        json.get('preparation_time')
+        const ingredient_groups =       json.get('ingredient_groups')
+        const setting_commentable =     json.get('setting_commentable')
+        const image =                   json.get('image')
+        const cooking_time =            json.get('cooking_time')
+        const servings =                json.get('servings')
+        const contest_id =              json.get('contest_id')
+        const contest =                 json.get('contest')
+        const setting_rateable =        json.get('setting_rateable')
+
+        setting_rateable
+        console.log('cooking_time: ', cooking_time);
 
         // because json.id isn't clear enough
         const recipeId = json.id
@@ -130,16 +160,16 @@ class Main extends Component {
         
         // object describes which fields are filled or empty
         let validation = {
-            title: title ? true: false,
-            category: recipe_category ? (recipe_category.toString().length? true: false) : false,
-            national_cuisine: recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
-            timing: parseInt(cooking_time, 10)? true: false,
-            servings: parseInt(servings, 10)? true: false,
-            ingredients: this.state.ingredients ? (this.state.ingredients.length? true: false) : false,
-            step: recipe_steps ? (recipe_steps.length? true: false) : false,
-            steps_description: recipe_steps ? (recipe_steps.find((elem) => elem.body.length === 0)? false: true) : false,
+            title:              title ? true: false,
+            category:           recipe_category ? (recipe_category.toString().length? true: false) : false,
+            national_cuisine:   recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
+            timing:             parseInt(cooking_time, 10)? true: false,
+            servings:           parseInt(servings, 10)? true: false,
+            ingredients:        this.state.ingredients ? (this.state.ingredients.length? true: false) : false,
+            step:               recipe_steps ? (recipe_steps.length? true: false) : false,
+            steps_description:  recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body.length === 0)? false: true) : false,
         }
-        console.log(Object.values(validation))
+        // console.log(Object.values(validation))
 
         // form is valid when all required fields are filled
         const isFormValid = (
@@ -154,51 +184,54 @@ class Main extends Component {
                         <div className='flex-wrapper'>
 
                             <div className='left-column form-column'>
-                                <SideTags 
+                                {/*<SideTags 
                                     tags={tags} 
                                     checked={checkedTags} 
                                     contests={contests}
                                     stateUpdater={this.stateUpdater}
                                     isCategoryValid={validation.category}
                                     isCuisineValid={validation.national_cuisine}
-                                />
+                                />*/}
                             </div>
 
                             <div className='main-column form-column'>
                                 <div className='content-box'>
                                     <div className='content-box__content'>
                                         <Input
+                                            onChange={this.onTitleInput}
+                                            value={json.get('title')}  
                                             className=''
-                                            onChange={(e)=> this.stateUpdater('title', e.target.value)}
-                                            value={title}
                                             isBig
-                                            isValid={title ? true : false}
+                                            isValid={status ? true : false}
                                             placeholder='Введите название рецепта'
+                                            fieldKey='title'                                             
                                         />
                                     </div>
-
+                                    {/*
                                     <Dropzone
                                         data={image}
                                         onChange={(val)=> this.stateUpdater('image', val)}
-                                    />
+                                    />*/}
 
+
+                                    
                                     <div className='content-box__content'>
                                         <Editor
-                                            data={description}
-                                            onChange={(val)=>{this.stateUpdater('description',val)}}
+                                            data={json.get('description')}
+                                            stateUpdater={this.stateUpdater}
                                         />
 
                                         <Timings
                                             isValid={validation.timing}
                                             isServingsValid={validation.servings}
-                                            data={{cooking_time: cooking_time, preparation_time: preparation_time, servings: servings}}
-                                            onTimeChange={(val) => this.stateUpdater('cooking_time', val)}
-                                            onPrepTimeChange={(val) => this.stateUpdater('preparation_time', val)}
-                                            onServingsChange={(val) => this.stateUpdater('servings', val)}
+                                            cooking_time={json.get('cooking_time')}
+                                            preparation_time={json.get('preparation_time')} 
+                                            servings={json.get('servings')}
+                                            stateUpdater={this.stateUpdater}
                                         />
 
                                     </div>
-
+                                    {/*
                                     <div className='content-box__content_ingredients'>
                                         <IngredientGroups
                                             recipeId={recipeId}
@@ -207,9 +240,10 @@ class Main extends Component {
                                             units={units}
                                             onChange={(val)=>this.stateUpdater('ingredient_groups',val)}
                                         />
-                                    </div>
+                                    </div>*/}
 
                                 </div>
+                                {/*
                                 <Steps
                                     isValid={validation.step}
                                     data={recipe_steps}
@@ -217,17 +251,17 @@ class Main extends Component {
                                     units={units}
                                     onChange={(val) => this.stateUpdater('recipe_steps', val)}
                                 />
-                                <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>
+                                <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>*/}
                             </div>
                             <div className="right-column form-column">
 
-                                <SideSubmitColumn 
+                                {/*<SideSubmitColumn 
                                     settingRateable={setting_rateable} 
                                     settingCommentable={setting_commentable} 
                                     stateUpdater={this.stateUpdater} 
                                     isFormValid={isFormValid} 
                                     onSubmit={this.onSubmit}
-                                />
+                                />*/}
 
                             </div>
                         </div>

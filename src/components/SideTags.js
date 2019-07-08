@@ -12,14 +12,14 @@ class SideTags extends Component {
         super(props);
     }
   
-    shouldComponentUpdate(nextProps){
+    /* shouldComponentUpdate(nextProps){
         if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
             return false
         }
         else {
             return true
         }
-    }
+    } */
 
     render() {
         const {
@@ -36,6 +36,9 @@ class SideTags extends Component {
             contest_id,
             contest
         } = this.props.checked
+
+        this.props.checked
+        console.log('this.props.checked: ', this.props.checked);
 
         const { tags, contests } = this.props
 
