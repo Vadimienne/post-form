@@ -36,7 +36,7 @@ class Main extends Component {
     
     // fetch data from the server when app launches
     async componentDidMount(){
-        const recipe = await     getRecipe(110258)
+        const recipe = await     getRecipe(110258) //createRecipe()
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
@@ -55,6 +55,7 @@ class Main extends Component {
 
 
     // write group ingredients to state
+    // these ingredients will be passed to steps as available ingredients
     updateIngredients(){
         let ingredients = []
         let ingredientGroups = [...this.state.json.ingredient_groups]
@@ -75,7 +76,15 @@ class Main extends Component {
     stateUpdater(field, val, callback){
         let array = clone(this.state.json)
         array[field] = val
-        this.setState({json: array}, callback)
+
+        if( field === 'ingredient_groups'){
+            console.log('state UPDATER')
+            console.log(val[0].recipe_ingredients[0].position)
+            console.log(val[0].recipe_ingredients[0])
+        }
+        //this.setState({json: array}, callback)
+        this.state.json = array
+        this.forceUpdate()
     }
 
     // submit form
@@ -128,8 +137,9 @@ class Main extends Component {
             servings: parseInt(servings, 10)? true: false,
             ingredients: this.state.ingredients ? (this.state.ingredients.length? true: false) : false,
             step: recipe_steps ? (recipe_steps.length? true: false) : false,
-            steps_description: recipe_steps ? (recipe_steps.find((elem) => elem.body.length === 0)? true: false) : false,
+            steps_description: recipe_steps ? (recipe_steps.find((elem) => elem.body.length === 0)? false: true) : false,
         }
+        console.log(Object.values(validation))
 
         // form is valid when all required fields are filled
         const isFormValid = (

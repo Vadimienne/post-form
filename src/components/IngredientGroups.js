@@ -56,6 +56,7 @@ class IngedientGroup extends Component {
     onIngChange(index, value){
         let array = clone(this.props.data)
         array[index].recipe_ingredients = value
+        console.log('ONINGCHANGE', array)
         this.props.onChange(array)
     }
 

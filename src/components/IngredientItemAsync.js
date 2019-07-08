@@ -44,9 +44,8 @@ class IngredientAsync extends Component {
         // when all fields of ing are valid and ing has no recipe_ingredient_id (id) 
         // send ing to the server
         // get recipe_ingredient_id and write ing to local state and Main state
-        if (data.amount && data.ingredient_id && data.unit_id && !data.id) {
+        if (data.amount && data.ingredient_id && data.unit_id ) {
             if (!data.id) {
-
                 // prepare data and send it to the server
                 data.element = this.props.groupInfo.element
                 data.element_position = this.props.groupInfo.element_position
@@ -58,14 +57,11 @@ class IngredientAsync extends Component {
                 data.id = recipe_ingredient_id
                 this.props.onChange(data)
                 this.setState({data})
-                return 0
             }
+            // if all fields are valid and recipe_ingredient_id is present, just send data to the state
             else {
                 this.props.onChange(data)
             }
-        }
-        else {
-            return -1
         }
     }
 

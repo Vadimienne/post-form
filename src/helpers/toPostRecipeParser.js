@@ -112,11 +112,13 @@ export default function parser(json, tags) {
         elem.recipe_ingredients.map((ing) => {
             ingredientsAccumulated.push({
                 position: ing.position,
-                ingredient_id: ing.id,
+                id: ing.id,
+                ingredient_id: ing.ingredient_id,
                 amount: ing.amount,
                 unit_id: ing.unit_id,
                 element: elem.element,
-                element_position: elem.element_position
+                element_position: elem.element_position,
+                _destroy: ing._destroy
             })
         })
     })
@@ -125,6 +127,6 @@ export default function parser(json, tags) {
 
     console.log(result)
 
-    return result
+    return {recipe: result}
 
 } 
