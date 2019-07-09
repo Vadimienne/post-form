@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { sortableElement } from 'react-sortable-hoc';
 
 import DragButton from 'components/DragButton'
@@ -31,4 +31,4 @@ function SortDeleteWrapper (props) {
     )
 }
 
-export default sortableElement(SortDeleteWrapper);
+export default memo(sortableElement(SortDeleteWrapper));

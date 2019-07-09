@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { sortableContainer } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
@@ -16,7 +16,7 @@ const SortableContainer = sortableContainer(({children}) => {
     return <ul>{children}</ul>;
 });
 
-class IngedientGroup extends Component {
+class IngedientGroup extends PureComponent {
     constructor(props) {
         super(props);
         this.onSortEnd = this.onSortEnd.bind(this)
@@ -26,6 +26,7 @@ class IngedientGroup extends Component {
     }
 
     // triggers on sort-button release
+    // #tofix
     onSortEnd({oldIndex, newIndex}) {
         let array = clone(this.props.data)
 
@@ -42,6 +43,7 @@ class IngedientGroup extends Component {
     }
 
     // send IngredientsList changes to state
+    //#tofix
     onIngChange(index, value){
         let array = clone(this.props.data)
         array[index].recipe_ingredients = value
@@ -50,11 +52,15 @@ class IngedientGroup extends Component {
     }
 
     // send group title to state
-    onNameChange(e, index){
-        let array = clone(this.props.data)
-        array[index].element = e.target.value
-        this.props.onChange(array)
+    //#tofix
+    onNameChange(index, value){
+        // let array = clone(this.props.data)
+        // array[index].element = e.target.value
+        // this.props.onChange(array)
+        this.props.stateUpdater(['ingredient_groups', index, 'element'], value)
     }
+
+
 
 
     // #tofix add position
@@ -70,6 +76,7 @@ class IngedientGroup extends Component {
         this.props.stateUpdater(['ingredient_groups'], fromJS(array))
     }
 
+    //#tofix
     deleteGroup(index){
         let array = clone(this.props.data)
         array.splice(index,1)
@@ -86,26 +93,29 @@ class IngedientGroup extends Component {
                 index={index}
                 key={`sortable-step-${index}`}
                 idType='ingredients'
-                onDelete={()=>this.deleteGroup(index)}
+                onDelete={this.deleteGroup}
             >
                 <div className='input-ingredient-group'>
                     <Input  
-                        onChange={(e) => this.onNameChange(e, index)} 
                         value={elem.get('element')} 
                         placeholder='Основные'
+                        stateUpdater={this.onNameChange}
+                        updatePath={index}
                     />
                 </div>
                 {!this.props.isValid? (
                     <span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>
                 ): undefined}
                 <IngredientList
-                    groupInfo={{element: elem.get('element'), element_position: elem.get('element_position')}}
+                    groupName={elem.get('element')}
+                    groupPosition={elem.get('element_position')}
                     recipeId={this.props.recipeId}
                     data={elem.get('recipe_ingredients')}
                     units={this.props.units}
-                    onChange={(val) => this.onIngChange(index, val)}
                     ingredientItem={Ingredient}
                     listType='groups'
+                    stateUpdater={this.props.stateUpdater}
+                    updatePath={index}
                 />
             </SortDeleteWrapper>
         )): []

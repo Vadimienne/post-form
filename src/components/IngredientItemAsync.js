@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import Select from 'react-select'
 import Input from 'components/Input'
@@ -11,7 +11,7 @@ import { throttle } from 'helpers'
 
 import 'styles/IngredientItem.sass'
 
-class IngredientAsync extends Component {
+class IngredientAsync extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
@@ -25,6 +25,7 @@ class IngredientAsync extends Component {
         this.onUnitSelect = this.onUnitSelect.bind(this)
         this.onIngSelect = this.onIngSelect.bind(this)
         this.loadOptions = this.loadOptions.bind(this)
+        this.onAmountInput = this.onAmountInput.bind(this)
         this.createIngredientOnServer = this.createIngredientOnServer.bind(this)
     }
 
@@ -39,47 +40,53 @@ class IngredientAsync extends Component {
 
     // send valid ingredient to server and write it to Local and Main state
     async createIngredientOnServer(){
-        let data = clone(this.state.data)
+        let data = this.state.data
 
         // when all fields of ing are valid and ing has no recipe_ingredient_id (id) 
         // send ing to the server
         // get recipe_ingredient_id and write ing to local state and Main state
-        if (data.amount && data.ingredient_id && data.unit_id ) {
-            if (!data.id) {
+        if (data.get('amount') && data.get('ingredient_id') && data.get('unit_id') ) {
+            if (!data.get('id')) {
                 // prepare data and send it to the server
-                data.element = this.props.groupInfo.element
-                data.element_position = this.props.groupInfo.element_position
-                let response = await createIngredient(this.props.recipeId, data)
+                data.set('element', this.props.groupInfo.element)
+                data.set('element_position', this.props.groupInfo.element_position)
+                let response = await createIngredient(this.props.recipeId, data.toJS())
                 let recipe_ingredient_id = response.id
 
-                delete data.element
-                delete data.element_position
-                data.id = recipe_ingredient_id
-                this.props.onChange(data)
+                // delete data.element
+                // delete data.element_position
+                console.log('data',data)
+                data.delete('element')
+                data.delete('element')
+                data.set('id', recipe_ingredient_id)
+                this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
                 this.setState({data})
             }
             // if all fields are valid and recipe_ingredient_id is present, just send data to the state
             else {
-                this.props.onChange(data)
+                // this.props.onChange(data)
+                console.log('hello', data)
+                this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
             }
         }
     }
 
     //triggers when ingredient is selected
     onIngSelect(selectedOption){
-        let data = clone(this.state.data)
-        data.ingredient_id = selectedOption.value.id
-        data.ingredient.id = selectedOption.value.id
-        data.ingredient.title = selectedOption.label
-        data.ingredient.unit_ids = selectedOption.value.unit_ids
+        let data = this.state.data
+        data.set('ingredient_id', selectedOption.value.id)
+        data.setIn(['ingredient', 'id'], selectedOption.value.id)
+        data.setIn(['ingredient', 'title'], selectedOption.label)
+        data.setIn(['ingredient', 'unit_ids'], selectedOption.value.unit_ids)
+        console.log('ONINGSELECT')
+        setTimeout(() =>console.log(data.toJS(), selectedOption), 3000)
         this.setState({data}, this.createIngredientOnServer)
     }
 
     // triggers on amount input
-    onInput(type, e){
-        let data = clone(this.state.data)
-        data[type] = e.target.value
-        this.setState({data}, this.createIngredientOnServer)
+    onAmountInput(path, value){
+        const { groupIndex, updatePath } = this.props
+        this.props.stateUpdater(['ingredient_groups', groupIndex, 'recipe_ingredients', updatePath, 'amount'], value)
     }
 
     // triggers when unit is selected
@@ -154,7 +161,8 @@ class IngredientAsync extends Component {
                 <Input 
                     className='input input-quantity' 
                     value={amount} 
-                    onChange={(e)=>this.onInput('amount',e)}
+                    stateUpdater={this.onAmountInput}
+                    updatePath='amount'
                 />
                 <Select 
                     className='ingredient-select' 

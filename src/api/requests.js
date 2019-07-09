@@ -3,6 +3,7 @@ export const apiPath = 'http://stage4.edimdoma.ru'
 
 let headers = {
     'Authorization': 'Basic '+btoa('ed4stage:ed4stage'),
+    'cache-control': 'no-cache'
 }
 
 function decoratedFetch(url, options){
@@ -50,6 +51,9 @@ export function getRecipe(id){
     return decoratedFetch(`/retsepty/${id}`,
         {
             method: 'get',
+            headers: {
+                'cache-control': 'no-cache'
+            }
         }
     )
 }

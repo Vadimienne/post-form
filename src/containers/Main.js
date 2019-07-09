@@ -78,7 +78,7 @@ class Main extends Component {
         console.log('isImmutable')
         console.log(Immutable.isImmutable(this.state.json))
 
-        this.setState({json: this.state.json.setIn(path, value)}, ()=> console.log(this.state.json.toJS().title))
+        this.setState({json: this.state.json.setIn(path, value)}, ()=> console.log(this.state.json.toJS().ingredient_groups[0].recipe_ingredients[0].ingredient.title))
 
     }
 
@@ -137,7 +137,7 @@ class Main extends Component {
         const setting_rateable =        json.get('setting_rateable')
 
         setting_rateable
-        console.log('cooking_time: ', cooking_time);
+        console.log('element: ', ingredient_groups.get(0).get('recipe_ingredients').get(0).get('ingredient').get('title'));
 
         // because json.id isn't clear enough
         const recipeId = json.id
@@ -239,7 +239,6 @@ class Main extends Component {
                                             isValid={validation.ingredients}
                                             data={ingredient_groups}
                                             units={units}
-                                            onChange={(val)=>this.stateUpdater('ingredient_groups',val)}
                                             stateUpdater={this.stateUpdater}
                                         />
                                     </div>

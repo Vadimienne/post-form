@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { sortableContainer } from 'react-sortable-hoc';
 import arrayMove from 'array-move'
 
@@ -11,7 +11,7 @@ const SortableContainerIng = sortableContainer(({children}) => {
     return <ul>{children}</ul>;
 });
 
-class Ingredients extends Component {
+class Ingredients extends PureComponent {
     constructor(props) {
         super(props);
         this.onSortEnd = this.onSortEnd.bind(this)
@@ -123,16 +123,19 @@ class Ingredients extends Component {
 
         // map ingredients
         let mappedIngredients = this.props.data.size ? this.props.data.map((elem, index) => (
-            <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
+            <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={this.removeIngredient}>
                 <Ingredient
-                    groupInfo={this.props.groupInfo ? this.props.groupInfo : undefined}
+                    groupName={this.props.groupName}
+                    groupPosition={this.props.groupPosition}
                     recipeId={this.props.recipeId}
-                    ingredientPosition={index + 1}
+                    ingredientPosition={index}
                     data={elem} 
-                    key={'ingredient'+index}
+                    key={'ingredient'}
                     units={this.props.units}
-                    ingredientsAvailable={this.props.ingredientsAvailable ? this.props.ingredientsAvailable : undefined}
-                    onChange={(value)=>this.onIngChange(index, value)}
+                    
+                    stateUpdater={this.props.stateUpdater}
+                    groupIndex={this.props.updatePath}
+                    updatePath={index}
                 />
             </SortDeleteWrapperInline>)) : []
 
@@ -146,7 +149,7 @@ class Ingredients extends Component {
                     <ConstructorBtn
                         icon='&#xea0d;'
                         text='Добавить ингредиент'
-                        onClick={()=>this.addIngredient()}
+                        onClick={this.addIngredient}
                     />
                 </div>
             </div>
