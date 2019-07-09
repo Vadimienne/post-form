@@ -5,8 +5,6 @@ import arrayMove from 'array-move'
 import SortDeleteWrapperInline from 'components/SortDeleteWrapperInline'
 import ConstructorBtn from 'components/ConstructorBtn'
 
-import {clone} from 'helpers'
-
 import 'styles/IngredientList.sass'
 
 const SortableContainerIng = sortableContainer(({children}) => {
@@ -124,7 +122,7 @@ class Ingredients extends Component {
 
 
         // map ingredients
-        let mappedIngredients = this.props.data.length ? this.props.data.map((elem, index) => (
+        let mappedIngredients = this.props.data.size ? this.props.data.map((elem, index) => (
             <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={()=>this.removeIngredient(index)}>
                 <Ingredient
                     groupInfo={this.props.groupInfo ? this.props.groupInfo : undefined}

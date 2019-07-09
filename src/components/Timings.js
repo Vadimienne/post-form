@@ -10,8 +10,13 @@ class Timings extends PureComponent {
     constructor(props) {
         super(props);
         this.state = { isChecked: false}
-        this.onInput = this.onInput.bind(this)
-        this.onHours = this.onHours.bind(this)
+        /* this.onHours = this.onHours.bind(this)
+        this.onMinutes = this.onMinutes.bind(this)
+        this.onPrepHours = this.onPrepHours.bind(this)
+        this.onPrepMinutes = this.onPrepMinutes.bind(this)
+        this.onServings = this.onServings.bind(this) */
+        this.onToggle = this.onToggle.bind(this)
+        this.localStateUpdater = this.localStateUpdater.bind(this)
     }
 
     componentDidMount(){
@@ -20,47 +25,39 @@ class Timings extends PureComponent {
         }
     }
 
+    // this implementation caused by the way data is stored in json
 
-    onHours(e){
+    /* onHours(e){
         let value = e.target.value
         let minutes = this.props.cooking_time % 60
         this.props.stateUpdater(['cooking_time'], value * 60 + minutes)
     }
 
-
-    // this implementation caused by the way data is stored in json
-    onInput(field, valueObj) {
-        const { onTimeChange, onPrepTimeChange, onServingsChange, stateUpdater } = this.props
-        let data = this.props.data
-        let value = valueObj.target.value
-
-        let minutes = data.cooking_time % 60
-        let preparationMinutes = data.preparation_time % 60
-
-        switch (field) {
-        case 'hours':
-            this.props.stateUpdater(['cooking_time'], value * 60 + minutes)
-            break;
-
-        case 'minutes':
-            this.props.stateUpdater(['cooking_time'], data.cooking_time + (value - minutes))
-            break;
-
-        case 'preparationHours':
-            this.props.stateUpdater(['preparation_time'], value * 60 + preparationMinutes)
-            break;
-
-        case 'preparationMinutes':
-            this.props.stateUpdater(['preparation_time'], data.preparation_time + (value - preparationMinutes))
-            break;
-
-        case 'servings':
-            onServingsChange(value)
-            break;
-
-        default: console.error('Error in Timings component')
-        }
+    onMinutes(e){
+        let value = e.target.value
+        let ct = this.props.cooking_time
+        let minutes = ct % 60
+        this.props.stateUpdater(['cooking_time'], ct + (value - minutes))
     }
+
+    onPrepHours(e){
+        let value = e.target.value
+        let preparationMinutes = this.props.preparation_time % 60
+        this.props.stateUpdater(['preparation_time'], value * 60 + preparationMinutes)
+    }
+
+    onPrepMinutes(e){
+        let value = e.target.value
+        let pt = this.props.preparation_time
+
+        let preparationMinutes = pt % 60
+        this.props.stateUpdater(['preparation_time'], pt + (value - preparationMinutes))
+    }
+
+    onServings(e){
+        this.props.stateUpdater(['servings'], e.target.value)
+    } */
+
 
     // toggle preparation time collapsible
     onToggle(){
@@ -70,6 +67,36 @@ class Timings extends PureComponent {
         }
         else{
             this.setState({isChecked: true})
+        }
+    }
+
+    localStateUpdater(path, value){
+        let ct = this.props.cooking_time
+        let pt = this.props.preparation_time
+        let minutes = ct % 60
+        let preparationMinutes = pt % 60
+        switch (path) {
+            case 'cooking_hours':
+                this.props.stateUpdater(['cooking_time'], value * 60 + minutes)
+                break;
+            
+            case 'cooking_minutes':
+                this.props.stateUpdater(['cooking_time'], ct + (value - minutes))
+                break;
+
+            case 'prep_hours':
+                this.props.stateUpdater(['preparation_time'], value * 60 + preparationMinutes)
+                break;
+
+            case 'prep_minutes':
+                this.props.stateUpdater(['preparation_time'], pt + (value - preparationMinutes))
+                break;
+
+            case 'servings':
+                this.props.stateUpdater(['servings'], value)
+                break;
+            default:
+                console.log('something went wrong in localStateUpdater. Check Timings.js')
         }
     }
 
@@ -103,17 +130,21 @@ class Timings extends PureComponent {
                             <Input 
                                 className='text-input' 
                                 type='number' 
-                                value={hours} 
-                                onChange={this.onHours} 
+                                value={hours}  
                                 maxlength={2}
+                                stateUpdater={this.localStateUpdater}
+                                updatePath='cooking_hours'
                             />
                             <span className='input-label'>часов</span>
 
                             <Input 
                                 className='text-input' 
+                                type='number'
                                 value={minutes} 
-                                
+                                onChange={this.onMinutes}
                                 maxlength={2}
+                                stateUpdater={this.localStateUpdater}
+                                updatePath='cooking_minutes'
                             />
                             <span className='input-label'>минут</span>
                         </div>
@@ -124,7 +155,9 @@ class Timings extends PureComponent {
                             <div className='timing-portions-icon' />
                             <Input 
                                 value={servings} 
-                                onChange={(e) => this.onInput('servings',e)}
+                                onChange={this.onServings}
+                                stateUpdater={this.localStateUpdater}
+                                updatePath='servings'
                             />
                             <span className='input-label'>человек</span>
                         </div>
@@ -133,7 +166,7 @@ class Timings extends PureComponent {
                 <div className='outer-flex-container'>
                     <div className='field_w260 preparation_check'>
                         <Check 
-                            onToggle={() => this.onToggle()} 
+                            onToggle={this.onToggle} 
                             isActive={this.state.isChecked} 
                             text='Требуется подготовка'
                         />
@@ -145,11 +178,15 @@ class Timings extends PureComponent {
                                 <div className='timing-clock-icon'/>
                                 <Input 
                                     value={preparationHours} 
-                                    onChange={(e) => this.onInput('preparationHours',e)}
+                                    onChange={this.onPrepHours}
+                                    stateUpdater={this.localStateUpdater}
+                                    updatePath='prep_hours'
                                 />
                                 <Input 
                                     value={preparationMinutes} 
-                                    onChange={(e) => this.onInput('preparationMinutes',e)}
+                                    onChange={this.onPrepMinutes}
+                                    stateUpdater={this.localStateUpdater}
+                                    updatePath='prep_minutes'
                                 />
                             </div>
                         </div>

@@ -19,7 +19,7 @@ class Editor  extends PureComponent {
     }
  */
     // update text
-   /*  updateEditorContent(){
+    /*  updateEditorContent(){
         const node = this.editorRef.current
         node.innerHTML = this.props.data
     } */

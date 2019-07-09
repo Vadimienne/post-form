@@ -7,7 +7,7 @@ import SelectAsync from 'react-select/async'
 import { getIngredients } from 'api/requests'
 import { createIngredient } from 'api/ingredients'
 import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
-import { throttle, clone } from 'helpers'
+import { throttle } from 'helpers'
 
 import 'styles/IngredientItem.sass'
 
@@ -104,10 +104,17 @@ class IngredientAsync extends Component {
     }
 
     render() {
-        const { ingredient, amount, unit_id, ingredient_id } = this.state.data ? this.state.data: {}
-        const { title, unit_ids } = ingredient ? ingredient: {}
+        // const { ingredient, amount, unit_id, ingredient_id } = this.state.data ? this.state.data: {}
+        // const { title, unit_ids } = ingredient ? ingredient: {}
         const { units } = this.props
+        
+        const ingredient = this.props.data.get('ingredient')
+        const unit_id = this.props.data.get('unit_id')
+        const amount = this.props.data.get('amount')
+        const ingredient_id = this.props.data.get('ingredient_id')
 
+        const title = ingredient.get('title')
+        const unit_ids = ingredient.get('unit_ids')
 
         //getting array of all available metrics for Unit Select
         let filteredOptions = units && unit_ids?  unit_ids.map((elem) => units.find((x)=> x.id===elem )): []

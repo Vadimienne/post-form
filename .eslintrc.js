@@ -57,6 +57,7 @@ module.exports = {
     ],
     'no-unused-vars': 1,
     'camelcase': 0,
+    "indent": ["warn", 4, { "SwitchCase": 1 }],
     'react/destructuring-assignment': 0,
     'react/jsx-closing-tag-location': 0,
     'react/forbid-prop-types': 0,

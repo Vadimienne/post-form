@@ -17,7 +17,7 @@ import SideTags from 'components/SideTags'
 import 'styles/index.css'
 import 'styles/MainMain.sass'
 import 'styles/EdimDomaIcons.sass'
-
+const titleUpdatePath = ['title']
 
 import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe } from 'api/requests'
 
@@ -177,6 +177,8 @@ class Main extends Component {
             && Object.values(validation).length
         ) ? false: true
 
+        
+
         return (
             <>
                 { this.state.json && this.state.tags && this.state.units ?
@@ -198,13 +200,13 @@ class Main extends Component {
                                 <div className='content-box'>
                                     <div className='content-box__content'>
                                         <Input
-                                            onChange={this.onTitleInput}
                                             value={json.get('title')}  
                                             className=''
                                             isBig
                                             isValid={status ? true : false}
                                             placeholder='Введите название рецепта'
-                                            fieldKey='title'                                             
+                                            stateUpdater={this.stateUpdater} 
+                                            updatePath={titleUpdatePath}                                          
                                         />
                                     </div>
                                     {/*
@@ -231,7 +233,7 @@ class Main extends Component {
                                         />
 
                                     </div>
-                                    {/*
+                                    
                                     <div className='content-box__content_ingredients'>
                                         <IngredientGroups
                                             recipeId={recipeId}
@@ -239,8 +241,9 @@ class Main extends Component {
                                             data={ingredient_groups}
                                             units={units}
                                             onChange={(val)=>this.stateUpdater('ingredient_groups',val)}
+                                            stateUpdater={this.stateUpdater}
                                         />
-                                    </div>*/}
+                                    </div>
 
                                 </div>
                                 {/*

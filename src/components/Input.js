@@ -5,6 +5,11 @@ import 'styles/Input.sass'
 class Input extends React.PureComponent {
     constructor(props){
         super(props)
+        this.onChange = this.onChange.bind(this)
+    }
+
+    onChange(e){
+        this.props.stateUpdater(this.props.updatePath, e.target.value)
     }
 
     render(){
@@ -16,7 +21,7 @@ class Input extends React.PureComponent {
                     <input
                         className='text-input' 
                         defaultValue={props.value}
-                        onChange={this.props.onChange}
+                        onChange={this.onChange}
                         placeholder={props.placeholder}
                         maxLength={props.maxlength}
                     />
@@ -26,7 +31,7 @@ class Input extends React.PureComponent {
             (  <div className={'field-big field-container ' + props.className + (props.isValid? '': ' invalid')}>
                 <input
                     className={'main-column__input_title text-input'} defaultValue={props.value}
-                    onChange={this.props.onChange}
+                    onChange={this.onChange}
                     placeholder={props.placeholder}
                     maxLength={props.maxlength}
                 />

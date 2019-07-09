@@ -2,14 +2,13 @@ import React, { Component } from "react";
 
 import { sortableContainer } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
+import { fromJS } from 'immutable'
 
 import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Button from 'components/ConstructorBtn'
 import IngredientList from 'components/IngredientList'
 import Input from 'components/Input'
 import Ingredient from 'components/IngredientItemAsync'
-
-import { clone } from 'helpers'
 
 import 'styles/IngredientGroups.sass'
 
@@ -25,16 +24,6 @@ class IngedientGroup extends Component {
         this.onIngChange = this.onIngChange.bind(this)
         this.addGroup = this.addGroup.bind(this)
     }
-
-    shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
-    }
-
 
     // triggers on sort-button release
     onSortEnd({oldIndex, newIndex}) {
@@ -70,11 +59,15 @@ class IngedientGroup extends Component {
 
     // #tofix add position
     addGroup(){
-        let array = clone(this.props.data)
+        /* console.log('ADDING')
+        console.log(this.props.data) */
+        let array = this.props.data.toJS()
         array.push(
             {
                 element:'', element_position: array.length + 1, recipe_ingredients:[]})
-        this.props.onChange(array)
+        /*  console.log(this.props.data) */
+        // this.props.onChange(array)
+        this.props.stateUpdater(['ingredient_groups'], fromJS(array))
     }
 
     deleteGroup(index){
@@ -86,7 +79,7 @@ class IngedientGroup extends Component {
     render() {
 
         // map groups
-        let items = this.props.data? this.props.data.map((elem, index)=> (
+        let items = this.props.data ? this.props.data.map((elem, index)=> (
             <SortDeleteWrapper
                 name='Укажите ингредиенты' deleteDesc='Удалить подраздел'
                 className='sort-delete-ingredients'
@@ -98,7 +91,7 @@ class IngedientGroup extends Component {
                 <div className='input-ingredient-group'>
                     <Input  
                         onChange={(e) => this.onNameChange(e, index)} 
-                        value={elem.element} 
+                        value={elem.get('element')} 
                         placeholder='Основные'
                     />
                 </div>
@@ -106,9 +99,9 @@ class IngedientGroup extends Component {
                     <span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>
                 ): undefined}
                 <IngredientList
-                    groupInfo={{element: elem.element, element_position: elem.element_position}}
+                    groupInfo={{element: elem.get('element'), element_position: elem.get('element_position')}}
                     recipeId={this.props.recipeId}
-                    data={[...elem.recipe_ingredients]}
+                    data={elem.get('recipe_ingredients')}
                     units={this.props.units}
                     onChange={(val) => this.onIngChange(index, val)}
                     ingredientItem={Ingredient}
@@ -117,10 +110,11 @@ class IngedientGroup extends Component {
             </SortDeleteWrapper>
         )): []
         //idType props used to separate different groups of SortDeleteWrappers and make clickable labels for buttons
-
+        items
+        console.log('items: ', items);
         return (
             <div className='ingredient-groups-component'>
-                { items.length ?
+                { items.size ?
                     <SortableContainer 
                         useWindowAsScrollContainer 
                         onSortEnd={this.onSortEnd} 

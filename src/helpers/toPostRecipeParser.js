@@ -1,11 +1,5 @@
 export default function parser(json, tags) {
 
-    // find name in list of objects by id
-    function findName(elem, list) {
-        let result = list.find((iter) => iter.id === elem)
-        return result.name
-    }
-
     // find multiple names in list of objects by id 
     function findNames (idsArray, targetArray){
         let result = []

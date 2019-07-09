@@ -2,7 +2,7 @@ import React from "react";
 
 import 'styles/DraftCard.sass'
 
-function Comp (props) {
+function Comp () {
     return (
         <div className='draft-card'>
             <a className='draft-card__link-wrapper' href='#'>
