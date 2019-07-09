@@ -5,8 +5,6 @@ import Editor from 'components/MyEditorDescription'
 import IngredientList from 'components/IngredientList'
 import IngredientItem from 'components/IngredientItemStep'
 
-import {clone} from 'helpers'
-
 import 'styles/Step.sass'
 
 class Step extends Component {

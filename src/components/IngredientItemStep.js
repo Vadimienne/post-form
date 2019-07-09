@@ -4,8 +4,6 @@ import Select from 'react-select'
 import Input from 'components/Input'
 import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
 
-import {clone} from 'helpers'
-
 import 'styles/IngredientItem.sass'
 
 class IngredientStep extends Component {

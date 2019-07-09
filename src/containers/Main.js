@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { clone } from 'helpers'
 import parser from 'helpers/toPostRecipeParser'
 import Immutable, { fromJS } from 'immutable'
 
@@ -42,7 +41,7 @@ class Main extends Component {
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
-       /*  const newRecipe = await createRecipe()
+        /*  const newRecipe = await createRecipe()
         console.log(newRecipe) */
         // console.log('PARSER')
         // parser(recipe, tags)

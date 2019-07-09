@@ -7,8 +7,6 @@ import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Step from 'components/Step'
 import Button from 'components/ConstructorBtn'
 
-import {clone} from 'helpers'
-
 const SortableContainer = sortableContainer(({children}) => {
     return <ul>{children}</ul>;
 });

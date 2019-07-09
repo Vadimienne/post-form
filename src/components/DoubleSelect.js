@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { clone } from 'helpers'
 
 import Select from 'react-select'
 
