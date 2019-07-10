@@ -75,11 +75,8 @@ class Main extends Component {
 
     // update particular state field with passed value. Optional callback when state update finished
     stateUpdater(path, value, callback){
-        console.log('isImmutable')
-        console.log(Immutable.isImmutable(this.state.json))
-
-        this.setState({json: this.state.json.setIn(path, value)}, ()=> console.log(this.state.json.toJS().ingredient_groups[0].recipe_ingredients[0].ingredient.title))
-
+        this.setState({json: this.state.json.setIn(path, value)}, 
+            ()=> console.log('stateUpdater',this.state.json.toJS().ingredient_groups[0].element))
     }
 
     onTitleInput(e){
@@ -137,7 +134,6 @@ class Main extends Component {
         const setting_rateable =        json.get('setting_rateable')
 
         setting_rateable
-        console.log('element: ', ingredient_groups.get(0).get('recipe_ingredients').get(0).get('ingredient').get('title'));
 
         // because json.id isn't clear enough
         const recipeId = json.id

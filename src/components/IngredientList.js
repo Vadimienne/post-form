@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import { sortableContainer } from 'react-sortable-hoc';
 import arrayMove from 'array-move'
+import { arrayMoveImmutable } from 'helpers'
 
 import SortDeleteWrapperInline from 'components/SortDeleteWrapperInline'
 import ConstructorBtn from 'components/ConstructorBtn'
 
 import 'styles/IngredientList.sass'
+import { Map, fromJS } from "immutable";
 
 const SortableContainerIng = sortableContainer(({children}) => {
     return <ul>{children}</ul>;
@@ -15,23 +17,9 @@ class Ingredients extends PureComponent {
     constructor(props) {
         super(props);
         this.onSortEnd = this.onSortEnd.bind(this)
+        this.removeIngredient = this.removeIngredient.bind(this)
+        this.addIngredient = this.addIngredient.bind(this)
     }
-
-    /* componentDidMount(){
-        let array = clone(this.props.data)
-        array = array.sort(
-            (a, b) => {
-                if (a.position < b.position){
-                    return -1
-                }
-                if (a.position > b.position){
-                    return 1
-                }
-                return 0
-            }
-        )
-        this.props.onChange(array)
-    } */
 
     // send ingredient changes to state
     onIngChange(index, value){
@@ -43,101 +31,82 @@ class Ingredients extends PureComponent {
     //#tofix refresh positions in array
     // triggers when sort-button is released
     onSortEnd({oldIndex, newIndex}){
-        let array = clone(this.props.data)
-        console.log(array[0].ingredient.title, array[0].position)
-
-        array = arrayMove (array, oldIndex, newIndex)
-        console.log(array[0].ingredient.title, array[0].position)
-
-        //refresh array's position fields
-        array = array.map((elem, index)=> {
-            elem.position = index + 1
-            return elem
-        })
-        console.log(array[0].ingredient.title, array[0].position)
-        this.props.onChange(array)
-        this.forceUpdate()
+        this.props.stateUpdater(
+            ['ingredient_groups', this.props.updatePath, 'recipe_ingredients'], 
+            arrayMoveImmutable(this.props.data, oldIndex, newIndex)
+        )
     }
 
     addIngredient(){
-        let array = clone(this.props.data)
+        let array = this.props.data
+
+        console.log('ADDIN ING BEACH')
         if( this.props.listType==='groups'){
-            array.push({
-                amount: '',
-                ingredient_id: '',
-                position: array.length + 1,
-                unit_id: '',
-                ingredient: {
-                    title: '',
-                    id: '',
-                    unit_ids: []
-                },
-            })
+            this.props.stateUpdater(['ingredient_groups', this.props.updatePath, 'recipe_ingredients', array.size], 
+                fromJS(
+                    {
+                        amount: '',
+                        ingredient_id: '',
+                        position: array.size + 1,
+                        unit_id: '',
+                        ingredient: {
+                            title: '',
+                            id: '',
+                            unit_ids: []
+                        },
+                    }
+                )
+            )
         }
         if( this.props.listType === 'step'){
-            array.push({
-                amount: '',
-                ingredient_id: '',
-                position: array.length + 1,
-                unit_id: '',
-            })
+            array = array.push(
+                Map(
+                    {
+                        amount: '',
+                        ingredient_id: '',
+                        position: array.length + 1,
+                        unit_id: '',
+                    }
+                )
+            )
+            this.props.onChange()
         }
-        this.props.onChange(array)
     }
 
     removeIngredient(index){
-        let array = clone(this.props.data)
-        //array.splice(index,1)
-        array[index]._destroy = true
-        array[index].destroy = true
-        console.log('anis: ', array[index])
-        this.props.onChange(array)
+        this.props.stateUpdater(['ingredient_groups', this.props.updatePath, 'recipe_ingredients', index, '_destroy' ], true)
     }
 
     render() {
 
-        // Ingredient component can be IngredientItemAsync or IngredientItemStep
+        
         let Ingredient = this.props.ingredientItem
 
-        // let cloned = this.props.data? clone(this.props.data) : []
-        // sort ingredients according to position property
-        /* let sortedIngredients = cloned.length ? cloned.sort(
-            (a, b) => {
-                if (a.position < b.position){
-                    return -1
-                }
-                if (a.position > b.position){
-                    return 1
-                }
-                return 0
+        // map ingredients without destroyed ones
+        let mappedIngredients = this.props.data.size ? this.props.data.map((elem, index) => {
+            if( elem.get('_destroy') !== true ) {
+                return (
+                    <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={this.removeIngredient}>
+                        <Ingredient
+                            groupName={this.props.groupName}
+                            groupPosition={this.props.groupPosition}
+                            recipeId={this.props.recipeId}
+                            ingredientPosition={index}
+                            data={elem} 
+                            key={'ingredient'}
+                            units={this.props.units}
+                            
+                            stateUpdater={this.props.stateUpdater}
+                            groupIndex={this.props.updatePath}
+                            updatePath={index}
+                        />
+                    </SortDeleteWrapperInline>
+                )
             }
-        ): [] */
-        
-        /* if ( this.props && this.props.groupInfo &&sortedIngredients.length && this.props.groupInfo.element_position == 1) {
-            console.log('sortedIngredients ',sortedIngredients[0].position, sortedIngredients[1].position,
-                sortedIngredients[2].position, sortedIngredients[3].position, sortedIngredients[4].position)
-            console.log('sortedIngredients ',sortedIngredients[0].ingredient_id, sortedIngredients[1].ingredient_id,
-                sortedIngredients[2].ingredient_id, sortedIngredients[3].ingredient_id, sortedIngredients[4].ingredient_id)
-        } */
-
-
-        // map ingredients
-        let mappedIngredients = this.props.data.size ? this.props.data.map((elem, index) => (
-            <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={this.removeIngredient}>
-                <Ingredient
-                    groupName={this.props.groupName}
-                    groupPosition={this.props.groupPosition}
-                    recipeId={this.props.recipeId}
-                    ingredientPosition={index}
-                    data={elem} 
-                    key={'ingredient'}
-                    units={this.props.units}
-                    
-                    stateUpdater={this.props.stateUpdater}
-                    groupIndex={this.props.updatePath}
-                    updatePath={index}
-                />
-            </SortDeleteWrapperInline>)) : []
+            else { 
+                return undefined
+            }
+        }) : []
 
         // render
         return (

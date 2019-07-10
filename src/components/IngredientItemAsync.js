@@ -4,6 +4,7 @@ import Select from 'react-select'
 import Input from 'components/Input'
 import MenuList from 'components/SelectMenuList'
 import SelectAsync from 'react-select/async'
+import Immutable, { isImmutable } from 'immutable'
 import { getIngredients } from 'api/requests'
 import { createIngredient } from 'api/ingredients'
 import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
@@ -19,7 +20,7 @@ class IngredientAsync extends PureComponent {
             selectedIngredient: {},
             amount: '',
             selectedUnit: {}, 
-            data: {}
+            data: Immutable.Map()
         }
         this.ingredients = []
         this.onUnitSelect = this.onUnitSelect.bind(this)
@@ -31,10 +32,17 @@ class IngredientAsync extends PureComponent {
 
     componentDidMount(){
         // set initial state
-        this.setState({selectedIngredient: this.props.data.ingredient})
-        this.setState({amount: this.props.data.amount})
-        this.setState({selectedUnit: this.props.data.unit_id})
+        // this.setState({selectedIngredient: this.props.data.ingredient})
+        // this.setState({amount: this.props.data.amount})
+        // this.setState({selectedUnit: this.props.data.unit_id})
         this.setState({data: this.props.data})
+    }
+
+    // update when sorted
+    componentDidUpdate(prevProps){
+        if(!prevProps.data.equals(this.props.data)){
+            this.setState({data: this.props.data})
+        }
     }
 
 
@@ -74,25 +82,26 @@ class IngredientAsync extends PureComponent {
     //triggers when ingredient is selected
     onIngSelect(selectedOption){
         let data = this.state.data
-        data.set('ingredient_id', selectedOption.value.id)
-        data.setIn(['ingredient', 'id'], selectedOption.value.id)
-        data.setIn(['ingredient', 'title'], selectedOption.label)
-        data.setIn(['ingredient', 'unit_ids'], selectedOption.value.unit_ids)
-        console.log('ONINGSELECT')
-        setTimeout(() =>console.log(data.toJS(), selectedOption), 3000)
+        data = data.set('ingredient_id', selectedOption.value.id)
+        data = data.setIn(['ingredient', 'id'], selectedOption.value.id)
+        data = data.setIn(['ingredient', 'title'], selectedOption.label)
+        data = data.setIn(['ingredient', 'unit_ids'], selectedOption.value.unit_ids)
         this.setState({data}, this.createIngredientOnServer)
     }
 
     // triggers on amount input
     onAmountInput(path, value){
-        const { groupIndex, updatePath } = this.props
-        this.props.stateUpdater(['ingredient_groups', groupIndex, 'recipe_ingredients', updatePath, 'amount'], value)
+        // const { groupIndex, updatePath } = this.props
+        // this.props.stateUpdater(['ingredient_groups', groupIndex, 'recipe_ingredients', updatePath, 'amount'], value)
+        let data = this.state.data
+        data = data.set('amount', value)
+        this.setState({data}, this.createIngredientOnServer)
     }
 
     // triggers when unit is selected
     onUnitSelect(selectedOption){
-        let data = clone(this.state.data)
-        data.unit_id = selectedOption.value
+        let data = this.state.data
+        data = data.set('unit_id', selectedOption.value)
         this.setState({data}, this.createIngredientOnServer)
         
     }
@@ -111,17 +120,15 @@ class IngredientAsync extends PureComponent {
     }
 
     render() {
-        // const { ingredient, amount, unit_id, ingredient_id } = this.state.data ? this.state.data: {}
-        // const { title, unit_ids } = ingredient ? ingredient: {}
         const { units } = this.props
         
-        const ingredient = this.props.data.get('ingredient')
-        const unit_id = this.props.data.get('unit_id')
-        const amount = this.props.data.get('amount')
-        const ingredient_id = this.props.data.get('ingredient_id')
+        const ingredient = this.state.data.get('ingredient')
+        const unit_id = this.state.data.get('unit_id')
+        const amount = this.state.data.get('amount')
+        const ingredient_id = this.state.data.get('ingredient_id')
 
-        const title = ingredient.get('title')
-        const unit_ids = ingredient.get('unit_ids')
+        const title = isImmutable(ingredient) ? ingredient.get('title'): ''
+        const unit_ids =isImmutable(ingredient) ? ingredient.get('unit_ids'): ''
 
         //getting array of all available metrics for Unit Select
         let filteredOptions = units && unit_ids?  unit_ids.map((elem) => units.find((x)=> x.id===elem )): []

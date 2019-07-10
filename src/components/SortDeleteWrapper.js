@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { PureComponent } from "react";
 import { sortableElement } from 'react-sortable-hoc';
 
 import DragButton from 'components/DragButton'
@@ -7,9 +7,20 @@ import TrashCanButton from 'components/TrashCanButton'
 import 'styles/SortDeleteWrapper.sass'
 
 
-function SortDeleteWrapper (props) {
-    return (
-        <>
+class SortDeleteWrapper extends PureComponent {
+
+    constructor(props){
+        super(props)
+        this.onDelete = this.onDelete.bind(this)
+    }
+
+    onDelete(){
+        this.props.onDelete(this.props.index)
+    }
+
+    render(){
+        const props = this.props
+        return (
             <div key={props.key} className={'sort-delete-wrapper '+props.className}>
                 <div className='block-managment'>
                     <div className='drag-n-desc'>
@@ -17,7 +28,7 @@ function SortDeleteWrapper (props) {
                         <div className='module-name'>{props.name}</div>
                     </div>
                     <div className='delete-n-desc'>
-                        <TrashCanButton className='trash-can' id={'trash-can-btn-' + props.idType + props.index} onClick={props.onDelete}/>
+                        <TrashCanButton className='trash-can' id={'trash-can-btn-' + props.idType + props.index} onClick={this.onDelete}/>
                         {
                             props.deleteDesc
                                 ?<label className='delete-desc' htmlFor={'trash-can-btn-' + props.idType + props.index}>{props.deleteDesc}</label>
@@ -27,8 +38,8 @@ function SortDeleteWrapper (props) {
                 </div>
                 <div className='module'>{props.children}</div>
             </div>
-        </>
-    )
+        )
+    }
 }
 
-export default memo(sortableElement(SortDeleteWrapper));
+export default sortableElement(SortDeleteWrapper);

@@ -11,6 +11,11 @@ class SortDeleteWrapper extends PureComponent {
 
     constructor(props){
         super(props)
+        this.onDelete = this.onDelete.bind(this)
+    }
+
+    onDelete(){
+        this.props.onDelete(this.props.index)
     }
 
     render(){
@@ -23,7 +28,7 @@ class SortDeleteWrapper extends PureComponent {
                 <div className='block-managment'>
                     <DragButton className='drag-button'/>
                     {children}
-                    <TrashCanButton className='trash-can' onClick={onDelete}/>
+                    <TrashCanButton className='trash-can' onClick={this.onDelete}/>
                 </div>
 
             </div>
