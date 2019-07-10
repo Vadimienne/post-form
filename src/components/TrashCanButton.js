@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import 'styles/TrashCanButton.css'
 
 function Comp (props) {
@@ -9,4 +9,4 @@ function Comp (props) {
     )
 }
 
-export default Comp;
+export default memo(Comp);

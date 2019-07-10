@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import 'styles/ConstructorBtn.sass'
 
@@ -13,4 +13,4 @@ function RoundBtn (props) {
     )
 }
 
-export default RoundBtn;
+export default memo(RoundBtn);

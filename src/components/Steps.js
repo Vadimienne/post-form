@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { sortableContainer } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
+import { arrayMoveImmutable } from 'helpers';
+import { fromJS } from 'immutable'
 
 import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Step from 'components/Step'
@@ -11,72 +12,66 @@ const SortableContainer = sortableContainer(({children}) => {
     return <ul>{children}</ul>;
 });
 
-class Steps extends Component {
+class Steps extends PureComponent {
     constructor(props) {
         super(props);
         this.onSortEnd = this.onSortEnd.bind(this)
-        this.onStepChange = this.onStepChange.bind(this)
         this.addStep = this.addStep.bind(this)
-    }
-
-    shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
+        this.deleteStep = this.deleteStep.bind(this)
     }
 
     // triggers when sort-button is released
     onSortEnd({oldIndex, newIndex}){
-        let array = clone(this.props.data)
-        array = arrayMove(array, oldIndex, newIndex)
-        this.props.onChange(array)
-        this.forceUpdate()
-    }
-
-    // send Step changes to state
-    onStepChange(index, value) {
-        let array = clone(this.props.data)
-        array[index] = value
-        this.props.onChange(array)
+        this.props.stateUpdater(
+            ['recipe_steps'], 
+            arrayMoveImmutable(this.props.data, oldIndex, newIndex)
+        )
     }
 
     addStep(){
-        let array = clone(this.props.data)
-        array.push({
-            image: '',
-            body: '',
-            step_ingredients: []
-        })
-        this.props.onChange(array)
+        let array = this.props.data
+        array = array.push(
+            fromJS(
+                {
+                    image: '',
+                    body: '',
+                    step_ingredients: []
+                }
+            )
+        )
+        this.props.stateUpdater(['recipe_steps'], array)
+
     }
 
     deleteStep(index){
-        let array = clone(this.props.data)
-        array.splice(index,1)
-        this.props.onChange(array)
+        this.props.stateUpdater(['recipe_steps', index, '_destroy'], true)
     }
 
     render() {
-
-        let items = this.props.data? this.props.data.map((elem, index)=> (
-            <SortDeleteWrapper
-                name={`${index + 1} шаг`}
-                deleteDesc='Удалить шаг'
-                className='content-box sort-delete-steps'
-                index={index}
-                key={'sortable-step-'+index}
-                onDelete={ () => this.deleteStep(index) }>
-                <Step
-                    data={elem}
-                    units={this.props.units}
-                    ingredientsAvailable={this.props.ingredientsAvailable}
-                    onChange={(val) => this.onStepChange(index, val)}
-                />
-            </SortDeleteWrapper>
-        )): []
+        let stepEnumeration = 1
+        let items = this.props.data ? this.props.data.map((elem, index)=> {
+            if (elem.get('_destroy') !== true) {
+                return(
+                    <SortDeleteWrapper
+                        name={`${stepEnumeration++} шаг`}
+                        deleteDesc='Удалить шаг'
+                        className='content-box sort-delete-steps'
+                        index={index}
+                        key={'sortable-step-'+index}
+                        onDelete={this.deleteStep}>
+                        <Step
+                            data={elem}
+                            units={this.props.units}
+                            ingredientsAvailable={this.props.ingredientsAvailable}
+                            stateUpdater={this.props.stateUpdater}
+                            stepIndex={index}
+                            key={'sortable-step__step-'+index}
+                        />
+                    </SortDeleteWrapper>
+                )
+            }
+        }
+        ): []
 
         return (
             <>

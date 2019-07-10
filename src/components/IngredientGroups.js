@@ -6,9 +6,8 @@ import { fromJS } from 'immutable'
 
 import SortDeleteWrapper from 'components/SortDeleteWrapper'
 import Button from 'components/ConstructorBtn'
-import IngredientList from 'components/IngredientList'
+import IngredientList from 'components/IngredientListGroup'
 import Input from 'components/Input'
-import Ingredient from 'components/IngredientItemAsync'
 
 import 'styles/IngredientGroups.sass'
 
@@ -88,7 +87,6 @@ class IngedientGroup extends PureComponent {
                             recipeId={this.props.recipeId}
                             data={elem.get('recipe_ingredients')}
                             units={this.props.units}
-                            ingredientItem={Ingredient}
                             listType='groups'
 
                             stateUpdater={this.props.stateUpdater}

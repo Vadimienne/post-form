@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
+import { isImmutable } from 'immutable'
 
 import Select from 'react-select'
 import Input from 'components/Input'
@@ -6,7 +7,7 @@ import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
 
 import 'styles/IngredientItem.sass'
 
-class IngredientStep extends Component {
+class IngredientStep extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
@@ -14,21 +15,13 @@ class IngredientStep extends Component {
         }
         /* this.onUnitSelect = this.onUnitSelect.bind(this) */
         this.onIngSelect = this.onIngSelect.bind(this)
+        this.onAmountInput = this.onAmountInput.bind(this)
     }
 
     // triggers on amount input
-    onInput(type, e){
-        let data = clone(this.props.data)
-        data[type] = e.target.value
-        this.props.onChange(data)
+    onAmountInput(path, value){
+        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], value)
     }
-
-    // no need in this as unit is fixed in Step
-    /* onUnitSelect(selectedOption){
-        let data = [...this.props.data]
-        data.unit_id = selectedOption.value
-        this.props.onChange(data)
-    } */
 
     // triggers when ingredient is selected
     onIngSelect(selectedOption){
@@ -40,7 +33,10 @@ class IngredientStep extends Component {
     render() {
         
         const { units, ingredientsAvailable, data } = this.props
-        const { amount, recipe_ingredient_id } = this.props.data
+        // const { amount, recipe_ingredient_id } = this.props.data
+
+        const amount =  this.props.data.get('amount') 
+        const recipe_ingredient_id =  this.props.data.get('recipe_ingredient_id')
 
         // PROCESSING AVAILABLE INGREDIENTS
         // push ingredients from all groups into one array
@@ -117,7 +113,7 @@ class IngredientStep extends Component {
                     <Input 
                         className='input input-quantity' 
                         value={amount} 
-                        onChange={(e) => this.onInput('amount',e)}
+                        stateUpdater={this.onAmountInput}
                     />
                     <Select 
                         className='ingredient-select' 

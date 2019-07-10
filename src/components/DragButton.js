@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { sortableHandle } from 'react-sortable-hoc';
 
 import 'styles/DragButton.css'
@@ -13,4 +13,4 @@ function Comp (props) {
     )
 }
 
-export default sortableHandle(Comp);
+export default memo(sortableHandle(Comp));

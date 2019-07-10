@@ -1,33 +1,14 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import ContentEditable from 'react-contenteditable'
 
 import 'styles/MyEditor.sass'
 
-class Editor  extends Component {
+class Editor  extends PureComponent {
     constructor(props) {
         super(props);
         this.editorRef = React.createRef()
-        this.onInput = this.onInput.bind(this)
-        this.updateEditorContent = this.updateEditorContent.bind(this)
-    }
-
-    shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
-    }
-
-    componentDidMount(){
-        this.props.data ? this.updateEditorContent() : null
-    }
-
-    // update text
-    updateEditorContent(){
-        const node = this.editorRef.current
-        node.innerHTML = this.props.data
+        this.onChange = this.onChange.bind(this)
+        this.focusEditor = this.focusEditor.bind(this)
     }
 
     // command executed when buttons (italic, bold, link, etc.) are pressed
@@ -42,24 +23,26 @@ class Editor  extends Component {
         document.execCommand(cmd.cmd, false, (val || ''))
     }
 
-    // send changes to state
-    onInput(){
-        const node = this.editorRef.current
-        this.props.onChange(node.innerHTML)
+    onChange(e){
+        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'body'], e.target.value)
+    }
+
+    focusEditor(){
+        this.editorRef.current.focus()
     }
 
     render() {
-
+        console.log('EDITOR REF: ', this.editorRef)
         return (
             <div
                 className={'editor ' + (this.props.data && this.props.data.length ? '' : 'invalid' )}
-                onClick={()=>this.editorRef.current.focus()}>
+                onClick={this.focusEditor}>
                 <span className='toolbox text-toolbox'>Описание</span>
 
                 <ContentEditable
                     className='editor-text'
                     html={this.props.data? this.props.data: ''}
-                    onChange={this.onInput}
+                    onChange={this.onChange}
                     innerRef={this.editorRef}
                 />
             </div>

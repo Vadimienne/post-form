@@ -1,46 +1,33 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import Dropzone from 'components/Dropzone'
 import Editor from 'components/MyEditorDescription'
-import IngredientList from 'components/IngredientList'
-import IngredientItem from 'components/IngredientItemStep'
+import IngredientList from 'components/IngredientListStep'
 
 import 'styles/Step.sass'
 
-class Step extends Component {
+class Step extends PureComponent {
     constructor(props) {
         super(props);
-        this.onFieldChange = this.onFieldChange.bind(this)
-    }
-
-    shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
-    }
-
-    // send field changes to state
-    onFieldChange(field, val) {
-        let data = clone(this.props.data)
-        data[field] = val
-        this.props.onChange(data)
     }
 
     render() {
-        const { image, body, step_ingredients } = this.props.data
+        // const { image, body, step_ingredients } = this.props.data
+
+        const image = this.props.data.get('image')
+        const body = this.props.data.get('body')
+        const step_ingredients = this.props.data.get('step_ingredients')
 
         return (
             <div className='step-presentational'>
                 <Dropzone 
-                    onChange={(val) => this.onFieldChange('image', val)} 
+                    onChange={this.onFieldChange} 
                     data={image}
                 />
                 <div className='content-box__content' >
                     <Editor 
-                        onChange={(val) => this.onFieldChange('body', val)} 
+                        stateUpdater={this.props.stateUpdater}
+                        stepIndex={this.props.stepIndex}
                         data={ body }
                     />
                     <span className='ingredients-label'>Укажите необходимые ингредиенты</span>
@@ -48,9 +35,9 @@ class Step extends Component {
                         data={step_ingredients}
                         units={this.props.units}
                         ingredientsAvailable={this.props.ingredientsAvailable}
-                        onChange={(val) => this.onFieldChange('step_ingredients', val)}
-                        ingredientItem={IngredientItem}
                         listType='step'
+                        stateUpdater={this.props.stateUpdater}
+                        updatePath={this.props.stepIndex}
                     />
                 </div>
             </div>

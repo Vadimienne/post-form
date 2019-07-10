@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import parser from 'helpers/toPostRecipeParser'
 import Immutable, { fromJS } from 'immutable'
 
@@ -21,7 +21,7 @@ const titleUpdatePath = ['title']
 import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe } from 'api/requests'
 
 
-class Main extends Component {
+class Main extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -76,7 +76,7 @@ class Main extends Component {
     // update particular state field with passed value. Optional callback when state update finished
     stateUpdater(path, value, callback){
         this.setState({json: this.state.json.setIn(path, value)}, 
-            ()=> console.log('stateUpdater',this.state.json.toJS().ingredient_groups[0].element))
+            ()=> console.log('stateUpdater',this.state.json.toJS().recipe_steps[0].body))
     }
 
     onTitleInput(e){
@@ -240,14 +240,15 @@ class Main extends Component {
                                     </div>
 
                                 </div>
-                                {/*
+                                
                                 <Steps
                                     isValid={validation.step}
                                     data={recipe_steps}
                                     ingredientsAvailable={ingredients}
                                     units={units}
-                                    onChange={(val) => this.stateUpdater('recipe_steps', val)}
+                                    stateUpdater={this.stateUpdater}
                                 />
+                                {/*
                                 <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>*/}
                             </div>
                             <div className="right-column form-column">
