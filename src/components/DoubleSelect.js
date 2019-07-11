@@ -1,29 +1,34 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import Select from 'react-select'
+import Immutable from 'immutable'
 
 import Check from 'components/Checkbox'
 
 import { borderColorize, borderInvalid } from 'config/selectStyles'
 
-class DoubleSelect extends Component {
+class DoubleSelect extends PureComponent {
     constructor(props) {
         super(props);
         this.onCategorySelect = this.onCategorySelect.bind(this)
+        this.toggleCheck = this.toggleCheck.bind(this)
     }
 
     // send category change to state
     onCategorySelect(selected){
-        this.props.onCategoryChange(selected.value, () => this.props.onSubcategoryChange([])) 
+        this.props.stateUpdater(['recipe_category'], selected.value, () => this.props.stateUpdater(['recipe_subcategories'], Immutable.List()))
     }
 
     // send subcategory change to state
     toggleCheck(id, isActive){
-        let array = clone(this.props.subcategories)
-        isActive ?
-            array.splice( array.indexOf(id), 1 )
-            :array.push( id )
-        this.props.onSubcategoryChange(array)
+
+        let array = this.props.subcategories
+        let newArray
+        isActive?
+            newArray = array.delete(array.indexOf(id))
+            : newArray = array.push( id )
+
+        this.props.stateUpdater(['recipe_subcategories'], newArray)
     }
 
     render() {
@@ -55,7 +60,9 @@ class DoubleSelect extends Component {
                     key={'checkbox-'+index}
                     isActive={isActive}
                     text={elem.name}
-                    onToggle={()=> this.toggleCheck(elem.id, isActive)}
+                    elemId={elem.id}
+                    
+                    stateUpdater={this.toggleCheck}
                 />
             )}
         )

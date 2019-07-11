@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { isImmutable } from 'immutable'
+import Immutable, { isImmutable } from 'immutable'
 
 import Select from 'react-select'
 import Input from 'components/Input'
@@ -30,30 +30,37 @@ class IngredientStep extends PureComponent {
         this.props.onChange(data)
     }
 
+    componentDidUpdate(prevProps){
+        // console.log('StepIndex: ', this.props.stepIndex, this.props.updatePath)
+        if(this.props.stepIndex == 11 && this.props.updatePath == 3){
+            console.log('iM AMOUNT:', this.props.amount, prevProps.amount)
+        }
+    }
+
     render() {
         
         const { units, ingredientsAvailable, data } = this.props
         // const { amount, recipe_ingredient_id } = this.props.data
 
-        const amount =  this.props.data.get('amount') 
+        const amount =  this.props.data.get('amount')
         const recipe_ingredient_id =  this.props.data.get('recipe_ingredient_id')
 
         // PROCESSING AVAILABLE INGREDIENTS
         // push ingredients from all groups into one array
-        let parsedAvailable = []
-        ingredientsAvailable ? ingredientsAvailable.map(
+        let parsedAvailable = Immutable.List()
+        isImmutable(ingredientsAvailable) && Object.keys(ingredientsAvailable).length ? ingredientsAvailable.map(
             (elem) => elem.value.map(
-                (ing) => parsedAvailable.push(ing)
+                (ing) => parsedAvailable = parsedAvailable.push(ing)
             )
         ): []
 
         // select one ingredient that matches data's recipe_ingredient_id 
         let selectedIngredient = parsedAvailable? parsedAvailable.find(
-            (elem) => elem.id === data.recipe_ingredient_id
+            (elem) => elem.get('id') === data.get('recipe_ingredient_id')
         ): undefined
 
         // extract unit_id from selectedIngredient
-        const unit_id = selectedIngredient ? selectedIngredient.unit_id : null
+        const unit_id = selectedIngredient ? selectedIngredient.get('unit_id') : null
 
 
         // PROCESS INGREDIENTS FOR SELECTOR 
@@ -62,23 +69,23 @@ class IngredientStep extends PureComponent {
             (elem) => {
                 return { label: elem.label, options: elem.value.map(
                     (ing) => {
-                        return { label: ing.ingredient.title, value: ing.id }
+                        return { label: ing.get('ingredient').get('title'), value: ing.get('id') }
                     }
                 )}
             }
         ): []
 
         // gen selected ingredient object
-        let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.ingredient.title: '') }
+        let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.get('ingredient').get('title'): '') }
 
 
         // PROCESSING UNITS
         // get available units for current ingredient
-        const { unit_ids } = (selectedIngredient? selectedIngredient.ingredient : {})
+        const unit_ids = (selectedIngredient? selectedIngredient.get('ingredient').get('unit_ids') : {})
 
 
         // Have valid units ids. Select units with same ids from all units list to get title
-        let filteredOptions = units && unit_ids ? unit_ids.map(
+        let filteredOptions = units && Object.keys(unit_ids).length ? unit_ids.map(
             (elem) => units.find(
                 (x)=> x.id===elem
             )
@@ -112,7 +119,7 @@ class IngredientStep extends PureComponent {
                     />
                     <Input 
                         className='input input-quantity' 
-                        value={amount} 
+                        value={this.props.amount} 
                         stateUpdater={this.onAmountInput}
                     />
                     <Select 

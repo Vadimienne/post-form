@@ -23,6 +23,8 @@ export function arrayMoveImmutable(list, oldIndex, newIndex){
     else if ( !Immutable.List.isList(list) ){
         throw "list is now Immutable List!"
     }
+    console.log('=================================================')
+    console.log('im invoked')
 
     const moving = list.get(oldIndex)
     list = list.delete(oldIndex)

@@ -51,32 +51,37 @@ class Main extends PureComponent {
         this.setState({tags})
         this.setState({units})
         this.setState({contests: contests.contests})
-        // this.updateIngredients()
+        this.updateIngredients()
     }
 
 
     // write group ingredients to state
     // these ingredients will be passed to steps as available ingredients
     updateIngredients(){
-        let ingredients = []
-        let ingredientGroups = [...this.state.json.ingredient_groups]
+        let ingredients = Immutable.List()
+        let ingredientGroups = this.state.json.get('ingredient_groups')
         ingredientGroups.map(
-            (elem) => ingredients.push({label: elem.element, value: elem.recipe_ingredients})
+            (elem) => ingredients = ingredients.push(
+                {
+                    label: elem.get('element'), 
+                    value: elem.get('recipe_ingredients')
+                }
+            )
         )
         this.setState({ingredients})
     }
 
     componentDidUpdate(prevProps, prevState){
         // update available ingredients when changed
-        if (prevState.json.ingredient_groups && (JSON.stringify(prevState.json.ingredient_groups) != JSON.stringify(this.state.json.ingredient_groups))){
-            // this.updateIngredients()
+        if ( Object.keys(prevState.json).length && !this.state.json.get('ingredient_groups').equals(prevState.json.get('ingredient_groups'))){
+            this.updateIngredients()
         }
     }
 
     // update particular state field with passed value. Optional callback when state update finished
     stateUpdater(path, value, callback){
-        this.setState({json: this.state.json.setIn(path, value)}, 
-            ()=> console.log('stateUpdater',this.state.json.toJS().recipe_steps[0].body))
+        this.setState({json: this.state.json.setIn(path, value)}, callback)
+            // ()=> console.log('stateUpdater',this.state.json.toJS().recipe_steps[11].step_ingredients[3].amount))
     }
 
     onTitleInput(e){
@@ -133,8 +138,6 @@ class Main extends PureComponent {
         const contest =                 json.get('contest')
         const setting_rateable =        json.get('setting_rateable')
 
-        setting_rateable
-
         // because json.id isn't clear enough
         const recipeId = json.id
 
@@ -181,21 +184,34 @@ class Main extends PureComponent {
                         <div className='flex-wrapper'>
 
                             <div className='left-column form-column'>
-                                {/*<SideTags 
+                                <SideTags 
                                     tags={tags} 
-                                    checked={checkedTags} 
+                                    
+                                    category={recipe_category}
+                                    subcategories={recipe_subcategories}
+                                    cookingMethods={recipe_cooking_methods}
+                                    cuisine={recipe_cuisine}
+                                    cuisineApps={recipe_cuisine_apps}
+                                    cuisineTypes={recipe_cuisine_types}
+                                    holidays={recipe_holidays}
+                                    mealtimes={recipe_mealtimes}
+                                    nutritionTypes={recipe_nutrition_types}
+                                    userTags={recipe_user_tags}
+                                    contest={contest}
+                                    contestId={contest_id}
+
                                     contests={contests}
                                     stateUpdater={this.stateUpdater}
                                     isCategoryValid={validation.category}
                                     isCuisineValid={validation.national_cuisine}
-                                />*/}
+                                />
                             </div>
 
                             <div className='main-column form-column'>
                                 <div className='content-box'>
                                     <div className='content-box__content'>
                                         <Input
-                                            value={json.get('title')}  
+                                            value={title}  
                                             className=''
                                             isBig
                                             isValid={status ? true : false}
@@ -214,16 +230,16 @@ class Main extends PureComponent {
                                     
                                     <div className='content-box__content'>
                                         <Editor
-                                            data={json.get('description')}
+                                            data={description}
                                             stateUpdater={this.stateUpdater}
                                         />
 
                                         <Timings
                                             isValid={validation.timing}
                                             isServingsValid={validation.servings}
-                                            cooking_time={json.get('cooking_time')}
-                                            preparation_time={json.get('preparation_time')} 
-                                            servings={json.get('servings')}
+                                            cooking_time={cooking_time}
+                                            preparation_time={preparation_time} 
+                                            servings={servings}
                                             stateUpdater={this.stateUpdater}
                                         />
 

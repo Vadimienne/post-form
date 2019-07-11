@@ -52,7 +52,10 @@ class Ingredients extends PureComponent {
 
         // map ingredients without destroyed ones
         let mappedIngredients = this.props.data.size ? this.props.data.map((elem, index) => {
-            console.log('before crash: ', elem)
+            console.log('before crash: ')
+            if(this.props.updatePath == 11 && index == 3){
+                console.log('eleven', elem.get('amount'))
+            }
             if( elem.get('_destroy') !== true ) {
                 return (
                     <SortDeleteWrapperInline className='sort-delete-wrapper-inline' index={index} key={'ingredient-sdw-'+index} onDelete={this.removeIngredient}>
@@ -61,9 +64,12 @@ class Ingredients extends PureComponent {
                             groupPosition={this.props.groupPosition}
                             recipeId={this.props.recipeId}
                             ingredientPosition={index}
-                            data={elem} 
+                            data={elem}
+                            amount = {elem.get('amount')}
+                            recipeIngredientId = {elem.get('recipe_ingredient_id')}
                             key={'ingredient'}
                             units={this.props.units}
+                            ingredientsAvailable={this.props.ingredientsAvailable}
                             
                             stateUpdater={this.props.stateUpdater}
                             stepIndex={this.props.updatePath}

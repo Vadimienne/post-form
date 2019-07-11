@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { fromJS } from 'immutable'
 import Select from 'react-select'
 
 import {borderColorize, borderInvalid} from 'config/selectStyles'
@@ -13,10 +13,11 @@ class CategorySelect extends Component {
     onSelect(selected){
         if (this.props.isMulti) {
             let ids = selected.map((elem) => elem.value)
-            this.props.onChange(ids)
+            // this.props.onChange(ids)
+            this.props.stateUpdater([this.props.updatePath], fromJS(ids))
         }
         else {
-            this.props.onChange(selected.value)
+            this.props.stateUpdater([this.props.updatePath], selected.value)
         }
     }
 
@@ -44,12 +45,14 @@ class CategorySelect extends Component {
                     )
                 )
                 
+                
                 // map value for Select
-                defaultValue = filteredCategories.map(
+                defaultValue = filteredCategories.toJS().map(
                     (elem) => { 
                         return { label: elem.name, value: elem.id }
                     }
                 )
+                console.log('SELECTED CATEGORY', selectedCategory, filteredCategories, defaultValue)
             }
             else{
                 // find selectedCategory in scaffold and make a value for Select

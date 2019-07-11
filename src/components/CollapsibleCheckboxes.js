@@ -1,26 +1,27 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import Check from 'components/Checkbox'
 
 import 'styles/CollapsibleCheckboxes.sass'
 
-class CollapsibleCheckboxes extends Component {
+class CollapsibleCheckboxes extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {isOpen:true}
+        this.toggleCheck = this.toggleCheck.bind(this)
     }
 
     // send checkbox toggles to state
-    toggleCheck(id, isChecked){
-        let array = clone(this.props.checked)
-        if (isChecked){
-            array.splice(array.indexOf(id), 1)
-        }
-        else {
-            array.push(id)
-        }
-        this.props.onChange(array)
+    toggleCheck(id, isActive){
+        let array = this.props.checked
+        let newArray
+        isActive?
+            newArray = array.delete(array.indexOf(id))
+            : newArray = array.push( id )
+
+        this.props.stateUpdater([this.props.updatePath], newArray)
     }
+    
 
     render() {
         const { head, tags, checked } = this.props
@@ -29,7 +30,15 @@ class CollapsibleCheckboxes extends Component {
         let checkboxes = tags.map((elem, index) => {
             let isChecked = checked.includes(elem.id)? true: false
             return(
-                <Check key={'checkbox-'+index} isActive={isChecked} text={elem.name} onToggle={()=> this.toggleCheck(elem.id, isChecked)}/>)
+                <Check 
+                    key={'checkbox-'+index} 
+                    isActive={isChecked} 
+                    text={elem.name} 
+                    onToggle={this.toggleCheck}
+                    elemId={elem.id}
+                    stateUpdater={this.toggleCheck}
+                />
+            )
         })
 
         return (

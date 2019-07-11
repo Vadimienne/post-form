@@ -2,7 +2,7 @@ import React from "react";
 
 import 'styles/Input.sass'
 
-class Input extends React.PureComponent {
+class Input extends React.Component {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
@@ -20,7 +20,7 @@ class Input extends React.PureComponent {
                 <div className='field-container'>
                     <input
                         className='text-input' 
-                        defaultValue={props.value}
+                        value={props.value ? props.value : ''}
                         onChange={this.onChange}
                         placeholder={props.placeholder}
                         maxLength={props.maxlength}
@@ -30,7 +30,7 @@ class Input extends React.PureComponent {
         ):
             (  <div className={'field-big field-container ' + props.className + (props.isValid? '': ' invalid')}>
                 <input
-                    className={'main-column__input_title text-input'} defaultValue={props.value}
+                    className={'main-column__input_title text-input'} value={props.value ? props.value : ''}
                     onChange={this.onChange}
                     placeholder={props.placeholder}
                     maxLength={props.maxlength}

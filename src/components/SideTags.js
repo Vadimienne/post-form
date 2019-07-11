@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
 import DoubleSelect from 'components/DoubleSelect'
@@ -7,35 +7,29 @@ import Draft from 'components/DraftCard'
 
 import 'styles/SideTags.sass'
 
-class SideTags extends Component {
+class SideTags extends PureComponent {
     constructor(props) {
         super(props);
     }
-  
-    /* shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
-    } */
 
     render() {
+
         const {
-            recipe_category,
-            recipe_subcategories,
-            recipe_cooking_methods,
-            recipe_cuisine,
-            recipe_cuisine_apps,
-            // recipe_cuisine_types,    // unused
-            recipe_holidays,
-            recipe_mealtimes,
-            recipe_nutrition_types,
-            // recipe_user_tags,        // used in different place
-            contest_id,
-            contest
-        } = this.props.checked
+            category,
+            subcategories,
+            cookingMethods,
+            cuisine,
+            cuisineApps,
+            cuisineTypes,
+            holidays,
+            mealtimes,
+            nutritionTypes,
+            userTags,
+            contest,
+            contestId
+        } = this.props
+
+
 
         this.props.checked
         console.log('this.props.checked: ', this.props.checked);
@@ -49,11 +43,10 @@ class SideTags extends Component {
                         <DoubleSelect
                             header='Опубликовать в категории' 
                             isValid={this.props.isCategoryValid}
-                            category={recipe_category}  
-                            subcategories={recipe_subcategories} 
+                            category={category}  
+                            subcategories={subcategories} 
                             categoryScaffold={tags.recipe_category}
-                            onCategoryChange=   {(val, callback) => this.props.stateUpdater('recipe_category', val, callback)}
-                            onSubcategoryChange={(val) => this.props.stateUpdater('recipe_subcategories', val)}
+                            stateUpdater={this.props.stateUpdater}
                         />
                     </div>
                 </div>
@@ -64,9 +57,14 @@ class SideTags extends Component {
                         {/* otherwise pass all available contests */}
                         <CategorySelect
                             header='Рецепт для конкурса' 
-                            categoryScaffold={contest_id? [{name: contest.title, id: contest.id}]: contests}
-                            selectedCategory={contest_id}
-                            onChange={(val) => this.props.stateUpdater('recipe_cuisine', val)}
+                            categoryScaffold={contestId? [{
+                                name: contest.get('title'), 
+                                id: contest.get('id')}]
+                                : contests}
+                            selectedCategory={contestId}
+                            
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='contest_id'
                         />
                     </div>
                 </div>
@@ -77,8 +75,9 @@ class SideTags extends Component {
                             header='Национальная кухня' 
                             isValid={this.props.isCuisineValid}
                             categoryScaffold={tags.recipe_cuisine} 
-                            selectedCategory={recipe_cuisine}
-                            onChange={(val) => this.props.stateUpdater('recipe_cuisine', val)}
+                            selectedCategory={cuisine}
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='recipe_cuisine'
                         />
 
                         <div className='separation-line' />
@@ -86,8 +85,10 @@ class SideTags extends Component {
                         <CollapsibleCheckboxes
                             head='Методы приготовления'
                             tags={tags.recipe_cooking_method} 
-                            checked={recipe_cooking_methods} 
-                            onChange={(val) => this.props.stateUpdater('recipe_cooking_methods',val)}
+                            checked={cookingMethods} 
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='recipe_cooking_methods'
+
                         />
 
                         <div className='separation-line' />
@@ -95,8 +96,9 @@ class SideTags extends Component {
                         <CollapsibleCheckboxes
                             head='Кухонная техника'
                             tags={tags.recipe_cuisine_app} 
-                            checked={recipe_cuisine_apps} 
-                            onChange={(val) => this.props.stateUpdater('recipe_cuisine_apps',val)}
+                            checked={cuisineApps} 
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='recipe_cuisine_apps'
                         />
                     </div>
                 </div>
@@ -106,8 +108,9 @@ class SideTags extends Component {
                         <CollapsibleCheckboxes
                             head='Тип питания'
                             tags={tags.recipe_nutrition_type} 
-                            checked={recipe_nutrition_types}
-                            onChange={(val) => this.props.stateUpdater('recipe_nutrition_types',val)}
+                            checked={nutritionTypes}
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='recipe_nutrition_types'
                         />
 
                         <div className='separation-line' />
@@ -115,8 +118,9 @@ class SideTags extends Component {
                         <CollapsibleCheckboxes
                             head='Время приема пищи'
                             tags={tags.recipe_mealtime} 
-                            checked={recipe_mealtimes}
-                            onChange={(val) => this.props.stateUpdater('recipe_mealtimes',val)}
+                            checked={mealtimes}
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='recipe_mealtimes'
                         />
                     </div>
                 </div>
@@ -127,8 +131,9 @@ class SideTags extends Component {
                             header='Рецепт для праздника' 
                             isMulti={true} 
                             categoryScaffold={tags.recipe_holiday} 
-                            selectedCategory={recipe_holidays}
-                            onChange={(val) => this.props.stateUpdater('recipe_holidays', val)}
+                            selectedCategory={holidays}
+                            stateUpdater={this.props.stateUpdater}
+                            updatePath='recipe_holidays'
                         />
                     </div>
                 </div>
