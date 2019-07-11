@@ -7,6 +7,11 @@ import Check from 'components/Checkbox'
 class Cont extends PureComponent {
     constructor(props) {
         super(props);
+        this.toggleCheck = this.toggleCheck.bind(this)
+    }
+
+    toggleCheck(path, value){
+        this.props.stateUpdater([path], !value)
     }
 
     render() {
@@ -63,13 +68,15 @@ class Cont extends PureComponent {
                                 className='bold-label' 
                                 isActive={setting_commentable}
                                 text='Получать комментарии и оценки от пользователей'
-                                onToggle={() => this.props.stateUpdater('setting_commentable', !setting_commentable)}
+                                stateUpdater={this.toggleCheck}
+                                elemId='setting_commentable'
                             />
                             <Check
                                 className='bold-label' 
                                 isActive={setting_rateable}
                                 text='Участвует в голосовании?'
-                                onToggle={() => this.props.stateUpdater('setting_rateable', !setting_rateable)}
+                                stateUpdater={this.toggleCheck}
+                                elemId='setting_rateable'
                             />
                         </div>
 

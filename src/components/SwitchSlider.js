@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import 'styles/SwitchSlider.sass'
 
-class Cont extends Component {
+class Cont extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {isOn: false}

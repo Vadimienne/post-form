@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import {requestIngredients} from 'api/requests'
 
@@ -6,7 +6,7 @@ import AsyncSelect from 'react-select/async'
 
 
 
-class IngredientSelect extends Component {
+class IngredientSelect extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {isOpen:true}

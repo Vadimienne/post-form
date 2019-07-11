@@ -2,7 +2,7 @@ import React from "react";
 
 import 'styles/Input.sass'
 
-class Input extends React.Component {
+class Input extends React.PureComponent {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)

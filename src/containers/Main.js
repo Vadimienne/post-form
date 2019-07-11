@@ -269,13 +269,13 @@ class Main extends PureComponent {
                             </div>
                             <div className="right-column form-column">
 
-                                {/*<SideSubmitColumn 
+                                <SideSubmitColumn 
                                     settingRateable={setting_rateable} 
                                     settingCommentable={setting_commentable} 
                                     stateUpdater={this.stateUpdater} 
                                     isFormValid={isFormValid} 
                                     onSubmit={this.onSubmit}
-                                />*/}
+                                />
 
                             </div>
                         </div>
