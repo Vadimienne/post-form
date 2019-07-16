@@ -68,12 +68,50 @@ class Main extends PureComponent {
                 }
             )
         )
-        this.setState({ingredients})
+
+
+        // make array of unique ingredients from steps with usedAmount field
+        // which is sum of all amounts of same ingredient
+        let steps = this.state.json.get('recipe_steps').toJS()
+        let stepIngredients = []
+        steps.map(
+            elem => elem.step_ingredients.map(
+                ing => {
+                    let duplicateIndex = stepIngredients.findIndex(x => x.recipe_ingredient_id == ing.recipe_ingredient_id)
+                    if ( duplicateIndex == -1 ){
+                        let newIngredient = Object.assign({}, ing, {usedAmount: parseFloat(ing.amount)})
+                        // console.log('ING AMOUNT',ing.amount)
+                        stepIngredients.push(newIngredient)
+                    }
+                    else {
+                        stepIngredients[duplicateIndex].usedAmount += parseFloat(ing.amount)
+                    }
+                }
+            )
+        )
+        
+        // pass usedAmount to ingredients
+        ingredients.map(
+            (elem, groupIndex) => {
+                elem.value.map(
+                    (ing, ingIndex) => {
+                        let id = ing.get('id')
+                        let foundInSteps = stepIngredients.find( x => x.recipe_ingredient_id == id)
+                        ingredients = ingredients.setIn([groupIndex, 'value', ingIndex, 'usedAmount'], 
+                            foundInSteps ? foundInSteps.usedAmount: 0)
+                    }
+                )
+            }
+        )
+
+        this.setState({ingredients}, () => console.log('ingredients updated'))
     }
 
     componentDidUpdate(prevProps, prevState){
         // update available ingredients when changed
-        if ( Object.keys(prevState.json).length && !this.state.json.get('ingredient_groups').equals(prevState.json.get('ingredient_groups'))){
+        if ( Object.keys(prevState.json).length && 
+            (!this.state.json.get('ingredient_groups').equals(prevState.json.get('ingredient_groups'))
+            || !this.state.json.get('recipe_steps').equals(prevState.json.get('recipe_steps')))){
             this.updateIngredients()
         }
     }
@@ -81,7 +119,7 @@ class Main extends PureComponent {
     // update particular state field with passed value. Optional callback when state update finished
     stateUpdater(path, value, callback){
         this.setState({json: this.state.json.setIn(path, value)}, callback)
-            // ()=> console.log('stateUpdater',this.state.json.toJS().recipe_steps[11].step_ingredients[3].amount))
+        // ()=> console.log('stateUpdater',this.state.json.toJS().recipe_steps[11].step_ingredients[3].amount))
     }
 
     onTitleInput(e){
@@ -179,7 +217,7 @@ class Main extends PureComponent {
 
         return (
             <>
-                { this.state.json && this.state.tags && this.state.units ?
+                { this.state.json && this.state.tags && this.state.units && this.state.ingredients ?
                     (<form id="article-form">
                         <div className='flex-wrapper'>
 

@@ -32,7 +32,6 @@ class Editor  extends PureComponent {
     }
 
     render() {
-        console.log('EDITOR REF: ', this.editorRef)
         return (
             <div
                 className={'editor ' + (this.props.data && this.props.data.length ? '' : 'invalid' )}

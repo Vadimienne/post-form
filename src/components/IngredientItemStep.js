@@ -11,36 +11,122 @@ class IngredientStep extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
-            isIngSelected: true
+            isIngSelected: false,
+            selectedIngredient: null,
         }
         /* this.onUnitSelect = this.onUnitSelect.bind(this) */
         this.onIngSelect = this.onIngSelect.bind(this)
         this.onAmountInput = this.onAmountInput.bind(this)
+        this.inputRef = React.createRef()
+        this.suggestionRef = React.createRef()
+        this.onClickSuggestion = this.onClickSuggestion.bind(this)
+        this.onFocusOut = this.onFocusOut.bind(this)
+        this.onFocus = this.onFocus.bind(this)
+
+        this.updateSelectedIngredient = this.updateSelectedIngredient.bind(this)
+        this.checkAmount = this.checkAmount.bind(this)
+    }
+
+    componentDidMount(){
+        console.log('HELLO THERE', this.props.data.get('recipe_ingredient_id'))
+        if (this.props.data.get('recipe_ingredient_id')){
+            this.updateSelectedIngredient(this.checkAmount)
+        }
+    }
+
+    componentDidUpdate(){
+        this.state.isIngSelected &&
+        this.updateSelectedIngredient(this.checkAmount)
+    }
+
+    updateSelectedIngredient(callback){
+        const { ingredientsAvailable, data } = this.props
+
+        let amount = data.get('amount')
+
+        let parsedAvailable = Immutable.List()
+        isImmutable(ingredientsAvailable) ? ingredientsAvailable.map(
+            (elem) => elem.value.map(
+                (ing) => parsedAvailable = parsedAvailable.push(ing)
+            )
+        ): []
+
+        // select one ingredient that matches data's recipe_ingredient_id 
+        let selectedIngredient = parsedAvailable? parsedAvailable.find(
+            (elem) => elem.get('id') === data.get('recipe_ingredient_id')
+        ): undefined
+
+        this.setState({selectedIngredient}, () => {
+            this.setState({isIngredientSelected: true})
+            callback? callback(): null
+        })
+    }
+
+    checkAmount(){
+
+        if(this.props.stepIndex == 3) {
+            console.log('used', this.state.selectedIngredient.get('usedAmount'))
+        }
+        
+        let all = this.state.selectedIngredient.get('amount')
+        let used = this.state.selectedIngredient.get('usedAmount')
+
+        if (all - used < 0){
+            this.inputRef.current.nextSibling.style = 'display: inline-block;'
+            this.inputRef.current.nextSibling.innerHTML= `Доступно ${all}&nbsp; Использовано ${used}`
+        }
+        return({all: all, used: used})
+        
     }
 
     // triggers on amount input
-    onAmountInput(path, value){
-        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], value)
+    onAmountInput(e){
+        let value = e.target.value
+        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], parseFloat(value? value: 0))
+
+    }
+
+    onClickSuggestion(){
+        this.suggestionRef.current.style='display: none;'
+    }
+
+    onFocus(){
+        this.inputRef.current.nextSibling.style = 'display: block;'
+    }
+
+    onFocusOut(){
+
+        let all = this.state.selectedIngredient.get('amount')
+        let used = this.state.selectedIngredient.get('usedAmount')
+
+        if (all - used >= 0){
+            this.inputRef.current.nextSibling.style = 'display: none;'
+            this.inputRef.current.nextSibling.innerHTML= `Доступно ${all}&nbsp; Использовано ${used}`
+        }
+        // let all = this.state.selectedIngredient.get('amount')
+        // let used = this.state.selectedIngredient.get('usedAmount')
+        // let result = this.props.data.get('amount')
+        // if(all - used < 0){
+        //     result = 0
+        // }
+        // this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], parseFloat(result? result: 0))
     }
 
     // triggers when ingredient is selected
     onIngSelect(selectedOption){
-        let data = clone(this.props.data)
-        data.recipe_ingredient_id = selectedOption.value
-        this.props.onChange(data)
-    }
+        let data = this.state.data
+        // data.recipe_ingredient_id = selectedOption.value
+        // this.props.onChange(data)
 
-    componentDidUpdate(prevProps){
-        // console.log('StepIndex: ', this.props.stepIndex, this.props.updatePath)
-        if(this.props.stepIndex == 11 && this.props.updatePath == 3){
-            console.log('iM AMOUNT:', this.props.amount, prevProps.amount)
-        }
+        // data.set('recipe_ingredient_id', selectedOption.value)
+        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'recipe_ingredient_id'], 
+            selectedOption.value, this.updateSelectedIngredient)
+
     }
 
     render() {
         
         const { units, ingredientsAvailable, data } = this.props
-        // const { amount, recipe_ingredient_id } = this.props.data
 
         const amount =  this.props.data.get('amount')
         const recipe_ingredient_id =  this.props.data.get('recipe_ingredient_id')
@@ -75,6 +161,8 @@ class IngredientStep extends PureComponent {
             }
         ): []
 
+        ingredientOptions = ingredientOptions.toJS()
+
         // gen selected ingredient object
         let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.get('ingredient').get('title'): '') }
 
@@ -106,6 +194,8 @@ class IngredientStep extends PureComponent {
             {value: unit_id, label: metricOptions.find((el) => el.value === unit_id).label}
             : null
 
+        console.log('INGREDIENT OPTIONS:', ingredientOptions)
+
         return (
             <>
 
@@ -117,11 +207,27 @@ class IngredientStep extends PureComponent {
                         onChange={this.onIngSelect} 
                         styles={selectStyleMedium}
                     />
-                    <Input 
+                    {/*<Input 
                         className='input input-quantity' 
                         value={this.props.amount} 
                         stateUpdater={this.onAmountInput}
-                    />
+                    />*/}
+                    <div className='input input-quantity'>
+                        <div className='field-container' ref={this.inputRef}>
+                            <input
+                                onFocus={this.onFocus}
+                                onBlur={this.onFocusOut}
+                                className='text-input' 
+                                value={amount || amount == 0 ? amount : ''}
+                                onChange={this.onAmountInput}
+                                
+                            />
+                        </div>
+                        { !!selectedIngredient && 
+                        <span className='input-suggestion' onClick={this.onClickSuggestion} ref={this.suggestionRef}>
+                            {`Доступно ${selectedIngredient.get('amount')} Использовано ${selectedIngredient.get('usedAmount')}`}
+                        </span>}
+                    </div>
                     <Select 
                         className='ingredient-select' 
                         isDisabled
