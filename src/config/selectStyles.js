@@ -1,6 +1,7 @@
 export const borderColorize = {
     control: (provided, state) => ({
         ...provided,
+        height: '40px',
         borderColor: '#e6e6e6',
         '&:hover': {
             borderColor: '#363636'
@@ -37,6 +38,7 @@ export const borderInvalid = {
     control: (provided, state) => ({
         ...provided,
         borderColor: '#ff451c',
-        boxShadow: 0
+        boxShadow: 0,
+        height: '40px'
     })
 }

@@ -17,7 +17,7 @@ class Input extends React.PureComponent {
         // big Input field has a html-structure different from default input field
         return !props.isBig? (
             <div className={props.className}>
-                <div className='field-container'>
+                <div className={'field-container' + (props.isValid !== false ? '': ' invalid')}>
                     <input
                         className='text-input' 
                         value={props.value ? props.value : ''}

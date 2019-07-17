@@ -69,6 +69,27 @@ class Main extends PureComponent {
             )
         )
 
+        ingredients.map(
+            (elem, groupIndex) => {
+                elem.value.map(
+                    (ing, ingIndex) => {
+
+                        // delete destroyed ingredients
+                        if(ing.get('_destroy') == true){
+                            ingredients = ingredients.deleteIn([groupIndex, 'value', ingIndex])
+                        }
+
+                        // delete invalid ingredients
+                        if(!(ing.get('amount') && ing.get('ingredient_id') && ing.get('unit_id'))) {
+                            ingredients = ingredients.deleteIn([groupIndex, 'value', ingIndex])
+                        }
+                    }
+                )
+            }
+        )
+
+        console.log(ingredients.toJS()[0].value)
+
 
         // make array of unique ingredients from steps with usedAmount field
         // which is sum of all amounts of same ingredient
@@ -79,12 +100,12 @@ class Main extends PureComponent {
                 ing => {
                     let duplicateIndex = stepIngredients.findIndex(x => x.recipe_ingredient_id == ing.recipe_ingredient_id)
                     if ( duplicateIndex == -1 ){
-                        let newIngredient = Object.assign({}, ing, {usedAmount: parseFloat(ing.amount)})
+                        let newIngredient = Object.assign({}, ing, {usedAmount: (parseFloat(ing.amount) ? parseFloat(ing.amount) : 0)})
                         // console.log('ING AMOUNT',ing.amount)
                         stepIngredients.push(newIngredient)
                     }
                     else {
-                        stepIngredients[duplicateIndex].usedAmount += parseFloat(ing.amount)
+                        stepIngredients[duplicateIndex].usedAmount += (parseFloat(ing.amount) ? parseFloat(ing.amount) : 0)
                     }
                 }
             )
@@ -201,7 +222,7 @@ class Main extends PureComponent {
             national_cuisine:   recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
             timing:             parseInt(cooking_time, 10)? true: false,
             servings:           parseInt(servings, 10)? true: false,
-            ingredients:        this.state.ingredients ? (this.state.ingredients.length? true: false) : false,
+            ingredients:        this.state.ingredients ? (this.state.ingredients.size? true: false) : false,
             step:               recipe_steps ? (recipe_steps.length? true: false) : false,
             steps_description:  recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body.length === 0)? false: true) : false,
         }
@@ -252,7 +273,7 @@ class Main extends PureComponent {
                                             value={title}  
                                             className=''
                                             isBig
-                                            isValid={status ? true : false}
+                                            isValid={validation.title}
                                             placeholder='Введите название рецепта'
                                             stateUpdater={this.stateUpdater} 
                                             updatePath={titleUpdatePath}                                          

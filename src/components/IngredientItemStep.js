@@ -3,7 +3,7 @@ import Immutable, { isImmutable } from 'immutable'
 
 import Select from 'react-select'
 import Input from 'components/Input'
-import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
+import { selectStyleShort, selectStyleMedium, borderInvalid } from 'config/selectStyles'
 
 import 'styles/IngredientItem.sass'
 
@@ -28,7 +28,6 @@ class IngredientStep extends PureComponent {
     }
 
     componentDidMount(){
-        console.log('HELLO THERE', this.props.data.get('recipe_ingredient_id'))
         if (this.props.data.get('recipe_ingredient_id')){
             this.updateSelectedIngredient(this.checkAmount)
         }
@@ -41,8 +40,6 @@ class IngredientStep extends PureComponent {
 
     updateSelectedIngredient(callback){
         const { ingredientsAvailable, data } = this.props
-
-        let amount = data.get('amount')
 
         let parsedAvailable = Immutable.List()
         isImmutable(ingredientsAvailable) ? ingredientsAvailable.map(
@@ -57,23 +54,26 @@ class IngredientStep extends PureComponent {
         ): undefined
 
         this.setState({selectedIngredient}, () => {
-            this.setState({isIngredientSelected: true})
+            this.setState({isIngSelected: true})
             callback? callback(): null
         })
     }
 
     checkAmount(){
 
-        if(this.props.stepIndex == 3) {
-            console.log('used', this.state.selectedIngredient.get('usedAmount'))
-        }
-        
         let all = this.state.selectedIngredient.get('amount')
         let used = this.state.selectedIngredient.get('usedAmount')
 
-        if (all - used < 0){
+        // if(this.props.stepIndex == 3) {
+        //     console.log('used', this.state.selectedIngredient.get('usedAmount'))
+        //     console.log('all: ', all)
+        // }
+
+        if (all - used < 0 || this.inputRef.current.isFocused){
             this.inputRef.current.nextSibling.style = 'display: inline-block;'
-            this.inputRef.current.nextSibling.innerHTML= `Доступно ${all}&nbsp; Использовано ${used}`
+        }
+        else{
+            this.inputRef.current.nextSibling.style = 'display: none;'
         }
         return({all: all, used: used})
         
@@ -82,7 +82,7 @@ class IngredientStep extends PureComponent {
     // triggers on amount input
     onAmountInput(e){
         let value = e.target.value
-        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], parseFloat(value? value: 0))
+        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], value? parseFloat(value) : '')
 
     }
 
@@ -92,36 +92,23 @@ class IngredientStep extends PureComponent {
 
     onFocus(){
         this.inputRef.current.nextSibling.style = 'display: block;'
+        this.inputRef.current.isFocused = true
     }
 
     onFocusOut(){
-
-        let all = this.state.selectedIngredient.get('amount')
-        let used = this.state.selectedIngredient.get('usedAmount')
+        let all = parseFloat(this.state.selectedIngredient.get('amount'))
+        let used = parseFloat(this.state.selectedIngredient.get('usedAmount'))
 
         if (all - used >= 0){
             this.inputRef.current.nextSibling.style = 'display: none;'
-            this.inputRef.current.nextSibling.innerHTML= `Доступно ${all}&nbsp; Использовано ${used}`
         }
-        // let all = this.state.selectedIngredient.get('amount')
-        // let used = this.state.selectedIngredient.get('usedAmount')
-        // let result = this.props.data.get('amount')
-        // if(all - used < 0){
-        //     result = 0
-        // }
-        // this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'amount'], parseFloat(result? result: 0))
+        this.inputRef.current.isFocused = false
     }
 
     // triggers when ingredient is selected
     onIngSelect(selectedOption){
-        let data = this.state.data
-        // data.recipe_ingredient_id = selectedOption.value
-        // this.props.onChange(data)
-
-        // data.set('recipe_ingredient_id', selectedOption.value)
         this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'recipe_ingredient_id'], 
             selectedOption.value, this.updateSelectedIngredient)
-
     }
 
     render() {
@@ -194,8 +181,6 @@ class IngredientStep extends PureComponent {
             {value: unit_id, label: metricOptions.find((el) => el.value === unit_id).label}
             : null
 
-        console.log('INGREDIENT OPTIONS:', ingredientOptions)
-
         return (
             <>
 
@@ -205,7 +190,7 @@ class IngredientStep extends PureComponent {
                         options={ingredientOptions} 
                         value={selectedValue} 
                         onChange={this.onIngSelect} 
-                        styles={selectStyleMedium}
+                        styles={recipe_ingredient_id ? selectStyleMedium: Object.assign({}, selectStyleMedium, borderInvalid)}
                     />
                     {/*<Input 
                         className='input input-quantity' 
@@ -213,7 +198,7 @@ class IngredientStep extends PureComponent {
                         stateUpdater={this.onAmountInput}
                     />*/}
                     <div className='input input-quantity'>
-                        <div className='field-container' ref={this.inputRef}>
+                        <div className={'field-container' + (amount ? '': ' invalid')} ref={this.inputRef}>
                             <input
                                 onFocus={this.onFocus}
                                 onBlur={this.onFocusOut}
@@ -224,7 +209,7 @@ class IngredientStep extends PureComponent {
                             />
                         </div>
                         { !!selectedIngredient && 
-                        <span className='input-suggestion' onClick={this.onClickSuggestion} ref={this.suggestionRef}>
+                        <span className='input-suggestion' onClick={this.onClickSuggestion} ref={this.suggestionRef} style={{display: 'none'}}>
                             {`Доступно ${selectedIngredient.get('amount')} Использовано ${selectedIngredient.get('usedAmount')}`}
                         </span>}
                     </div>

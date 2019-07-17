@@ -35,11 +35,17 @@
 
   &.invalid
     border-color: #ff451c
+    &::before
+      content: '\ea3a'
+      font-family: 'EdimDoma-Icons'
+      position: absolute
+      top: 12px
+      left: 4px
+      color: red
     input
       &::placeholder
         color: #ff451c
-      &::before
-        content: '&#xea3a;'
+
 
 
 
@@ -73,3 +79,7 @@
       font-size: 14px
       color: #b3b3b3
       font-weight: 700
+.input-invalid-icon
+  font-family: 'EdimDoma-Icons'
+  position: absolute
+  top

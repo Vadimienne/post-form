@@ -7,7 +7,7 @@ import SelectAsync from 'react-select/async'
 import Immutable, { isImmutable } from 'immutable'
 import { getIngredients } from 'api/requests'
 import { createIngredient } from 'api/ingredients'
-import { selectStyleShort, selectStyleMedium } from 'config/selectStyles'
+import { selectStyleShort, selectStyleMedium, borderInvalid } from 'config/selectStyles'
 import { throttle } from 'helpers'
 
 import 'styles/IngredientItem.sass'
@@ -53,30 +53,23 @@ class IngredientAsync extends PureComponent {
         // when all fields of ing are valid and ing has no recipe_ingredient_id (id) 
         // send ing to the server
         // get recipe_ingredient_id and write ing to local state and Main state
-        if (data.get('amount') && data.get('ingredient_id') && data.get('unit_id') ) {
-            if (!data.get('id')) {
-                // prepare data and send it to the server
-                data.set('element', this.props.groupInfo.element)
-                data.set('element_position', this.props.groupInfo.element_position)
-                let response = await createIngredient(this.props.recipeId, data.toJS())
-                let recipe_ingredient_id = response.id
+        if (data.get('amount') && data.get('ingredient_id') && data.get('unit_id') && !data.get('id')) {
+            // prepare data and send it to the server
+            data = data.set('element', this.props.groupName)
+            data = data.set('element_position', this.props.groupPosition)
+            let response = await createIngredient(this.props.recipeId, data.toJS())
+            let recipe_ingredient_id = response.id
 
-                // delete data.element
-                // delete data.element_position
-                console.log('data',data)
-                data.delete('element')
-                data.delete('element')
-                data.set('id', recipe_ingredient_id)
-                this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
-                this.setState({data})
-            }
+            data.delete('element')
+            data.delete('element')
+            data.set('id', recipe_ingredient_id)
+            this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
+            this.setState({data})
+            return 0
             // if all fields are valid and recipe_ingredient_id is present, just send data to the state
-            else {
-                // this.props.onChange(data)
-                console.log('hello', data)
-                this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
-            }
         }
+        this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
+        this.setState({data})
     }
 
     //triggers when ingredient is selected
@@ -162,10 +155,11 @@ class IngredientAsync extends PureComponent {
                     components={{ MenuList: MenuList }}
                     value={{ value: ingredient_id, label: title }}
                     loadOptions={this.loadOptions}
-                    styles={selectStyleMedium}
+                    styles={ingredient_id ? selectStyleMedium : Object.assign({}, selectStyleMedium, borderInvalid)}
                     onChange={this.onIngSelect}
                 />
                 <Input 
+                    isValid={!!amount}
                     className='input input-quantity' 
                     value={amount} 
                     stateUpdater={this.onAmountInput}
@@ -174,7 +168,7 @@ class IngredientAsync extends PureComponent {
                 <Select 
                     className='ingredient-select' 
                     options={options} 
-                    styles={selectStyleShort} 
+                    styles={unit_id ? selectStyleShort : Object.assign({}, selectStyleShort, borderInvalid)} 
                     onChange={this.onUnitSelect} 
                     value={defaultValue} 
                 />

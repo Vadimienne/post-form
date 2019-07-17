@@ -61,6 +61,23 @@ class IngedientGroup extends PureComponent {
         // map groups
         let items = this.props.data ? this.props.data.map((elem, index)=> {
             if (elem.get('_destroy') !== true){
+
+                const isGroupNameValid = !!elem.get('element')
+                let areIngredientsValid = true
+                const array = elem.get('recipe_ingredients').toJS()
+
+                for (var i = 0; i < array.length; i++){
+                    let el = array[i]
+
+                    if(!(el.ingredient_id && el.amount && el.unit_id) && !el._destroy){
+                        areIngredientsValid = false
+                        break;
+                    }
+                }
+
+                isGroupNameValid, areIngredientsValid
+                console.log('isGroupNameValid, areIngredientsValid: ', isGroupNameValid, areIngredientsValid);
+
                 return (
                     <SortDeleteWrapper
                         name='Укажите ингредиенты' deleteDesc='Удалить подраздел'
@@ -72,6 +89,7 @@ class IngedientGroup extends PureComponent {
                     >
                         <div className='input-ingredient-group'>
                             <Input  
+                                isValid={isGroupNameValid && areIngredientsValid}
                                 value={elem.get('element')} 
                                 placeholder='Основные'
                                 stateUpdater={this.onNameChange}
