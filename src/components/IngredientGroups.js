@@ -75,9 +75,6 @@ class IngedientGroup extends PureComponent {
                     }
                 }
 
-                isGroupNameValid, areIngredientsValid
-                console.log('isGroupNameValid, areIngredientsValid: ', isGroupNameValid, areIngredientsValid);
-
                 return (
                     <SortDeleteWrapper
                         name='Укажите ингредиенты' deleteDesc='Удалить подраздел'

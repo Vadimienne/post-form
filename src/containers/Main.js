@@ -19,6 +19,7 @@ import 'styles/EdimDomaIcons.sass'
 const titleUpdatePath = ['title']
 
 import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe } from 'api/requests'
+import { sortSortable } from 'helpers'
 
 
 class Main extends PureComponent {
@@ -37,10 +38,12 @@ class Main extends PureComponent {
     
     // fetch data from the server when app launches
     async componentDidMount(){
-        const recipe = await getRecipe(110258) //createRecipe()
+        let recipe = await getRecipe(110258) //createRecipe()
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
+
+        recipe = sortSortable(recipe)
         /*  const newRecipe = await createRecipe()
         console.log(newRecipe) */
         // console.log('PARSER')

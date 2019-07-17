@@ -31,3 +31,31 @@ export function arrayMoveImmutable(list, oldIndex, newIndex){
     list = list.insert(newIndex, moving)
     return list
 }
+
+function sortByKey(array, key){
+    array.sort((a, b) => {
+        if ( parseInt(a[key], 10) < parseInt(b[key]) ) {
+            return -1
+        }
+        else{
+            return 1
+        }
+    })
+    return array
+}
+
+export function sortSortable(json){
+    json.ingredient_groups = sortByKey(json.ingredient_groups, 'element_position')
+
+    json.ingredient_groups.map((elem, index) => {
+        json.ingredient_groups[index].recipe_ingredients = sortByKey(elem.recipe_ingredients, 'position')
+    })
+
+    json.recipe_steps = sortByKey(json.recipe_steps, 'position')
+
+    json.recipe_steps.map((elem, index) => {
+        json.recipe_steps[index].step_ingredients = sortByKey(elem.step_ingredients, 'position')
+    })
+
+    return json
+}

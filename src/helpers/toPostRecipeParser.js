@@ -88,30 +88,35 @@ export default function parser(json, tags) {
 
 
     // STEPS
+    // note that positions rewritten here to match positions displayed after manual sorting
+    result.recipe_steps_attributes = recipe_steps.map((elem, stepIndex) => {
 
-    result.recipe_steps_attributes = recipe_steps.map((elem) => {
+        let sortedIngs = elem.step_ingredients.map((ing, ingIndex) => {
+            ing.position = ingIndex + 1
+        })
+
         return {
             body: elem.body,
-            position: elem.position,
-            step_ingredient_attributes: elem.step_ingredients
+            position: stepIndex + 1,    // rewrite step position
+            step_ingredient_attributes: sortedIngs
         }
     })
 
 
     // INGREDIENTS GROUPS
-
+    // note that positions rewritten here to match positions displayed after manual sorting
     let ingredientsAccumulated = []
 
-    ingredient_groups.map((elem) => {
-        elem.recipe_ingredients.map((ing) => {
+    ingredient_groups.map((elem, elemIndex) => {
+        elem.recipe_ingredients.map((ing, ingIndex) => {
             ingredientsAccumulated.push({
-                position: ing.position,
+                position: ingIndex + 1,
                 id: ing.id,
                 ingredient_id: ing.ingredient_id,
                 amount: ing.amount,
                 unit_id: ing.unit_id,
                 element: elem.element,
-                element_position: elem.element_position,
+                element_position: elemIndex + 1,
                 _destroy: ing._destroy
             })
         })
