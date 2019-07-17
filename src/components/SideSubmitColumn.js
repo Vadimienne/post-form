@@ -53,6 +53,7 @@ class Cont extends PureComponent {
                             className='draft-btn' 
                             text="В ЧЕРНОВИК" 
                             icon='&#xea22;' 
+                            onClick={this.props.onDraftSubmit}
                         />
 
                         <span className='draft-label'>Если Вы не готовы выложить рецепт, хотите его дополнить позже, сохраните черновик.</span>

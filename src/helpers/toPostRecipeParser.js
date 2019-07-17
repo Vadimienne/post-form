@@ -1,4 +1,4 @@
-export default function parser(json, tags) {
+export default function parser(json, tags, status) {
 
     // find multiple names in list of objects by id 
     function findNames (idsArray, targetArray){
@@ -123,6 +123,10 @@ export default function parser(json, tags) {
     })
 
     result.recipe_ingredients_attributes = ingredientsAccumulated
+
+
+    // STATUS
+    result.status = status
 
     console.log(result)
 

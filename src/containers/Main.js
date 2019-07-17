@@ -32,6 +32,7 @@ class Main extends PureComponent {
         this.stateUpdater = this.stateUpdater.bind(this)
         this.updateIngredients = this.updateIngredients.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.onDraftSubmit = this.onDraftSubmit.bind(this)
         this.onTitleInput = this.onTitleInput.bind(this)
     }
 
@@ -152,7 +153,12 @@ class Main extends PureComponent {
 
     // submit form
     onSubmit() {
-        updateRecipe(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags))
+        updateRecipe(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags, 'on_moderation'))
+    }
+
+    // save draft
+    onDraftSubmit(){
+        updateRecipe(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags, 'draft'))
     }
 
     render() {
@@ -326,6 +332,7 @@ class Main extends PureComponent {
                                     stateUpdater={this.stateUpdater} 
                                     isFormValid={isFormValid} 
                                     onSubmit={this.onSubmit}
+                                    onDraftSubmit={this.onDraftSubmit}
                                 />
 
                             </div>
