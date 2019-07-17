@@ -11,6 +11,17 @@ class Step extends PureComponent {
         super(props);
     }
 
+    // shouldComponentUpdate(nextProps){
+    //     let oData = this.props.data
+    //     let nData = nextProps.data
+    //     let str = (a) => JSON.stringify(a)
+    //     if(str(oData.toJS()) === str(nData.toJS())){
+    //         return 0
+    //     }
+    //     console.log('STEP UPDATED')
+    //     return 1
+    // }
+
     render() {
         // const { image, body, step_ingredients } = this.props.data
 

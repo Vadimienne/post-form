@@ -18,6 +18,14 @@ class SortDeleteWrapper extends PureComponent {
         this.props.onDelete(this.props.index)
     }
 
+    // shouldComponentUpdate(nextProps){
+    //     let str = (a) => JSON.stringify(a)
+    //     if(str(this.props.children.props.data.toJS()) === str(nextProps.children.props.data.toJS())){
+    //         return 0
+    //     }
+    //     return 1
+    // }
+
     render(){
         const props = this.props
         return (

@@ -91,7 +91,7 @@ class Main extends PureComponent {
             }
         )
 
-        console.log(ingredients.toJS()[0].value)
+        // console.log(ingredients.toJS()[0].value)
 
 
         // make array of unique ingredients from steps with usedAmount field
@@ -128,7 +128,7 @@ class Main extends PureComponent {
             }
         )
 
-        this.setState({ingredients}, () => console.log('ingredients updated'))
+        this.setState({ingredients})
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -152,31 +152,17 @@ class Main extends PureComponent {
 
     // submit form
     onSubmit() {
-        updateRecipe(this.state.json.id, parser(this.state.json, this.state.tags))
+        updateRecipe(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags))
     }
 
     render() {
         const { json, units, tags, ingredients, contests } = this.state
-        // json.toJS()
         console.log('new render')
 
         if ( !Object.keys(json).length ){
             return 0
         }
 
-        /* const { 
-            title,                  image, 
-            description,            cooking_time,  
-            preparation_time,       servings,
-            ingredient_groups,      recipe_steps,
-            setting_commentable,    setting_rateable,
-            recipe_category,        recipe_cooking_methods,
-            recipe_cuisine,         recipe_cuisine_apps,
-            recipe_cuisine_types,   recipe_holidays,
-            recipe_mealtimes,       recipe_nutrition_types,
-            recipe_user_tags,       recipe_subcategories,
-            contest,                contest_id,
-        } = json */
         const recipe_category =         json.get('recipe_category')
         const recipe_cuisine =          json.get('recipe_cuisine')
         const recipe_cuisine_types =    json.get('recipe_cuisine_types')
@@ -217,6 +203,7 @@ class Main extends PureComponent {
             contest:                contest,
             contest_id:             contest_id
         }
+
         
         // object describes which fields are filled or empty
         let validation = {
@@ -226,9 +213,11 @@ class Main extends PureComponent {
             timing:             parseInt(cooking_time, 10)? true: false,
             servings:           parseInt(servings, 10)? true: false,
             ingredients:        this.state.ingredients ? (this.state.ingredients.size? true: false) : false,
-            step:               recipe_steps ? (recipe_steps.length? true: false) : false,
+            step:               recipe_steps ? (recipe_steps.size? true: false) : false,
             steps_description:  recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body.length === 0)? false: true) : false,
         }
+
+        // console.log(validation)
         // console.log(Object.values(validation))
 
         // form is valid when all required fields are filled
