@@ -45,17 +45,72 @@ function sortByKey(array, key){
 }
 
 export function sortSortable(json){
-    json.ingredient_groups = sortByKey(json.ingredient_groups, 'element_position')
+    if(json.ingredient_groups){
+        json.ingredient_groups = sortByKey(json.ingredient_groups, 'element_position')
 
-    json.ingredient_groups.map((elem, index) => {
-        json.ingredient_groups[index].recipe_ingredients = sortByKey(elem.recipe_ingredients, 'position')
-    })
+        json.ingredient_groups.map((elem, index) => {
+            if(json.ingredient_groups[index].recipe_ingredients){
+                json.ingredient_groups[index].recipe_ingredients = sortByKey(elem.recipe_ingredients, 'position')
+            }
+        })
+    }
 
-    json.recipe_steps = sortByKey(json.recipe_steps, 'position')
+    
 
-    json.recipe_steps.map((elem, index) => {
-        json.recipe_steps[index].step_ingredients = sortByKey(elem.step_ingredients, 'position')
-    })
+
+    if(json.recipe_steps){
+        json.recipe_steps = sortByKey(json.recipe_steps, 'position')
+
+        json.recipe_steps.map((elem, index) => {
+            if(json.recipe_steps[index].step_ingredients){
+                json.recipe_steps[index].step_ingredients = sortByKey(elem.step_ingredients, 'position')
+            }
+        })
+    }
 
     return json
 }
+
+
+export function recipeStatusToText (status) {
+    switch (status) {
+        case 'draft': 
+            return 'Черновик'
+        case 'on_moderation':
+            return 'На модерации'
+        case 'published':
+            return 'Опубликован'
+        default:
+            return 'Рецепт'
+    }
+}
+
+export function monthFromNum (num) {
+    switch (num){
+        case 1:
+            return 'января'
+        case 2:
+            return 'февраля'
+        case 3:
+            return 'марта'
+        case 4:
+            return 'апреля'
+        case 5:
+            return 'мая'
+        case 6:
+            return 'июня'
+        case 7:
+            return 'июля'
+        case 8:
+            return 'августа'
+        case 9:
+            return 'сентября'
+        case 10:
+            return 'октября'
+        case 11:
+            return 'ноября'
+        case 12:
+            return 'декабря'
+    }
+}
+

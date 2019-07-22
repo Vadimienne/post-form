@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import CollapsibleCheckboxes from 'components/CollapsibleCheckboxes'
 import DoubleSelect from 'components/DoubleSelect'
 import CategorySelect from 'components/CategorySelect'
-import Draft from 'components/DraftCard'
 
 import 'styles/SideTags.sass'
 
@@ -29,12 +28,10 @@ class SideTags extends PureComponent {
             contestId
         } = this.props
 
-
+        const { tags, contests } = this.props
 
         this.props.checked
-        console.log('this.props.checked: ', this.props.checked);
-
-        const { tags, contests } = this.props
+        console.log('this.props.checked: ', tags.recipe_holiday, tags.recipe_cuisine, contests);
 
         return (
             <div className='side-tags'>
@@ -137,7 +134,6 @@ class SideTags extends PureComponent {
                         />
                     </div>
                 </div>
-                <Draft />
             </div>
         );
     }

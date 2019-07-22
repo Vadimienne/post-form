@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import parser from 'helpers/toPostRecipeParser'
 import Immutable, { fromJS } from 'immutable'
+import { Route } from 'react-router-dom'
 
+import RecipeSelector from 'components/RecipeSelector'
 import Dropzone from 'components/Dropzone';
 import Editor from 'components/MyEditor';
 import Steps from 'components/Steps'
@@ -18,7 +20,7 @@ import 'styles/MainMain.sass'
 import 'styles/EdimDomaIcons.sass'
 const titleUpdatePath = ['title']
 
-import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe } from 'api/requests'
+import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe, getRecipesByStatus } from 'api/requests'
 import { sortSortable } from 'helpers'
 
 
@@ -34,34 +36,50 @@ class Main extends PureComponent {
         this.onSubmit = this.onSubmit.bind(this)
         this.onDraftSubmit = this.onDraftSubmit.bind(this)
         this.onTitleInput = this.onTitleInput.bind(this)
+        this.fetchRecipe = this.fetchRecipe.bind(this)
     }
 
     
     // fetch data from the server when app launches
     async componentDidMount(){
-        let recipe = await getRecipe(110258) //createRecipe()
+        
+
+        if(this.props.match.params.recipeId){
+            let recipe = await getRecipe(this.props.match.params.recipeId)
+
+            recipe = sortSortable(recipe)
+            this.setState({json: fromJS(recipe)})
+        }
+        const draftRecipes = await getRecipesByStatus('draft')
+        const on_moderation = await getRecipesByStatus('on_moderation')
+        const published = await getRecipesByStatus('published') 
+        console.log('ROUTING PARAMS: ', this.props)
+
         const tags = await getTags()
         const units = await getUnits()
         const contests = await getContests()
 
-        recipe = sortSortable(recipe)
+        // recipe = sortSortable(recipe)
         /*  const newRecipe = await createRecipe()
         console.log(newRecipe) */
         // console.log('PARSER')
         // parser(recipe, tags)
         /* contests
         console.log('contests: ', contests.contests); */
-        this.setState({json: fromJS(recipe)})
+        this.setState({drafts: draftRecipes.recipes})
+        this.setState({on_moderation: on_moderation.recipes})
+        this.setState({published: published.recipes})
         this.setState({tags})
         this.setState({units})
-        this.setState({contests: contests.contests})
-        this.updateIngredients()
+        this.setState({contests: contests})
+        // this.updateIngredients()
     }
 
 
     // write group ingredients to state
     // these ingredients will be passed to steps as available ingredients
     updateIngredients(){
+        console.log('updating ingredients')
         let ingredients = Immutable.List()
         let ingredientGroups = this.state.json.get('ingredient_groups')
         ingredientGroups.map(
@@ -139,6 +157,17 @@ class Main extends PureComponent {
             || !this.state.json.get('recipe_steps').equals(prevState.json.get('recipe_steps')))){
             this.updateIngredients()
         }
+        else if (!this.state.ingredients && this.state.json.size) {
+            this.updateIngredients()
+        }
+    }
+
+
+    async fetchRecipe(id, slug){
+        console.log('*Click!*')
+        let recipe = await getRecipe(id, slug)
+        recipe = sortSortable(recipe)
+        this.setState({json: fromJS(recipe)})
     }
 
     // update particular state field with passed value. Optional callback when state update finished
@@ -163,10 +192,21 @@ class Main extends PureComponent {
 
     render() {
         const { json, units, tags, ingredients, contests } = this.state
-        console.log('new render')
+        console.log('new render', this.props)
 
-        if ( !Object.keys(json).length ){
+
+        if(!this.state.drafts || !this.state.on_moderation || !this.state.published){
             return 0
+        }
+
+        if ( !this.state.json.size && this.state.drafts && this.state.on_moderation && this.state.published ){
+            return (
+                <RecipeSelector 
+                    drafts={this.state.drafts} 
+                    onModeration={this.state.on_moderation}
+                    published={this.state.published}
+                    onClick={this.fetchRecipe}
+                />)
         }
 
         const recipe_category =         json.get('recipe_category')
@@ -220,7 +260,7 @@ class Main extends PureComponent {
             servings:           parseInt(servings, 10)? true: false,
             ingredients:        this.state.ingredients ? (this.state.ingredients.size? true: false) : false,
             step:               recipe_steps ? (recipe_steps.size? true: false) : false,
-            steps_description:  recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body.length === 0)? false: true) : false,
+            steps_description:  recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body && elem.body.length === 0)? false: true) : false,
         }
 
         // console.log(validation)
@@ -235,9 +275,11 @@ class Main extends PureComponent {
         
 
         return (
-            <>
-                { this.state.json && this.state.tags && this.state.units && this.state.ingredients ?
+            <div>
+                
+                { Object.keys(this.state.json).length && Object.keys(this.state.tags).length && this.state.units && this.state.ingredients && this.state.contests ?
                     (<form id="article-form">
+                        
                         <div className='flex-wrapper'>
 
                             <div className='left-column form-column'>
@@ -340,7 +382,7 @@ class Main extends PureComponent {
                     </form>):
                     (<div>loading..</div>)
                 }
-            </>
+            </div>
         );
     }
 }

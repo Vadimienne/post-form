@@ -47,15 +47,29 @@ export function getUnits(){
         .catch((error) => {console.log(error); return 0})
 } */
 
-export function getRecipe(id){
-    return decoratedFetch(`/retsepty/${id}`,
+export function getRecipe(id, slug){
+    return decoratedFetch(`/retsepty/${id}-${slug}`,
         {
             method: 'get',
+            credentials: 'include',
+            headers: headers
+        }
+    )
+}
+
+// status: draft, on_moderation, published
+export function getRecipesByStatus(status){
+    return fetch(`${apiPath}/users/recipes/${status}`,
+        {
+            credentials: 'include',
             headers: {
-                'cache-control': 'no-cache'
+                'Authorization': 'Basic '+btoa('ed4stage:ed4stage'),
+                'cache-control': 'no-cache',
             }
         }
     )
+        .then((response) => response.json())
+        .catch((error) => {console.log(error); return 0})
 }
 
 export function getTags(){
@@ -113,3 +127,19 @@ export function updateRecipe (id, json) {
         }
     )
 }
+
+export function postImage (id, file) {
+    return fetch (apiPath + `/retsepty/${id}/images`,
+        {
+            method: 'post',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Basic '+btoa('ed4stage:ed4stage')
+            },
+            body: file
+        }
+    )
+}
+

@@ -20,8 +20,7 @@ class Ingredients extends PureComponent {
         this.removeIngredient = this.removeIngredient.bind(this)
         this.addIngredient = this.addIngredient.bind(this)
     }
-
-    //#tofix refresh positions in array
+    
     // triggers when sort-button is released
     onSortEnd({oldIndex, newIndex}){
         this.props.stateUpdater(
