@@ -15,18 +15,16 @@ class RecipeSelector extends PureComponent {
         const { drafts, onModeration, published } = this.props
 
         let mappedDrafts = drafts.map((elem, index) => 
-            <Link to={`/${elem.id}`} >
-                <DraftCard 
-                    body={htmlToText.fromString(elem.description)}
-                    title={elem.title}
-                    imgUrl={elem.image}
-                    date={elem.updated_at}
-                    recipeStatus='Черновик'
-                    recipeId={elem.id}
-                    recipeSlug={elem.slug}
-                    key={`${elem.status}-card-${index}`}
-                />
-            </Link>
+            <DraftCard 
+                body={htmlToText.fromString(elem.description)}
+                title={elem.title}
+                imgUrl={elem.image}
+                date={elem.updated_at}
+                recipeStatus='Черновик'
+                recipeId={elem.id}
+                recipeSlug={elem.slug}
+                key={`${elem.status}-card-${index}`}
+            />
         )
 
 
