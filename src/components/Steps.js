@@ -60,6 +60,7 @@ class Steps extends PureComponent {
                         key={'sortable-step-'+index}
                         onDelete={this.deleteStep}>
                         <Step
+                            recipeId={this.props.recipeId}
                             data={elem}
                             units={this.props.units}
                             ingredientsAvailable={this.props.ingredientsAvailable}

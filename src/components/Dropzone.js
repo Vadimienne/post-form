@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import 'styles/Dropzone.sass'
 
+import { postImage } from 'api/requests'
+
 // function postPic (url, file) {
 //   if( url && file ) {
 //     return fetch (url, {method: 'POST', body: file})
@@ -52,7 +54,7 @@ class Dropzone extends Component {
         this.fileInputRef.current.click()
     }
 
-    onFilesAdded(evt) {
+    async onFilesAdded(evt) {
         if (this.props.disabled) return
         const files = evt.target.files
 
@@ -68,17 +70,25 @@ class Dropzone extends Component {
         //  }
         //  reader.readAsDataURL(file);
 
-        let getUrl = () => {
-            return postPic().then((resolve) =>this.props.onChange(resolve))
-        }
-        getUrl()
+        // let getUrl = () => {
+        //     return postPic().then((resolve) =>this.props.onChange(resolve))
+        // }
+        // getUrl()
 
         // this.props.stateUpdater(getUrl())
 
-        if (this.props.onFilesAdded) {
-            const array = this.fileListToArray(files)
-            this.props.onFilesAdded(array)
-        }
+        const { recipeId } = this.props
+        console.log('dropzone props: ', files[0])
+
+        let response = await postImage(recipeId, files[0])
+
+        console.log(response)
+
+
+        // if (this.props.onFilesAdded) {
+        //     const array = this.fileListToArray(files)
+        //     this.props.onFilesAdded(array)
+        // }
     }
 
     onDragOver(evt) {
@@ -99,11 +109,12 @@ class Dropzone extends Component {
         if (this.props.disabled) return
 
         const files = event.dataTransfer.files
-        if (this.props.onFilesAdded) {
-            const array = this.fileListToArray(files)
-            this.props.onFilesAdded(array)
-        }
-        this.setState({ hightlight: false })
+        // if (this.props.onFilesAdded) {
+        //     const array = this.fileListToArray(files)
+        //     this.props.onFilesAdded(array)
+        // }
+        // this.setState({ hightlight: false })
+        
     }
 
     fileListToArray(list) {
@@ -136,7 +147,6 @@ class Dropzone extends Component {
                     ref={this.fileInputRef}
                     className="FileInput"
                     type="file"
-                    multiple
                     onChange={this.onFilesAdded}
                 />
 

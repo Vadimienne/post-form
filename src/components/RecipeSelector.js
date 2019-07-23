@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import DraftCard from 'components/DraftCard'
+import { Link } from 'react-router-dom'
 
 import htmlToText from 'html-to-text'
 
@@ -14,17 +15,18 @@ class RecipeSelector extends PureComponent {
         const { drafts, onModeration, published } = this.props
 
         let mappedDrafts = drafts.map((elem, index) => 
-            <DraftCard 
-                body={htmlToText.fromString(elem.description)}
-                title={elem.title}
-                imgUrl={elem.image}
-                date={elem.updated_at}
-                recipeStatus='Черновик'
-                onClick={this.props.onClick}
-                recipeId={elem.id}
-                recipeSlug={elem.slug}
-                key={`${elem.status}-card-${index}`}
-            />
+            <Link to={`/${elem.id}`} >
+                <DraftCard 
+                    body={htmlToText.fromString(elem.description)}
+                    title={elem.title}
+                    imgUrl={elem.image}
+                    date={elem.updated_at}
+                    recipeStatus='Черновик'
+                    recipeId={elem.id}
+                    recipeSlug={elem.slug}
+                    key={`${elem.status}-card-${index}`}
+                />
+            </Link>
         )
 
 

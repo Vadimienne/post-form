@@ -4,7 +4,7 @@ import Immutable, { fromJS } from 'immutable'
 import { Route } from 'react-router-dom'
 
 import RecipeSelector from 'components/RecipeSelector'
-import Dropzone from 'components/Dropzone';
+import Dropzone from 'components/Dropzon';
 import Editor from 'components/MyEditor';
 import Steps from 'components/Steps'
 import Tags from 'components/Tags'
@@ -53,7 +53,6 @@ class Main extends PureComponent {
         const draftRecipes = await getRecipesByStatus('draft')
         const on_moderation = await getRecipesByStatus('on_moderation')
         const published = await getRecipesByStatus('published') 
-        console.log('ROUTING PARAMS: ', this.props)
 
         const tags = await getTags()
         const units = await getUnits()
@@ -233,7 +232,7 @@ class Main extends PureComponent {
         const setting_rateable =        json.get('setting_rateable')
 
         // because json.id isn't clear enough
-        const recipeId = json.id
+        const recipeId = json.get('id')
 
         const checkedTags = {
             recipe_category:        recipe_category,
@@ -319,11 +318,13 @@ class Main extends PureComponent {
                                             updatePath={titleUpdatePath}                                          
                                         />
                                     </div>
-                                    {/*
+                                    
                                     <Dropzone
                                         data={image}
-                                        onChange={(val)=> this.stateUpdater('image', val)}
-                                    />*/}
+                                        recipeId={recipeId}
+                                        stateUpdater={this.stateUpdater}
+                                        fetchPath='recipe[image]'
+                                    />
 
 
                                     
@@ -357,6 +358,7 @@ class Main extends PureComponent {
                                 </div>
                                 
                                 <Steps
+                                    recipeId={recipeId}
                                     isValid={validation.step}
                                     data={recipe_steps}
                                     ingredientsAvailable={ingredients}

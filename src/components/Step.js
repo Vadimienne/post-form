@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import Dropzone from 'components/Dropzone'
+import Dropzone from 'components/Dropzon'
 import Editor from 'components/MyEditorDescription'
 import IngredientList from 'components/IngredientListStep'
 
@@ -23,8 +23,9 @@ class Step extends PureComponent {
     // }
 
     render() {
-        // const { image, body, step_ingredients } = this.props.data
+        const { stepIndex } = this.props
 
+        const stepId = this.props.data.get('id')
         const image = this.props.data.get('image')
         const body = this.props.data.get('body')
         const step_ingredients = this.props.data.get('step_ingredients')
@@ -32,8 +33,10 @@ class Step extends PureComponent {
         return (
             <div className='step-presentational'>
                 <Dropzone 
-                    onChange={this.onFieldChange} 
                     data={image}
+                    recipeId={this.props.recipeId}
+                    stateUpdater={this.props.stateUpdater}
+                    stepId={stepId}
                 />
                 <div className='content-box__content' >
                     <Editor 
