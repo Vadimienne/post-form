@@ -9,21 +9,16 @@ class Comp extends React.PureComponent {
 
     constructor(props){
         super(props)
-        this.onRecipeSelect = this.onRecipeSelect.bind(this)
-    }
-
-    onRecipeSelect(){
-        this.props.onClick(this.props.recipeId, this.props.recipeSlug)
     }
 
     render(){
 
-        const {recipeStatus, body, title, date, imgUrl, onClick} = this.props
+        const {recipeStatus, body, title, date, imgUrl} = this.props
 
         let theDate = new Date(date)
         return (
             <div className='draft-card'>
-                <div className='draft-card__link-wrapper' onClick={this.onRecipeSelect}>
+                <div className='draft-card__link-wrapper' >
                     <img className='draft-card__image' src={imgUrl ? imgUrl : recipePlaceholder} />
                     <div className='draft-card__status-badge draft-card__content'>{recipeStatus}</div>
                     <div className='draft-card-height-wrapper' >
