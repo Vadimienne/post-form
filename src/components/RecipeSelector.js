@@ -49,31 +49,33 @@ class RecipeSelector extends PureComponent {
 
 
         let mappedModeration = onModeration.map((elem, index) => 
-            <DraftCard 
-                body={htmlToText.fromString(elem.description)}
-                title={elem.title}
-                imgUrl={elem.image}
-                date={elem.updated_at}
-                recipeStatus='Модерация'
-                onClick={this.props.onClick}
-                recipeId={elem.id}
-                recipeSlug={elem.slug}
-                key={`${elem.status}-card-${index}`}
-            />
+            <Link to={`/${elem.id}`}>
+                <DraftCard 
+                    body={htmlToText.fromString(elem.description)}
+                    title={elem.title}
+                    imgUrl={elem.image}
+                    date={elem.updated_at}
+                    recipeStatus='Модерация'
+                    recipeId={elem.id}
+                    recipeSlug={elem.slug}
+                    key={`${elem.status}-card-${index}`}
+                />
+            </Link>
         )
 
         let mappedPublished = published.map((elem, index) => 
-            <DraftCard 
-                body={htmlToText.fromString(elem.description)}
-                title={elem.title}
-                imgUrl={elem.image}
-                date={elem.updated_at}
-                recipeStatus='Опубликован'
-                onClick={this.props.onClick}
-                recipeId={elem.id}
-                recipeSlug={elem.slug}
-                key={`${elem.status}-card-${index}`}
-            />
+            <Link to={`/${elem.id}`}>
+                <DraftCard 
+                    body={htmlToText.fromString(elem.description)}
+                    title={elem.title}
+                    imgUrl={elem.image}
+                    date={elem.updated_at}
+                    recipeStatus='Опубликован'
+                    recipeId={elem.id}
+                    recipeSlug={elem.slug}
+                    key={`${elem.status}-card-${index}`}
+                />
+            </Link>
         )
 
 
