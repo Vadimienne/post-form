@@ -22,16 +22,26 @@
 
 
   > .icon-hide
+    transition: color 0.1s ease
     right: 14px
     top: 10px
     font-size: 10px
   > .icon-show
+    transition: color 0.1s ease
+    color: #fff
     font-size: 14px
     right: 62px
     top: 8px
 
 
   &.active
+    background-color: #27D287
     > .slider
       right: -2px
       transition: right 0.2s ease
+    > .icon-hide 
+      transition: color 0.1s ease
+      color: #fff
+    > .icon-show
+      transition: color 0.1s ease
+      color: #000

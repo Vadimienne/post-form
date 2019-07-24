@@ -5,11 +5,12 @@
 
 .loading-box
     height: 90%
-    background-color: #ebebeb
+    background-color: #ededed
     border-radius: 4px
     width: 95%
     margin: auto
-    animation: 0.8s ease 1s infinite alpha
+    animation: 1.2s ease 0s infinite 
+    animation-name: alpha, pulse
 
 .content-box-loading
     box-sizing: border-box
@@ -21,10 +22,10 @@
 
 @keyframes pulse 
     0% { width: 95%; height: 90% }
-    50% { width: 90%; height: 80% }
+    50% { width: 92%; height: 89% }
     100% { width: 95%; height: 90% }
 
 @keyframes alpha
     0% { opacity: 1 }
-    50% { opacity: 0.5 }
+    50% { opacity: 0.7 }
     100% { opacity: 1 }

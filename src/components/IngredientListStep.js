@@ -7,7 +7,7 @@ import ConstructorBtn from 'components/ConstructorBtn'
 import Ingredient from 'components/IngredientItemStep'
 
 import 'styles/IngredientList.sass'
-import Immutable, { Map, fromJS } from "immutable";
+import { fromJS } from "immutable";
 
 const SortableContainerIng = sortableContainer(({children}) => {
     return <ul>{children}</ul>;

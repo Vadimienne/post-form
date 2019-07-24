@@ -1,6 +1,11 @@
 .checkbox
   display: block
   margin-bottom: 10px
+  cursor: pointer
+  &:hover
+    .checkbox-label
+      &::before
+        border-color: black
   > .checkbox-input
     opacity: 0
     overflow: visible
@@ -30,6 +35,7 @@
   &.active
     > .checkbox-label
       &::before
+        border: none
         background-image: url('../images/checkbox.png')
 
 .side-tags

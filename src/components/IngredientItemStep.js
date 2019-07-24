@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import Immutable, { isImmutable } from 'immutable'
 
 import Select from 'react-select'
-import Input from 'components/Input'
 import { selectStyleShort, selectStyleMedium, borderInvalid } from 'config/selectStyles'
 
 import 'styles/IngredientItem.sass'
@@ -151,7 +150,9 @@ class IngredientStep extends PureComponent {
         ingredientOptions = ingredientOptions.toJS()
 
         // gen selected ingredient object
-        let selectedValue = { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.get('ingredient').get('title'): '') }
+        let selectedValue = recipe_ingredient_id ? 
+            { value: recipe_ingredient_id, label: (selectedIngredient? selectedIngredient.get('ingredient').get('title'): '') }
+            : undefined
 
 
         // PROCESSING UNITS
@@ -191,6 +192,7 @@ class IngredientStep extends PureComponent {
                         value={selectedValue} 
                         onChange={this.onIngSelect} 
                         styles={recipe_ingredient_id ? selectStyleMedium: Object.assign({}, selectStyleMedium, borderInvalid)}
+                        placeholder='Начните вводить название'
                     />
                     {/*<Input 
                         className='input input-quantity' 
@@ -219,6 +221,7 @@ class IngredientStep extends PureComponent {
                         styles={selectStyleShort} 
                         onChange={this.onUnitSelect} 
                         value={metric} 
+                        placeholder='...'
                     />
                 </div>
 

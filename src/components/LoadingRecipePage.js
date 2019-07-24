@@ -22,18 +22,18 @@ function Comp (props) {
                     <div className='left-column form-column'>
                         <div className='content-box-loading'>
                             <LoadingBox height="50px"/>
-                            {[...Array(5)].map(() => <LoadingBox height="30px"/>)}        
+                            {[...Array(5)].map((e, index) => <LoadingBox key={`1-loading-box-${index}`} height="30px"/>)}        
                         </div>
                         <div className='content-box-loading'>
                             <LoadingBox height="50px"/>      
                         </div>
                         <div className='content-box-loading'>
                             <LoadingBox height="50px"/>
-                            {[...Array(20)].map(() => <LoadingBox height="30px"/>)}        
+                            {[...Array(20)].map((e, index) => <LoadingBox key={`2-loading-box-${index}`} height="30px"/>)}        
                         </div>
                         <div className='content-box-loading'>
                             <LoadingBox height="50px"/>
-                            {[...Array(20)].map(() => <LoadingBox height="30px"/>)}        
+                            {[...Array(20)].map((e, index) => <LoadingBox key={`3-loading-box-${index}`} height="30px"/>)}        
                         </div>
                         <div className='content-box-loading'>
                             <LoadingBox height="50px"/>       
@@ -42,7 +42,7 @@ function Comp (props) {
 
                     <div className='main-column form-column'>
                         <div className='content-box'>
-                            <LoadingBox height="60px"/>
+                            <LoadingBox height="80px"/>
                             <LoadingBox height="340px"/> 
                             <LoadingBox height="560px"/> 
                             <LoadingBox height="340px"/>  
@@ -50,13 +50,16 @@ function Comp (props) {
                     </div>
                     <div className="right-column form-column">
                         <div className='content-box-loading'>
-                            <LoadingBox height="250px"/> 
+                            <LoadingBox height="120px"/>
+                            <LoadingBox height="80px"/> 
                         </div>
                         <div className='content-box-loading'>
-                            <LoadingBox height="250px"/> 
+                            <LoadingBox height="110px"/>
+                            <LoadingBox height="170px"/> 
                         </div>
                         <div className='content-box-loading'>
-                            <LoadingBox height="250px"/> 
+                            <LoadingBox height="90px"/>
+                            <LoadingBox height="140px"/> 
                         </div>
                     </div>
                 </div>

@@ -62,7 +62,7 @@ class Timings extends PureComponent {
     // toggle preparation time collapsible
     onToggle(){
         if (this.state.isChecked){
-            this.props.onPrepTimeChange(0)
+            this.props.stateUpdater(['preparation_time'], 0)
             this.setState({isChecked: false})
         }
         else{
@@ -166,7 +166,8 @@ class Timings extends PureComponent {
                 <div className='outer-flex-container'>
                     <div className='field_w260 preparation_check'>
                         <Check 
-                            onToggle={this.onToggle} 
+                            className='title'
+                            stateUpdater={this.onToggle} 
                             isActive={this.state.isChecked} 
                             text='Требуется подготовка'
                         />

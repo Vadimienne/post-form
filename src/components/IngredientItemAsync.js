@@ -156,10 +156,11 @@ class IngredientAsync extends PureComponent {
             <div className='ingredient-item'>
                 <SelectAsync
                     components={{ MenuList: MenuList }}
-                    value={{ value: ingredient_id, label: title }}
+                    value={ingredient_id? { value: ingredient_id, label: title }: undefined}
                     loadOptions={this.loadOptions}
                     styles={ingredient_id ? selectStyleMedium : Object.assign({}, selectStyleMedium, borderInvalid)}
                     onChange={this.onIngSelect}
+                    placeholder='Начните вводить название'
                 />
                 <Input 
                     isValid={!!amount}
@@ -173,6 +174,7 @@ class IngredientAsync extends PureComponent {
                     options={options} 
                     styles={unit_id ? selectStyleShort : Object.assign({}, selectStyleShort, borderInvalid)} 
                     onChange={this.onUnitSelect} 
+                    placeholder='...'
                     value={defaultValue} 
                 />
             </div>

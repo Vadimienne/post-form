@@ -1,4 +1,4 @@
-export const borderColorize = {
+export const defaultStyle = {
     control: (provided, state) => ({
         ...provided,
         height: '40px',
@@ -6,7 +6,11 @@ export const borderColorize = {
         '&:hover': {
             borderColor: '#363636'
         },
-        boxShadow: 0
+        boxShadow: 0,
+    }),
+    placeholder: (provided, state) => ({
+        ...provided,
+        whiteSpace: 'nowrap'
     })
 }
 
@@ -15,7 +19,7 @@ export const selectStyleShort = {
         ...provided,
         width:'100px'
     }),
-    ...borderColorize
+    ...defaultStyle
 }
 
 export const selectStyleMedium = {
@@ -23,7 +27,7 @@ export const selectStyleMedium = {
         ...provided,
         width:'270px'
     }),
-    ...borderColorize
+    ...defaultStyle
 }
 
 export const selectStyleLong = {
@@ -31,7 +35,7 @@ export const selectStyleLong = {
         ...provided,
         width:'570px'
     }),
-    ...borderColorize
+    ...defaultStyle
 }
 
 export const borderInvalid = {
