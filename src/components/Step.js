@@ -30,6 +30,8 @@ class Step extends PureComponent {
         const body = this.props.data.get('body')
         const step_ingredients = this.props.data.get('step_ingredients')
 
+        console.log('stepImage: ', image)
+
         return (
             <div className='step-presentational'>
                 <Dropzone 
@@ -37,6 +39,7 @@ class Step extends PureComponent {
                     recipeId={this.props.recipeId}
                     stateUpdater={this.props.stateUpdater}
                     stepId={stepId}
+                    stepIndex={this.props.stepIndex}
                 />
                 <div className='content-box__content' >
                     <Editor 

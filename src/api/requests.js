@@ -130,6 +130,8 @@ export function postImageStep (id, stepId, file) {
 
     let formData = new FormData()
     formData.append('recipe_step[image]', file)
+
+    console.log('fetch ')
     return fetch (apiPath + `/retsepty/${id}/recipe_steps/${stepId}`,
         {
             method: 'put',

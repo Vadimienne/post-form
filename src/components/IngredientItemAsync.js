@@ -74,8 +74,11 @@ class IngredientAsync extends PureComponent {
 
     //triggers when ingredient is selected
     onIngSelect(selectedOption){
+
+        console.log('selectedOption: ',selectedOption, this.state.data.toJS())
         let data = this.state.data
         data = data.set('ingredient_id', selectedOption.value.id)
+        data = data.set('ingredient', Immutable.Map())
         data = data.setIn(['ingredient', 'id'], selectedOption.value.id)
         data = data.setIn(['ingredient', 'title'], selectedOption.label)
         data = data.setIn(['ingredient', 'unit_ids'], selectedOption.value.unit_ids)

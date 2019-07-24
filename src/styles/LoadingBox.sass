@@ -1,0 +1,30 @@
+.loading-container
+    display: flex
+    padding: 5px 0
+
+
+.loading-box
+    height: 90%
+    background-color: #ebebeb
+    border-radius: 4px
+    width: 95%
+    margin: auto
+    animation: 0.8s ease 1s infinite alpha
+
+.content-box-loading
+    box-sizing: border-box
+    width: 100%
+    border-radius: 4px
+    box-shadow: 0 1px 4px rgba(71,44,6,0.2)
+    margin-top: 20px
+    background-color: #fff
+
+@keyframes pulse 
+    0% { width: 95%; height: 90% }
+    50% { width: 90%; height: 80% }
+    100% { width: 95%; height: 90% }
+
+@keyframes alpha
+    0% { opacity: 1 }
+    50% { opacity: 0.5 }
+    100% { opacity: 1 }

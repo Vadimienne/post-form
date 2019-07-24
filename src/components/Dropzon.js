@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import 'styles/Dropzone.sass'
 
 import { postImage, postImageStep } from 'api/requests'
 
-class Dropzone extends Component {
+class Dropzone extends PureComponent {
     constructor(props) {
         super(props)
 
@@ -17,15 +17,6 @@ class Dropzone extends Component {
         this.openFileDialog = this.openFileDialog.bind(this)
         this.onFilesAdded = this.onFilesAdded.bind(this)
         this.onDrop = this.onDrop.bind(this)
-    }
-
-    shouldComponentUpdate(nextProps){
-        if(JSON.stringify(this.props) === JSON.stringify(nextProps)){
-            return false
-        }
-        else {
-            return true
-        }
     }
 
     openFileDialog() {
@@ -45,7 +36,8 @@ class Dropzone extends Component {
         }
         else {
             let response = await postImageStep(this.props.recipeId, this.props.stepId, files[0])
-            this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'image'], response.image)
+            let imageUrl = `${response.image}?${Math.floor(Math.random() * Math.floor(99999))}`
+            this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'image'], imageUrl)
         }
 
     }
@@ -69,6 +61,7 @@ class Dropzone extends Component {
     render() {
 
         const url = this.props.data
+        console.log('DROPZONE URL: ', url)
 
         return (
             <div
