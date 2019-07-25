@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import 'styles/Dropzone.sass'
 
 import { postImage, postImageStep } from 'api/requests'
-import UploadImage from 'images/upload-image.svg'
+import UploadImage from 'images/upload-image.png'
 import Svg from 'components/Svg'
 
 class Dropzone extends PureComponent {
@@ -73,7 +73,8 @@ class Dropzone extends PureComponent {
                 onClick={this.openFileDialog}
                 style={{ cursor: this.props.disabled ? 'default' : 'pointer'}}
             >
-                <Svg icon={UploadImage} />
+                <span className='Dropzone__upload-description'>Загрузите фотографию</span>
+                
                 
                 <input
                     ref={this.fileInputRef}

@@ -14,9 +14,11 @@ class RecipeSelector extends PureComponent {
     }
 
     async componentDidMount(){
-        const draftRecipes = await getRecipesByStatus('draft')
-        const on_moderation = await getRecipesByStatus('on_moderation')
-        const published = await getRecipesByStatus('published') 
+        let draftRecipes = await getRecipesByStatus('draft')
+        let on_moderation = await getRecipesByStatus('on_moderation')
+        let published = await getRecipesByStatus('published') 
+
+        draftRecipes.recipes.sort((a,b) => -(new Date(a.updated_at) - new Date(b.updated_at)))
 
         this.setState({drafts: draftRecipes.recipes})
         this.setState({onModeration: on_moderation.recipes})
@@ -33,7 +35,7 @@ class RecipeSelector extends PureComponent {
         }
 
         let mappedDrafts = drafts.map((elem, index) => 
-            <Link to={`/${elem.id}`}>
+            <Link to={`/${elem.id}`} key={`${elem.status}-card-${index}`}>
                 <DraftCard 
                     body={htmlToText.fromString(elem.description)}
                     title={elem.title}
@@ -49,7 +51,7 @@ class RecipeSelector extends PureComponent {
 
 
         let mappedModeration = onModeration.map((elem, index) => 
-            <Link to={`/${elem.id}`}>
+            <Link to={`/${elem.id}`} key={`${elem.status}-card-${index}`}>
                 <DraftCard 
                     body={htmlToText.fromString(elem.description)}
                     title={elem.title}
@@ -64,7 +66,7 @@ class RecipeSelector extends PureComponent {
         )
 
         let mappedPublished = published.map((elem, index) => 
-            <Link to={`/${elem.id}`}>
+            <Link to={`/${elem.id}`} key={`${elem.status}-card-${index}`}>
                 <DraftCard 
                     body={htmlToText.fromString(elem.description)}
                     title={elem.title}
