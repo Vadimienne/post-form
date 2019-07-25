@@ -211,8 +211,14 @@ class IngredientStep extends PureComponent {
                             />
                         </div>
                         { !!selectedIngredient && 
-                        <span className='input-suggestion' onClick={this.onClickSuggestion} ref={this.suggestionRef} style={{display: 'none'}}>
-                            {`Доступно ${selectedIngredient.get('amount')} Использовано ${selectedIngredient.get('usedAmount')}`}
+                        <span 
+                            className={`input-suggestion ${selectedIngredient.get('amount') - selectedIngredient.get('usedAmount') >= 0 ? 'valid': ''}`} 
+                            onClick={this.onClickSuggestion} 
+                            ref={this.suggestionRef} 
+                            style={{display: 'none'}}
+                        >
+                            <span className='input-suggestion__item'>{`Доступно ${selectedIngredient.get('amount')}`}</span> <br/>
+                            <span className='input-suggestion__item'>{`Использовано ${selectedIngredient.get('usedAmount')}`}</span>
                         </span>}
                     </div>
                     <Select 

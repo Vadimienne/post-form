@@ -246,8 +246,8 @@ class Main extends PureComponent {
                                     units={units}
                                     stateUpdater={this.stateUpdater}
                                 />
-                                {/*
-                                <Tags data={tags} onChange={(val) => this.stateUpdater('tags', val)}/>*/}
+                
+                                <Tags data={recipe_user_tags} tags={tags} stateUpdater={this.stateUpdater}/>
                             </div>
                             <div className="right-column form-column">
 

@@ -10,17 +10,23 @@
 
   .input-suggestion
     z-index: 1
-    width: 80px
-    height: 40px
     display: none
     position: absolute
     top: -7px
     left: 86px
-    border: 1px solid red
     border-radius: 4px
     background-color: #ffbfc2
     padding: 3px
     font-size: 10px
+
+    &.valid
+      background-color: #b8ffc5
+
+      &::before
+        border-color: transparent #b8ffc5 transparent transparent
+    
+    &__item
+      white-space: nowrap
 
     &::before
       content: ""
@@ -41,7 +47,7 @@
       position: absolute
       z-index: 2
       top: -7px
-      left: 76px
+      left: 90%
       font-weight: 600
       font-size: 12px
       
