@@ -52,7 +52,6 @@ class CategorySelect extends Component {
                         return { label: elem.name, value: elem.id }
                     }
                 )
-                console.log('SELECTED CATEGORY', selectedCategory, filteredCategories, defaultValue)
             }
             else{
                 // find selectedCategory in scaffold and make a value for Select

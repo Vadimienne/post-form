@@ -63,7 +63,6 @@ class Dropzone extends PureComponent {
     render() {
 
         const url = this.props.data
-        console.log('DROPZONE URL: ', url)
 
         return (
             <div

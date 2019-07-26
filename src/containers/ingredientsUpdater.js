@@ -18,22 +18,30 @@ export function updateIngredients(){
     // leave only valid ingredients
     ingredients.map(
         (elem, groupIndex) => {
-            elem.value.map(
+            elem.value = elem.value.filter(
                 (ing, ingIndex) => {
-
-                    // delete destroyed ingredients
-                    if(ing.get('_destroy') == true){
-                        ingredients = ingredients.deleteIn([groupIndex, 'value', ingIndex])
+                    // filter destroyed and invalid ingredients
+                    if ((ing.get('_destroy') == true) || !(ing.get('amount') && ing.get('ingredient_id') && ing.get('unit_id'))) {
+                        return false
                     }
-
-                    // delete invalid ingredients
-                    if(!(ing.get('amount') && ing.get('ingredient_id') && ing.get('unit_id'))) {
-                        ingredients = ingredients.deleteIn([groupIndex, 'value', ingIndex])
+                    else {
+                        return true
                     }
+                    // // delete destroyed ingredients
+                    // if(ing.get('_destroy') == true){
+                    //     ingredients = ingredients.setIn([groupIndex, 'value', ingIndex, 'invalid'], true)
+                    // }
+
+                    // // delete invalid ingredients
+                    // if(!(ing.get('amount') && ing.get('ingredient_id') && ing.get('unit_id'))) {
+                    //     console.log('DELETING INGREDIENT:', groupIndex, ingIndex)
+                    //     ingredients = ingredients.setIn([groupIndex, 'value', ingIndex, 'invalid'], true)
+                    // }
                 }
             )
         }
     )
+    console.log('ingredients after deletions: ', ingredients.toJS()[0])
 
 
     // make array of unique ingredients from steps with usedAmount field

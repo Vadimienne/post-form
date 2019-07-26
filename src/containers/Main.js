@@ -23,6 +23,7 @@ const titleUpdatePath = ['title']
 import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe, getRecipesByStatus } from 'api/requests'
 import { sortSortable } from 'helpers'
 import { updateIngredients } from './ingredientsUpdater'
+import { validate } from './validation'
 
 
 class Main extends PureComponent {
@@ -135,17 +136,11 @@ class Main extends PureComponent {
         
 
         // VALIDATING FORM
-        // object describes which fields are filled or empty
-        let validation = {
-            title:              title ? true: false,
-            category:           recipe_category ? (recipe_category.toString().length? true: false) : false,
-            national_cuisine:   recipe_cuisine? (recipe_cuisine.toString().length? true: false): false,
-            timing:             parseInt(cooking_time, 10)? true: false,
-            servings:           parseInt(servings, 10)? true: false,
-            ingredients:        this.state.ingredients ? (this.state.ingredients.size? true: false) : false,
-            step:               recipe_steps ? (recipe_steps.size? true: false) : false,
-            steps_description:  recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body && elem.body.length === 0)? false: true) : false,
-        }
+        let validation = validate({title, recipe_category, recipe_cuisine, cooking_time, servings, ingredients: this.state.ingredients, recipe_steps})
+
+        Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))
+        console.log('________________________________________________________________________________________________')
+        console.log(this.state.ingredients.toJS()[0].value)
 
         // form is valid when all required fields are filled
         const isFormValid = (

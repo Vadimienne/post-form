@@ -30,9 +30,6 @@ class SideTags extends PureComponent {
 
         const { tags, contests } = this.props
 
-        this.props.checked
-        console.log('this.props.checked: ', tags.recipe_holiday, tags.recipe_cuisine, contests);
-
         return (
             <div className='side-tags'>
                 <div className='content-box'>
