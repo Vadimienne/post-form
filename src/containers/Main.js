@@ -136,6 +136,8 @@ class Main extends PureComponent {
         
 
         // VALIDATING FORM
+
+        // TOFIX VALIDATE ACTUAL INGREDIENTS, NOT THIS.STATE.INGREDIENTS 
         let validation = validate({title, recipe_category, recipe_cuisine, cooking_time, servings, ingredients: this.state.ingredients, recipe_steps})
 
         Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))

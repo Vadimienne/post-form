@@ -23,19 +23,29 @@ export function validate ({title, recipe_category, recipe_cuisine, cooking_time,
     validation.servings = parseInt(servings, 10)? true: false
 
     if (ingredients && ingredients.size){
+        console.log(1)
         if (ingredients.toJS().find(elem => elem.value.length == 0)){
+            console.log(2)
             validation.ingredients = false
         }
         else {
-            if(ingredients.toJS().find(elem => !(elem.ingredient_id && elem.amount && elem.unit_id))){
+            console.log(3)
+            let isThereInvalidIngredient = true
+            ingredients.toJS().map(group => {isThereInvalidIngredient = group.value.find(elem => (!elem.ingredient_id || !elem.amount || !elem.unit_id))})
+            console.log('isThereInvalid', isThereInvalidIngredient)
+            console.log(ingredients.toJS()[0].value[0])
+            if(isThereInvalidIngredient){
+                console.log(4)
                 validation.ingredients = false
             }
             else{
+                console.log(5)
                 validation.ingredients = true
             }
         }
     }
     else {
+        console.log(6)
         validation.ingredients = false
     }
 

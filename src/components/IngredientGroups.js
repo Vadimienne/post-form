@@ -75,6 +75,11 @@ class IngedientGroup extends PureComponent {
                     }
                 }
 
+                let isAnyIngredient = false
+                if(array.find(elem => elem._destroy != true)){
+                    isAnyIngredient = true
+                }
+
                 return (
                     <SortDeleteWrapper
                         name='Укажите ингредиенты' deleteDesc='Удалить подраздел'
@@ -93,7 +98,7 @@ class IngedientGroup extends PureComponent {
                                 updatePath={index}
                             />
                         </div>
-                        {!this.props.isValid? (
+                        {!isAnyIngredient ? (
                             <span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>
                         ): undefined}
                         <IngredientList
