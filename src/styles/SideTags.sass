@@ -1,15 +1,28 @@
 .category_section_title
-  display: block
+  display: flex
   font-weight: 700
   font-size: 14px
   margin-bottom: 10px
 
+  .warning-icon
+    display: none
+    font-family: 'EdimDoma-Icons'
+    color: red
+    margin-right: 10px
+    font-size: 20px
+    font-weight: 100
+
   &.invalid
     color: #ff451c
-    &::before
-      display: inline-block
-      content: '\ea3a'
-      font-family: "EdimDoma-Icons"
-      transform: rotate(180deg)
-      font-size: 16px
-      margin-right: 7px
+
+    .warning-icon
+        display: flex
+        align-items: center
+    
+    // &::before
+    //   display: inline-block
+    //   content: '\ea3a'
+    //   font-family: "EdimDoma-Icons"
+    //   transform: rotate(180deg)
+    //   font-size: 16px
+    //   margin-right: 7px

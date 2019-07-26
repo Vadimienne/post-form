@@ -65,7 +65,10 @@ class CategorySelect extends Component {
 
         return (
             <>
-                <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>{header}</span>
+                <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>
+                    <div className='warning-icon'>&#xea3a;</div>
+                    {header}
+                </span>
                 <Select
                     isMulti={this.props.isMulti} 
                     onChange={this.onSelect} 

@@ -10,11 +10,12 @@
 
 .step-validation-warning
   color: #ff451c
-  &::before
-    display: inline-block
-    content: '\ea3a'
-    font-family: "EdimDoma-Icons"
-    transform: rotate(180deg)
-    font-size: 16px
-    margin-right: 7px
-    font-weight: 700
+  display: flex
+  .warning-icon
+    display: flex
+    align-items: center
+    font-family: 'EdimDoma-Icons'
+    color: red
+    margin-right: 10px
+    font-size: 20px
+    font-weight: 100

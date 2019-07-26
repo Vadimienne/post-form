@@ -123,7 +123,10 @@ class Timings extends PureComponent {
             <div className='timings-component'>
                 <div className='outer-flex-container'>
                     <div>
-                        <span className={'title' + (this.props.isValid? '': ' invalid')}>Время приготовления</span>
+                        <span className={'title' + (this.props.isValid? '': ' invalid')}>
+                            <div className='warning-icon'>&#xea3a;</div>
+                            Время приготовления
+                        </span>
 
                         <div className={'input-timings-width timing-flex-container' + (this.props.isValid? '': ' invalid')}>
                             <div className='timing-clock-icon'/>
@@ -150,7 +153,10 @@ class Timings extends PureComponent {
                         </div>
                     </div>
                     <div>
-                        <span className={'title' + (this.props.isServingsValid? '': ' invalid')}>Количество персон </span>
+                        <span className={'title' + (this.props.isServingsValid? '': ' invalid')}>
+                            <div className='warning-icon'>&#xea3a;</div>
+                            Количество персон 
+                        </span>
                         <div className='input-portions-width timing-flex-container'>
                             <div className='timing-portions-icon' />
                             <Input 

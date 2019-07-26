@@ -9,10 +9,12 @@
   transition: border-color 0.25s ease
   padding: 0 0 0 0
   position: relative
-  display: block
+  display: flex
   overflow: hidden
 
+
   .text-input
+    display: inline-block
     outline: none
     border: none
     background: transparent
@@ -22,7 +24,7 @@
     box-sizing: border-box
     font-size: 14px
     font-weight: 400
-    padding: 0 20px
+    margin-left: 10px
     border-radius: 4px
     cursor: text
 
@@ -33,15 +35,18 @@
       font-size: 22px
       font-weight: 700
 
+  .warning-icon
+    display: none
+    font-family: 'EdimDoma-Icons'
+    color: red
+    margin-left: 10px
   &.invalid
     border-color: #ff451c
-    &::before
-      content: '\ea3a'
-      font-family: 'EdimDoma-Icons'
-      position: absolute
-      top: 12px
-      left: 4px
-      color: red
+    
+    .warning-icon
+      display: flex
+      align-items: center
+    
     input
       &::placeholder
         color: #ff451c

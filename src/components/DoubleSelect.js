@@ -69,7 +69,11 @@ class DoubleSelect extends PureComponent {
 
         return (
             <>
-                <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>{this.props.header}</span>
+                <span className={'category_section_title' + (isValid !== false? '': ' invalid')}>
+                    <div className='warning-icon'>&#xea3a;</div>
+                    {this.props.header}
+                </span>
+
                 <Select
                     options={options} 
                     onChange={this.onCategorySelect} 

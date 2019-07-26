@@ -87,7 +87,10 @@ class Steps extends PureComponent {
                 </SortableContainer>
                 {
                     !this.props.isValid? 
-                        <span className='step-validation-warning'>Нужно указать хотя бы один шаг</span>
+                        <span className='step-validation-warning'>
+                            <div className='warning-icon'>&#xea3a;</div>
+                            Нужно указать хотя бы один шаг
+                        </span>
                         : undefined
                 }
                 <Button 

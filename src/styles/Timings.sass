@@ -9,22 +9,35 @@
   background-image: url(https://e0.edimdoma.ru/assets/recipes/person-f1da3d74442d1605f72c9a9ccd872f2e.png)
 
 .timings-component
+  
+    
   .title
+    display: flex
     font-weight: 700
     font-size: 14px
     &.invalid
       color: #ff451c
-      &::before
-        display: inline-block
-        content: '\ea3a'
-        font-family: "EdimDoma-Icons"
-        transform: rotate(180deg)
-        font-size: 16px
-        margin-right: 7px
 
   .invalid
     .field-container
       border: 1px solid #ff451c
+
+  .warning-icon
+    display: none
+    font-family: 'EdimDoma-Icons'
+    color: red
+    margin-left: 10px
+    margin-right: 10px
+    font-size: 20px
+    font-weight: 100
+  .invalid
+    .warning-icon
+      display: flex
+      align-items: center
+
+  .text-input
+    .warning-icon 
+      display: none
 
 
   .timing-flex-container

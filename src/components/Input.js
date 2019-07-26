@@ -18,6 +18,7 @@ class Input extends React.PureComponent {
         return !props.isBig? (
             <div className={props.className}>
                 <div className={'field-container' + (props.isValid !== false ? '': ' invalid')}>
+                    <div className='warning-icon'>&#xea3a;</div>
                     <input
                         className='text-input' 
                         value={props.value ? props.value : ''}
@@ -28,14 +29,16 @@ class Input extends React.PureComponent {
                 </div>
             </div>
         ):
-            (  <div className={'field-big field-container ' + props.className + (props.isValid? '': ' invalid')}>
-                <input
-                    className={'main-column__input_title text-input'} value={props.value ? props.value : ''}
-                    onChange={this.onChange}
-                    placeholder={props.placeholder}
-                    maxLength={props.maxlength}
-                />
-            </div>
+            (  
+                <div className={'field-big field-container ' + props.className + (props.isValid? '': ' invalid')}>
+                    <div className='warning-icon'>&#xea3a;</div>
+                    <input
+                        className={'main-column__input_title text-input'} value={props.value ? props.value : ''}
+                        onChange={this.onChange}
+                        placeholder={props.placeholder}
+                        maxLength={props.maxlength}
+                    />
+                </div>
             )
     }
 
