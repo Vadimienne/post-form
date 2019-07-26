@@ -27,7 +27,12 @@ export function validate ({title, recipe_category, recipe_cuisine, cooking_time,
             validation.ingredients = false
         }
         else {
-            validation.ingredients = true
+            if(ingredients.toJS().find(elem => !(elem.ingredient_id && elem.amount && elem.unit_id))){
+                validation.ingredients = false
+            }
+            else{
+                validation.ingredients = true
+            }
         }
     }
     else {
