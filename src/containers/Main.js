@@ -10,6 +10,7 @@ import IngredientGroups from 'components/IngredientGroups'
 import Timings from 'components/Timings'
 import Input from 'components/Input'
 import LoadingBox from 'components/LoadingBox'
+import CategorySelect from 'components/CategorySelect'
 import LoadingRecipePage from 'components/LoadingRecipePage'
 
 import SideSubmitColumn from 'components/SideSubmitColumn'
@@ -243,8 +244,18 @@ class Main extends PureComponent {
                                     units={units}
                                     stateUpdater={this.stateUpdater}
                                 />
-                
-                                <Tags data={recipe_user_tags} tags={tags} stateUpdater={this.stateUpdater}/>
+                                <div className='content-box'>
+                                    <div className='content-box__content_tags'>
+                                        <p className='content_tags-title'>Добавьте теги:</p>
+                                        <CategorySelect 
+                                            categoryScaffold={tags.recipe_user_tag}
+                                            selectedCategory={recipe_user_tags}
+                                            isMulti
+                                            stateUpdater={this.stateUpdater}
+                                            updatePath='recipe_user_tags'
+                                        />
+                                    </div>
+                                </div>
                             </div>
                             <div className="right-column form-column">
 

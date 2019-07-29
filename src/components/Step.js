@@ -38,6 +38,7 @@ class Step extends PureComponent {
                     stateUpdater={this.props.stateUpdater}
                     stepId={stepId}
                     stepIndex={this.props.stepIndex}
+                    height='200px'
                 />
                 <div className='content-box__content' >
                     <Editor 

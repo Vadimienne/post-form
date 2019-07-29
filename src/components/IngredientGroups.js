@@ -98,9 +98,6 @@ class IngedientGroup extends PureComponent {
                                 updatePath={index}
                             />
                         </div>
-                        {!isAnyIngredient ? (
-                            <span className='ingredients-validation-warning'>Необходимо указать хотя бы один ингредиент</span>
-                        ): undefined}
                         <IngredientList
                             groupName={elem.get('element')}
                             groupPosition={elem.get('element_position')}
@@ -117,7 +114,9 @@ class IngedientGroup extends PureComponent {
             }
         }
         ): []
-        //idType props used to separate different groups of SortDeleteWrappers and make clickable labels for buttons
+
+        items = items.filter(elem => elem != undefined)
+
         return (
             <div className='ingredient-groups-component'>
                 { items.size ?
@@ -130,7 +129,7 @@ class IngedientGroup extends PureComponent {
                     >
                         {items}
                     </SortableContainer> : undefined}
-                <div className='button-offset'>
+                <div className={`button-offset ${items.toJS().length? '': 'empty-list'}`}>
                     <Button 
                         onClick={this.addGroup} 
                         text='Добавить подраздел' 

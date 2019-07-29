@@ -155,7 +155,6 @@ class IngredientAsync extends PureComponent {
         return (
             <div className='ingredient-item'>
                 <SelectAsync
-                    components={{ MenuList: MenuList }}
                     value={ingredient_id? { value: ingredient_id, label: title }: undefined}
                     loadOptions={this.loadOptions}
                     styles={ingredient_id ? selectStyleMedium : Object.assign({}, selectStyleMedium, borderInvalid)}

@@ -66,13 +66,20 @@ class Dropzone extends PureComponent {
 
         return (
             <div
-                className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''} ${url ? 'uploaded' : ''}`}
+                className={`Dropzone ${this.state.hightlight ? 'Highlight ' : ''} ${url ? ' uploaded' : ''}`}
                 onDrop={this.onDrop}
                 onDragOver={this.onDragOver}
                 onClick={this.openFileDialog}
-                style={{ cursor: this.props.disabled ? 'default' : 'pointer'}}
+                url={url}
+                style={{ 
+                    cursor: this.props.disabled ? 'default' : 'pointer', 
+                    backgroundImage: url ? `url(${url})`: '../images/upload-image.png',
+                    height: this.props.height? this.props.height : '340px'
+                }}
             >
-                <span className='Dropzone__upload-description'>Загрузите фотографию</span>
+                {!url?
+                    <span className='Dropzone__upload-description'>Загрузите фотографию</span> : undefined
+                }
                 
                 
                 <input
