@@ -91,7 +91,7 @@ class IngedientGroup extends PureComponent {
                     >
                         <div className='input-ingredient-group'>
                             <Input  
-                                isValid={isGroupNameValid && areIngredientsValid}
+                                isValid={isGroupNameValid && areIngredientsValid && isAnyIngredient}
                                 value={elem.get('element')} 
                                 placeholder='Основные'
                                 stateUpdater={this.onNameChange}

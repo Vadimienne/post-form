@@ -23,6 +23,9 @@ export function validate ({title, recipe_category, recipe_cuisine, cooking_time,
     validation.servings = parseInt(servings, 10)? true: false
 
     if (ingredients && ingredients.size){
+
+        validation.groupNames = ingredients.toJS().find(elem => !elem.label) ? false : true
+
         console.log(1)
         if (ingredients.toJS().find(elem => elem.value.length == 0)){
             console.log(2)
@@ -48,6 +51,8 @@ export function validate ({title, recipe_category, recipe_cuisine, cooking_time,
         console.log(6)
         validation.ingredients = false
     }
+
+    // validation.groupNames = 
 
     // validation.ingredients = this.state.ingredients && this.state.ingredients.size ?
     //     (this.state.ingredients.toJS().find(elem => elem.value.length == 0)? false: true) : false
