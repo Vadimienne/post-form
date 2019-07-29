@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import DraftCard from 'components/DraftCard'
+import NewRecipeCard from 'components/NewRecipeCard'
 import { Link } from 'react-router-dom'
 import htmlToText from 'html-to-text'
 
@@ -83,6 +84,9 @@ class RecipeSelector extends PureComponent {
 
         return (
             <div className='recipe-selector'>
+                <Link to='/new'>
+                    <NewRecipeCard />
+                </Link>
                 {mappedDrafts}
                 {mappedModeration}
                 {mappedPublished}

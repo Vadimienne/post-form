@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import parser from 'helpers/toPostRecipeParser'
 import { fromJS } from 'immutable'
+import { Redirect } from 'react-router-dom'
 
 import Dropzone from 'components/Dropzon';
 import Editor from 'components/MyEditor';
@@ -45,8 +46,16 @@ class Main extends PureComponent {
     // fetch data from the server when app launches
     async componentDidMount(){
 
-        let recipe = await getRecipe(this.props.match.params.recipeId)
-        recipe = sortSortable(recipe)
+        let recipeId = this.props.match.params.recipeId
+        let recipe
+        if(recipeId === 'new'){
+            recipe = await createRecipe()
+            this.props.history.push(`/${recipe.id}`)
+        }
+        else{
+            recipe = await getRecipe(this.props.match.params.recipeId)
+            recipe = sortSortable(recipe)
+        }                                                               
         this.setState({json: fromJS(recipe)})
 
         const tags = await getTags()
@@ -102,11 +111,17 @@ class Main extends PureComponent {
 
     render() {
         const { json, units, tags, ingredients, contests } = this.state
-        console.log('new render')
+        console.log('new render', this.state.json)
+
+        if (this.state.json === 0){
+            return <Redirect to='/notfound'/>
+        }
 
         if (!(Object.keys(this.state.json).length && Object.keys(this.state.tags).length && this.state.units && this.state.ingredients && this.state.contests)){
             return <LoadingRecipePage />
         }
+
+        
 
         // GETTING DATA
         const recipe_category =         json.get('recipe_category')
@@ -142,8 +157,6 @@ class Main extends PureComponent {
         let validation = validate({title, recipe_category, recipe_cuisine, cooking_time, servings, ingredients: this.state.ingredients, recipe_steps})
 
         Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))
-        console.log('________________________________________________________________________________________________')
-        console.log(this.state.ingredients.toJS()[0].value)
 
         // form is valid when all required fields are filled
         const isFormValid = (

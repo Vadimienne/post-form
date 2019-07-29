@@ -4,9 +4,10 @@ export default function parser(json, tags, status) {
     function findNames (idsArray, targetArray){
         let result = []
         idsArray.map((elem) => {
-            result.push(
-                targetArray.find((iter) => iter.id === elem).name
-            )
+            targetArray.find((iter) => iter.id === elem) ? result.push(targetArray.find((iter) => iter.id === elem).name): null
+            // result.push(
+            //     targetArray.find((iter) => iter.id === elem) ? targetArray.find((iter) => iter.id === elem).name : 
+            // )
         })
         return result
     }
@@ -57,7 +58,8 @@ export default function parser(json, tags, status) {
     result.recipe_category_list = findNames([recipe_category], tags.recipe_category)
 
     // subcategories 
-    let subcategories = tags.recipe_category.find((iter) => iter.id === recipe_category).recipe_subcategory
+    let subcategories = tags.recipe_category.find((iter) => iter.id === recipe_category) ? 
+        tags.recipe_category.find((iter) => iter.id === recipe_category).recipe_subcategory : []
 
     result.recipe_subcategory_list = findNames(recipe_subcategories, subcategories)
 
