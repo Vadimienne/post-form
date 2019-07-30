@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import Main from './containers/Main'
 import RecipeSelector from './containers/RecipeSelector';
-import NotFound from './containers/NotFound'
+import ErrorPage from './containers/ErrorPage'
 
 const wrapper = document.getElementById("post-form");
 wrapper ? ReactDOM.render(
@@ -11,6 +11,6 @@ wrapper ? ReactDOM.render(
         <Switch>
             <Route exact path='/:recipeId' component={Main}></Route>
             <Route exact path='/' component={RecipeSelector}></Route>
-            <Route exact path='/notfound' component={NotFound} />
+            <Route component={ErrorPage} />
         </Switch>
     </Router>, wrapper) : false;

@@ -41,7 +41,6 @@ export function updateIngredients(){
             )
         }
     )
-    console.log('ingredients after deletions: ', ingredients.toJS()[0])
 
 
     // make array of unique ingredients from steps with usedAmount field

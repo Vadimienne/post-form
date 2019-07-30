@@ -12,7 +12,6 @@ function Comp (props) {
     // lilLoadingBoxes = lilLoadingBoxes.map(elem => (
     //     <LoadingBox height="20px"/>
     // ))
-    console.log('lilLoadingBoxed:', lilLoadingBoxes)
 
     return (
         <>

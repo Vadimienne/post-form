@@ -41,7 +41,7 @@ class Cont extends PureComponent {
                     <div className='preview'>
                         <div className='slider-container'>
                             <span className='toggle-label'>Включен</span>
-                            <SwitchSlider />
+                            <SwitchSlider onToggle={this.props.onPreviewToggle}/>
                             <span className='toggle-label'>Выключен</span>
                         </div>
 

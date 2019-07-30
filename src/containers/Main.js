@@ -1,17 +1,17 @@
 import React, { PureComponent } from "react";
 import parser from 'helpers/toPostRecipeParser'
 import { fromJS } from 'immutable'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Router } from 'react-router-dom'
 
 import Dropzone from 'components/Dropzon';
 import Editor from 'components/MyEditor';
 import Steps from 'components/Steps'
-import Tags from 'components/Tags'
 import IngredientGroups from 'components/IngredientGroups'
 import Timings from 'components/Timings'
 import Input from 'components/Input'
-import LoadingBox from 'components/LoadingBox'
 import CategorySelect from 'components/CategorySelect'
+
+import ErrorPage from 'containers/ErrorPage'
 import LoadingRecipePage from 'components/LoadingRecipePage'
 
 import SideSubmitColumn from 'components/SideSubmitColumn'
@@ -22,7 +22,7 @@ import 'styles/MainMain.sass'
 import 'styles/EdimDomaIcons.sass'
 const titleUpdatePath = ['title']
 
-import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe, getRecipesByStatus } from 'api/requests'
+import { getRecipe, getUnits, getTags, getContests, createRecipe, updateRecipe, showPreview } from 'api/requests'
 import { sortSortable } from 'helpers'
 import { updateIngredients } from './ingredientsUpdater'
 import { validate } from './validation'
@@ -34,12 +34,17 @@ class Main extends PureComponent {
         this.state = {
             json: {},
             tags: {},
+            failedToFetch: false,
+            loading: true,
+            isPreviewActive: false,
+            previewHTML: ''
         };
         this.stateUpdater = this.stateUpdater.bind(this)
         this.updateIngredients = updateIngredients.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onDraftSubmit = this.onDraftSubmit.bind(this)
         this.onTitleInput = this.onTitleInput.bind(this)
+        this.onPreviewToggle = this.onPreviewToggle.bind(this)
     }
 
     
@@ -48,24 +53,53 @@ class Main extends PureComponent {
 
         let recipeId = this.props.match.params.recipeId
         let recipe
+        let statusRecipe
         if(recipeId === 'new'){
             recipe = await createRecipe()
             this.props.history.push(`/${recipe.id}`)
         }
         else{
             recipe = await getRecipe(this.props.match.params.recipeId)
-            recipe = sortSortable(recipe)
+            statusRecipe = await recipe.status
         }                                                               
-        this.setState({json: fromJS(recipe)})
 
-        const tags = await getTags()
-        const units = await getUnits()
-        const contests = await getContests()
+        const tagsResponse = await getTags()
+        const unitsResponse = await getUnits()
+        const contestsResponse = await getContests()
 
-        this.setState({tags})
-        this.setState({units})
-        this.setState({contests: contests})
-        this.updateIngredients()
+        const statusTags = await tagsResponse.status
+        const statusUnits = await unitsResponse.status
+        const statusContests = await contestsResponse.status
+
+
+        if( statusRecipe == 200 && statusTags == 200 && statusUnits == 200 && statusContests == 200 ){
+            recipe = await recipe.json()
+            recipe = sortSortable(recipe)
+
+            const tags = await tagsResponse.json()
+            const units = await unitsResponse.json()
+            const contests = await contestsResponse.json()
+
+            console.log('FETCHED FINE')
+            this.setState({json: fromJS(recipe)})
+            this.setState({tags})
+            this.setState({units})
+            this.setState({contests: contests})
+            this.updateIngredients()
+
+            this.setState({loading: false})
+        }
+        else {
+            console.log('FAILED TO FETCH')
+            const statusCodes = [statusRecipe, statusTags, statusUnits, statusContests]
+            const failedCode = statusCodes.find(elem => elem != 200)
+            this.setState({loading: false, failedToFetch: failedCode})
+        }
+
+        // this.setState({tags})
+        // this.setState({units})
+        // this.setState({contests: contests})
+        // this.updateIngredients()
     }
 
     //#torefactor
@@ -106,19 +140,33 @@ class Main extends PureComponent {
         updateRecipe(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags, 'draft'))
     }
 
+    async onPreviewToggle(){
+        if(this.state.isPreviewActive){
+            this.setState({isPreviewActive: false})
+        }
+        else{
+            let response = await showPreview(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags, 'draft'))
+            if (response.status == 200) {
+                this.setState({previewHTML: response.json().html, isPreviewActive: true})
+            }
+        }
+    }
+
 
 
 
     render() {
-        const { json, units, tags, ingredients, contests } = this.state
-        console.log('new render', this.state.json)
+        // if(this.state.failedToFetch){
+        //     return <Redirect to='/notfound'/>
+        // }
+        const { json, units, tags, ingredients, contests, loading, failedToFetch } = this.state
+        console.log(`new render, loading: ${loading}, failed: ${failedToFetch}`)
 
-        if (this.state.json === 0){
-            return <Redirect to='/notfound'/>
-        }
-
-        if (!(Object.keys(this.state.json).length && Object.keys(this.state.tags).length && this.state.units && this.state.ingredients && this.state.contests)){
+        if (loading){
             return <LoadingRecipePage />
+        }
+        else if (failedToFetch){
+            return <ErrorPage code={failedToFetch}/>
         }
 
         
@@ -156,7 +204,7 @@ class Main extends PureComponent {
         // TOFIX VALIDATE ACTUAL INGREDIENTS, NOT THIS.STATE.INGREDIENTS 
         let validation = validate({title, recipe_category, recipe_cuisine, cooking_time, servings, ingredients: this.state.ingredients, recipe_steps})
 
-        Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))
+        // Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))
 
         // form is valid when all required fields are filled
         const isFormValid = (
@@ -279,6 +327,7 @@ class Main extends PureComponent {
                                     isFormValid={isFormValid} 
                                     onSubmit={this.onSubmit}
                                     onDraftSubmit={this.onDraftSubmit}
+                                    onPreviewToggle = {this.onPreviewToggle}
                                 />
 
                             </div>

@@ -8,6 +8,8 @@ import { getRecipesByStatus } from 'api/requests'
 
 import 'styles/RecipeSelector.sass'
 
+import LoadingBox from 'components/LoadingBox'
+
 class RecipeSelector extends PureComponent {
     constructor(props) {
         super(props);
@@ -31,7 +33,20 @@ class RecipeSelector extends PureComponent {
 
         if (!(drafts && onModeration && published) ) {
             return (
-                <div>loading recipes...</div>
+                <div className='recipe-selector-loading'>
+                    <div className='content-box-loading'>
+                        <LoadingBox height='450px' width='280px' />
+                    </div>
+                    <div className='content-box-loading'>
+                        <LoadingBox height='450px' width='280px' />
+                    </div>
+                    <div className='content-box-loading'>
+                        <LoadingBox height='450px' width='280px' />
+                    </div>
+                    <div className='content-box-loading'>
+                        <LoadingBox height='450px' width='280px' />
+                    </div>
+                </div>
             )
         }
 

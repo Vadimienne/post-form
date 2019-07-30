@@ -19,16 +19,20 @@ class SideTags extends PureComponent {
             cookingMethods,
             cuisine,
             cuisineApps,
-            cuisineTypes,
             holidays,
             mealtimes,
             nutritionTypes,
-            userTags,
             contest,
             contestId
         } = this.props
 
-        const { tags, contests } = this.props
+        let { tags, contests } = this.props
+
+
+        // options from TAGS have NAME property but in contests it's TITLE. CategorySelect requires NAME
+        if(contests){
+            contests = contests.map(elem => Object.assign(elem, {name: elem.title}))
+        }
 
         return (
             <div className='side-tags'>

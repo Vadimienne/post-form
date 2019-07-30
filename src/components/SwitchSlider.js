@@ -12,7 +12,8 @@ class Cont extends PureComponent {
     // toggle slider and call onClick from props
     onClick(){
         this.setState({isOn: !this.state.isOn})
-        this.props.onClick? this.props.onClick(): null
+        console.log('hey', this.props.onToggle)
+        this.props.onToggle? this.props.onToggle(): null
     }
 
     render() {
