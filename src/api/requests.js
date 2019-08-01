@@ -113,11 +113,11 @@ export function showPreview (id, json) {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
-                
+                'Content-Type': 'application/json',
                 'Authorization': 'Basic '+btoa('ed4stage:ed4stage')
             },
             body: JSON.stringify({
-              "recipe":{
+              recipe:{
                 "title":"Морские гребешки с пюре из зеленого горошка141",
                 "preparation_time":"0",
                 "cooking_time":"10",

@@ -98,9 +98,12 @@ export default function parser(json, tags, status) {
         })
 
         return {
+            id: elem.id,
+            image: elem.image,
             body: elem.body,
             position: stepIndex + 1,    // rewrite step position
-            step_ingredient_attributes: sortedIngs
+            step_ingredient_attributes: sortedIngs,
+            _destroy: elem._destroy
         }
     })
 
