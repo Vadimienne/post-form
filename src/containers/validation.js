@@ -51,7 +51,7 @@ export function validate ({title, recipe_category, recipe_cuisine, cooking_time,
 
     validation.step = recipe_steps ? (recipe_steps.find(elem => elem.get('_destroy') !== true)? true: false) : false
 
-    validation.steps_description = recipe_steps ? (recipe_steps.toJS().find((elem) => elem.body && elem.body.length !== 0)? true: false) : false
+    validation.steps_description = recipe_steps ? (recipe_steps.toJS().find((elem) => !elem.body || elem.body.length == 0)? false: true) : false
 
     return validation
 }

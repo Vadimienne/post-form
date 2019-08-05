@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Immutable, { isImmutable } from 'immutable'
+import Immutable, { isImmutable, fromJS } from 'immutable'
 
 import Select from 'react-select'
 import { selectStyleShort, selectStyleMedium, borderInvalid } from 'config/selectStyles'
@@ -106,8 +106,25 @@ class IngredientStep extends PureComponent {
 
     // triggers when ingredient is selected
     onIngSelect(selectedOption){
-        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath, 'recipe_ingredient_id'], 
-            selectedOption.value, this.updateSelectedIngredient)
+        let fullIngredient
+        console.log('Ingredients ava: ', this.props.ingredientsAvailable)
+        let ings = this.props.ingredientsAvailable.toJS()
+        ings.map((elem) => {
+            elem.value.map(e => {
+                if (e.id == selectedOption.value){
+                    fullIngredient = e
+                }
+            })
+        })
+
+        let data = {
+            recipe_ingredient_id: selectedOption.value,
+            unit_id: fullIngredient.unit_id,
+            ingredient_id: fullIngredient.ingredient_id,
+        }
+
+        this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'step_ingredients', this.props.updatePath], 
+            fromJS(data), this.updateSelectedIngredient)
     }
 
     render() {

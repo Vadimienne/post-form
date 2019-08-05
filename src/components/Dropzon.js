@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import 'styles/Dropzone.sass'
 
 import { postImage, postImageStep, postImageCreatingStep } from 'api/requests'
-import UploadImage from 'images/upload-image.png'
-import Svg from 'components/Svg'
 
 class Dropzone extends PureComponent {
     constructor(props) {

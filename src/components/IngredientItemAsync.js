@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 
 import Select from 'react-select'
 import Input from 'components/Input'
-import MenuList from 'components/SelectMenuList'
 import SelectAsync from 'react-select/async'
 import Immutable, { isImmutable } from 'immutable'
 import { getIngredients } from 'api/requests'

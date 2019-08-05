@@ -19,7 +19,7 @@ class SortDeleteWrapper extends PureComponent {
     }
 
     render(){
-        const { className, children, onDelete } = this.props
+        const { className, children } = this.props
 
 
         return (

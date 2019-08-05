@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import parser from 'helpers/toPostRecipeParser'
 import { fromJS } from 'immutable'
-import { Redirect, Router } from 'react-router-dom'
 
 import Dropzone from 'components/Dropzon';
 import Editor from 'components/MyEditor';
@@ -138,6 +137,7 @@ class Main extends PureComponent {
     // save draft
     onDraftSubmit(){
         updateRecipe(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags, 'draft'))
+        console.log(JSON.stringify(parser(this.state.json.toJS(), this.state.tags, 'draft')))
     }
 
     async onPreviewToggle(){
@@ -206,7 +206,7 @@ class Main extends PureComponent {
         // TOFIX VALIDATE ACTUAL INGREDIENTS, NOT THIS.STATE.INGREDIENTS 
         let validation = validate({title, recipe_category, recipe_cuisine, cooking_time, servings, ingredients: this.state.ingredients, recipe_steps})
 
-        // Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))
+        Object.keys(validation).map(elem => console.log(`${elem}:`.padEnd(25,' ') + validation[elem]))
 
         // form is valid when all required fields are filled
         const isFormValid = (

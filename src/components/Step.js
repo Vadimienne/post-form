@@ -23,7 +23,6 @@ class Step extends PureComponent {
     // }
 
     render() {
-        const { stepIndex } = this.props
 
         const stepId = this.props.data.get('id')
         const image = this.props.data.get('image')

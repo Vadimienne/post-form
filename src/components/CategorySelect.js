@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { fromJS } from 'immutable'
 import Select from 'react-select'
 
-import {borderColorize, borderInvalid} from 'config/selectStyles'
+import {defaultStyle, borderInvalid} from 'config/selectStyles'
 
 class CategorySelect extends Component {
     constructor(props) {
@@ -73,7 +73,7 @@ class CategorySelect extends Component {
                     onChange={this.onSelect} 
                     options={options} 
                     defaultValue={defaultValue}
-                    styles={isValid !== false ? borderColorize : borderInvalid} 
+                    styles={isValid !== false ? defaultStyle : borderInvalid} 
                     placeholder='Начните вводить название'
                 />
             </>

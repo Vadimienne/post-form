@@ -1,6 +1,6 @@
 import React from "react";
 
-import { recipeStatusToText, monthFromNum } from 'helpers'
+import { monthFromNum } from 'helpers'
 import recipePlaceholder from 'images/recipePlaceholder.png'
 
 import 'styles/DraftCard.sass'

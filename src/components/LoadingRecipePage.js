@@ -2,7 +2,7 @@ import React from "react";
 
 import LoadingBox from 'components/LoadingBox.js'
 
-function Comp (props) {
+function Comp () {
 
     let lilLoadingBoxes = []
     for (let i = 0; i==10; i++){

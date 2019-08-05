@@ -17,9 +17,9 @@ export function updateIngredients(){
 
     // leave only valid ingredients
     ingredients.map(
-        (elem, groupIndex) => {
+        (elem) => {
             elem.value = elem.value.filter(
-                (ing, ingIndex) => {
+                (ing) => {
                     // filter destroyed and invalid ingredients
                     if ((ing.get('_destroy') == true) || !(ing.get('amount') && ing.get('ingredient_id') && ing.get('unit_id'))) {
                         return false

@@ -5,7 +5,7 @@ import Immutable from 'immutable'
 
 import Check from 'components/Checkbox'
 
-import { borderColorize, borderInvalid } from 'config/selectStyles'
+import { defaultStyle, borderInvalid } from 'config/selectStyles'
 
 class DoubleSelect extends PureComponent {
     constructor(props) {
@@ -78,7 +78,7 @@ class DoubleSelect extends PureComponent {
                     options={options} 
                     onChange={this.onCategorySelect} 
                     defaultValue={selectedValue} 
-                    styles={isValid !== false ? borderColorize : borderInvalid} 
+                    styles={isValid !== false ? defaultStyle : borderInvalid} 
                     placeholder='Начните вводить название'
                 />
                 <div>{checkboxes}</div>

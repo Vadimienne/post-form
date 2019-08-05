@@ -91,15 +91,23 @@ export default function parser(json, tags, status) {
 
     // STEPS
     // note that positions rewritten here to match positions displayed after manual sorting
+
+    console.log('RECIPE STEPS: ', recipe_steps)
     result.recipe_steps_attributes = recipe_steps.map((elem, stepIndex) => {
 
-        let sortedIngs = elem.step_ingredients.map((ing, ingIndex) => {
+        console.log('ingredients: ', elem, elem.step_ingredients)
+
+        elem.step_ingredients.map((ing, ingIndex) => {
             ing.position = ingIndex + 1
         })
 
+        let sortedIngs = elem.step_ingredients
+
+        console.log('sorted Ings: ', sortedIngs)
+
         return {
             id: elem.id,
-            image: elem.image,
+            // image: elem.image,
             body: elem.body,
             position: stepIndex + 1,    // rewrite step position
             step_ingredient_attributes: sortedIngs,
@@ -114,8 +122,8 @@ export default function parser(json, tags, status) {
 
     ingredient_groups.map((elem, elemIndex) => {
         elem.recipe_ingredients.map((ing, ingIndex) => {
-            console.log('AMA INGREDIENT')
-            console.log(ing)
+            // console.log('AMA INGREDIENT')
+            // console.log(ing)
             ingredientsAccumulated.push({
                 position: ingIndex + 1,
                 id: ing.id,
