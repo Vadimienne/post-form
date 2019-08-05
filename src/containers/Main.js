@@ -146,8 +146,10 @@ class Main extends PureComponent {
         }
         else{
             let response = await showPreview(this.state.json.get('id'), parser(this.state.json.toJS(), this.state.tags, 'draft'))
+            console.log('respose status: ', response.status)
             if (response.status == 200) {
-                this.setState({previewHTML: response.json().html, isPreviewActive: true})
+                let res = await response.json()
+                this.setState({previewHTML: res.html, isPreviewActive: true})
             }
         }
     }
@@ -160,7 +162,7 @@ class Main extends PureComponent {
         //     return <Redirect to='/notfound'/>
         // }
         const { json, units, tags, ingredients, contests, loading, failedToFetch } = this.state
-        console.log(`new render, loading: ${loading}, failed: ${failedToFetch}`)
+        console.log(`new render`)
 
         if (loading){
             return <LoadingRecipePage />
@@ -216,11 +218,10 @@ class Main extends PureComponent {
 
         return (
             <div>
-                
                 { Object.keys(this.state.json).length && Object.keys(this.state.tags).length && this.state.units && this.state.ingredients && this.state.contests ?
                     (<form id="article-form">
-                        <div className='flex-wrapper'>
-
+                        <div className={`flex-wrapper ${this.state.isPreviewActive ? 'previewActive': ''}`}>
+                            <div className={`preview-overlay ${this.state.isPreviewActive ? 'active': ''}`} />
                             <div className='left-column form-column'>
                                 <SideTags 
                                     tags={tags} 
@@ -246,7 +247,8 @@ class Main extends PureComponent {
                             </div>
 
                             <div className='main-column form-column'>
-                                <div className='content-box'>
+                                <div  className={`preview-page ${this.state.isPreviewActive ? 'active': ''}`} dangerouslySetInnerHTML={{__html: this.state.previewHTML}}/>
+                                <div className={`content-box ${this.state.isPreviewActive ? 'visuallyHidden': ''}`}>
                                     <div className='content-box__content'>
                                         <Input
                                             value={title}  
@@ -296,16 +298,17 @@ class Main extends PureComponent {
                                     </div>
 
                                 </div>
-                                
-                                <Steps
-                                    recipeId={recipeId}
-                                    isValid={validation.step}
-                                    data={recipe_steps}
-                                    ingredientsAvailable={ingredients}
-                                    units={units}
-                                    stateUpdater={this.stateUpdater}
-                                />
-                                <div className='content-box'>
+                                <div className={`${this.state.isPreviewActive ? 'visuallyHidden': ''}`}>
+                                    <Steps
+                                        recipeId={recipeId}
+                                        isValid={validation.step}
+                                        data={recipe_steps}
+                                        ingredientsAvailable={ingredients}
+                                        units={units}
+                                        stateUpdater={this.stateUpdater}
+                                    />
+                                </div>
+                                <div className={`content-box ${this.state.isPreviewActive ? 'visuallyHidden': ''}`}>
                                     <div className='content-box__content_tags'>
                                         <p className='content_tags-title'>Добавьте теги:</p>
                                         <CategorySelect 
