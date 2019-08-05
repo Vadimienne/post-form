@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import 'styles/Dropzone.sass'
 
-import { postImage, postImageStep } from 'api/requests'
+import { postImage, postImageStep, postImageCreatingStep } from 'api/requests'
 import UploadImage from 'images/upload-image.png'
 import Svg from 'components/Svg'
 
@@ -37,9 +37,24 @@ class Dropzone extends PureComponent {
             this.props.stateUpdater(['image'], response.image)
         }
         else {
-            let response = await postImageStep(this.props.recipeId, this.props.stepId, files[0])
-            let imageUrl = `${response.image}?${Math.floor(Math.random() * Math.floor(99999))}`
-            this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'image'], imageUrl)
+
+            console.log('HELLO HELLO AHAHAH:', this.props.stepId)
+            if (this.props.stepId){
+                let response = await postImageStep(this.props.recipeId, this.props.stepId, files[0])
+                let imageUrl = `${response.image}?${Math.floor(Math.random() * Math.floor(99999))}`
+                this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'image'], imageUrl)
+            }
+            else{
+                let data = {
+                    image: files[0],
+                    body: this.props.body,
+                    position: parseInt(this.props.stepIndex, 10) + 1,
+                    recipe_id: this.props.recipeId
+                }
+                let response = await postImageCreatingStep(this.props.recipeId, data)
+                let imageUrl = `${response.image}?${Math.floor(Math.random() * Math.floor(99999))}`
+                this.props.stateUpdater(['recipe_steps', this.props.stepIndex, 'image'], imageUrl)
+            }
         }
 
     }
@@ -63,6 +78,7 @@ class Dropzone extends PureComponent {
     render() {
 
         const url = this.props.data
+        
 
         return (
             <div
@@ -73,7 +89,7 @@ class Dropzone extends PureComponent {
                 url={url}
                 style={{ 
                     cursor: this.props.disabled ? 'default' : 'pointer', 
-                    backgroundImage: url ? `url(${url})`: '../images/upload-image.png',
+                    backgroundImage: url ? `url(${url})`: '',
                     height: this.props.height? this.props.height : '340px'
                 }}
             >

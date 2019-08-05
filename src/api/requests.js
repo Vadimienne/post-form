@@ -165,3 +165,29 @@ export function postImageStep (id, stepId, file) {
         .catch((error) => {console.log(error); return 0})
 }
 
+export function postImageCreatingStep (id, data) {
+
+    const { image, body, position, recipe_id } = data
+
+    let formData = new FormData()
+    formData.append('recipe_step[image]', image)
+    formData.append('recipe_step[body]', body)
+    formData.append('recipe_step[position]', position)
+    formData.append('recipe_step[recipe_id]', recipe_id)
+
+    console.log('fetch ')
+    return fetch (apiPath + `/retsepty/${id}/recipe_steps`,
+        {
+            method: 'post',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Basic '+btoa('ed4stage:ed4stage')
+            },
+            body: formData
+        }
+    )
+        .then((response) => response.json())
+        .catch((error) => {console.log(error); return 0})
+}
+

@@ -114,6 +114,8 @@ export default function parser(json, tags, status) {
 
     ingredient_groups.map((elem, elemIndex) => {
         elem.recipe_ingredients.map((ing, ingIndex) => {
+            console.log('AMA INGREDIENT')
+            console.log(ing)
             ingredientsAccumulated.push({
                 position: ingIndex + 1,
                 id: ing.id,

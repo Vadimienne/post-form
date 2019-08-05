@@ -60,9 +60,9 @@ class IngredientAsync extends PureComponent {
             let response = await createIngredient(this.props.recipeId, data.toJS())
             let recipe_ingredient_id = response.id
 
-            data.delete('element')
-            data.delete('element')
-            data.set('id', recipe_ingredient_id)
+            data = data.delete('element')
+            data = data.delete('element_position')
+            data = data.set('id', recipe_ingredient_id)
             this.props.stateUpdater(['ingredient_groups', this.props.groupIndex, 'recipe_ingredients', this.props.updatePath], data)
             this.setState({data})
             return 0
